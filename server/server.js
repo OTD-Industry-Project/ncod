@@ -4,6 +4,9 @@
 // Express
 const express = require("express");
 
+// Our Database
+const db = require("./db");
+
 // dotenv for configuring environment variables
 require("dotenv").config();
 
@@ -14,8 +17,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 // ROUTES
-app.get("/api", (req, res) => {
-    res.json({message: "Server says hello!"});
+app.get("/api", async (req, res) => {
+    const data = await db.query("SELECT * FROM rnc_database");
+    const { rows: [{ id, timestamp }] } = data;
+
+    res.json({message: `id: ${id} timestamp: ${timestamp}`});
 });
 
 // Run Server
