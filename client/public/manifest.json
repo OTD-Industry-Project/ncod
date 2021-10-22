@@ -1,0 +1,11 @@
+{
+  "short_name": "NCOD",
+  "name": "Nuline Charter On The Day",
+  "icons": [
+    
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
