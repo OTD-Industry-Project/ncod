@@ -1,5 +1,12 @@
 # NCOD
-SPA fleet management app using PERN stack
+Single-Page fleet management app using PERN stack  
+
+As a proof of concept:  
+- React attempts to fetch the `/api` route
+- Express is listening for this and is then querying and fetching data from https://rnacentral.org/help/public-database with the help of the `pg` node module
+- Express then passes the data back to React
+- React displays it
+
 
 # Get Started
 ## Clone the repo
