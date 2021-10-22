@@ -3,7 +3,7 @@ SPA fleet management app using PERN stack
 
 # Get Started
 ## Clone the repo
-`git clone [--branch-name] <repo-link>`
+`git clone https://github.com/OTD-Industry-Project/ncod.git`
 
 ## Installing Dependencies
 Run `npm install` from within both the `client` and `server` folders:
