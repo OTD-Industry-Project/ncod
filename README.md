@@ -24,6 +24,6 @@ In the first terminal, and from within the `server` folder run `npm start`
 In the second terminal, and from within the `client` folder run `npm start`
 
 ## Making Changes
-While running in both terminals, go to http://localhost:3000
-Any changes made to the client should automatically refresh the react app  
-Any changes made to the server should automatically restart the server
+- While running in both terminals, go to http://localhost:3000
+- Any changes made to the client should automatically refresh the react app
+- Any changes made to the server should automatically restart the server
