@@ -18,10 +18,15 @@ const app = express();
 
 // ROUTES
 app.get("/api", async (req, res) => {
-    const data = await db.query("SELECT * FROM rnc_database");
-    const { rows: [{ id, timestamp }] } = data;
+    
+    // Didn't want to keep fetching data everytime, so commented out for now
+    
+    // const data = await db.query("SELECT * FROM rnc_database");
+    // const { rows: [{ id, timestamp }] } = data;
 
-    res.json({message: `id: ${id} timestamp: ${timestamp}`});
+    // res.json({message: `id: ${id} timestamp: ${timestamp}`});
+
+    res.json({message: "Hello from Server"});
 });
 
 // Run Server
