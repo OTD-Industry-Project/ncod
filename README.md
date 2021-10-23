@@ -1,5 +1,7 @@
 # NCOD
-Single-Page fleet management app using PERN stack  
+Single-Page fleet management app using PERN stack 
+
+![](demo.gif)
 
 As a proof of concept:  
 - React attempts to fetch the `/api` route
