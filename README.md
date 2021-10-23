@@ -1,6 +1,7 @@
 # NCOD
 Single-Page fleet management app using PERN stack 
 
+## Demo of Layout
 ![](demo.gif)
 
 As a proof of concept:  
