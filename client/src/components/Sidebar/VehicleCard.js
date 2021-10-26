@@ -1,27 +1,23 @@
 import React from 'react'
+import './Sidebar.css';
 
 const VehicleCard = ({status, id, destination, times, eta, onClick }) => {
     
-    let colorClass;
+    let classes = "";
 
     switch (status) {
-        case "Completed":
-            colorClass = "table-success"
-            break;
-        case "On Time":
-            colorClass = "table-primary"
-            break;
         case "Delayed":
-            colorClass = "table-danger"
+            classes += "table-danger hovers"
             break;
         default:
-            colorClass = "";
+            classes += "";
     }
 
+    classes += " table-row"
     
     return (
         <React.Fragment>
-            <tr className={colorClass}>
+            <tr className={classes} onClick={onClick}>
                 <th>{status}</th>
                 <td>{id}</td>
                 <td>{destination}</td>

@@ -1,0 +1,13 @@
+.table-responsive {
+    padding: 0;
+    margin: 0;
+}
+
+.table-row:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+
+.table-danger:hover {
+    background-color: red;
+}

@@ -52,12 +52,12 @@ function App() {
       <div className="row flex-grow-1">
 
         {/* Bootstrap Responsive resizing */}
-        <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
+        <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <Sidebar />
         </div>
 
         {/* Bootstrap Responsive resizing */}
-        <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
+        <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
             <h1>Map</h1>
         </div>
       </div>

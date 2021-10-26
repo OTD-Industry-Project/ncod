@@ -15,6 +15,7 @@ body {
 
     /* Global CSS variables here */
     --header-height: 75px;
+    --hover-color: #e7e7e7;
 }
 
 code {
