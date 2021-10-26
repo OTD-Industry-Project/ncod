@@ -4,9 +4,9 @@
 }
 
 /* Center content vertically */
-.row > div {
-    /* margin: auto; */
-}
+/* .row > div {
+    margin: auto;
+} */
 
 .time,
 .day-date {

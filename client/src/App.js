@@ -1,6 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import './App.css';
 import Header from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
 
 /* 
       This is the big picture view of the layout
@@ -42,7 +43,7 @@ function App() {
       
       {/* Header row with one col */}
       <div className="row Header">
-        <div className="col bg-primary">
+        <div className="col">
             <Header />
         </div>
       </div>
@@ -52,13 +53,12 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-        <h1>Scrollabe Sidebar</h1>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum augue nec nisl tempus vestibulum. Phasellus eget neque id lectus malesuada maximus. Ut quis tellus massa. Sed mattis bibendum sem, quis dapibus quam commodo sit amet. Sed volutpat lacinia lacus non finibus. Praesent vitae nunc sed turpis suscipit porttitor vehicula nec elit. Sed eleifend velit dui, vel pulvinar arcu egestas at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec nisi odio, malesuada vel vulputate ac, ornare et dolor. Aenean quis purus urna. Nullam enim nibh, eleifend at auctor nec, luctus sit amet nulla. Praesent vel justo nec augue congue venenatis. Nam tincidunt ultrices arcu et auctor. Donec ut sapien eu mauris pretium sagittis. Proin fermentum ex augue, et fringilla risus ultricies aliquet. Duis semper ullamcorper augue vel tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum augue nec nisl tempus vestibulum. Phasellus eget neque id lectus malesuada maximus. Ut quis tellus massa. Sed mattis bibendum sem, quis dapibus quam commodo sit amet. Sed volutpat lacinia lacus non finibus. Praesent vitae nunc sed turpis suscipit porttitor vehicula nec elit. Sed eleifend velit dui, vel pulvinar arcu egestas at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec nisi odio, malesuada vel vulputate ac, ornare et dolor. Aenean quis purus urna. Nullam enim nibh, eleifend at auctor nec, luctus sit amet nulla. Praesent vel justo nec augue congue venenatis. Nam tincidunt ultrices arcu et auctor. Donec ut sapien eu mauris pretium sagittis. Proin fermentum ex augue, et fringilla risus ultricies aliquet. Duis semper ullamcorper augue vel tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum augue nec nisl tempus vestibulum. Phasellus eget neque id lectus malesuada maximus. Ut quis tellus massa. Sed mattis bibendum sem, quis dapibus quam commodo sit amet. Sed volutpat lacinia lacus non finibus. Praesent vitae nunc sed turpis suscipit porttitor vehicula nec elit. Sed eleifend velit dui, vel pulvinar arcu egestas at. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec nisi odio, malesuada vel vulputate ac, ornare et dolor. Aenean quis purus urna. Nullam enim nibh, eleifend at auctor nec, luctus sit amet nulla. Praesent vel justo nec augue congue venenatis. Nam tincidunt ultrices arcu et auctor. Donec ut sapien eu mauris pretium sagittis. Proin fermentum ex augue, et fringilla risus ultricies aliquet. Duis semper ullamcorper augue vel tempus.
+            <Sidebar />
         </div>
 
         {/* Bootstrap Responsive resizing */}
         <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-            Map
+            <h1>Map</h1>
         </div>
       </div>
     </div>

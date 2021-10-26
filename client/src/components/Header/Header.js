@@ -23,10 +23,10 @@ class Header extends React.Component {
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-1 border">Media Controls</div>
                     
                     {/* Scrub bar */}
-                    <div className="d-none d-sm-block col-sm-3 col-md-3 col-lg-4 col-xl-5 border">Scrubbing bar</div>
+                    <div className="d-none d-sm-block col-sm-3 col-md-3 col-lg-3 col-xl-5 border">Scrubbing bar</div>
                     
                     {/* Date and time */}
-                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-1 col-xl-2 border">
+                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2 border">
                         <Datetime />
                     </div>
                     
