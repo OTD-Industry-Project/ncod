@@ -1,3 +1,19 @@
 .Header {
-    height: var(--header-height);
+    max-height: var(--header-height);
+    overflow: hidden;
+}
+
+/* Center content vertically */
+.row > div {
+    /* margin: auto; */
+}
+
+.time,
+.day-date {
+    font-family: "Roboto", sans-serif;
+}
+
+.time {
+    font-weight: bold;
+    font-size: large;
 }
