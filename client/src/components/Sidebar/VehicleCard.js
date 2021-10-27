@@ -27,7 +27,7 @@ const VehicleCard = ({status, id, destination, times, eta, onClick }) => {
                 <td>{eta}</td>
             </tr>
         </React.Fragment>
-    );
+    )
 }
 
 export default VehicleCard;

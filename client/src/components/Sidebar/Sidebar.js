@@ -18,7 +18,7 @@ class Sidebar extends Component {
     }
 
     render() {
-      
+
         return (
             // Container-fluid makes full width and table-responsive prevents table from overflowing at smaller screen sizes
             <div className="container-fluid table-responsive">
@@ -59,18 +59,19 @@ class Sidebar extends Component {
                     </thead>
                     <tbody>
                         {/* Map the data into the table, where the VehicleCard component returns a single table-row*/}
-                        {MOCK_DATA.map(vehicle => (
 
-                                    <VehicleCard 
-                                        key={vehicle.id}
-                                        status={vehicle.status}
-                                        id={vehicle.id}
-                                        destination={vehicle.destination}
-                                        times={vehicle.times}
-                                        eta={vehicle.eta}
-                                        onClick={this.vehicleCardClicked(vehicle.id)}  
-                                    />
-                        ))}
+                            {MOCK_DATA.map(vehicle => (
+
+                                        <VehicleCard 
+                                            key={vehicle.id}
+                                            status={vehicle.status}
+                                            id={vehicle.id}
+                                            destination={vehicle.destination}
+                                            times={vehicle.times}
+                                            eta={vehicle.eta}
+                                            onClick={this.vehicleCardClicked(vehicle.id)}
+                                        />
+                            ))}
                     </tbody>
                 </table>
             </div>
