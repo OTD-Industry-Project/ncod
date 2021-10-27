@@ -8,6 +8,18 @@
     background-color: var(--hover-color);
 }
 
-.table-danger:hover {
-    background-color: red;
+.delayed {
+    background-color: rgba(250, 111, 111, 0.418);
+}
+
+.delayed:hover {
+    background-color: rgba(250, 111, 111, 0.718);
+}
+
+.sort-dropdown {
+    font-size: small;
+}
+
+.rdn {
+    margin: 0.375rem 0.75rem;
 }

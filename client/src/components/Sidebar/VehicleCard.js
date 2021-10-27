@@ -3,11 +3,13 @@ import './Sidebar.css';
 
 const VehicleCard = ({status, id, destination, times, eta, onClick }) => {
     
+    // Conditional css
     let classes = "";
 
+    // add conditional classes to each table row
     switch (status) {
         case "Delayed":
-            classes += "table-danger hovers"
+            classes += "delayed"
             break;
         default:
             classes += "";
@@ -25,7 +27,7 @@ const VehicleCard = ({status, id, destination, times, eta, onClick }) => {
                 <td>{eta}</td>
             </tr>
         </React.Fragment>
-    )
+    );
 }
 
 export default VehicleCard;
