@@ -3,6 +3,14 @@
     margin: 0;
 }
 
+.form-control {
+    width: 80%;
+}
+
+.table-row {
+    font-size: 0.8rem;
+}
+
 .table-row:hover {
     cursor: pointer;
     background-color: var(--hover-color);
@@ -17,9 +25,14 @@
 }
 
 .sort-dropdown {
-    font-size: small;
+    font-size: 0.8rem;
 }
 
 .rdn {
-    margin: 0.375rem 0.75rem;
+    margin: 0;
+    padding: 0;
+}
+
+.mt-3 {
+    font-size: smaller;
 }

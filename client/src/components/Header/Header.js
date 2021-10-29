@@ -12,12 +12,12 @@ class Header extends React.Component {
                 {/* Bootstrap Responsive resizing. Alerts and settings are hidden on mobile and tablet sizes, and replaced with Hamburger */}
                 <div className="row d-flex h-100">
                     {/* Logo */}
-                    <div className="col-8 col-sm-2 col-md-2 col-lg-2 col-xl-1 border">
+                    <div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1 border">
                         <Logo />
                     </div>
 
                     {/* History Toggle */}
-                    <div className="d-none d-sm-block col-sm-1 col-md-1 col-lg-1 col-xl-1 border">History toggle</div>
+                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-1 border">History toggle</div>
                     
                     {/* Media controls */}
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-1 border">Media Controls</div>
