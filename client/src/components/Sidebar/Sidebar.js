@@ -6,6 +6,15 @@ import { Dropdown } from 'react-dropdown-now';
 import 'react-dropdown-now/style.css';
 
 class Sidebar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: MOCK_DATA,
+            sortBy: "Vehicle ID",
+            orderBy: "Default"
+        }
+      }
     
     vehicleCardClicked = param => e => {
         // Prevent page from reloading
@@ -38,14 +47,7 @@ class Sidebar extends Component {
  
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: MOCK_DATA,
-            sortBy: "Vehicle ID",
-            orderBy: "Default"
-        }
-      }
+    
 
     render() {
 
@@ -82,7 +84,7 @@ class Sidebar extends Component {
                       options={['Vehicle ID', 'On Time', 'Delayed', 'Pre Departed', 'Completed', ]}
                       value="Vehicle ID"
                       onChange={(value) => console.log('change!', value)}
-                      onSelect={(value) => { this.setState({sortBy: value.value}); console.log(`changed to ${value.value}`)}} 
+                      onSelect={(value) =>  this.setState({sortBy: value.value})}
                       onClose={(closedBySelection) => console.log('closedBySelection?:', closedBySelection)}
                       onOpen={() => console.log('open!')}
                     />

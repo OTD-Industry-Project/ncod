@@ -1,4 +1,4 @@
-
+import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery';
 import '@popperjs/core';

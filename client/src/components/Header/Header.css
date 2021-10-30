@@ -1,12 +1,14 @@
 .Header {
     max-height: var(--header-height);
+    background-color: azure;
     overflow: hidden;
+    border-bottom: 2px solid rgb(202, 202, 202);
 }
 
 /* Center content vertically */
-/* .row > div {
+.row > div {
     margin: auto;
-} */
+}
 
 .time,
 .day-date {
@@ -16,4 +18,12 @@
 .time {
     font-weight: bold;
     font-size: large;
+}
+
+.date-picker {
+    height: 100%;
+    width: 100px;
+    padding: 0.6rem;
+
+    font-size: small;
 }
