@@ -5,8 +5,24 @@ import Datetime from './Datetime';
 import HistoryToggle from './HistoryToggle';
 
 class Header extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: null,
+            date: null
+        }
+    }
+    
+    handleHistoryCallback = (childData) => {
+        this.setState({date: childData});
+    }
        
     render() { 
+
+        const { data, date } = this.state;
+        
+        
         return (
             <div className="Header">
                 
@@ -19,7 +35,7 @@ class Header extends React.Component {
 
                     {/* History Toggle */}
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2 border">
-                        <HistoryToggle />
+                        <HistoryToggle parentCallback={this.handleHistoryCallback}/>
                     </div>
                     
                     {/* Media controls */}
@@ -30,7 +46,7 @@ class Header extends React.Component {
                     
                     {/* Date and time */}
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2 border">
-                        <Datetime />
+                        <Datetime date={date}/>
                     </div>
                     
                     {/* Alerts */}

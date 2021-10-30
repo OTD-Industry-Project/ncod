@@ -1,42 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "./Header.css";
+import Switch from "react-switch";
 
-function HistoryToggle() {
+function HistoryToggle({ parentCallback }) {
     const [startDate, setStartDate] = useState(new Date());
-    const [button, setButton] = useState({
-        classes: "btn btn-secondary",
-        active: false,
-        today: new Date(),
-    });
 
-    const sameDate = (d1, d2) => {
-        return (
-            d1.getFullYear() === d2.getFullYear() &&
-            d1.getMonth() === d2.getMonth() &&
-            d1.getDay() === d2.getDay()
-        );
+    const [checked, setChecked] = useState(false);
+    const handleChange = (nextChecked) => {
+        setChecked(nextChecked);
+        if (checked) {
+            onTrigger(startDate, true);
+        }
     };
 
-    useEffect(() => {
-        console.log(startDate);
-        if (sameDate(startDate, button.today)) {
-            setButton({ classes: "btn btn-primary" });
+    const onTrigger = (date, reset) => {
+        setStartDate(date);
+
+        if (reset) {
+            parentCallback(null);
+        } else {
+            parentCallback(date);
         }
-    }, []);
+    };
 
     return (
-        <div className="container-fluid d-flex justify-content-between">
-            <button
-                className={button.classes}
-                onClick={button.active ? setStartDate(button.today) : undefined}
-            >
-                Today
-            </button>
+        <div className="container-fluid d-flex">
+            <label className="switch d-flex align-items-center">
+                <span>Live</span>
+                <Switch
+                    onChange={handleChange}
+                    checked={checked}
+                    className="react-switch"
+                    onColor="#86d3ff"
+                    offColor="#85b858"
+                    offHandleColor="#567a36"
+                    onHandleColor="#2693e6"
+                    handleDiameter={30}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                    height={20}
+                    width={48}
+                />
+                <span>History</span>
+            </label>
+
             <DatePicker
-                className="date-picker"
+                className={checked ? "date-picker" : "date-picker d-none"}
                 selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                onChange={(date) => {
+                    onTrigger(date, false);
+                }}
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown

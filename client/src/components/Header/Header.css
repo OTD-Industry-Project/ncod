@@ -15,6 +15,10 @@
     font-family: "Roboto", sans-serif;
 }
 
+.history-date {
+    color: red;
+}
+
 .time {
     font-weight: bold;
     font-size: large;
@@ -23,7 +27,13 @@
 .date-picker {
     height: 100%;
     width: 100px;
-    padding: 0.6rem;
+    padding: 0.4rem;
 
-    font-size: small;
+    font-size: 0.85rem;
+}
+
+.switch > span {
+    font-weight: 500;
+    color: darkblue;
+    margin: 0 0.63rem;
 }
