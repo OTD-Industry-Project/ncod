@@ -17,15 +17,16 @@
 }
 
 .delayed {
-    background-color: rgba(250, 111, 111, 0.418);
+    background-color: var(--light-red);
 }
 
 .delayed:hover {
-    background-color: rgba(250, 111, 111, 0.718);
+    background-color: var(--red-hover);
 }
 
-.sort-dropdown {
+.dropdowns {
     font-size: 0.8rem;
+    color: var(--dark-blue);
 }
 
 .rdn {

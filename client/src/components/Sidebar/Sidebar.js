@@ -67,7 +67,7 @@ class Sidebar extends Component {
                     {/* react-dropdown-now package */}
                     <p className="mt-3">Order By:</p>
                     <Dropdown
-                      className="sort-dropdown"
+                      className="dropdowns"
                       placeholder="Order by"
                       options={['Default', 'Time ASC', 'Time DESC']}
                       value="Default"
@@ -79,7 +79,7 @@ class Sidebar extends Component {
 
                     <p className="mt-3">Sort By:</p>
                     <Dropdown
-                      className="sort-dropdown"
+                      className="dropdowns"
                       placeholder="Select an option"
                       options={['Vehicle ID', 'On Time', 'Delayed', 'Pre Departed', 'Completed', ]}
                       value="Vehicle ID"

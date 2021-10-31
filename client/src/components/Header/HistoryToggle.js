@@ -7,6 +7,7 @@ function HistoryToggle({ parentCallback }) {
     const [startDate, setStartDate] = useState(new Date());
 
     const [checked, setChecked] = useState(false);
+
     const handleChange = (nextChecked) => {
         setChecked(nextChecked);
         if (checked) {

@@ -1,8 +1,9 @@
 .Header {
     max-height: var(--header-height);
-    background-color: azure;
+    background-color: var(--off-white);
     overflow: hidden;
-    border-bottom: 2px solid rgb(202, 202, 202);
+    border-bottom: var(--border);
+    box-shadow: var(--box-shadow);
 }
 
 /* Center content vertically */
@@ -10,13 +11,29 @@
     margin: auto;
 }
 
+.logo {
+    font-family: "Raleway";
+    color: var(--dark-blue);
+    letter-spacing: -0.1rem;
+    font-size: 2rem;
+    margin: 0 1rem;
+    font-weight: 500;
+    text-shadow: var(--text-shadow);
+}
+
+.logo:hover {
+    text-shadow: var(--text-shadow-hover);
+    cursor: pointer;
+}
+
 .time,
 .day-date {
     font-family: "Roboto", sans-serif;
+    color: var(--dark-blue);
 }
 
 .history-date {
-    color: red;
+    color: var(--red);
 }
 
 .time {
@@ -28,12 +45,22 @@
     height: 100%;
     width: 100px;
     padding: 0.4rem;
-
     font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--dark-blue);
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--radius);
 }
 
 .switch > span {
     font-weight: 500;
-    color: darkblue;
+    color: var(--dark-blue);
     margin: 0 0.63rem;
+    text-shadow: var(--text-shadow);
+}
+
+.switch > span:hover {
+    text-shadow: var(--text-shadow-hover);
+    cursor: pointer;
 }
