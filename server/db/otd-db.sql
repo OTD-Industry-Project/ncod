@@ -1,4 +1,7 @@
--- Create Database and switch into it first [\c <database_name>]
+-- Usage: 
+--    psql -U <username> -f <C:\some\file\path\ncod\server\db\otd-db.sql>
+-- or navigate into C:\some\file\path\ncod\server\db\ and run as:
+--    psql -U <username> -f ./otd-db.sql
 
 CREATE DATABASE test;
 

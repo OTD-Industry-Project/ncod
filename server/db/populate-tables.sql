@@ -1,2 +1,0 @@
-insert into ADDRESS (addr_Name, addr_Num, addr_Street, addr_Suburb, addr_State, addr_Lat, addr_Long, addr_Location) values ('Telangi Satu', '675', 'eblight0@cmu.edu', 'Female', '63.114.111.196', '47.218.134.210', '39.118.80.6', ST_SetSRID(ST_MakePoint(addr_Long, addr_Lat), 4326));
-insert into ADDRESS (addr_Name, addr_Num, addr_Street, addr_Suburb, addr_State, addr_Lat, addr_Long, addr_Location) values ('Xiangying', '55470', 'nkehri1@hud.gov', 'Genderfluid', '26.20.83.90', '75.141.156.242', '139.115.228.97', ST_SetSRID(ST_MakePoint(addr_Long, addr_Lat), 4326));
