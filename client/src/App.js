@@ -2,7 +2,8 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-
+import MapWrapper from './components/MapWrapper/MapWrapper';
+import { useState, useEffect } from 'react';
 /* 
       This is the big picture view of the layout
 
@@ -28,13 +29,13 @@ function App() {
 
   // Commented out fetching to work on layout
 
-  // const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
 
-  // useEffect(() => {
-  //   fetch("/api")
-  //   .then((res) => res.json())
-  //   .then((data) => setData(data.message));
-  // }, []);
+  useEffect(() => {
+    fetch("/api")
+    .then((res) => res.json())
+    .then((data) => setData(data.message));
+  }, []);
 
   return (
     
@@ -54,11 +55,12 @@ function App() {
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <Sidebar />
+            {data}
         </div>
 
         {/* Bootstrap Responsive resizing */}
         <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-            <h1>Map</h1>
+            <MapWrapper />
         </div>
       </div>
     </div>
