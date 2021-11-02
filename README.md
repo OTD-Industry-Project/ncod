@@ -1,16 +1,6 @@
 # NCOD
 Single-Page fleet management app using PERN stack 
 
-## Demo of Layout
-![](demo.gif)
-
-As a proof of concept:  
-- React attempts to fetch the `/api` route
-- Express is listening for this and is then querying and fetching data from https://rnacentral.org/help/public-database with the help of the `pg` node module
-- Express then passes the data back to React
-- React displays it
-
-
 # Get Started
 ## Clone the repo
 `git clone https://github.com/OTD-Industry-Project/ncod.git`
