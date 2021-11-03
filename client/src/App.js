@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import MapWrapper from './components/MapWrapper/MapWrapper';
 import { useState, useEffect } from 'react';
 
+
 /* 
       This is the big picture view of the layout
 
@@ -61,7 +62,7 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-            <MapWrapper />
+          <MapWrapper />
         </div>
       </div>
     </div>
