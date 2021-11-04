@@ -7,7 +7,8 @@
             "addr_suburb": "Werribee",
             "addr_state": "Vic",
             "addr_lat": "-37.930723",
-            "addr_long": "144.669180"
+            "addr_long": "144.669180",
+            "statusUpdate": "delayed"
         },
         {
             "addr_name": "Werribee Train Station",
@@ -16,7 +17,8 @@
             "addr_suburb": "Werribee",
             "addr_state": "Vic",
             "addr_lat": "-37.898757", 
-            "addr_long": "144.660870"
+            "addr_long": "144.660870",
+            "statusUpdate": "Empty"
         },
         {
             "addr_name": "Coles head office",
@@ -25,7 +27,8 @@
             "addr_suburb": "Malvern East",
             "addr_state": "Vic",
             "addr_lat": "-37.845887",
-            "addr_long": "145.048133"
+            "addr_long": "145.048133",
+            "statusUpdate": "On Schedule"
         },
         {
             "addr_name": "Cirque Electriq",
@@ -34,7 +37,8 @@
             "addr_suburb": "Docklands",
             "addr_state": "Vic",
             "addr_lat": "-37.812132",
-            "addr_long": "144.936583"
+            "addr_long": "144.936583",
+            "statusUpdate": "Lost"
         }
     ]
 }
