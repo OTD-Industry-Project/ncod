@@ -1,60 +1,49 @@
 import React from 'react'
-import { useMap, TileLayer, LayersControl, Marker, Popup, ZoomControl } from 'react-leaflet'
+import { TileLayer, LayersControl, Marker, Popup, ZoomControl } from 'react-leaflet'
+import addressData from "../../data/address.json"
 
 const Layers = () => {
-    // const map = useMap()
 
-  return (
-    <>
-    <ZoomControl position="topright"/>
-        <LayersControl position="topright">
+    return (
+        <>
+            <ZoomControl position="topright" /> {/* fully customisable zoom controls*/}
+            <LayersControl position="topright"> {/* layer control panel */}
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                
 
-            <LayersControl.Overlay checked name="On Schedule">
-                <Marker position={[-37.813629, 144.963058]}
-                eventHandlers={{
-                    mouseover: (event) => event.target.openPopup(),
-                    mouseout: (event) => event.target.closePopup(),
-                    }}
-                >
-                    <Popup>
-                        On Schedule.
-                    </Popup>
-                </Marker>
-            </LayersControl.Overlay>
+                {/* Adding each layer for visibility to be toggled on and off as required.*/}
 
-            <LayersControl.Overlay checked name="Delayed">
-                <Marker position={[-37.829929, 144.898785]}
-                eventHandlers={{
-                    mouseover: (event) => event.target.openPopup(),
-                    mouseout: (event) => event.target.closePopup(),
-                    }}
-                >
-                    <Popup>
-                        Delayed.
-                    </Popup>
-                </Marker>
-            </LayersControl.Overlay>
+                <LayersControl.Overlay checked name="On Schedule">
 
-            <LayersControl.Overlay checked name="Empty">
-                <Marker position={[-37.927189, 144.901017]}
-                eventHandlers={{
-                    mouseover: (event) => event.target.openPopup(),
-                    mouseout: (event) => event.target.closePopup(),
-                    }}
-                >
-                    <Popup>
-                        Empty.
-                    </Popup>
-                </Marker>
-            </LayersControl.Overlay>
-        </LayersControl>
-    </>
-  )
+                    {/* Looping through JSON array imported from ./data/address.json to display markers */}
+
+                    {addressData.locations.map(buses => (
+                        <Marker
+                            key={buses.addr_name}
+                            position={[buses.addr_lat, buses.addr_long]}
+                            
+                            /* Using event handlers to access mouseover/out features for hover info
+                            to be defined inside the Popup tags  */
+                            
+                            eventHandlers={{
+                                mouseover: (event) => event.target.openPopup(),
+                                mouseout: (event) => event.target.closePopup(),
+                            }}
+                        >
+                            <Popup>
+                                {buses.addr_name}.
+                            </Popup>
+                        </Marker>
+
+
+                    ))}
+
+                </LayersControl.Overlay>
+            </LayersControl>
+        </>
+    )
 }
 
 export default Layers;
