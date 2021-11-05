@@ -1,7 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import './App.css';
 import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
+
 
 /* 
       This is the big picture view of the layout
@@ -53,7 +53,7 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-            <Sidebar />
+            
         </div>
 
         {/* Bootstrap Responsive resizing */}
