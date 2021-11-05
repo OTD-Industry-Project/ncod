@@ -47,7 +47,6 @@ function HistoryToggle({ parentCallback }) {
                 />
                 <span>History</span>
             </label>
-
             <DatePicker
                 className={checked ? "date-picker" : "date-picker d-none"}
                 selected={startDate}

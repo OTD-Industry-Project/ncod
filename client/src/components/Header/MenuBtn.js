@@ -28,7 +28,7 @@ function MenuBtn(){
                     Setting 4
                 </ListItem>
                 <ListItem button>
-                    Setting 5
+                    The settings can go quite depending on length of title
                 </ListItem>
             </List>
         </div>
