@@ -1,0 +1,48 @@
+{
+    "locations" : [
+        {
+            "id": 1,
+            "addr_name": "Werribee Mansion",
+            "addr_num": "",
+            "addr_street": "K Road",
+            "addr_suburb": "Werribee",
+            "addr_state": "Vic",
+            "addr_lat": "-37.930723",
+            "addr_long": "144.669180",
+            "statusUpdate": "Delayed"
+        },
+        {
+            "id": 2,
+            "addr_name": "Werribee Train Station",
+            "addr_numb": "",
+            "addr_street": "Manly Street",
+            "addr_suburb": "Werribee",
+            "addr_state": "Vic",
+            "addr_lat": "-37.898757", 
+            "addr_long": "144.660870",
+            "statusUpdate": "Empty"
+        },
+        {
+            "id": 3,
+            "addr_name": "Coles head office",
+            "addr_numb": "800",
+            "addr_street": "Toorak Road",
+            "addr_suburb": "Malvern East",
+            "addr_state": "Vic",
+            "addr_lat": "-37.845887",
+            "addr_long": "145.048133",
+            "statusUpdate": "On Schedule"
+        },
+        {
+            "id": 4,
+            "addr_name": "Cirque Electriq",
+            "addr_num" : "",
+            "addr_street": "Pearl River Road",
+            "addr_suburb": "Docklands",
+            "addr_state": "Vic",
+            "addr_lat": "-37.812132",
+            "addr_long": "144.936583",
+            "statusUpdate": "Lost"
+        }
+    ]
+}

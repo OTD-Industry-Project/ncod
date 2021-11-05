@@ -2,7 +2,7 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
-import MapWrapper from './components/MapWrapper/MapWrapper';
+import MapWrapper from './components/MapWrapper/MapWrapper.jsx';
 import { useState, useEffect } from 'react';
 
 
