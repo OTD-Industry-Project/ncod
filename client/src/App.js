@@ -55,13 +55,13 @@ function App() {
       <div className="row flex-grow-1">
 
         {/* Bootstrap Responsive resizing */}
-        <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+        <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
             <Sidebar />
             {!data ? "Server is not responding..." : data}
         </div>
 
         {/* Bootstrap Responsive resizing */}
-        <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+        <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
           <MapWrapper />
         </div>
       </div>
