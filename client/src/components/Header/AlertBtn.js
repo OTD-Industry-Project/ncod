@@ -71,6 +71,22 @@ function AlertBtn () {
                             </IconButton>
                         </Alert>
                     </Collapse>
+                    <Alert severity="warning">
+                    <AlertTitle>Examples ONLY --- Warning - Late!</AlertTitle>
+                    Bus ID - 70 <br />
+                    Driver Id - "GILES" <br />
+                    Date - 13/10/2020 <br />
+                    Time Slot - 12:10PM - 1:00PM <br />
+                    Destination - "CGS WHEELERS HILL" <br />
+                    </Alert>
+                    <Alert severity="warning">
+                    <AlertTitle>Warning - Running Behind</AlertTitle>
+                    Bus ID - 10 <br />
+                    Driver Id - "DOGAN" <br />
+                    Date - 26/10/2020 <br />
+                    Time Slot - 9:00AM - 10:00AM <br />
+                    Destination - "Bacchus Marsh Grammer Woodlea Campus" <br />
+                    </Alert>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} autoFocus> Close</Button>
