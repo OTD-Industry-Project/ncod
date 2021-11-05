@@ -3,7 +3,9 @@ import './Header.css';
 import Logo from './Logo';
 import Datetime from './Datetime';
 import HistoryToggle from './HistoryToggle';
-
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { Typography } from '@mui/material';
 class Header extends React.Component {
 
     constructor(props) {
@@ -24,41 +26,36 @@ class Header extends React.Component {
         
         
         return (
-            <div className="Header">
-                
+            <AppBar>
+                <Toolbar>
+                    <Typography sx={{flexGrow: 1}}>
+                         <Logo />
+                    </Typography>
+                    <Typography className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                        <HistoryToggle parentCallback={this.handleHistoryCallback}/>
+                    </Typography>
+                    <Typography sx={{flexGrow: 2}}align="center">
+                        Media Controls
+                    </Typography>
+                    <Typography sx={{flexGrow: 5}}>
+                        Scrubbing bar
+                    </Typography>
+                    <Typography sx={{flexGrow: 1}}>
+                        Alerts
+                    </Typography>
+                    <Typography sx={{flexGrow: 1}}>
+                        Settings
+                    </Typography>
+                    <Typography sx={{flexGrow: 2}}>
+                        <Datetime date={date}/>
+                    </Typography>
                 {/* Bootstrap Responsive resizing. Alerts and settings are hidden on mobile and tablet sizes, and replaced with Hamburger */}
                 <div className="row d-flex h-100">
-                    {/* Logo */}
-                    <div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1 border">
-                        <Logo />
-                    </div>
-
-                    {/* History Toggle */}
-                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2 border">
-                        <HistoryToggle parentCallback={this.handleHistoryCallback}/>
-                    </div>
-                    
-                    {/* Media controls */}
-                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-1 border">Media Controls</div>
-                    
-                    {/* Scrub bar */}
-                    <div className="d-none d-sm-block col-sm-3 col-md-3 col-lg-3 col-xl-4 border">Scrubbing bar</div>
-                    
-                    {/* Date and time */}
-                    <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2 border">
-                        <Datetime date={date}/>
-                    </div>
-                    
-                    {/* Alerts */}
-                    <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1 border">Alerts</div>
-                    
-                    {/* Settings */}
-                    <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1 border">Settings</div>
-
-                    {/* Only appears on mobile or tablet sizes */}
-                    <div className="col-4 col-sm-2 col-md-2 d-lg-none border">Hamburger</div>
+                    <div className="col-4 col-sm-2 col-md-2 d-lg-none">Hamburger</div>
                 </div>
-            </div>
+            
+            </Toolbar>
+            </AppBar>
         );
     }
 }
