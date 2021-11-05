@@ -3,6 +3,7 @@ import './Header.css';
 import Logo from './Logo';
 import Datetime from './Datetime';
 import HistoryToggle from './HistoryToggle';
+import MenuBtn from './MenuBtn';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Typography } from '@mui/material';
@@ -11,7 +12,6 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
             date: null
         }
     }
@@ -22,7 +22,7 @@ class Header extends React.Component {
        
     render() { 
 
-        const { data, date } = this.state;
+        const { date } = this.state;
         
         
         return (
@@ -43,11 +43,11 @@ class Header extends React.Component {
                     <Typography sx={{flexGrow: 1}}>
                         Alerts
                     </Typography>
-                    <Typography sx={{flexGrow: 1}}>
-                        Settings
-                    </Typography>
                     <Typography sx={{flexGrow: 2}}>
                         <Datetime date={date}/>
+                    </Typography>
+                    <Typography sx={{flexGrow: 1}}>
+                        <MenuBtn />
                     </Typography>
                 {/* Bootstrap Responsive resizing. Alerts and settings are hidden on mobile and tablet sizes, and replaced with Hamburger */}
                 <div className="row d-flex h-100">
