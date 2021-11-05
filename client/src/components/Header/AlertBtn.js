@@ -7,14 +7,16 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle'
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import CloseIcon from '@mui/icons-material/Close';
+import Collapse from '@mui/material/Collapse';
 
 function AlertBtn () {
     
     const [open, setOpen] = React.useState(false);
+    const [alertOpen, alertSetOpen] = React.useState(true);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -53,10 +55,22 @@ function AlertBtn () {
                     <AlertTitle>Info</AlertTitle>
                     This is an info alert — <strong>check it out!</strong>
                     </Alert>
-                    <Alert severity="success">
-                    <AlertTitle>Success</AlertTitle>
-                    This is a success alert — <strong>check it out!</strong>
-                    </Alert>
+                    <Collapse in={alertOpen}>
+                        <Alert severity="success">
+                        <AlertTitle>Success</AlertTitle>
+                        This is a success alert — <strong>check it out!</strong>
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                size="small"
+                                onClick={() => {
+                                    alertSetOpen(false);
+                                }}
+                            >
+                            <CloseIcon fontSize="inherit" />
+                            </IconButton>
+                        </Alert>
+                    </Collapse>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} autoFocus> Close</Button>
