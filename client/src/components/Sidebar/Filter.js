@@ -1,6 +1,7 @@
 import React from "react";
 import "./Sidebar.css";
 
+// Return a simple input field. Updates the filter prop with every key typed
 export const Filter = ({ filter, setFilter }) => {
     return (
         <div className="Search">
