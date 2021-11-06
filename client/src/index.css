@@ -33,7 +33,7 @@ body {
     --off-white: #fdfdfd;
 
     /* Shadows */
-    --text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    --text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.08);
     --text-shadow-hover: 2px 2px 4px rgba(0, 0, 0, 0.25);
     --box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.05);
 }

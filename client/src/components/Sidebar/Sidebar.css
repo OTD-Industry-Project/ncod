@@ -1,0 +1,30 @@
+.table {
+    font-size: 0.85rem;
+}
+
+.text-secondary,
+h6 {
+    font-size: 0.75rem;
+    text-shadow: var(--text-shadow);
+}
+
+.Top {
+    padding: 0.8rem;
+}
+
+thead {
+    color: var(--dark-blue);
+    text-shadow: var(--text-shadow);
+}
+
+thead > tr > th:hover {
+    padding-bottom: 0.4rem;
+    background-color: var(--hover-color);
+    border-radius: var(--radius);
+}
+
+tbody > tr:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+    border-radius: var(--radius);
+}

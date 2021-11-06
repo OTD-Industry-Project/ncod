@@ -57,7 +57,6 @@ function App() {
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
             <Sidebar />
-            {!data ? "Server is not responding..." : data}
         </div>
 
         {/* Bootstrap Responsive resizing */}
