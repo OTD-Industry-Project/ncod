@@ -2,6 +2,10 @@
     font-size: 0.85rem;
 }
 
+.Search {
+    margin-right: 2rem;
+}
+
 .text-secondary,
 h6 {
     font-size: 0.75rem;

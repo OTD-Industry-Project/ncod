@@ -73,7 +73,7 @@ export const Sidebar = () => {
     return (
         <>
             <div className="Top container-fluid d-flex justify-content-between">
-                <Filter filter={globalFilter} setFilter={setGlobalFilter} />
+                <Filter className="Search" filter={globalFilter} setFilter={setGlobalFilter} />
                 <div className="text-secondary align-self-center">{`Last Updated: ${lastUpdated.toLocaleTimeString()}`}</div>
             </div>
 
