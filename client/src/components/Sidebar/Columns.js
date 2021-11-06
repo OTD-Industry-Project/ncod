@@ -5,24 +5,19 @@ export const COLUMNS = [
     },
     {
         Header: 'ID',
-        accessor: 'vehicle_id',
+        accessor: 'VehicleID',
     },
     {
         Header: 'Dest.',
-        accessor: 'dest',
+        accessor: 'Destination',
     },
     {
-        Header: 'Times',
-        columns: [
-            {
-                Header: 'Pickup',
-                accessor: 'pickup_time'
-            },
-            {
-                Header: 'Dest.',
-                accessor: 'dest_time'
-            }
-        ]
+        Header: 'From',
+        accessor: 'PickupDateTime'
+    },
+    {
+        Header: 'To',
+        accessor: 'ArrivalDateTime'
     },
     {
         Header: 'ETA',
