@@ -1,9 +1,9 @@
 import React from 'react';
 import './Header.css';
 import IconButton from '@mui/material/IconButton';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import FastRewindIcon from '@mui/icons-material/FastRewind';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext'
+import FastForwardIcon from '@mui/icons-material/FastForward';
 import { useTheme } from '@mui/material/styles';
 
 function MediaControls () {
@@ -11,14 +11,14 @@ function MediaControls () {
 
     return (
         <div>
-            <IconButton aria-label="previous">
-                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+            <IconButton aria-label="rewind">
+                {theme.direction === 'rtl' ? <FastForwardIcon /> : <FastRewindIcon />}
             </IconButton>
             <IconButton aria-label="play/pause">
                 <PlayArrowIcon sx={{ height: 38, width: 38 }} />
             </IconButton>
-            <IconButton aria-label="next">
-                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+            <IconButton aria-label="forward">
+                {theme.direction === 'rtl' ? <FastRewindIcon /> : <FastForwardIcon />}
             </IconButton>
         </div>
     )

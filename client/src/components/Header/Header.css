@@ -7,3 +7,14 @@
     border-bottom: var(--border);
     box-shadow: var(--box-shadow);
 }
+.react-date-picker__calendar--open {
+    top: 100% !important;
+    bottom: unset !important;
+  }
+.react-datepicker-wrapper {
+    display: inline-block;
+    padding-top: 10px !important;
+    padding-left: 10px !important;
+    border: 0px;
+    width: 200px !important;
+}

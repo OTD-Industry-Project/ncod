@@ -5,7 +5,6 @@ import Datetime from './Datetime';
 import HistoryToggle from './HistoryToggle';
 import MenuBtn from './MenuBtn';
 import AlertBtn from './AlertBtn';
-import MediaControls from './MediaControls';
 import ScrubBar from './ScrubBar';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -34,11 +33,8 @@ class Header extends React.Component {
                     <Typography sx={{flexGrow: 1}}>
                          <Logo />
                     </Typography>
-                    <Typography className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                    <Typography className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-4">
                         <HistoryToggle parentCallback={this.handleHistoryCallback}/>
-                    </Typography>
-                    <Typography sx={{flexGrow: 1}}align="center" >
-                        <MediaControls />
                     </Typography>
                     <Typography sx={{flexGrow: 5}}marginTop="0">
                         <ScrubBar />
@@ -46,7 +42,7 @@ class Header extends React.Component {
                     <Typography sx={{flexGrow: 1}}align="center">
                         <AlertBtn />
                     </Typography>
-                    <Typography sx={{flexGrow: 1}}align="center">
+                    <Typography sx={{flexGrow: 2}}align="center">
                         <Datetime date={date}/>
                     </Typography>
                     <Typography sx={{flexGrow: 1}}align="center">
