@@ -32,3 +32,8 @@ tbody > tr:hover {
     cursor: pointer;
     border-radius: var(--radius);
 }
+
+.selected {
+    background-color: var(--light-blue);
+    font-weight: bold;
+}

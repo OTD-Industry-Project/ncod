@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
 import MapWrapper from './components/MapWrapper/MapWrapper.jsx';
 import { useState, useEffect } from 'react';
+import { processedData } from "./data/DataHelper";
 
 
 /* 
@@ -32,6 +33,17 @@ function App() {
   // Commented out fetching to work on layout
 
   const [data, setData] = useState(null);
+  const [schedule, setSchedule] = useState(processedData());
+
+  const activeCallBack = (uid) => {
+    
+    const index = schedule.findIndex(obj => obj.uid === uid);
+    let newSchedule = processedData();
+    console.log(newSchedule);
+    newSchedule[index].active = true;
+    
+    setSchedule(newSchedule);
+  };
 
   useEffect(() => {
     fetch("/api")
@@ -56,12 +68,12 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-            <Sidebar />
+            <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
         </div>
 
         {/* Bootstrap Responsive resizing */}
         <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-          <MapWrapper />
+          <MapWrapper schedule={schedule} />
         </div>
       </div>
     </div>
