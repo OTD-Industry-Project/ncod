@@ -1,65 +1,30 @@
 import React, { useMemo, useState } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import "./Sidebar.css";
-import TEST_DATA from "../../data/TEST_DATA.json";
+
 import { COLUMNS } from "./Columns";
 import { Filter } from "./Filter";
 
 const NUM_OF_VEHICLES = 50;
 
-export const Sidebar = () => {
+export const Sidebar = ({ schedule, activeCallBack }) => {
     
     // Keep track of last updated. Will be more useful when we are pulling live GPS data
     const [lastUpdated, setLastUpdated] = useState(new Date());
-    
-    // Make a copy of the TEST_DATA file
-    const newData = TEST_DATA;
+    const [selectedRow, setSelectedRow] = useState(-1);
 
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-
-    // Iterate through each object in newData
-    // Add a randomised status property to each object
-    // Add an ETA property to each object
-    // Remove date from times
-    newData.forEach((el) => {
+    const handleEvent = (row, i) => {
+        activeCallBack(row.uid);
         
-        // Remove dates from PickupDateTime and ArrivalDataTime
-        el.PickupDateTime = el.PickupDateTime.substr(
-            el.PickupDateTime.indexOf(" ") + 1
-        );
-        
-        el.ArrivalDateTime = el.ArrivalDateTime.substr(
-            el.ArrivalDateTime.indexOf(" ") + 1
-        );
-
-        // Set the eta as arrival date time
-        el.eta = el.ArrivalDateTime;
-
-        // Randomly pick a status
-        switch (getRandomInt(4)) {
-            case 0:
-                el.status = "On Time";
-                break;
-            case 1:
-                el.status = "Pre Departed";
-                break;
-            case 2:
-                el.status = "Delayed";
-                break;
-            case 3:
-                el.status = "Completed";
-                break;
-            default:
-                el.status = "Error";
+        if (selectedRow !== undefined) {
+            setSelectedRow(i);
         }
-    });
-
+    }
+    
     // Memoize the columns and data for the table. 
     // This is essentially caching all the data, so react doesn't need to rebuild the data and columns on every refresh.
     const columns = useMemo(() => COLUMNS, []);
-    const data = useMemo(() => newData.slice(0, NUM_OF_VEHICLES), []);
+    const data = useMemo(() => schedule.slice(0, NUM_OF_VEHICLES), []);
 
     // Create a table instance with useTable hook provided by the React-Table package
     // We are passing in colums and data, as well as Filter and Sorting functions
@@ -146,7 +111,7 @@ export const Sidebar = () => {
                 <tbody {...getTableBodyProps()}>
 
                     {/* Iterate over every row */}
-                    {rows.map((row) => {
+                    {rows.map((row, i) => {
 
                         // React-table function that prepares the row to be iterated over and displayed
                         prepareRow(row);
@@ -154,7 +119,7 @@ export const Sidebar = () => {
                         return (
                             
                             // Get and apply row props
-                            <tr {...row.getRowProps()}>
+                            <tr key={i} onClick={() => handleEvent(row.original, i)} className={selectedRow === i ? "selected" : ""} {...row.getRowProps()}>
 
                                 {/* Iterate over each cell in the row and return the rendered cell */}
                                 {row.cells.map((cell) => {
