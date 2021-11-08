@@ -16,14 +16,18 @@ export const processedData = () => {
         
         el.uid = index + 1;
 
-        // Remove dates from PickupDateTime and ArrivalDataTime
-        el.PickupDateTime = el.PickupDateTime.substr(
-            el.PickupDateTime.indexOf(" ") + 1
-        );
-        
-        el.ArrivalDateTime = el.ArrivalDateTime.substr(
-            el.ArrivalDateTime.indexOf(" ") + 1
-        );
+        // Only reformat string once
+        if (el.ArrivalDateTime.search("/") !== -1) {
+            
+            // Remove dates from PickupDateTime and ArrivalDataTime
+            el.PickupDateTime = el.PickupDateTime.substr(
+                el.PickupDateTime.indexOf(" ") + 1
+            );
+            
+            el.ArrivalDateTime = el.ArrivalDateTime.substr(
+                el.ArrivalDateTime.indexOf(" ") + 1
+            );
+        }
 
         // Create a field to track if selected
         el.active = false;
