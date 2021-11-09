@@ -2,6 +2,7 @@ import React from "react";
 import {
     TileLayer,
     LayersControl,
+    FeatureGroup,
     CircleMarker,
     Popup,
     ZoomControl,
@@ -10,20 +11,22 @@ import {
 const Layers = ({ schedule }) => {
 
     // still in progress, attempting to access the active item clicked in sidebar
-    
+
     /*     var i = 0;
         if (schedule.active = false) { 
             i = schedule.uid;
         console.log(schedule.active);
-        } */ 
+        } */
 
 
-        
+
     // Filtering the schedule to apply different layer controls
-    
+
     console.log(schedule);
 
-    var onTime = (schedule.filter((buses) => buses.status === "On Time")); 
+    var preDeparted = (schedule.filter((buses) => buses.status === "Pre Departed"));
+
+    var onTime = (schedule.filter((buses) => buses.status === "On Time"));
 
     var delayed = (schedule.filter((buses) => buses.status === "Delayed"));
 
@@ -41,97 +44,133 @@ const Layers = ({ schedule }) => {
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
 
-
                 <LayersControl.Overlay
-                    checked name={"On Time"}
+                    checked name={"Pre Departed"}
                     key={schedule.uid}>
 
-                    {/* looping over the pickup points, and pltting with a green circle */}
+                    {/* looping over the pickup points, and plotting with a coloured circle */}
 
-                    {onTime.map((buses) => (
+                    <FeatureGroup>
+                        {preDeparted.map((buses) => (
 
-                        <CircleMarker
-                            eventKey={buses.VehicleID + buses.DriverID}
-                            center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                            color={'green'}
+                            <CircleMarker
+                                eventKey={preDeparted.uid}
+                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                color={'DodgerBlue'}
 
-                            /* Using event handlers to access mouseover/out features for hover info
-                            to be defined inside the Popup tags  */
+                                /* Using event handlers to access mouseover/out features for hover info
+                                to be defined inside the Popup tags  */
 
-                            eventHandlers={{
-                                mouseover: (event) => event.target.openPopup(),
-                                mouseout: (event) => event.target.closePopup(),
-                            }}
-                        >
-                            <Popup>
-                                <h4>{buses.status}</h4> <br />
-                                <h6>{buses.PickupPoint}</h6> <br />
-                                VehicleID : {buses.VehicleID} <br />
-                                DriverID : {buses.DriverID} <br />
-                            </Popup>
+                                eventHandlers={{
+                                    mouseover: (event) => event.target.openPopup(),
+                                    mouseout: (event) => event.target.closePopup(),
+                                }}
+                            >
+                                <Popup>
+                                    <h4>{buses.status}</h4> <br />
+                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    VehicleID : {buses.VehicleID} <br />
+                                    DriverID : {buses.DriverID} <br />
+                                </Popup>
 
-                        </CircleMarker>
+                            </CircleMarker>
 
-                    ))}
+                        ))}
+                    </FeatureGroup>
 
                 </LayersControl.Overlay>
 
                 {/* repeating the above code from different filters, to add the different layers */}
 
                 <LayersControl.Overlay
+                    checked name={"On Time"}
+                    key={schedule.uid}>
+
+                    <FeatureGroup>
+                        {onTime.map((buses) => (
+
+                            <CircleMarker
+                                eventKey={onTime.uid}
+                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                color={'ForestGreen'}
+
+                                eventHandlers={{
+                                    mouseover: (event) => event.target.openPopup(),
+                                    mouseout: (event) => event.target.closePopup(),
+                                }}
+                            >
+                                <Popup>
+                                    <h4>{buses.status}</h4> <br />
+                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    VehicleID : {buses.VehicleID} <br />
+                                    DriverID : {buses.DriverID} <br />
+                                </Popup>
+
+                            </CircleMarker>
+
+                        ))}
+                    </FeatureGroup>
+
+                </LayersControl.Overlay>
+
+                <LayersControl.Overlay
                     checked name={"Delayed"}
                     key={schedule.uid}>
 
-                    {delayed.map((buses) => (
+                    <FeatureGroup>
+                        {delayed.map((buses) => (
 
-                        <CircleMarker
-                            eventKey={buses.VehicleID + buses.DriverID}
-                            center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                            color={'orange'}
+                            <CircleMarker
+                                eventKey={delayed.uid}
+                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                color={'OrangeRed'}
 
-                            eventHandlers={{
-                                mouseover: (event) => event.target.openPopup(),
-                                mouseout: (event) => event.target.closePopup(),
-                            }}
-                        >
-                            <Popup>
-                                <h4>{buses.status}</h4> <br />
-                                <h6>{buses.PickupPoint}</h6> <br />
-                                VehicleID : {buses.VehicleID} <br />
-                                DriverID : {buses.DriverID} <br />
-                            </Popup>
+                                eventHandlers={{
+                                    mouseover: (event) => event.target.openPopup(),
+                                    mouseout: (event) => event.target.closePopup(),
+                                }}
+                            >
+                                <Popup>
+                                    <h4>{buses.status}</h4> <br />
+                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    VehicleID : {buses.VehicleID} <br />
+                                    DriverID : {buses.DriverID} <br />
+                                </Popup>
 
-                        </CircleMarker>
+                            </CircleMarker>
 
-                    ))}
+                        ))}
+                    </FeatureGroup>
                 </LayersControl.Overlay>
 
                 <LayersControl.Overlay
                     checked name={"Empty"}
                     key={schedule.uid}>
 
-                    {empty.map((buses) => (
+                    <FeatureGroup>
+                        {empty.map((buses) => (
 
-                        <CircleMarker
-                            eventKey={buses.VehicleID + buses.DriverID}
-                            center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                            color={'dark'}
+                            <CircleMarker
+                                eventKey={empty.uid}
+                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                color={'DarkGrey'}
 
-                            eventHandlers={{
-                                mouseover: (event) => event.target.openPopup(),
-                                mouseout: (event) => event.target.closePopup(),
-                            }}
-                        >
-                            <Popup>
-                                <h4>{buses.status}</h4> <br />
-                                <h6>{buses.PickupPoint}</h6> <br />
-                                VehicleID : {buses.VehicleID} <br />
-                                DriverID : {buses.DriverID} <br />
-                            </Popup>
+                                eventHandlers={{
+                                    mouseover: (event) => event.target.openPopup(),
+                                    mouseout: (event) => event.target.closePopup(),
+                                }}
+                            >
+                                <Popup>
+                                    <h4>{buses.status}</h4> <br />
+                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    VehicleID : {buses.VehicleID} <br />
+                                    DriverID : {buses.DriverID} <br />
+                                </Popup>
 
-                        </CircleMarker>
+                            </CircleMarker>
 
-                    ))}
+                        ))}
+                    </FeatureGroup>
 
                 </LayersControl.Overlay>
 
