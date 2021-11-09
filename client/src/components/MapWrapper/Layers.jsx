@@ -6,27 +6,28 @@ import {
     Popup,
     ZoomControl,
 } from "react-leaflet";
-import test_data from "../../data/TEST_DATA.json"
 
 const Layers = ({ schedule }) => {
+
+    // still in progress, attempting to access the active item clicked in sidebar
+    
+    /*     var i = 0;
+        if (schedule.active = false) { 
+            i = schedule.uid;
+        console.log(schedule.active);
+        } */ 
+
+
+        
+    // Filtering the schedule to apply different layer controls
     
     console.log(schedule);
-    
-    const data = test_data;
 
-    //testing arrays and looping through data to extract something useful for layers control//
+    var onTime = (schedule.filter((buses) => buses.status === "On Time")); 
 
-    // const bus = Array.from(addressData.locations.map(buses => buses.statusUpdate));
+    var delayed = (schedule.filter((buses) => buses.status === "Delayed"));
 
-    
-    /*     var busStatus = data.reduce(function (r, a) {
-            r[a.SingleJourney] = r[a.SingleJourney] || [];
-            r[a.SingleJourney].push(a);
-            return r;
-        }, Object.create(null));
-    
-        console.log(busStatus); */
-
+    var empty = (schedule.filter((buses) => buses.status === "Completed"));
 
     return (
         <>
@@ -40,17 +41,19 @@ const Layers = ({ schedule }) => {
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
 
+
                 <LayersControl.Overlay
-                    checked name={"DriverID: " + data.DriverID + " Driving Bus# " + data.VehicleID} //planning to sort this somehow
-                    key={data.element}>
+                    checked name={"On Time"}
+                    key={schedule.uid}>
 
-                    {/* looping over the pickup points, and pltting with a blue circle */}
+                    {/* looping over the pickup points, and pltting with a green circle */}
 
-                    {data.map((buses) => (
+                    {onTime.map((buses) => (
 
                         <CircleMarker
                             eventKey={buses.VehicleID + buses.DriverID}
                             center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                            color={'green'}
 
                             /* Using event handlers to access mouseover/out features for hover info
                             to be defined inside the Popup tags  */
@@ -61,26 +64,30 @@ const Layers = ({ schedule }) => {
                             }}
                         >
                             <Popup>
+                                <h4>{buses.status}</h4> <br />
                                 <h6>{buses.PickupPoint}</h6> <br />
                                 VehicleID : {buses.VehicleID} <br />
-                                DriverID : {buses.DriverID}
+                                DriverID : {buses.DriverID} <br />
                             </Popup>
 
                         </CircleMarker>
 
                     ))}
 
-                    {/* looping over the destination points, and pltting with a red circle */}
+                </LayersControl.Overlay>
 
-                    {data.map((buses) => (
+                {/* repeating the above code from different filters, to add the different layers */}
+
+                <LayersControl.Overlay
+                    checked name={"Delayed"}
+                    key={schedule.uid}>
+
+                    {delayed.map((buses) => (
 
                         <CircleMarker
                             eventKey={buses.VehicleID + buses.DriverID}
-                            center={[buses.DestinationLatitude, buses.DestinationLongitude]}
-                            color={'dark'} //default is blue
-
-                            /* Using event handlers to access mouseover/out features for hover info
-                            to be defined inside the Popup tags  */
+                            center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                            color={'orange'}
 
                             eventHandlers={{
                                 mouseover: (event) => event.target.openPopup(),
@@ -88,14 +95,44 @@ const Layers = ({ schedule }) => {
                             }}
                         >
                             <Popup>
-                                <h6>{buses.Destination}</h6> <br />
+                                <h4>{buses.status}</h4> <br />
+                                <h6>{buses.PickupPoint}</h6> <br />
                                 VehicleID : {buses.VehicleID} <br />
-                                DriverID : {buses.DriverID}
+                                DriverID : {buses.DriverID} <br />
                             </Popup>
 
                         </CircleMarker>
 
                     ))}
+                </LayersControl.Overlay>
+
+                <LayersControl.Overlay
+                    checked name={"Empty"}
+                    key={schedule.uid}>
+
+                    {empty.map((buses) => (
+
+                        <CircleMarker
+                            eventKey={buses.VehicleID + buses.DriverID}
+                            center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                            color={'dark'}
+
+                            eventHandlers={{
+                                mouseover: (event) => event.target.openPopup(),
+                                mouseout: (event) => event.target.closePopup(),
+                            }}
+                        >
+                            <Popup>
+                                <h4>{buses.status}</h4> <br />
+                                <h6>{buses.PickupPoint}</h6> <br />
+                                VehicleID : {buses.VehicleID} <br />
+                                DriverID : {buses.DriverID} <br />
+                            </Popup>
+
+                        </CircleMarker>
+
+                    ))}
+
                 </LayersControl.Overlay>
 
             </LayersControl>
