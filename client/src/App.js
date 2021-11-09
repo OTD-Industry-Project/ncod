@@ -36,30 +36,36 @@ function App() {
   const [schedule, setSchedule] = useState(processedData());
 
   const activeCallBack = (uid) => {
-    
+
     const index = schedule.findIndex(obj => obj.uid === uid);
     let newSchedule = processedData();
-    console.log(newSchedule);
+
+
+    //console logging active schedule info
+    if (newSchedule[index].active = true) {
+      console.log(newSchedule[index]);
+    }
+
+
     newSchedule[index].active = true;
-    
     setSchedule(newSchedule);
   };
 
   useEffect(() => {
     fetch("/api")
-    .then((res) => res.json())
-    .then((data) => setData(data.message));
+      .then((res) => res.json())
+      .then((data) => setData(data.message));
   }, []);
 
   return (
-    
+
     // Entire app container
     <div className="container-fluid vh-100 d-flex flex-column">
-      
+
       {/* Header row with one col */}
       <div className="row Header">
         <div className="col">
-            <Header />
+          <Header />
         </div>
       </div>
 
@@ -68,7 +74,7 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-            <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
+          <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
         </div>
 
         {/* Bootstrap Responsive resizing */}

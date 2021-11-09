@@ -12,8 +12,6 @@ const Layers = ({ schedule }) => {
 
     // Filtering the schedule to apply different layer controls
 
-    //console.log(schedule);
-
     var preDeparted = (schedule.filter((buses) => buses.status === "Pre Departed"));
 
     var onTime = (schedule.filter((buses) => buses.status === "On Time"));
@@ -26,10 +24,18 @@ const Layers = ({ schedule }) => {
         <>
             <ZoomControl position="topright" /> {/* fully customisable zoom controls*/}
             <LayersControl position="topright"> {/* layer control panel */}
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                <LayersControl.BaseLayer checked name="OSM Default">
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="Dark Mode">
+                    <TileLayer
+                        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; 
+                        <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                    /></LayersControl.BaseLayer>
 
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
@@ -57,8 +63,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -90,8 +96,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -121,8 +127,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -151,8 +157,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
