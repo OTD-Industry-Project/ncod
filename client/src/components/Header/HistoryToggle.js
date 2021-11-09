@@ -61,6 +61,7 @@ function HistoryToggle({ parentCallback }) {
                 onChange={(date) => {
                     onTrigger(date, false);
                 }}
+                dateFormat="dd/MM/yyyy"
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown

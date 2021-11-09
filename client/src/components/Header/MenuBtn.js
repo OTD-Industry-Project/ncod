@@ -3,15 +3,15 @@ import './Header.css';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { List, Drawer, ListItem } from '@mui/material';
-
+//function for menu hamburger button
 function MenuBtn(){
 
     const [state, setState] = React.useState(false)
-
+    //toggling state of drawer
     const toggleDrawer = (open) => (event) => {
         setState(open)
     }
-
+    //list of settings options to be displayed, clickable
     const list = () => (
         <div onClick={toggleDrawer(false)}>
             <List>
@@ -33,7 +33,7 @@ function MenuBtn(){
             </List>
         </div>
     )
-
+    //div menu icon button to open drawer when clicked
     return(
         <div>
             <IconButton sx={{flexGrow: 1}} edge="start" color="inherit" aria-label="menu" 

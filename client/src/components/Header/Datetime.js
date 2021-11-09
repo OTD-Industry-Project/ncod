@@ -1,8 +1,8 @@
 import React from 'react';
 import Clock from 'react-live-clock';
 import './Header.css';
-
-
+//simple function for displaying current time and date
+//formatted to be more legable
 const Datetime = ({ date }) => {
     
     return (
@@ -12,5 +12,4 @@ const Datetime = ({ date }) => {
         </div>
     );
 }
-
 export default Datetime;
