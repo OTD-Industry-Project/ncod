@@ -10,19 +10,9 @@ import {
 
 const Layers = ({ schedule }) => {
 
-    // still in progress, attempting to access the active item clicked in sidebar
-
-    /*     var i = 0;
-        if (schedule.active = false) { 
-            i = schedule.uid;
-        console.log(schedule.active);
-        } */
-
-
-
     // Filtering the schedule to apply different layer controls
 
-    console.log(schedule);
+    //console.log(schedule);
 
     var preDeparted = (schedule.filter((buses) => buses.status === "Pre Departed"));
 
@@ -45,8 +35,7 @@ const Layers = ({ schedule }) => {
                 by looping through the array*/}
 
                 <LayersControl.Overlay
-                    checked name={"Pre Departed"}
-                    key={schedule.uid}>
+                    checked name={"Pre Departed"}>
 
                     {/* looping over the pickup points, and plotting with a coloured circle */}
 
@@ -54,6 +43,7 @@ const Layers = ({ schedule }) => {
                         {preDeparted.map((buses) => (
 
                             <CircleMarker
+                                key={buses.uid}
                                 eventKey={preDeparted.uid}
                                 center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
                                 color={'DodgerBlue'}
@@ -83,13 +73,13 @@ const Layers = ({ schedule }) => {
                 {/* repeating the above code from different filters, to add the different layers */}
 
                 <LayersControl.Overlay
-                    checked name={"On Time"}
-                    key={schedule.uid}>
+                    checked name={"On Time"}>
 
                     <FeatureGroup>
                         {onTime.map((buses) => (
 
                             <CircleMarker
+                                key={buses.uid}
                                 eventKey={onTime.uid}
                                 center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
                                 color={'ForestGreen'}
@@ -114,13 +104,13 @@ const Layers = ({ schedule }) => {
                 </LayersControl.Overlay>
 
                 <LayersControl.Overlay
-                    checked name={"Delayed"}
-                    key={schedule.uid}>
+                    checked name={"Delayed"}>
 
                     <FeatureGroup>
                         {delayed.map((buses) => (
 
                             <CircleMarker
+                                key={buses.uid}
                                 eventKey={delayed.uid}
                                 center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
                                 color={'OrangeRed'}
@@ -144,13 +134,13 @@ const Layers = ({ schedule }) => {
                 </LayersControl.Overlay>
 
                 <LayersControl.Overlay
-                    checked name={"Empty"}
-                    key={schedule.uid}>
+                    checked name={"Empty"}>
 
                     <FeatureGroup>
                         {empty.map((buses) => (
 
                             <CircleMarker
+                                key={buses.uid}
                                 eventKey={empty.uid}
                                 center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
                                 color={'DarkGrey'}
