@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import {
-    TileLayer, LayersControl, FeatureGroup,
+import {TileLayer, LayersControl, FeatureGroup,
     CircleMarker, Popup, ZoomControl,
-    useMapEvents, Marker
-} from "react-leaflet";
+    useMapEvents, Marker, Tooltip} from "react-leaflet";
 
 
 
@@ -22,25 +20,25 @@ const Layers = ({ schedule, activeBus }) => {
 
 //Testing flyTo active bus marker... need to select a bus from side bar, then click anywhere on the map
 
-    if (activeBus !== null) {
-        LocationMarker()
-    }
-
-    function LocationMarker() {
+    
+function LocationMarker() {
         const [position, setPosition] = useState(null)
         const map = useMapEvents({
             click() {
-                map.locate()
+                setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude])
+                if (activeBus !== null) {
+                    map.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 });}
             },
-            locationfound(e) {
-                setPosition(e.latlng);
-                map.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 });
-            },
+            
         })
 
         return position === null ? null : (
-            <Marker position={position}>
-                <Popup>You are here</Popup>
+            <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
+                <Tooltip direction="top" offset={[-15,-10]} permanent>
+                    {activeBus.status} <br />
+                    Bus # : {activeBus.VehicleID} <br/>
+                    Location : {activeBus.PickupPoint} <br />
+                </Tooltip>
             </Marker>
         )
     }
@@ -61,7 +59,8 @@ const Layers = ({ schedule, activeBus }) => {
                         <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
                         url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
                     /></LayersControl.BaseLayer>
-                <LocationMarker />
+                <LocationMarker /> {/* flyTo function*/}
+
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
 
