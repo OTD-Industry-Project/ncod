@@ -34,24 +34,19 @@ function App() {
 
   const [data, setData] = useState(null);
   const [schedule, setSchedule] = useState(processedData());
+  const [activeBus, setActiveBus] = useState(null);
 
   const activeCallBack = (uid) => {
 
     const index = schedule.findIndex(obj => obj.uid === uid);
-    let newSchedule = processedData();
+    let newSchedule = schedule;
 
-
-    //console logging active schedule info
-    if (newSchedule[index].active = true) {
-      console.log(newSchedule[index]);
-    }
-
-
-    newSchedule[index].active = true;
-    setSchedule(newSchedule);
+    setActiveBus(newSchedule[index]);
+    // setSchedule(newSchedule);
   };
 
-  useEffect(() => {
+  useEffect(() =>  {
+    
     fetch("/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));
@@ -79,7 +74,7 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-          <MapWrapper schedule={schedule} />
+          <MapWrapper schedule={schedule} activeBus={activeBus} />
         </div>
       </div>
     </div>
