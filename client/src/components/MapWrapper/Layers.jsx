@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
     TileLayer, LayersControl, FeatureGroup,
-    CircleMarker, Popup, ZoomControl,
-    useMapEvents, Marker, Tooltip, useMap
+    CircleMarker, Popup, ZoomControl, Marker,
+    Tooltip, useMap
 } from "react-leaflet";
 
 
 
 const Layers = ({ schedule, activeBus }) => {
-
 
     // Filtering the schedule to apply different layer controls
 
@@ -20,27 +19,19 @@ const Layers = ({ schedule, activeBus }) => {
 
     var empty = (schedule.filter((buses) => buses.status === "Completed"));
 
-
-    //Testing flyTo active bus marker... need to select a bus from side bar first, then change return below
-
+    // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
         const [position, setPosition] = useState(null)
 
-        console.log(activeBus) //fires when clicking on the sidebar
-
+        // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap()
-        if (activeBus !== null) {
-            console.log(activeBus.PickupPointLongitude + ", " + activeBus.PickupPointLatitude);
-
-            //setPosition([activeBus.PickupPointLatitude + ", " + activeBus.PickupPointLongitude]) // not working, loops for some reason, time out error
-
+        if (position === null && activeBus !== null) {
+            setPosition(activeBus.PickupPointLongitude + ", " + activeBus.PickupPointLatitude)
             maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 })
 
         }
-        console.log(position);
 
-        // replace position variable with maps variable below, once an item is already clicked on, save file, then continue clicking items
-        // remember to change back to position before reloading page, as null value crashes on load
+        // Places a marker at the location, with an open tool tip conating info
         return position === null ? null : (
             <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
                 <Tooltip direction="top" offset={[-15, -10]} permanent>
@@ -53,7 +44,7 @@ const Layers = ({ schedule, activeBus }) => {
     }
 
 
-    //original working code below
+    // Map layer rendering and marker plots
     return (
         <>
             <ZoomControl position="topright" /> {/* fully customisable zoom controls*/}
@@ -70,7 +61,7 @@ const Layers = ({ schedule, activeBus }) => {
                         <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
                         url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
                     /></LayersControl.BaseLayer>
-                <LocationMarker /> {/* flyTo function*/}
+                <LocationMarker /> {/* flyTo function call*/}
 
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
