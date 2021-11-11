@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import {TileLayer, LayersControl, FeatureGroup,
+import {
+    TileLayer, LayersControl, FeatureGroup,
     CircleMarker, Popup, ZoomControl,
-    useMapEvents, Marker, Tooltip} from "react-leaflet";
+    useMapEvents, Marker, Tooltip, useMap
+} from "react-leaflet";
 
 
 
@@ -18,31 +20,56 @@ const Layers = ({ schedule, activeBus }) => {
 
     var empty = (schedule.filter((buses) => buses.status === "Completed"));
 
-//Testing flyTo active bus marker... need to select a bus from side bar, then click anywhere on the map
-
     
-function LocationMarker() {
-        const [position, setPosition] = useState(null)
-        const map = useMapEvents({
-            click() {
-                setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude])
-                if (activeBus !== null) {
-                    map.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 });}
-            },
-            
-        })
+    //Testing flyTo active bus marker... need to select a bus from side bar, then click anywhere on the map
 
+    function LocationMarker() {
+        const [position, setPosition] = useState(null)
+
+        console.log(activeBus) //fires when clicking on the sidebar
+
+        var flyingbus = []
+
+        const maps = useMap()
+        if (activeBus !== null && activeBus == true) {
+            console.log(activeBus) // not working
+            setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]) // not working
+
+            /*          change return to this variable and it works? but won't read when null / first load
+                        load app, click on item in the side bar, replace return to this variable, and will display markers as clicked on */
+            flyingbus = [activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]
+
+            console.log(flyingbus) // not working
+            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 }); // not working
+        }
+
+
+        // this commented section below works, using fylto each loaction when clicked inside the map bounds
+
+        /*         const map = useMapEvents({
+                    click() { //needs to be clicked inside the map to activate
+                        
+                        if (activeBus !== null) {
+                            setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude])
+                            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 });}
+                    },
+                    
+                }) */
+
+        // replace position with flying bus as mentioned above
         return position === null ? null : (
             <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
-                <Tooltip direction="top" offset={[-15,-10]} permanent>
+                <Tooltip direction="top" offset={[-15, -10]} permanent>
                     {activeBus.status} <br />
-                    Bus # : {activeBus.VehicleID} <br/>
+                    Bus # : {activeBus.VehicleID} <br />
                     Location : {activeBus.PickupPoint} <br />
                 </Tooltip>
             </Marker>
         )
     }
 
+
+    //original working code below
     return (
         <>
             <ZoomControl position="topright" /> {/* fully customisable zoom controls*/}
