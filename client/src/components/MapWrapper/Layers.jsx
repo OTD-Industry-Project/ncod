@@ -20,43 +20,27 @@ const Layers = ({ schedule, activeBus }) => {
 
     var empty = (schedule.filter((buses) => buses.status === "Completed"));
 
-    
-    //Testing flyTo active bus marker... need to select a bus from side bar, then click anywhere on the map
+
+    //Testing flyTo active bus marker... need to select a bus from side bar first, then change return below
 
     function LocationMarker() {
         const [position, setPosition] = useState(null)
 
         console.log(activeBus) //fires when clicking on the sidebar
 
-        var flyingbus = []
-
         const maps = useMap()
-        if (activeBus !== null && activeBus == true) {
-            console.log(activeBus) // not working
-            setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]) // not working
+        if (activeBus !== null) {
+            console.log(activeBus.PickupPointLongitude + ", " + activeBus.PickupPointLatitude);
 
-            /*          change return to this variable and it works? but won't read when null / first load
-                        load app, click on item in the side bar, replace return to this variable, and will display markers as clicked on */
-            flyingbus = [activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]
+            //setPosition([activeBus.PickupPointLatitude + ", " + activeBus.PickupPointLongitude]) // not working, loops for some reason, time out error
 
-            console.log(flyingbus) // not working
-            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 }); // not working
+            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 })
+
         }
+        console.log(position);
 
-
-        // this commented section below works, using fylto each loaction when clicked inside the map bounds
-
-        /*         const map = useMapEvents({
-                    click() { //needs to be clicked inside the map to activate
-                        
-                        if (activeBus !== null) {
-                            setPosition([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude])
-                            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 });}
-                    },
-                    
-                }) */
-
-        // replace position with flying bus as mentioned above
+        // replace position variable with maps variable below, once an item is already clicked on, save file, then continue clicking items
+        // remember to change back to position before reloading page, as null value crashes on load
         return position === null ? null : (
             <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
                 <Tooltip direction="top" offset={[-15, -10]} permanent>
