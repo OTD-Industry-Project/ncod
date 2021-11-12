@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import {
     TileLayer, LayersControl, FeatureGroup,
-    CircleMarker, Popup, ZoomControl, Marker,
-    Tooltip, useMap
+    Popup, ZoomControl, Marker, Tooltip, useMap
 } from "react-leaflet";
 import { divIcon } from "leaflet";
-
 
 
 const Layers = ({ schedule, activeBus }) => {
 
     // Create custom Marker Icons
     var icon = divIcon();
+    // Initialise empty varibable to contain active bus status
+    var activeBusStatus;
 
     // Filtering the schedule to apply different layer controls
 
@@ -33,13 +33,27 @@ const Layers = ({ schedule, activeBus }) => {
             setPosition(activeBus.PickupPointLongitude + ", " + activeBus.PickupPointLatitude)
             maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 })
 
+            // Setting variable to be passed allowing access to CSS classes where 'activeBus.status' contains a space
+            if (activeBus.status === "On Time") {
+                activeBusStatus = "OnTime"
+            } else if (activeBus.status === "Pre Departed") {
+                activeBusStatus = "PreDeparted"
+            } else {
+                activeBusStatus = activeBus.status
+            }
+            // Assigning CSS class based on bus status
+            icon = divIcon({
+                className: "marker " + activeBusStatus,
+                html: `<span>${activeBus.VehicleID}</span>`,
+            })
+
         }
 
         // Places a marker at the location, with an open tool tip conating info
         return position === null ? null : (
             <Marker icon={icon}
                 position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
-                <Tooltip direction="top" offset={[8, -5]} permanent>
+                <Tooltip direction="top" offset={[8, -5]} permanent> {/* Will work out how to close this, or use a better open method */}
                     {activeBus.status} <br />
                     Bus # : {activeBus.VehicleID} <br />
                     Location : {activeBus.PickupPoint} <br />
@@ -79,7 +93,7 @@ const Layers = ({ schedule, activeBus }) => {
                     <FeatureGroup>
                         {preDeparted.map((buses) => (
                             icon = divIcon({
-                                className: "marker predeparted",
+                                className: "marker PreDeparted",
                                 html: `<span>${buses.VehicleID}</span>`,
                             }),
 
@@ -88,7 +102,6 @@ const Layers = ({ schedule, activeBus }) => {
                                 key={buses.uid}
                                 eventKey={preDeparted.uid}
                                 position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                //color={'DodgerBlue'}
 
                                 /* Using event handlers to access mouseover/out features for hover info
                                 to be defined inside the Popup tags  */
@@ -120,7 +133,7 @@ const Layers = ({ schedule, activeBus }) => {
                     <FeatureGroup>
                         {onTime.map((buses) => (
                             icon = divIcon({
-                                className: "marker ontime",
+                                className: "marker OnTime",
                                 html: `<span>${buses.VehicleID}</span>`,
                             }),
 
@@ -129,7 +142,6 @@ const Layers = ({ schedule, activeBus }) => {
                                 key={buses.uid}
                                 eventKey={onTime.uid}
                                 position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                //color={'ForestGreen'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),
@@ -156,7 +168,7 @@ const Layers = ({ schedule, activeBus }) => {
                     <FeatureGroup>
                         {delayed.map((buses) => (
                             icon = divIcon({
-                                className: "marker delayed",
+                                className: "marker Delayed",
                                 html: `<span>${buses.VehicleID}</span>`,
                             }),
 
@@ -165,7 +177,6 @@ const Layers = ({ schedule, activeBus }) => {
                                 key={buses.uid}
                                 eventKey={delayed.uid}
                                 position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                //color={'OrangeRed'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),
@@ -191,7 +202,7 @@ const Layers = ({ schedule, activeBus }) => {
                     <FeatureGroup>
                         {empty.map((buses) => (
                             icon = divIcon({
-                                className: "marker completed",
+                                className: "marker Completed",
                                 html: `<span>${buses.VehicleID}</span>`,
                             }),
 
@@ -200,7 +211,6 @@ const Layers = ({ schedule, activeBus }) => {
                                 key={buses.uid}
                                 eventKey={empty.uid}
                                 position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                //color={'DarkGrey'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),

@@ -37,18 +37,18 @@
     font-weight: bold;
   }
   
-  .predeparted {
+  .PreDeparted {
     background-color: DodgerBlue;
   }
 
-  .ontime {
+  .OnTime {
     background-color: forestgreen;
   }
 
-  .delayed {
+  .Delayed {
     background-color: OrangeRed;
   }
 
-  .completed {
+  .Completed {
     background-color: DarkGrey;
   }
