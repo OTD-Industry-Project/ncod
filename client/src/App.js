@@ -2,6 +2,7 @@
 import './App.css';
 import Header from './components/Header/Header';
 import Sidebar from './components/Sidebar/Sidebar';
+import Footer from './components/Footer/Footer';
 import MapWrapper from './components/MapWrapper/MapWrapper.jsx';
 import { useState, useEffect } from 'react';
 import { processedData } from "./data/DataHelper";
@@ -62,7 +63,10 @@ function App() {
             <Header />
         </div>
       </div>
-
+      {/* Footer row with one col */}
+      <div class="fixed-bottom">
+            <Footer />
+        </div>
       {/* 2nd row. Two cols - Sidebar and Map Section */}
       <div className="row flex-grow-1">
 
@@ -76,6 +80,7 @@ function App() {
           <MapWrapper schedule={schedule} />
         </div>
       </div>
+      
     </div>
   );
 }

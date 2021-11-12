@@ -1,5 +1,5 @@
 import React from 'react';
-import './Header.css';
+import './Footer.css';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
 //mark points list for the scrub bar
@@ -7,35 +7,35 @@ import Box from '@mui/material/Box';
 //label is the time displayed uder value point
 const marks = [
   {
-    value: 200,
+    value: 2.00,
     label: '2:00',
   },
   {
-    value: 500,
+    value: 5.00,
     label: '5:00',
   },
   {
-    value: 800,
+    value: 8.00,
     label: '8:00',
   },
   {
-    value: 1100,
+    value: 11.00,
     label: '11:00',
   },
   {
-    value: 1400,
+    value: 14.00,
     label: '14:00',
   },
   {
-    value: 1700,
+    value: 17.00,
     label: '17:00',
   },
   {
-    value: 2000,
+    value: 20.00,
     label: '20:00',
   },
   {
-    value: 2300,
+    value: 23.00,
     label: '23:00',
   },
 ];
@@ -47,17 +47,18 @@ function valuetext(value) {
 //min and max set time for day
 //step is how often to set points
 //marks are the labeling of regular intervals
-export default function ScrubBar() {
+export default function FooterScrubBar() {
     return (
       <Box>
         <Slider
           aria-label="time"
-          defaultValue={700}
+          defaultValue={7.00}
           getAriaValueText={valuetext}
-          step={100}
+          valueLabelDisplay="auto"
+          step={1.00}
           marks={marks}
           min={0}
-          max={2400}
+          max={24.00}
           color="secondary"
         />
       </Box>
