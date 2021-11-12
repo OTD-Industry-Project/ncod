@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-    TileLayer,
-    LayersControl,
-    FeatureGroup,
-    CircleMarker,
-    Popup,
-    ZoomControl,
+    TileLayer, LayersControl, FeatureGroup,
+    CircleMarker, Popup, ZoomControl, Marker,
+    Tooltip, useMap
 } from "react-leaflet";
 
-const Layers = ({ schedule }) => {
+
+
+const Layers = ({ schedule, activeBus }) => {
 
     // Filtering the schedule to apply different layer controls
-
-    //console.log(schedule);
 
     var preDeparted = (schedule.filter((buses) => buses.status === "Pre Departed"));
 
@@ -22,14 +19,49 @@ const Layers = ({ schedule }) => {
 
     var empty = (schedule.filter((buses) => buses.status === "Completed"));
 
+    // Clicking an item on the sidebar, will change focused position and provide info
+    function LocationMarker() {
+        const [position, setPosition] = useState(null)
+
+        // When clicked on sidebar, will update position of active selection, flyTo location
+        const maps = useMap()
+        if (position === null && activeBus !== null) {
+            setPosition(activeBus.PickupPointLongitude + ", " + activeBus.PickupPointLatitude)
+            maps.flyTo([activeBus.PickupPointLatitude, activeBus.PickupPointLongitude], 14, { duration: 2 })
+
+        }
+
+        // Places a marker at the location, with an open tool tip conating info
+        return position === null ? null : (
+            <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
+                <Tooltip direction="top" offset={[-15, -10]} permanent>
+                    {activeBus.status} <br />
+                    Bus # : {activeBus.VehicleID} <br />
+                    Location : {activeBus.PickupPoint} <br />
+                </Tooltip>
+            </Marker>
+        )
+    }
+
+
+    // Map layer rendering and marker plots
     return (
         <>
             <ZoomControl position="topright" /> {/* fully customisable zoom controls*/}
             <LayersControl position="topright"> {/* layer control panel */}
-                <TileLayer
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+                <LayersControl.BaseLayer checked name="OSM Default">
+                    <TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                </LayersControl.BaseLayer>
+                <LayersControl.BaseLayer name="Dark Mode">
+                    <TileLayer
+                        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; 
+                        <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+                        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+                    /></LayersControl.BaseLayer>
+                <LocationMarker /> {/* flyTo function call*/}
 
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
@@ -57,8 +89,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -90,8 +122,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -121,8 +153,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
@@ -151,8 +183,8 @@ const Layers = ({ schedule }) => {
                                 }}
                             >
                                 <Popup>
-                                    <h4>{buses.status}</h4> <br />
-                                    <h6>{buses.PickupPoint}</h6> <br />
+                                    <h5>{buses.status}</h5> <br />
+                                    Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>

@@ -14,10 +14,10 @@ export const processedData = () => {
     // Remove date from times
     newData.forEach((el, index) => {
         
-        el.uid = index + 1;
-
         // Only reformat string once
         if (el.ArrivalDateTime.search("/") !== -1) {
+
+            el.uid = index;
             
             // Remove dates from PickupDateTime and ArrivalDataTime
             el.PickupDateTime = el.PickupDateTime.substr(
@@ -27,31 +27,31 @@ export const processedData = () => {
             el.ArrivalDateTime = el.ArrivalDateTime.substr(
                 el.ArrivalDateTime.indexOf(" ") + 1
             );
+
+            // Set the eta as arrival date time
+            el.eta = el.ArrivalDateTime;
+    
+            // Randomly pick a status
+            switch (getRandomInt(4)) {
+                case 0:
+                    el.status = "On Time";
+                    break;
+                case 1:
+                    el.status = "Pre Departed";
+                    break;
+                case 2:
+                    el.status = "Delayed";
+                    break;
+                case 3:
+                    el.status = "Completed";
+                    break;
+                default:
+                    el.status = "Error";
+            }
         }
+       
 
-        // Create a field to track if selected
-        el.active = false;
-
-        // Set the eta as arrival date time
-        el.eta = el.ArrivalDateTime;
-
-        // Randomly pick a status
-        switch (getRandomInt(4)) {
-            case 0:
-                el.status = "On Time";
-                break;
-            case 1:
-                el.status = "Pre Departed";
-                break;
-            case 2:
-                el.status = "Delayed";
-                break;
-            case 3:
-                el.status = "Completed";
-                break;
-            default:
-                el.status = "Error";
-        }
     });
     return newData;
 }
+
