@@ -41,7 +41,7 @@ function MenuBtn(){
             >
                 <MenuIcon />         
             </IconButton>
-            <Drawer
+            <Drawer //Drawer to open a side menu for settings
             anchor={'right'}
             open={state}
             onClose={toggleDrawer(false)}
