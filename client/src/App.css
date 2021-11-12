@@ -22,3 +22,33 @@
     min-height: 100%;
     max-height: 100%;
 }
+
+.marker {
+    border-radius: 15px;
+    border: 1px solid #FFF;
+    display: inline-block;
+    width: auto!important;
+    height: auto!important;
+    width: 30px!important;
+    text-align: center;
+    height: 30px!important;
+    line-height: 30px;
+    color: #FFF;
+    font-weight: bold;
+  }
+  
+  .predeparted {
+    background-color: DodgerBlue;
+  }
+
+  .ontime {
+    background-color: forestgreen;
+  }
+
+  .delayed {
+    background-color: OrangeRed;
+  }
+
+  .completed {
+    background-color: DarkGrey;
+  }

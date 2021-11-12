@@ -4,10 +4,14 @@ import {
     CircleMarker, Popup, ZoomControl, Marker,
     Tooltip, useMap
 } from "react-leaflet";
+import { divIcon } from "leaflet";
 
 
 
 const Layers = ({ schedule, activeBus }) => {
+
+    // Create custom Marker Icons
+    var icon = divIcon();
 
     // Filtering the schedule to apply different layer controls
 
@@ -33,8 +37,9 @@ const Layers = ({ schedule, activeBus }) => {
 
         // Places a marker at the location, with an open tool tip conating info
         return position === null ? null : (
-            <Marker position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
-                <Tooltip direction="top" offset={[-15, -10]} permanent>
+            <Marker icon={icon}
+                position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
+                <Tooltip direction="top" offset={[8, -5]} permanent>
                     {activeBus.status} <br />
                     Bus # : {activeBus.VehicleID} <br />
                     Location : {activeBus.PickupPoint} <br />
@@ -73,12 +78,17 @@ const Layers = ({ schedule, activeBus }) => {
 
                     <FeatureGroup>
                         {preDeparted.map((buses) => (
+                            icon = divIcon({
+                                className: "marker predeparted",
+                                html: `<span>${buses.VehicleID}</span>`,
+                            }),
 
-                            <CircleMarker
+                            <Marker
+                                icon={icon}
                                 key={buses.uid}
                                 eventKey={preDeparted.uid}
-                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                color={'DodgerBlue'}
+                                position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                //color={'DodgerBlue'}
 
                                 /* Using event handlers to access mouseover/out features for hover info
                                 to be defined inside the Popup tags  */
@@ -88,14 +98,14 @@ const Layers = ({ schedule, activeBus }) => {
                                     mouseout: (event) => event.target.closePopup(),
                                 }}
                             >
-                                <Popup>
+                                <Popup offset={[10, 0]}>
                                     <h5>{buses.status}</h5> <br />
                                     Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
 
-                            </CircleMarker>
+                            </Marker>
 
                         ))}
                     </FeatureGroup>
@@ -109,26 +119,31 @@ const Layers = ({ schedule, activeBus }) => {
 
                     <FeatureGroup>
                         {onTime.map((buses) => (
+                            icon = divIcon({
+                                className: "marker ontime",
+                                html: `<span>${buses.VehicleID}</span>`,
+                            }),
 
-                            <CircleMarker
+                            <Marker
+                                icon={icon}
                                 key={buses.uid}
                                 eventKey={onTime.uid}
-                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                color={'ForestGreen'}
+                                position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                //color={'ForestGreen'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),
                                     mouseout: (event) => event.target.closePopup(),
                                 }}
                             >
-                                <Popup>
+                                <Popup offset={[10, 0]}>
                                     <h5>{buses.status}</h5> <br />
                                     Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
 
-                            </CircleMarker>
+                            </Marker>
 
                         ))}
                     </FeatureGroup>
@@ -140,26 +155,31 @@ const Layers = ({ schedule, activeBus }) => {
 
                     <FeatureGroup>
                         {delayed.map((buses) => (
+                            icon = divIcon({
+                                className: "marker delayed",
+                                html: `<span>${buses.VehicleID}</span>`,
+                            }),
 
-                            <CircleMarker
+                            <Marker
+                                icon={icon}
                                 key={buses.uid}
                                 eventKey={delayed.uid}
-                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                color={'OrangeRed'}
+                                position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                //color={'OrangeRed'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),
                                     mouseout: (event) => event.target.closePopup(),
                                 }}
                             >
-                                <Popup>
+                                <Popup offset={[10, 0]}>
                                     <h5>{buses.status}</h5> <br />
                                     Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
 
-                            </CircleMarker>
+                            </Marker>
 
                         ))}
                     </FeatureGroup>
@@ -170,26 +190,31 @@ const Layers = ({ schedule, activeBus }) => {
 
                     <FeatureGroup>
                         {empty.map((buses) => (
+                            icon = divIcon({
+                                className: "marker completed",
+                                html: `<span>${buses.VehicleID}</span>`,
+                            }),
 
-                            <CircleMarker
+                            <Marker
+                                icon={icon}
                                 key={buses.uid}
                                 eventKey={empty.uid}
-                                center={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
-                                color={'DarkGrey'}
+                                position={[buses.PickupPointLatitude, buses.PickupPointLongitude]}
+                                //color={'DarkGrey'}
 
                                 eventHandlers={{
                                     mouseover: (event) => event.target.openPopup(),
                                     mouseout: (event) => event.target.closePopup(),
                                 }}
                             >
-                                <Popup>
+                                <Popup offset={[10, 0]}>
                                     <h5>{buses.status}</h5> <br />
                                     Location: {buses.PickupPoint} <br />
                                     VehicleID : {buses.VehicleID} <br />
                                     DriverID : {buses.DriverID} <br />
                                 </Popup>
 
-                            </CircleMarker>
+                            </Marker>
 
                         ))}
                     </FeatureGroup>
