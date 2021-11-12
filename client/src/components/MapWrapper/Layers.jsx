@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
     TileLayer, LayersControl, FeatureGroup,
     Popup, ZoomControl, Marker, Tooltip, useMap
 } from "react-leaflet";
-import { divIcon } from "leaflet";
+import { divIcon, popup } from "leaflet";
 
 
 const Layers = ({ schedule, activeBus }) => {
@@ -49,16 +49,30 @@ const Layers = ({ schedule, activeBus }) => {
 
         }
 
-        // Places a marker at the location, with an open tool tip conating info
+        // Access active bus Marker to force open Popup on selection
+        const MyMarker = (props) => {
+            const leafletRef = useRef();
+            useEffect(() => {
+                leafletRef.current.openPopup();
+            }, [])
+            return <Marker ref={leafletRef} {...props} />
+        }
+
+        // Places a marker at the location, with an open Popup conating info, closeable 
         return position === null ? null : (
-            <Marker icon={icon}
-                position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}>
-                <Tooltip direction="top" offset={[8, -5]} permanent> {/* Will work out how to close this, or use a better open method */}
-                    {activeBus.status} <br />
-                    Bus # : {activeBus.VehicleID} <br />
-                    Location : {activeBus.PickupPoint} <br />
-                </Tooltip>
-            </Marker>
+            <MyMarker icon={icon}
+                position={[activeBus.PickupPointLatitude, activeBus.PickupPointLongitude]}
+                eventHandlers={{
+                    mouseover: (event) => event.target.openPopup(),
+                    mouseout: (event) => event.target.closePopup(),
+                }}>
+                <Popup direction="top" offset={[8, -5]}>
+                    <h5>{activeBus.status}</h5> <br />
+                    Location: {activeBus.PickupPoint} <br />
+                    VehicleID : {activeBus.VehicleID} <br />
+                    DriverID : {activeBus.DriverID} <br />
+                </Popup>
+            </MyMarker>
         )
     }
 
