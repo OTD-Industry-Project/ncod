@@ -8,15 +8,15 @@ import Box from '@mui/material/Box';
 const marks = [
   {
     value: 2.00,
-    label: '2:00',
+    label: '02:00',
   },
   {
     value: 5.00,
-    label: '5:00',
+    label: '05:00',
   },
   {
     value: 8.00,
-    label: '8:00',
+    label: '08:00',
   },
   {
     value: 11.00,
@@ -59,7 +59,6 @@ export default function FooterScrubBar() {
           marks={marks}
           min={0}
           max={24.00}
-          color="secondary"
         />
       </Box>
     )
