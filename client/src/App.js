@@ -38,11 +38,16 @@ function App() {
   const [activeBus, setActiveBus] = useState(null);
 
   const activeCallBack = (uid) => {
-
+    
     const index = schedule.findIndex(obj => obj.uid === uid);
     let newSchedule = schedule;
 
-    setActiveBus(newSchedule[index]);
+    if (activeBus !== null && activeBus.uid === uid) {
+      setActiveBus(null);
+      console.log("Row is unselected and Active bus is set back to null")
+    } else {
+      setActiveBus(newSchedule[index]);
+    }    
     // setSchedule(newSchedule);
   };
 
