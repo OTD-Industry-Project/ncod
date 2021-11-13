@@ -14,10 +14,17 @@ export const Sidebar = ({ schedule, activeCallBack }) => {
     const [selectedRow, setSelectedRow] = useState(-1);
 
     const handleEvent = (row, i) => {
+        
         activeCallBack(row.uid);
         
+        if (i === selectedRow) {
+            setSelectedRow(-1);
+            return;
+        }
+        
+    
         if (selectedRow !== undefined) {
-            setSelectedRow(i);
+            setSelectedRow(i);    
         }
     }
     
