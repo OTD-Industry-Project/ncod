@@ -6,10 +6,9 @@ import {
     Popup,
     ZoomControl,
     Marker,
-    Tooltip,
     useMap,
 } from "react-leaflet";
-import { divIcon, popup } from "leaflet";
+import { divIcon} from "leaflet";
 
 const Layers = ({ schedule, activeBus }) => {
     // Log active bus. null when nothing selected.
