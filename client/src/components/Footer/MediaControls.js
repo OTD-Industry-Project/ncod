@@ -13,13 +13,13 @@ function MediaControls () {
     return (
         <div>
             <IconButton aria-label="rewind">
-                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+                {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon style={{fill: "#008ae6"}}/>}
             </IconButton>
             <IconButton aria-label="play/pause">
-                <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                <PlayArrowIcon sx={{ height: 38, width: 38 }} style={{fill: "#008ae6"}}/>
             </IconButton>
             <IconButton aria-label="forward">
-                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+                {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon style={{fill: "#008ae6"}}/>}
             </IconButton>
         </div>
     )
