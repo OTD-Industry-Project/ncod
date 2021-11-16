@@ -4,6 +4,9 @@
 // Express
 const express = require("express");
 
+// Import routers
+const routes = require("./routes/api");
+
 // Our Database
 const db = require("./db");
 
@@ -15,36 +18,18 @@ const PORT = process.env.PORT || 3002;
 
 // Instantiate express app
 const app = express();
-
+ 
+// parses incoming requests with JSON payloads
 app.use(express.json());
 
-
-// ROUTES
-
-//Get all address
-app.get("/api/address", async (req, res) => {
-
-    try {
-        const results = await db.query("SELECT * FROM address");
-        console.log(results.rows);
-        res.status(200).json({
-            status: "success",
-            results: results.rows.length,
-            data: {
-                address: results.rows,
-            },
-        });
-    } 
-    catch (err) {
-        console.log(err);
-    }
-});
+// To Use the pre-defined routes
+app.use('/', routes);
 
 
 //Get address by ID
 app.get("/api/address/:id", async (req, res) => {
     try {
-        const results = await db.query(`SELECT * FROM address WHERE addr_id = ${req.params.id}`);
+        const results = await db.query("SELECT * FROM address WHERE addr_id = $1", [req.params.id]);
         console.log(results.rows[0]);
         res.status(200).json({
             status: "success",
@@ -57,8 +42,6 @@ app.get("/api/address/:id", async (req, res) => {
         console.log(err);
     }
 });
-
-
 
 
 // Run Server

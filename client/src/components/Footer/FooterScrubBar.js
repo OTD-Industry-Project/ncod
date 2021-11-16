@@ -86,7 +86,6 @@ export default function FooterScrubBar() {
         valueLabelFormat={valuetext}
         marks={marks}
         valueLabelDisplay="auto"
-        marks={marks}
         onChange={handleChange}
         color="secondary"
       />
