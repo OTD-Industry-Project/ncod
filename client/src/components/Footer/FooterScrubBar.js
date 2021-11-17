@@ -87,7 +87,6 @@ export default function FooterScrubBar() {
         marks={marks}
         valueLabelDisplay="auto"
         onChange={handleChange}
-        color="secondary"
       />
 
     </Box>

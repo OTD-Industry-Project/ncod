@@ -6,4 +6,6 @@ const apiController = require("../controllers/api");
 
 router.get("/api/address", apiController.getAllAddress);
 
+router.get("/api/address/:id", apiController.getAddressID);
+
 module.exports = router;

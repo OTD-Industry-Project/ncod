@@ -17,9 +17,21 @@ const getAllAddress = async(req, res) => {
     }
 };
 
-
-
-
+const getAddressID = async(req, res) => {
+    try {
+        const results = await db.query("SELECT * FROM address WHERE addr_id = $1", [req.params.id]);
+        console.log(results.rows[0]);
+        res.status(200).json({
+            status: "success",
+            data: {
+                address: results.rows[0],
+            },
+        });
+    } 
+    catch (err) {
+        console.log(err);
+    }
+};
 
 
 
@@ -27,5 +39,6 @@ const getAllAddress = async(req, res) => {
 
 
 module.exports = {
-    getAllAddress
+    getAllAddress, 
+    getAddressID
 };

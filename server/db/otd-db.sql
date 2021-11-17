@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS BOOKING (
   CONSTRAINT FK_DESTINATION FOREIGN KEY (destination_id) REFERENCES DESTINATION(destination_id)
 );
 
-CREATE TABLE VEHICLE (
+CREATE TABLE IF NOT EXISTS VEHICLE (
   vehicle_id INT NOT NULL, 
   display_name VARCHAR(10) NOT NULL, 
   rego_plate VARCHAR(8) NOT NULL, 
@@ -69,7 +69,7 @@ CREATE TABLE VEHICLE (
 CREATE TABLE IF NOT EXISTS JOB (
   vehicle_id INT, 
   booking_id INT, 
-  driver_id INT, 
+  driver_id VARCHAR(50), 
   description_of_job VARCHAR(255), 
   routing_info GEOGRAPHY[],
   CONSTRAINT PK_JOB PRIMARY KEY ( vehicle_id, booking_id ),
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS JOB (
   CONSTRAINT FK_BOOKING FOREIGN KEY (booking_id) REFERENCES BOOKING(booking_id)
 );
 
-CREATE TABLE HISTORY (
+CREATE TABLE IF NOT EXISTS HISTORY (
   vehicle_id INT NOT NULL, 
   time_stamp timestamp without time ZONE NOT NULL, 
   latitude DECIMAL(11,6), 
