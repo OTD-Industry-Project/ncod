@@ -125,6 +125,7 @@ export function getScheduledActivity(apikey,date) {
             console.log("This was the key we used:", res.SessionKey)
             console.log("If this is not blank there is more data:", res.NextRequestData)
             console.log("This is the data received:", res.Data)
+            return res.Data
         })
         .error(err => {
             console.log("We received an error from the GetScheduledActivity")
