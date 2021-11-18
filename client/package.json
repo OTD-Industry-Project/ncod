@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.0.5",
     "@mui/material": "^5.0.6",
+    "@mui/styles": "^5.1.1",
     "@popperjs/core": "^2.10.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -15,16 +16,17 @@
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
     "moment-timezone": "^0.5.33",
+    "mui-datatables": "^4.0.0",
     "ol": "^6.9.0",
     "popper.js": "^1.16.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-leaflet": "^3.2.2",
+    "react-moment": "^1.1.1",
     "react-scripts": "4.0.3",
     "react-table": "^7.7.0",
     "styled-components": "^5.3.3",
-    "web-vitals": "^1.0.1",
-    "react-moment": "^1.1.1"
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
