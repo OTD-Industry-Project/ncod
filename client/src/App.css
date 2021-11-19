@@ -15,6 +15,7 @@
     width: var(--sidebar-width);
     top: 0;
     left: 0;
+    bottom: var(--footer-height);
     z-index: 1000;
     overflow: auto;
 }
@@ -28,10 +29,10 @@
 .Footer {
     position: absolute;
     bottom: 0;
-    left: 600px;
-    max-height: 300px;
-    min-height: 140px;
-    width: calc(100% - var(--sidebar-width));
+    left: 0;
+    max-height: var(--footer-height);
+    min-height: var(--footer-height);
+    width: 100%;
     /* background-color: red; */
     z-index: 1000;
 }
