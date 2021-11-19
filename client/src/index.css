@@ -17,6 +17,7 @@ body {
 
     /* Global CSS variables here */
     --header-height: 75px;
+    --sidebar-width: 600px;
     --border: 1px solid var(--light-blue);
     --radius: 4px;
 

@@ -9,12 +9,10 @@ class Footer extends Component {
         return (
             //toolbar returns divs which has responsive resizing and calls other scripts to be placed inside divs
             <Toolbar>
-                <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-3">
-                </div>
-                <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
+                <div className="d-none d-sm-none d-md-none d-lg-block col-lg-3 col-xl-3">
                     <MediaControls />
                 </div>
-                <div className="d-none d-sm-block col-sm-3 col-md-3 col-lg-3 col-xl-8"> 
+                <div className="d-none d-sm-block col-sm-3 col-md-3 col-lg-9 col-xl-9"> 
                     <FooterScrubBar />
                 </div>    
             </Toolbar>
