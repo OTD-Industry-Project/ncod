@@ -6,6 +6,7 @@ import Footer from './components/Footer/Footer';
 import MapWrapper from './components/MapWrapper/MapWrapper.jsx';
 import { useState, useEffect } from 'react';
 import { processedData } from "./data/DataHelper";
+import SimpleSlide from './components/Sidebar/SimpleSlide';
 
 
 /* 
@@ -70,7 +71,7 @@ function App() {
         </div>
       </div>
       {/* Footer row with one col */}
-      <div class="fixed-bottom">
+      <div className="fixed-bottom">
             <Footer />
         </div>
       {/* 2nd row. Two cols - Sidebar and Map Section */}
@@ -78,7 +79,10 @@ function App() {
 
         {/* Bootstrap Responsive resizing */}
         <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-          <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
+          <SimpleSlide>
+            <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
+          </SimpleSlide>
+          
         </div>
 
         {/* Bootstrap Responsive resizing */}
