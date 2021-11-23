@@ -11,6 +11,7 @@
 
 .Sidebar {
     position: absolute;
+    /* background-color: aqua; */
     max-height: calc(100% - var(--header-height));
     width: var(--sidebar-width);
     top: 0;

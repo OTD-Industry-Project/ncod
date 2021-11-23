@@ -35,6 +35,8 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
+    const [achecked, setaChecked] = useState(false);
+
 
     const activeCallBack = (uid) => {
         const index = schedule.findIndex((obj) => obj.uid === uid);
@@ -49,6 +51,10 @@ function App() {
         // setSchedule(newSchedule);
     };
 
+    const handleChange = () => {
+        setaChecked((prev) => !prev);
+      };
+
     useEffect(() => {
         fetch("/api")
             .then((res) => res.json())
@@ -61,7 +67,7 @@ function App() {
             {/* Header row with one col */}
             <div className="row Header">
                 <div className="col">
-                    <Header />
+                    <Header handleChange={handleChange}/>
                 </div>
             </div>
             {/* Footer row with one col */}
@@ -69,7 +75,7 @@ function App() {
             {/* 2nd row. Two cols - Sidebar and Map Section */}
             <div className="Map">
                 <div className="Sidebar">
-                    <SimpleSlide>
+                    <SimpleSlide achecked={achecked}>
                         <Sidebar
                             schedule={schedule}
                             activeCallBack={activeCallBack}
