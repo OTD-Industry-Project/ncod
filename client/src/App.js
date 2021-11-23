@@ -1,12 +1,12 @@
 // import React, { useState, useEffect } from "react";
-import './App.css';
-import Header from './components/Header/Header';
-import Sidebar from './components/Sidebar/Sidebar';
-import Footer from './components/Footer/Footer';
-import MapWrapper from './components/MapWrapper/MapWrapper.jsx';
-import { useState, useEffect } from 'react';
+import "./App.css";
+import Header from "./components/Header/Header";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Footer from "./components/Footer/Footer";
+import MapWrapper from "./components/MapWrapper/MapWrapper.jsx";
+import { useState, useEffect } from "react";
 import { processedData } from "./data/DataHelper";
-
+import SimpleSlide from "./components/Sidebar/SimpleSlide";
 
 /* 
       This is the big picture view of the layout
@@ -30,65 +30,66 @@ import { processedData } from "./data/DataHelper";
 */
 
 function App() {
+    // Commented out fetching to work on layout
 
-  // Commented out fetching to work on layout
+    const [data, setData] = useState(null);
+    const [schedule, setSchedule] = useState(processedData());
+    const [activeBus, setActiveBus] = useState(null);
+    const [achecked, setaChecked] = useState(false);
 
-  const [data, setData] = useState(null);
-  const [schedule, setSchedule] = useState(processedData());
-  const [activeBus, setActiveBus] = useState(null);
 
-  const activeCallBack = (uid) => {
-    
-    const index = schedule.findIndex(obj => obj.uid === uid);
-    let newSchedule = schedule;
+    const activeCallBack = (uid) => {
+        const index = schedule.findIndex((obj) => obj.uid === uid);
+        let newSchedule = schedule;
 
-    if (activeBus !== null && activeBus.uid === uid) {
-      setActiveBus(null);
-      console.log("Row is unselected and Active bus is set back to null")
-    } else {
-      setActiveBus(newSchedule[index]);
-    }    
-    // setSchedule(newSchedule);
-  };
+        if (activeBus !== null && activeBus.uid === uid) {
+            setActiveBus(null);
+            console.log("Row is unselected and Active bus is set back to null");
+        } else {
+            setActiveBus(newSchedule[index]);
+        }
+        // setSchedule(newSchedule);
+    };
 
-  useEffect(() =>  {
-    
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+    const handleChange = () => {
+        setaChecked((prev) => !prev);
+      };
 
-  return (
+    useEffect(() => {
+        fetch("/api")
+            .then((res) => res.json())
+            .then((data) => setData(data.message));
+    }, []);
 
-    // Entire app container
-    <div className="container-fluid vh-100 d-flex flex-column">
+    return (
+        // Entire app container
+        <div className="container-fluid vh-100 d-flex flex-column">
+            {/* Header row with one col */}
+            <div className="row Header">
+                <div className="col">
+                    <Header handleChange={handleChange}/>
+                </div>
+            </div>
+            {/* Footer row with one col */}
 
-      {/* Header row with one col */}
-      <div className="row Header">
-        <div className="col">
-          <Header />
+            {/* 2nd row. Two cols - Sidebar and Map Section */}
+            <div className="Map">
+                <div className="Sidebar">
+                    <SimpleSlide achecked={achecked}>
+                        <Sidebar
+                            schedule={schedule}
+                            activeCallBack={activeCallBack}
+                        />
+                    </SimpleSlide>
+                </div>
+
+                <MapWrapper schedule={schedule} activeBus={activeBus} />
+                <div className="Footer">
+                    <Footer />
+                </div>
+            </div>
         </div>
-      </div>
-      {/* Footer row with one col */}
-      <div class="fixed-bottom">
-            <Footer />
-        </div>
-      {/* 2nd row. Two cols - Sidebar and Map Section */}
-      <div className="row flex-grow-1">
-
-        {/* Bootstrap Responsive resizing */}
-        <div className="Sidebar col-12 col-sm-12 col-md-12 col-lg-4 col-xl-3">
-          <Sidebar schedule={schedule} activeCallBack={activeCallBack} />
-        </div>
-
-        {/* Bootstrap Responsive resizing */}
-        <div className="Map col-12 col-sm-12 col-md-12 col-lg-8 col-xl-9">
-          <MapWrapper schedule={schedule} activeBus={activeBus} />
-        </div>
-      </div>
-      
-    </div>
-  );
+    );
 }
 
 export default App;
