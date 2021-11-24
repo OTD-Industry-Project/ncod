@@ -5,7 +5,7 @@
 const express = require("express");
 
 // Import routers
-const routes = require("./routes/api");
+const routes = require("./routes/Routes");
 
 // Our Database
 const db = require("./db");

@@ -80,7 +80,7 @@ export default function FooterScrubBar() {
     <Box>
       <Slider
         min={0}
-        step={30} //30 minutes
+        step={5} //5 minutes
         max={1440} //total minutes per 24 hours
         defaultValue={420} //7am in minutes
         valueLabelFormat={valuetext}
