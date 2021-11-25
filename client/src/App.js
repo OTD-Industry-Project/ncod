@@ -35,7 +35,7 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
-    const [achecked, setaChecked] = useState(false);
+    const [scheduleOpen, setScheduleOpen] = useState(false);
 
 
     const activeCallBack = (uid) => {
@@ -52,7 +52,10 @@ function App() {
     };
 
     const handleChange = () => {
-        setaChecked((prev) => !prev);
+        setScheduleOpen((prev) => !prev);
+        if (schedule) {
+            setActiveBus(null);
+        }
       };
 
     useEffect(() => {
@@ -74,8 +77,9 @@ function App() {
 
             {/* 2nd row. Two cols - Sidebar and Map Section */}
             <div className="Map">
-                <div className="Sidebar">
-                    <SimpleSlide achecked={achecked}>
+                {console.log(data)}
+                <div className={scheduleOpen ? "Sidebar" : "Sidebar closed"}>
+                    <SimpleSlide scheduleOpen={scheduleOpen}>
                         <Sidebar
                             schedule={schedule}
                             activeCallBack={activeCallBack}

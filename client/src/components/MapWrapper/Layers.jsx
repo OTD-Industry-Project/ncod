@@ -8,11 +8,12 @@ import {
     Marker,
     useMap,
 } from "react-leaflet";
-import { divIcon} from "leaflet";
+import { divIcon } from "leaflet";
+import "./MapWrapper.css";
 
 const Layers = ({ schedule, activeBus }) => {
     // Log active bus. null when nothing selected.
-    console.log(activeBus);
+    // console.log(activeBus);
 
     // Create custom Marker Icons
     var icon = divIcon();
