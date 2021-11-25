@@ -8,7 +8,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import './Sidebar.css';
 
 export default function SimpleSlide(props) {
-console.log(props.achecked);
   return (
     <Box sx={{ height: "100%" }}>
       <Box sx={{ width: "300" }}>

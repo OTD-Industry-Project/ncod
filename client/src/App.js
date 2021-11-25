@@ -58,11 +58,11 @@ function App() {
         }
       };
 
-    useEffect(() => {
+    /* useEffect(() => {
         fetch("/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
-    }, []);
+    }, []); */
 
     return (
         // Entire app container
@@ -77,7 +77,6 @@ function App() {
 
             {/* 2nd row. Two cols - Sidebar and Map Section */}
             <div className="Map">
-                {console.log(data)}
                 <div className={scheduleOpen ? "Sidebar" : "Sidebar closed"}>
                     <SimpleSlide scheduleOpen={scheduleOpen}>
                         <Sidebar
