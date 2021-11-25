@@ -17,7 +17,7 @@ export default function SimpleSlide(props) {
           control={<Switch checked={checked} onChange={handleChange} />}
           label="Show"
         /> */}
-        <Slide direction="down" in={props.achecked} mountOnEnter unmountOnExit>
+        <Slide direction="down" in={props.scheduleOpen} mountOnEnter unmountOnExit>
           <div>{props.children}</div>
         </Slide>
       </Box>
