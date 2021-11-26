@@ -15,6 +15,7 @@ function MapWrapper({ schedule, activeBus }) {
             scrollWheelZoom={true}
         >
             <Layers schedule={schedule} activeBus={activeBus} />
+            
         </MapContainer>
     );
 }
