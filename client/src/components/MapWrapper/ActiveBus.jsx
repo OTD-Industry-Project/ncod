@@ -9,10 +9,8 @@ var icon = divIcon();
 var activeBusStatus;
 
 // Clicking an item on the sidebar, will change focused position and provide info
-function LocationMarker({activeBus}) {
+const LocationMarker = ({activeBus}) => {
     const [position, setPosition] = useState(null);
-    // Create custom Marker Icons
-    var icon = divIcon();
 
     // When clicked on sidebar, will update position of active selection, flyTo location
     const maps = useMap();

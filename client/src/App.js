@@ -56,13 +56,15 @@ function App() {
         if (schedule) {
             setActiveBus(null);
         }
-      };
+    };
 
-    /* useEffect(() => {
-        fetch("/api")
+    useEffect(() => {
+        fetch("/api/address")
             .then((res) => res.json())
             .then((data) => setData(data.message));
-    }, []); */
+    }, []);
+
+    
 
     return (
         // Entire app container
@@ -70,7 +72,7 @@ function App() {
             {/* Header row with one col */}
             <div className="row Header">
                 <div className="col">
-                    <Header handleChange={handleChange}/>
+                    <Header handleChange={handleChange} />
                 </div>
             </div>
             {/* Footer row with one col */}

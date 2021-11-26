@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { TileLayer, LayersControl, FeatureGroup,
-    Popup, ZoomControl, Marker, useMap } from "react-leaflet";
+import {
+    TileLayer, LayersControl, FeatureGroup,
+    Popup, ZoomControl, Marker, useMap
+} from "react-leaflet";
 import { divIcon } from "leaflet";
 import Delayed from "./Delayed";
 import EmptyBus from "./EmptyBus.jsx";
 import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
+//import LocationMarker from "./ActiveBus";
 
 const Layers = ({ schedule, activeBus }) => {
 
@@ -94,7 +97,7 @@ const Layers = ({ schedule, activeBus }) => {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                {/* Adding dark mode layer option, for dark/night map*/}
+                    {/* Adding dark mode layer option, for dark/night map*/}
                 </LayersControl.BaseLayer>
                 <LayersControl.BaseLayer name="Dark Mode">
                     <TileLayer
@@ -113,6 +116,15 @@ const Layers = ({ schedule, activeBus }) => {
                 <OnTime schedule={schedule} />
                 <Delayed schedule={schedule} />
                 <EmptyBus schedule={schedule} />
+
+                {/* Not Working yet}
+                <LocationMarker activeBus={activeBus} /> */}
+
+                <LayersControl.Overlay name={"Test"}>
+                    <FeatureGroup>
+                        {/* Testing */}
+                    </FeatureGroup>
+                </LayersControl.Overlay>
 
 
             </LayersControl>
