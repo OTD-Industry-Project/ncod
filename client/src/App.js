@@ -38,7 +38,12 @@ function App() {
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
     
+    const [tableType, setTableType] = useState(true);
 
+
+    const changeTableType = () => {
+        setTableType((prev) => !prev);
+    };
 
     const activeCallBack = (uid) => {
         const index = schedule.findIndex((obj) => obj.uid === uid);
@@ -72,7 +77,7 @@ function App() {
             {/* Header row with one col */}
             <div className="row Header">
                 <div className="col">
-                    <Header/>
+                    <Header changeTableType={changeTableType} />
                 </div>
             </div>
             {/* Footer row with one col */}
@@ -84,11 +89,13 @@ function App() {
                 <div className="Sidebar">
                     
                     <Sidetabs>
-                      {/* <MUITable schedule={schedule} activeCallBack={activeCallBack}/> */}
-                      <Table
+                      {tableType ? <Table
                             schedule={schedule}
                             activeCallBack={activeCallBack}
-                        />
+                        /> :
+                      <MUITable schedule={schedule} activeCallBack={activeCallBack}/>
+                      
+                      }
                     </Sidetabs>
                     
                 </div>
