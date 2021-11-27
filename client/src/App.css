@@ -13,13 +13,15 @@
     position: absolute;
     /* background-color: aqua; */
     max-height: calc(100% - var(--header-height));
+    min-height: calc(100% - var(--header-height));
+
     width: var(--sidebar-width);
     top: 0;
     left: 0;
-    bottom: var(--footer-height);
+    bottom: 0;
     z-index: 1000;
     overflow: auto;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .closed {
