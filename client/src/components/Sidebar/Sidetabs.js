@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
-import { Sidebar, Tab } from '@pusky/react-leaflet-sidetabs';
+import { Sidebar, Tab } from './react-leaflet-sidetabs';
 import './Sidebar.css';
 
 const Sidetabs = (props, { schedule, activeCallBack }) => {
