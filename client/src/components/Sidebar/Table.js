@@ -62,9 +62,9 @@ export const Table = ({ schedule, activeCallBack }) => {
     return (
         <>
             {/* Input field and Last Updated */}
-            <div className="Top container-fluid d-flex justify-content-between">
+            <div className="Top mt-3 container-fluid d-flex justify-content-between">
                 <Filter className="Search" filter={globalFilter} setFilter={setGlobalFilter} />
-                <div className="text-secondary align-self-center">{`Last Updated: ${lastUpdated.toLocaleTimeString()}`}</div>
+                <div className="text-secondary align-self-center small">{`Last Updated: ${lastUpdated.toLocaleTimeString()}`}</div>
             </div>
 
             {/* Table starts here. the ...getSomethingProps() methods are essentially returning an array of props that

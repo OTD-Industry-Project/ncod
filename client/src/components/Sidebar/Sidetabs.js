@@ -16,8 +16,9 @@ const Sidetabs = (props, { schedule, activeCallBack }) => {
    }
 
    return (
-      <section className="Sidebar">
+      <section >
          <Sidebar
+            
             position="left"
             collapsed={!(openTab)}
             selected={openTab}

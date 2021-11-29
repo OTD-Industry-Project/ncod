@@ -2,8 +2,15 @@
     margin: 0 -12px;
 }
 
-/* .sidebar {
-    min-height: 98%;
-    max-height: 98%;
-    width: 800px;
-} */
+.Search {
+    width: 40%;
+}
+
+table {
+    font-size: smaller;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
