@@ -1,3 +1,16 @@
 .mui-table {
     margin: 0 -12px;
 }
+
+.Search {
+    width: 40%;
+}
+
+table {
+    font-size: smaller;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}

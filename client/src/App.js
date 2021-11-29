@@ -1,7 +1,9 @@
 // import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
+import MUITable from "./components/Sidebar/MUITable";
+import Table from "./components/Sidebar/Table";
+import Sidetabs from "./components/Sidebar/Sidetabs";
 import Footer from "./components/Footer/Footer";
 import MapWrapper from "./components/MapWrapper/MapWrapper.jsx";
 import { useState, useEffect } from "react";
@@ -35,8 +37,13 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
-    const [scheduleOpen, setScheduleOpen] = useState(false);
+    
+    const [tableType, setTableType] = useState(true);
 
+
+    const changeTableType = () => {
+        setTableType((prev) => !prev);
+    };
 
     const activeCallBack = (uid) => {
         const index = schedule.findIndex((obj) => obj.uid === uid);
@@ -51,12 +58,12 @@ function App() {
         // setSchedule(newSchedule);
     };
 
-    const handleChange = () => {
-        setScheduleOpen((prev) => !prev);
-        if (schedule) {
-            setActiveBus(null);
-        }
-      };
+    // const handleChange = () => {
+    //     setScheduleOpen((prev) => !prev);
+    //     if (schedule) {
+    //         setActiveBus(null);
+    //     }
+    //   };
 
     useEffect(() => {
         fetch("/api")
@@ -70,7 +77,7 @@ function App() {
             {/* Header row with one col */}
             <div className="row Header">
                 <div className="col">
-                    <Header handleChange={handleChange}/>
+                    <Header changeTableType={changeTableType} />
                 </div>
             </div>
             {/* Footer row with one col */}
@@ -78,16 +85,24 @@ function App() {
             {/* 2nd row. Two cols - Sidebar and Map Section */}
             <div className="Map">
                 {console.log(data)}
-                <div className={scheduleOpen ? "Sidebar" : "Sidebar closed"}>
-                    <SimpleSlide scheduleOpen={scheduleOpen}>
-                        <Sidebar
+                
+                <div className="Sidebar">
+                    
+                    <Sidetabs>
+                      {tableType ? <Table
                             schedule={schedule}
                             activeCallBack={activeCallBack}
-                        />
-                    </SimpleSlide>
+                        /> :
+                      <MUITable schedule={schedule} activeCallBack={activeCallBack}/>
+                      
+                      }
+                    </Sidetabs>
+                    
                 </div>
 
                 <MapWrapper schedule={schedule} activeBus={activeBus} />
+                
+                
                 <div className="Footer">
                     <Footer />
                 </div>
