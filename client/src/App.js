@@ -12,7 +12,6 @@ import SimpleSlide from "./components/Sidebar/SimpleSlide";
 
 /* 
       This is the big picture view of the layout
-
                                 COL
              --------------------------------------------
          ROW |                                          |
@@ -58,29 +57,18 @@ function App() {
         // setSchedule(newSchedule);
     };
 
-<<<<<<< HEAD
-    const handleChange = () => {
-        setScheduleOpen((prev) => !prev);
-        if (schedule) {
-            setActiveBus(null);
-        }
-    };
-=======
     // const handleChange = () => {
     //     setScheduleOpen((prev) => !prev);
     //     if (schedule) {
     //         setActiveBus(null);
     //     }
     //   };
->>>>>>> cc77fb4ea68b2fd63d69c7b17166494b4bfad651
 
     useEffect(() => {
-        fetch("/api/address")
+        fetch("/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
     }, []);
-
-    
 
     return (
         // Entire app container
@@ -88,29 +76,19 @@ function App() {
             {/* Header row with one col */}
             <div className="row Header">
                 <div className="col">
-<<<<<<< HEAD
-                    <Header handleChange={handleChange} />
-=======
                     <Header changeTableType={changeTableType} />
->>>>>>> cc77fb4ea68b2fd63d69c7b17166494b4bfad651
                 </div>
             </div>
             {/* Footer row with one col */}
 
             {/* 2nd row. Two cols - Sidebar and Map Section */}
             <div className="Map">
-<<<<<<< HEAD
-                <div className={scheduleOpen ? "Sidebar" : "Sidebar closed"}>
-                    <SimpleSlide scheduleOpen={scheduleOpen}>
-                        <Sidebar
-=======
                 {console.log(data)}
                 
                 <div className="Sidebar">
                     
                     <Sidetabs>
                       {tableType ? <Table
->>>>>>> cc77fb4ea68b2fd63d69c7b17166494b4bfad651
                             schedule={schedule}
                             activeCallBack={activeCallBack}
                         /> :
