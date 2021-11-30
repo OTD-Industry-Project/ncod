@@ -1,3 +1,20 @@
 .mui-table {
     margin: 0 -12px;
 }
+
+.Search {
+    width: 40%;
+}
+
+table {
+    font-size: smaller;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+.MuiPopover-paper {
+    top: 86px !important;
+    left: 525px !important;
+}

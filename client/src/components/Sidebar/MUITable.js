@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
 
-class Sidebar extends React.Component {
+class MUITable extends React.Component {
     render() {
         const { schedule, activeCallBack } = this.props;
 
@@ -140,4 +140,4 @@ class Sidebar extends React.Component {
     }
 }
 
-export default Sidebar;
+export default MUITable;
