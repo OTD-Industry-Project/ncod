@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from './react-leaflet-sidetabs';
 import './Sidebar.css';
+import colors from './colors'
 
 const Sidetabs = (props, { schedule, activeCallBack }) => {
 
@@ -39,7 +40,7 @@ const Sidetabs = (props, { schedule, activeCallBack }) => {
 
             </Tab>
             <Tab id="/#settings" header="Settings" icon={<FiSettings />} anchor="bottom">
-               <p>The button for this tab can be anchored to the bottom by using the <code>anchor="bottom"</code> props on the <code>Tab</code> component</p>
+               <colors />
             </Tab>
 
          </Sidebar>

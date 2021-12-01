@@ -23,7 +23,7 @@ const Delayed = ({ schedule }) => {
                         (buses) => (
                             (icon = divIcon({
                                 className: "marker Delayed",
-                                html: `<span>${buses.VehicleID}</span>`,
+                                html: `<span style= --marker:green>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker

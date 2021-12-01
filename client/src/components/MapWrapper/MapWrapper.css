@@ -14,3 +14,7 @@
         filter: var(--map-tiles-filter, none);
     }
 }
+
+.leaflet-tile {
+    filter: invert(100%) hue-rotate(220deg) !important;    
+}
