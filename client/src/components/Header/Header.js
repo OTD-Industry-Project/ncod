@@ -28,7 +28,7 @@ class Header extends React.Component {
         const { date } = this.state;
         
         return (
-            <AppBar>
+            <AppBar className="Header">
                 <Toolbar>
                     <div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1">
                          <Logo changeTableType={this.props.changeTableType} />
@@ -45,10 +45,7 @@ class Header extends React.Component {
                     <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
                         <MenuBtn />
                     </div>
-                    {/* Bootstrap Responsive resizing. Alerts and settings are hidden on mobile and tablet sizes, and replaced with Hamburger */}
-                    <div className="row d-flex h-100">
-                        <div className="col-4 col-sm-2 col-md-2 d-lg-none">Hamburger</div>
-                    </div>
+                    
                 </Toolbar>
             </AppBar>
         );
