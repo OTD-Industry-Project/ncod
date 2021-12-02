@@ -8,7 +8,6 @@ import Delayed from "./Delayed";
 import EmptyBus from "./EmptyBus.jsx";
 import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
-//import LocationMarker from "./ActiveBus";
 
 const Layers = ({ schedule, activeBus }) => {
 
@@ -91,22 +90,12 @@ const Layers = ({ schedule, activeBus }) => {
             {/* fully customisable zoom controls*/}
             <LayersControl position="topright">
                 {" "}
-                {/* layer control panel and default map layer */}
-                <LayersControl.BaseLayer checked name="OSM Default">
+                {/* default map layer */}
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    {/* Adding dark mode layer option, for dark/night map*/}
-                </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="Dark Mode">
-                    <TileLayer
-                        attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; 
-                        <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
-                        url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-                    />
-                </LayersControl.BaseLayer>
-
+         
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
 
@@ -116,16 +105,6 @@ const Layers = ({ schedule, activeBus }) => {
                 <OnTime schedule={schedule} />
                 <Delayed schedule={schedule} />
                 <EmptyBus schedule={schedule} />
-
-                {/* Not Working yet}
-                <LocationMarker activeBus={activeBus} /> */}
-
-                <LayersControl.Overlay name={"Test"}>
-                    <FeatureGroup>
-                        {/* Testing */}
-                    </FeatureGroup>
-                </LayersControl.Overlay>
-
 
             </LayersControl>
         </>

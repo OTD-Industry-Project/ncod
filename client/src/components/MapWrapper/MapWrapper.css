@@ -1,10 +1,4 @@
-.MapWrapper {
-    min-height: calc(100vh - var(--header-height));
-    margin: 0 -12px;
-    padding: 0;
-}
-
-:root {
+/* :root {
     --map-tiles-filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg)
         saturate(0.3) brightness(0.7);
 }
@@ -13,8 +7,16 @@
     .map-tiles {
         filter: var(--map-tiles-filter, none);
     }
+} */
+
+.MapWrapper {
+    min-height: calc(100vh - var(--header-height));
+    margin: 0 -12px;
+    padding: 0;
 }
 
-.leaflet-tile {
-    filter: invert(100%) hue-rotate(220deg) !important;    
-}
+/* Darkmode */
+
+/* .leaflet-tile {
+    filter: brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4) !important;    
+} */
