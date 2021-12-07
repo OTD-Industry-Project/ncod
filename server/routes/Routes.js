@@ -12,4 +12,6 @@ router.get("/api/drivers", apiController.getAllDrivers);
 
 router.get("/api/drivers/:id", apiController.getDriverID);
 
+router.post("/api/drivers/#", apiController.insertDriver);
+
 module.exports = router;

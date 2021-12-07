@@ -66,6 +66,22 @@ const getDriverID = async(req, res) => {
     }
 };
 
+const insertDriver = async(req, res) => {
+    try {
+        const results = await db.query("INSERT INTO drivers (driver_name) SELECT 'boob' FROM drivers WHERE NOT EXISTS (SELECT driver_id FROM drivers WHERE driver_name ='boob') LIMIT 1 RETURNING driver_id;");
+        console.log(results.rows[0]);
+        res.status(200).json({
+            status: "success",
+            data: {
+                driver: results.rows[0],
+            },
+        });
+    } 
+    catch (err) {
+        console.log(err);
+    }
+};
+
 
 
 
@@ -75,5 +91,6 @@ module.exports = {
     getAllAddress, 
     getAddressID,
     getAllDrivers,
-    getDriverID
+    getDriverID,
+    insertDriver
 };
