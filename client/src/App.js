@@ -9,6 +9,12 @@ import MapWrapper from "./components/MapWrapper/MapWrapper.jsx";
 import { useState, useEffect } from "react";
 import { processedData } from "./data/DataHelper";
 import SimpleSlide from "./components/Sidebar/SimpleSlide";
+import { ThemeProvider } from "styled-components";
+import {
+    lightTheme,
+    darkTheme,
+    GlobalStyle,
+} from "./components/Theme/Themes";
 
 /* 
       This is the big picture view of the layout
@@ -36,8 +42,8 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
-    
     const [tableType, setTableType] = useState(true);
+    const [theme, setTheme] = useState(true);
 
 
     const changeTableType = () => {
@@ -57,6 +63,10 @@ function App() {
         // setSchedule(newSchedule);
     };
 
+    const switchTheme = () => {
+        setTheme((prev) => !prev);
+    };
+
     // const handleChange = () => {
     //     setScheduleOpen((prev) => !prev);
     //     if (schedule) {
@@ -71,42 +81,49 @@ function App() {
     }, []);
 
     return (
-        // Entire app container
-        <div className="container-fluid vh-100 d-flex flex-column">
-            {/* Header row with one col */}
-            <div className="row Header">
-                <div className="col">
-                    <Header changeTableType={changeTableType} />
-                </div>
-            </div>
-            {/* Footer row with one col */}
+        <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+            <>
+                <GlobalStyle />
+                {/* Entire app container */}
+                <div className="container-fluid vh-100 d-flex flex-column">
+                    {/* Header row with one col */}
+                    <div className="row Header">
+                        <div className="col">
+                            <Header changeTableType={changeTableType} />
+                        </div>
+                    </div>
+                    {/* Footer row with one col */}
 
-            {/* 2nd row. Two cols - Sidebar and Map Section */}
-            <div className="Map">
-                {console.log(data)}
-                
-                <div className="Sidebar">
-                    
-                    <Sidetabs>
-                      {tableType ? <Table
-                            schedule={schedule}
-                            activeCallBack={activeCallBack}
-                        /> :
-                      <MUITable schedule={schedule} activeCallBack={activeCallBack}/>
-                      
-                      }
-                    </Sidetabs>
-                    
-                </div>
+                    {/* 2nd row. Two cols - Sidebar and Map Section */}
+                    <div className="Map">
+                        {console.log(data)}
 
-                <MapWrapper schedule={schedule} activeBus={activeBus} />
-                
-                
-                <div className="Footer">
-                    <Footer />
+                        <div className="Sidebar">
+                            <Sidetabs switchTheme={switchTheme}>
+                                {tableType ? (
+                                    <Table
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                    />
+                                ) : (
+                                    <MUITable
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                    />
+                                )}
+                            </Sidetabs>
+                        </div>
+
+                        <MapWrapper schedule={schedule} activeBus={activeBus} />
+
+
+                        <div className="Footer">
+                            <Footer />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </>
+        </ThemeProvider>
     );
 }
 
