@@ -9,10 +9,11 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
-    body: "#2C2F33",
+    body: '#2C2F33',
     text: '#FFF',
-    background: 'linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(55,55,55,1) 40%, rgba(55,55,55,1) 100%)',
+    background: '#2C2F33',
     appBar: '#23272A',
+    icon: 'rgb(133, 184, 88)',
     scrubBar: 'rgb(133, 184, 88)',
     mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
 };
@@ -36,10 +37,14 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.text};
         background-color: ${props => props.theme.body} !important;
     }
-    .MuiSvgIcon-root,
+    .MuiSvgIcon-root {
+        fill: ${props => props.theme.icon} !important;
+        color: ${props => props.theme.icon} !important;
+    }
     .MuiSlider-rail,
     .MuiSlider-track,
-    .MuiSlider-valueLabelCircle {
+    .MuiSlider-valueLabelCircle,
+    .css-eg0mwd-MuiSlider-thumb {
         fill: ${props => props.theme.scrubBar} !important;
         color: ${props => props.theme.scrubBar} !important;
     }
@@ -64,4 +69,7 @@ export const GlobalStyle = createGlobalStyle`
     .leaflet-tile {
         filter: ${props => props.theme.mapTiles} !important;
     } 
+    .leaflet-bar a {
+        background: ${props => props.theme.background};
+    }
 `;
