@@ -13,7 +13,7 @@ export const darkTheme = {
     text: '#FFF',
     background: 'linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(55,55,55,1) 40%, rgba(55,55,55,1) 100%)',
     appBar: '#23272A',
-    scrubBar: '#FFF',
+    scrubBar: 'rgb(133, 184, 88)',
     mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
 };
 
@@ -55,6 +55,10 @@ export const GlobalStyle = createGlobalStyle`
     .MuiPaper-root {
         background-color: ${props => props.theme.body};
         color: ${props => props.theme.text};
+    }
+
+    .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
+        background-color: ${props => props.theme.scrubBar};
     }
 
     .leaflet-tile {
