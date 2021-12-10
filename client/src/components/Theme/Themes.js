@@ -9,7 +9,7 @@ export const lightTheme = {
     info: 'rgb(229, 246, 253)',
     error: 'rgb(253, 237, 237)',
     success: 'rgb(237, 247, 237)',
-    selectedRow: 'rgb(81, 112, 54)'
+    selectedRow: '#1976d2'
 };
 
 export const darkTheme = {
@@ -106,7 +106,11 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .selected > td {
-        color: ${props => props.theme.selectedRow};
+        opacity: 0.75;
+        background: ${props => props.theme.selectedRow} !important;
+    }
+    .css-1m13d3u-MuiTableCell-root {
+        color: ${props => props.theme.text} !important;
     }
     
 `;
