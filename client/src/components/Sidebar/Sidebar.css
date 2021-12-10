@@ -19,3 +19,7 @@ tbody > tr:hover {
     top: 86px !important;
     left: 525px !important;
 }
+
+.selected {
+    font-weight: 800;
+}

@@ -9,6 +9,7 @@ export const lightTheme = {
     info: 'rgb(229, 246, 253)',
     error: 'rgb(253, 237, 237)',
     success: 'rgb(237, 247, 237)',
+    selectedRow: 'rgb(81, 112, 54)'
 };
 
 export const darkTheme = {
@@ -23,6 +24,7 @@ export const darkTheme = {
     error: 'rgb(247, 186, 186)',
     success: 'rgb(153, 240, 169)',
     mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
+    selectedRow: 'rgb(133, 184, 88)'
 };
 
 export const GlobalStyle = createGlobalStyle`
@@ -103,6 +105,8 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.background} !important;
     }
 
-    
+    .selected > td {
+        color: ${props => props.theme.selectedRow};
+    }
     
 `;
