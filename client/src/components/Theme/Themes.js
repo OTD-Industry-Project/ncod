@@ -108,5 +108,6 @@ export const GlobalStyle = createGlobalStyle`
     .selected > td {
         color: ${props => props.theme.selectedRow};
     }
-    
+
+   
 `;

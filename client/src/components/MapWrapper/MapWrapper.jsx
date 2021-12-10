@@ -5,7 +5,7 @@ import Layers from "./Layers";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-function MapWrapper({ schedule, activeBus }) {
+function MapWrapper({ schedule, activeBus, colors }) {
     return (
         <MapContainer
             className="MapWrapper"
@@ -16,11 +16,10 @@ function MapWrapper({ schedule, activeBus }) {
             maxBoundsViscosity={0.5}
             maxBounds={[
                 [-7.616662, 92.639302],
-                [-48.102563, 164.401997]
+                [-48.102563, 164.401997],
             ]}
         >
-            <Layers schedule={schedule} activeBus={activeBus} />
-
+            <Layers schedule={schedule} activeBus={activeBus} colors={colors} />
         </MapContainer>
     );
 }

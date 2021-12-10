@@ -1,7 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
-    TileLayer, LayersControl, FeatureGroup,
-    Popup, ZoomControl, Marker, useMap
+    TileLayer,
+    LayersControl,
+    FeatureGroup,
+    Popup,
+    ZoomControl,
+    Marker,
+    useMap,
 } from "react-leaflet";
 import { divIcon } from "leaflet";
 import Delayed from "./Delayed";
@@ -10,7 +15,6 @@ import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
 
 const Layers = ({ schedule, activeBus }) => {
-
     // Create custom Marker Icons
     var icon = divIcon();
     // Initialise empty varibable to contain active bus status
@@ -25,8 +29,8 @@ const Layers = ({ schedule, activeBus }) => {
         if (position === null && activeBus !== null) {
             setPosition(
                 activeBus.PickupPointLongitude +
-                ", " +
-                activeBus.PickupPointLatitude
+                    ", " +
+                    activeBus.PickupPointLatitude
             );
             maps.flyTo(
                 [activeBus.PickupPointLatitude, activeBus.PickupPointLongitude],
@@ -91,21 +95,18 @@ const Layers = ({ schedule, activeBus }) => {
             <LayersControl position="topright">
                 {" "}
                 {/* default map layer */}
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-         
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
-
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
                 <PreDeparted schedule={schedule} />
                 <OnTime schedule={schedule} />
                 <Delayed schedule={schedule} />
                 <EmptyBus schedule={schedule} />
-
             </LayersControl>
         </>
     );

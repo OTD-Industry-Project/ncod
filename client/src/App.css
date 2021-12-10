@@ -49,17 +49,17 @@
 }
 
 .PreDeparted {
-    background-color: DodgerBlue;
+    background-color: #1e90ff;
 }
 
 .OnTime {
-    background-color: forestgreen;
+    background-color: #228b22;
 }
 
 .Delayed {
-    background-color: OrangeRed;
+    background-color: #ff4500;
 }
 
 .Completed {
-    background-color: DarkGrey;
+    background-color: #a9a9a9;
 }

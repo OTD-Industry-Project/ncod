@@ -44,6 +44,12 @@ function App() {
     const [activeBus, setActiveBus] = useState(null);
     const [tableType, setTableType] = useState(true);
     const [theme, setTheme] = useState(true);
+    const [colors, setColors] = useState({
+        predeparted: '#1e90ff',
+        ontime: '#228b22',
+        delayed: '#ff4500',
+        completed: '#a9a9a9'
+    });
 
 
     const changeTableType = () => {
@@ -67,6 +73,13 @@ function App() {
         setTheme((prev) => !prev);
     };
 
+    const changeColors = (key, color) => {
+        
+        let newColors = colors;
+        newColors[key] = color;
+        setColors(newColors);
+    }
+
     // const handleChange = () => {
     //     setScheduleOpen((prev) => !prev);
     //     if (schedule) {
@@ -81,7 +94,9 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme ? lightTheme : darkTheme}>
+        <ThemeProvider theme={
+            theme ? lightTheme : darkTheme
+        } >
             <>
                 <GlobalStyle />
                 {/* Entire app container */}
@@ -99,7 +114,7 @@ function App() {
                         {console.log(data)}
 
                         <div className="Sidebar">
-                            <Sidetabs switchTheme={switchTheme}>
+                            <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
                                 {tableType ? (
                                     <Table
                                         schedule={schedule}
@@ -114,7 +129,7 @@ function App() {
                             </Sidetabs>
                         </div>
 
-                        <MapWrapper schedule={schedule} activeBus={activeBus} />
+                        <MapWrapper schedule={schedule} activeBus={activeBus} colors={colors} />
 
 
                         <div className="Footer">
