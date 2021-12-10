@@ -89,7 +89,7 @@ function App() {
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
-                            <Header changeTableType={changeTableType} />
+                            <Header changeTableType={changeTableType} theme={theme} />
                         </div>
                     </div>
                     {/* Footer row with one col */}

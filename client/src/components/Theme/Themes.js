@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     * {
         color: ${props => props.theme.text};
     }
+
     body, 
     .leaflet-popup-content-wrapper, 
     .leaflet-popup-tip, 
@@ -78,7 +79,9 @@ export const GlobalStyle = createGlobalStyle`
     }
     .sidebar-content,
     .sidebar-tabs,
-    .MuiPaper-root {
+    .MuiPaper-root,
+    .date-picker,
+    select {
         background-color: ${props => props.theme.body};
         color: ${props => props.theme.text};
     }
@@ -93,4 +96,13 @@ export const GlobalStyle = createGlobalStyle`
     .leaflet-bar a {
         background: ${props => props.theme.background};
     }
+
+    .MuiAlert-message,
+    .MuiAlertTitle-root,
+    strong {
+        color: ${props => props.theme.background} !important;
+    }
+
+    
+    
 `;
