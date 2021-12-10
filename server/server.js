@@ -4,6 +4,9 @@
 // Express
 const express = require("express");
 
+// Import routers
+const routes = require("./routes/Routes");
+
 // Our Database
 const db = require("./db");
 
@@ -11,15 +14,16 @@ const db = require("./db");
 require("dotenv").config();
 
 // Use environment variable if configured, otherwise use port 3000
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Instantiate express app
 const app = express();
+ 
+// parses incoming requests with JSON payloads
+app.use(express.json());
 
-// ROUTES
-app.get("/api", async (req, res) => {
-    res.json({message: "Hello from Server"});
-});
+// To Use the pre-defined routes
+app.use('/', routes);
 
 // Run Server
 app.listen(PORT, () => {

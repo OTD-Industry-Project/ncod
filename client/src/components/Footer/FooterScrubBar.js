@@ -63,28 +63,32 @@ function valuetext(value) {
     hrs + ":" + padZero(mins) + timeType);
 }
 
-//scrub bar function to display actual scrub bar
-//min and max set time for day
-//step is how often to set points
-//marks are the labeling of regular intervals
+
+/* scrub bar function to display actual scrub bar
+min and max set time for day
+step is how often to set points
+marks are the labeling of regular intervals */
 export default function FooterScrubBar() {
+
   //Setting state to use event changes and set new value when slider is moved
-    const [value, setValue] = React.useState(1);
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    return (
-      <Box>
-        <Slider
-          min={0}
-          step={30} //30 minutes
-          max={1440} //total minutes per 24 hours
-          defaultValue={420} //7am in minutes
-          valueLabelFormat={valuetext}
-          marks={marks}
-          valueLabelDisplay="auto"
-          onChange={handleChange}
-        />
-      </Box>
-    )
+  const [value, setValue] = React.useState(1);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box>
+      <Slider
+        min={0}
+        step={5} //5 minutes
+        max={1440} //total minutes per 24 hours
+        defaultValue={420} //7am in minutes
+        valueLabelFormat={valuetext}
+        marks={marks}
+        valueLabelDisplay="auto"
+        onChange={handleChange}
+      />
+
+    </Box>
+  )
 }

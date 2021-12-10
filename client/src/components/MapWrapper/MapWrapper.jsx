@@ -13,8 +13,14 @@ function MapWrapper({ schedule, activeBus }) {
             zoom={10}
             zoomControl={false} //default is {true} and a fixed display on the top left, removing this to import one that can be positioned via Layers.jsx
             scrollWheelZoom={true}
+            maxBoundsViscosity={0.5}
+            maxBounds={[
+                [-7.616662, 92.639302],
+                [-48.102563, 164.401997]
+            ]}
         >
             <Layers schedule={schedule} activeBus={activeBus} />
+
         </MapContainer>
     );
 }
