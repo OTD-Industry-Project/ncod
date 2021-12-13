@@ -1,19 +1,18 @@
 import React from "react";
-import {
-    LayersControl,
-    FeatureGroup,
-    Popup,
-    Marker,
-} from "react-leaflet";
+import { LayersControl, FeatureGroup, Popup, Marker } from "react-leaflet";
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
-const PreDeparted = ({ schedule }) => {
+const PreDeparted = ({ schedule, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
 
     // Filtering the schedule to apply different layer controls
-    var preDeparted = schedule.filter((buses) => buses.status === "Pre Departed");
+    var preDeparted = schedule.filter(
+        (buses) => buses.status === "Pre Departed"
+    );
+
+    console.log(colors);
 
     return (
         <>
@@ -24,7 +23,7 @@ const PreDeparted = ({ schedule }) => {
                         (buses) => (
                             (icon = divIcon({
                                 className: "marker PreDeparted",
-                                html: `<span>${buses.VehicleID}</span>`,
+                                html: `<div style="background-color: ${colors.predeparted}; border-radius: 50%;"><span>${buses.VehicleID}</span></div>`,
                             })),
                             (
                                 <Marker
@@ -58,7 +57,6 @@ const PreDeparted = ({ schedule }) => {
             </LayersControl.Overlay>
         </>
     );
-
 };
 
 export default PreDeparted;

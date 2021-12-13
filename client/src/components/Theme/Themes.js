@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+
 export const lightTheme = {
-    text: '#091e65',
-    background: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 33%, rgba(241,241,241,1) 100%)',
+   
     appBar: '#0074d9',
     scrubBar: '#1976d2',
     warning: 'rgb(255, 244, 229)',
@@ -113,5 +113,4 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.text} !important;
     }
 
-   
 `;

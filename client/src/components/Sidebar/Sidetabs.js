@@ -6,12 +6,7 @@ import ColorPicker from "./ColorPicker";
 
 const Sidetabs = (props) => {
     const [openTab, setOpenTab] = useState("/#schedule");
-    const [showColorPicker, setShowColorPicker] = useState({
-        predeparted: false,
-        ontime: false,
-        delayed: false,
-        completed: false,
-    });
+    
 
     const onClose = () => {
         setOpenTab(false);
@@ -49,109 +44,6 @@ const Sidetabs = (props) => {
                     anchor="bottom"
                 >
                     <div className="container-fluid">
-                        {/* PreDeparted Colour Picker */}
-                        <div className="d-flex align-items-center mt-3">
-                            <h3 className="m-3">Colours</h3>
-                        </div>
-
-                        <div className="d-flex mt-3 align-items-center">
-                            <h5 className="m-3">Pre Departed:</h5>
-                            <button
-                                className="btn btn-secondary"
-                                style={{
-                                    backgroundColor: props.colors.predeparted,
-                                }}
-                                onClick={() =>
-                                    setShowColorPicker((prev) => ({
-                                        predeparted: !prev.predeparted,
-                                    }))
-                                }
-                            >
-                                {showColorPicker.predeparted ? "Set" : "Change"}
-                            </button>
-                        </div>
-
-                        <ColorPicker
-                            k={"predeparted"}
-                            color={props.colors.predeparted}
-                            showColorPicker={showColorPicker.predeparted}
-                            changeColors={props.changeColors}
-                        />
-
-                        {/* Ontime Colour Picker */}
-
-                        <div className="d-flex mt-3 align-items-center">
-                            <h5 className="m-3">On Time:</h5>
-                            <button
-                                className="btn btn-secondary"
-                                style={{
-                                    backgroundColor: props.colors.ontime,
-                                }}
-                                onClick={() =>
-                                    setShowColorPicker((prev) => ({
-                                        ontime: !prev.ontime,
-                                    }))
-                                }
-                            >
-                                {showColorPicker.ontime ? "Set" : "Change"}
-                            </button>
-                        </div>
-                        <ColorPicker
-                            k={"ontime"}
-                            color={props.colors.ontime}
-                            showColorPicker={showColorPicker.ontime}
-                            changeColors={props.changeColors}
-                        />
-
-                        {/* Delayed Colour Picker */}
-
-                        <div className="d-flex mt-3 align-items-center">
-                            <h5 className="m-3">Delayed:</h5>
-                            <button
-                                className="btn btn-secondary"
-                                style={{
-                                    backgroundColor: props.colors.delayed,
-                                }}
-                                onClick={() =>
-                                    setShowColorPicker((prev) => ({
-                                        delayed: !prev.delayed,
-                                    }))
-                                }
-                            >
-                                {showColorPicker.delayed ? "Set" : "Change"}
-                            </button>
-                        </div>
-                        <ColorPicker
-                            k={"delayed"}
-                            color={props.colors.delayed}
-                            showColorPicker={showColorPicker.delayed}
-                            changeColors={props.changeColors}
-                        />
-
-                        {/* Completed Colour Picker */}
-                        <div className="d-flex mt-3 align-items-center">
-                            <h5 className="m-3">Completed:</h5>
-                            <button
-                                className="btn btn-secondary"
-                                style={{
-                                    backgroundColor: props.colors.completed,
-                                }}
-                                onClick={() =>
-                                    setShowColorPicker((prev) => ({
-                                        completed: !prev.completed,
-                                    }))
-                                }
-                            >
-                                {showColorPicker.completed ? "Set" : "Change"}
-                            </button>
-                        </div>
-                        <ColorPicker
-                            k={"completed"}
-                            color={props.colors.completed}
-                            showColorPicker={showColorPicker.completed}
-                            changeColors={props.changeColors}
-                        />
-
                         <div className="d-flex align-items-center mt-3">
                             <button
                                 className="btn btn-primary m-3"
@@ -160,6 +52,63 @@ const Sidetabs = (props) => {
                                 Switch theme
                             </button>
                         </div>
+                        {/* PreDeparted Colour Picker */}
+                        <div className="d-flex align-items-center mt-3">
+                            <h3 className="m-3">Colours</h3>
+                        </div>
+
+                        <div className="d-flex flex-column mt-3">
+                            <h5 className="m-3">Pre Departed:</h5>
+                            <ColorPicker
+                                
+                                k={"predeparted"}
+                                color={props.colors.predeparted}
+                                changeColors={props.changeColors}
+                            />
+                            
+                        </div>
+
+
+
+                        {/* Ontime Colour Picker */}
+
+                        <div className="d-flex flex-column mt-3">
+                            <h5 className="m-3">On Time:</h5>
+                            <ColorPicker
+                                k={"ontime"}
+                                color={props.colors.ontime}
+                                
+                                changeColors={props.changeColors}
+                            />
+                            
+                        </div>
+
+
+                        {/* Delayed Colour Picker */}
+
+                        <div className="d-flex flex-column mt-3">
+                            <h5 className="m-3">Delayed:</h5>
+                            <ColorPicker
+                                k={"delayed"}
+                                color={props.colors.delayed}
+                                
+                                changeColors={props.changeColors}
+                            />
+                            
+                        </div>
+
+                        {/* Completed Colour Picker */}
+                        <div className="d-flex flex-column mt-3">
+                            <h5 className="m-3">Completed:</h5>
+                            <ColorPicker
+                                k={"completed"}
+                                color={props.colors.completed}
+                                
+                                changeColors={props.changeColors}
+                            />
+                            
+                        </div>
+
                     </div>
                 </Tab>
             </Sidebar>
