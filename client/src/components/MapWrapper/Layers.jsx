@@ -14,7 +14,7 @@ import EmptyBus from "./EmptyBus.jsx";
 import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
 
-const Layers = ({ schedule, activeBus }) => {
+const Layers = ({ schedule, activeBus, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Initialise empty varibable to contain active bus status
@@ -103,10 +103,10 @@ const Layers = ({ schedule, activeBus }) => {
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
-                <PreDeparted schedule={schedule} />
-                <OnTime schedule={schedule} />
-                <Delayed schedule={schedule} />
-                <EmptyBus schedule={schedule} />
+                <PreDeparted schedule={schedule} colors={colors} />
+                <OnTime schedule={schedule} colors={colors} />
+                <Delayed schedule={schedule} colors={colors} />
+                <EmptyBus schedule={schedule} colors={colors} />
             </LayersControl>
         </>
     );
