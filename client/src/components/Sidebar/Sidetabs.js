@@ -56,6 +56,12 @@ const Sidetabs = (props) => {
 
                         <div className="d-flex mt-3 align-items-center">
                             <h5 className="m-3">Pre Departed:</h5>
+                            <ColorPicker
+                                k={"predeparted"}
+                                color={props.colors.predeparted}
+                                showColorPicker={showColorPicker.predeparted}
+                                changeColors={props.changeColors}
+                            />
                             <button
                                 className="btn btn-secondary"
                                 style={{
@@ -71,17 +77,18 @@ const Sidetabs = (props) => {
                             </button>
                         </div>
 
-                        <ColorPicker
-                            k={"predeparted"}
-                            color={props.colors.predeparted}
-                            showColorPicker={showColorPicker.predeparted}
-                            changeColors={props.changeColors}
-                        />
+
 
                         {/* Ontime Colour Picker */}
 
                         <div className="d-flex mt-3 align-items-center">
                             <h5 className="m-3">On Time:</h5>
+                            <ColorPicker
+                                k={"ontime"}
+                                color={props.colors.ontime}
+                                showColorPicker={showColorPicker.ontime}
+                                changeColors={props.changeColors}
+                            />
                             <button
                                 className="btn btn-secondary"
                                 style={{
@@ -96,17 +103,18 @@ const Sidetabs = (props) => {
                                 {showColorPicker.ontime ? "Set" : "Change"}
                             </button>
                         </div>
-                        <ColorPicker
-                            k={"ontime"}
-                            color={props.colors.ontime}
-                            showColorPicker={showColorPicker.ontime}
-                            changeColors={props.changeColors}
-                        />
+
 
                         {/* Delayed Colour Picker */}
 
                         <div className="d-flex mt-3 align-items-center">
                             <h5 className="m-3">Delayed:</h5>
+                            <ColorPicker
+                                k={"delayed"}
+                                color={props.colors.delayed}
+                                showColorPicker={showColorPicker.delayed}
+                                changeColors={props.changeColors}
+                            />
                             <button
                                 className="btn btn-secondary"
                                 style={{
@@ -121,12 +129,6 @@ const Sidetabs = (props) => {
                                 {showColorPicker.delayed ? "Set" : "Change"}
                             </button>
                         </div>
-                        <ColorPicker
-                            k={"delayed"}
-                            color={props.colors.delayed}
-                            showColorPicker={showColorPicker.delayed}
-                            changeColors={props.changeColors}
-                        />
 
                         {/* Completed Colour Picker */}
                         <div className="d-flex mt-3 align-items-center">
