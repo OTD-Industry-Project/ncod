@@ -2,7 +2,6 @@ import { createGlobalStyle } from "styled-components";
 
 
 export const lightTheme = {
-   
     appBar: '#0074d9',
     scrubBar: '#1976d2',
     warning: 'rgb(255, 244, 229)',
@@ -19,7 +18,7 @@ export const darkTheme = {
     appBar: '#23272A',
     icon: 'rgb(133, 184, 88)',
     scrubBar: 'rgb(133, 184, 88)',
-    warning: 'rgb(240, 192, 153)',
+    warning: 'rgb(255, 215, 157)',
     info: 'rgb(153, 186, 240)',
     error: 'rgb(247, 186, 186)',
     success: 'rgb(153, 240, 169)',
@@ -29,9 +28,9 @@ export const darkTheme = {
 
 export const GlobalStyle = createGlobalStyle`
     
-    * {
+    ${'' /* * {
         color: ${props => props.theme.text};
-    }
+    } */}
 
     body, 
     .leaflet-popup-content-wrapper, 
@@ -46,10 +45,7 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.text};
         background-color: ${props => props.theme.background} !important;
     }
-    .MuiSvgIcon-root {
-        fill: ${props => props.theme.icon} !important;
-        color: ${props => props.theme.icon} !important;
-    }
+    
     
 ${'' /* Alert colors */}
     .MuiAlert-standardWarning {
@@ -65,6 +61,14 @@ ${'' /* Alert colors */}
         background-color: ${props => props.theme.success} !important;
     }
 
+    .MuiIconButton-root,
+    .MuiTablePagination-toolbar,
+    .MuiTablePagination-selectIcon,
+    .MuiTouchRipple-root {
+        color: ${props => props.theme.text} !important;
+    }
+
+
 ${'' /* scrub bar colours */}
     .MuiSlider-rail,
     .MuiSlider-track,
@@ -75,6 +79,10 @@ ${'' /* scrub bar colours */}
     }
     .MuiSlider-valueLabel {
         background-color: ${props => props.theme.background} !important;
+    }
+${'' /* media controls */}
+    .Footer > div > div > div > button > svg {
+        fill: ${props => props.theme.scrubBar} !important;
     }
 
     .MuiAppBar-root,
@@ -90,7 +98,11 @@ ${'' /* scrub bar colours */}
         background-color: ${props => props.theme.background};
         color: ${props => props.theme.text};
     }
+    .sidebar-tabs > ul > li > button {
+        color: ${props => props.theme.text};
+    }
 
+${'' /* row select in sidebar schedule */}
     .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
         background-color: ${props => props.theme.scrubBar};
     }
@@ -102,11 +114,6 @@ ${'' /* dark mode map tiles */}
 ${'' /* leaflet zoomControls */}
     .leaflet-bar a {
         background: ${props => props.theme.background};
-    }
-
-    .MuiAlertTitle-root,
-    strong {
-        color: ${props => props.theme.scrubBar} !important;
     }
 
 ${'' /* selected row in side bar */}
@@ -122,8 +129,12 @@ ${'' /* text color in Mui table */}
     .MuiTypography-root,
     .MuiInput-root,
     .MuidInput-root > input,
-    .MuiInputLabel-root {
+    .MuiInputLabel-root,
+    thead > tr > th {
         color: ${props => props.theme.text} !important;
+    }
+    .MuiFormGroup-root > label > span > svg {
+        color: ${props => props.theme.scrubBar} !important;
     }
 
 ${'' /* routes */}

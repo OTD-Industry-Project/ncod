@@ -8,7 +8,6 @@
     overflow: hidden !important;
 }
 
-
 .Search {
     width: 40%;
 }
@@ -26,13 +25,6 @@ tbody > tr:hover {
     top: 86px !important;
     left: 525px !important;
 }
-
-.MuiAlert-message,
-.MuiAlert-icon {
-    background-color: inherit !important;
-}
-
-
 
 .selected {
     font-weight: 800;
