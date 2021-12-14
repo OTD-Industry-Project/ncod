@@ -42,7 +42,6 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
-    const [tableType, setTableType] = useState(true);
     const [theme, setTheme] = useState(true);
     const [colors, setColors] = useState({
         predeparted: '#1e90ff',
@@ -51,10 +50,6 @@ function App() {
         completed: '#a9a9a9'
     });
 
-
-    const changeTableType = () => {
-        setTableType((prev) => !prev);
-    };
 
     const activeCallBack = (uid) => {
         const index = schedule.findIndex((obj) => obj.uid === uid);
@@ -105,7 +100,7 @@ function App() {
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
-                            <Header changeTableType={changeTableType} theme={theme} />
+                            <Header theme={theme} />
                         </div>
                     </div>
                     {/* Footer row with one col */}
@@ -116,17 +111,17 @@ function App() {
 
                         <div className="Sidebar">
                             <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
-                                {tableType ? (
+                                
                                     <Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                ) : (
+                                
                                     <MUITable
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                )}
+                                
                             </Sidetabs>
                         </div>
 

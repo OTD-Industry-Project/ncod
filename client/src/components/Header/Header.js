@@ -31,7 +31,7 @@ class Header extends React.Component {
             <AppBar className="Header">
                 <Toolbar>
                     <div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                         <Logo changeTableType={this.props.changeTableType} theme={this.props.theme} />
+                         <Logo theme={this.props.theme} />
                     </div>
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2" align="center">
                         <Datetime date={date}/>
