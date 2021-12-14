@@ -37,7 +37,6 @@ export const GlobalStyle = createGlobalStyle`
     .leaflet-popup-content-wrapper, 
     .leaflet-popup-tip, 
     .leaflet-control {
-        background-color: ${props => props.theme.body};
         color: ${props => props.theme.text};
         body: ${props => props.theme.body};
         background: ${props => props.theme.background}; 
@@ -45,7 +44,7 @@ export const GlobalStyle = createGlobalStyle`
     th, 
     td {
         color: ${props => props.theme.text};
-        background-color: ${props => props.theme.body} !important;
+        background-color: ${props => props.theme.background} !important;
     }
     .MuiSvgIcon-root {
         fill: ${props => props.theme.icon} !important;
@@ -108,7 +107,7 @@ ${'' /* leaflet zoomControls */}
     .MuiAlert-message,
     .MuiAlertTitle-root,
     strong {
-        color: ${props => props.theme.background} !important;
+        color: ${props => props.theme.text} !important;
     }
 
 ${'' /* selected row in side bar */}
@@ -123,6 +122,7 @@ ${'' /* text color in Mui table */}
     }
     .MuiTypography-root,
     .MuiInput-root,
+    .MuidInput-root > input,
     .MuiInputLabel-root {
         color: ${props => props.theme.text} !important;
     }

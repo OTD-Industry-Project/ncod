@@ -68,6 +68,7 @@ class MUITable extends React.Component {
             filter: true,
             filterType: "dropdown",
             responsive: "standard",
+            download: false,
             //   fixedHeader: true,
             expandableRows: true,
             rowsPerPage: 15,
