@@ -32,9 +32,7 @@ tbody > tr:hover {
     background-color: inherit !important;
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
-    left: 715px !important;
-}
+
 
 .selected {
     font-weight: 800;

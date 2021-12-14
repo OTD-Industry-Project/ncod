@@ -72,7 +72,7 @@ class MUITable extends React.Component {
             //   fixedHeader: true,
             expandableRows: true,
             elevation: 0,
-            rowsPerPage: 100,
+            rowsPerPage: 15,
             onRowClick: (rowData) => activeCallBack(rowData[0]),
             selectableRowsHideCheckboxes: true,
             expandableRowsHeader: false,

@@ -106,7 +106,7 @@ ${'' /* leaflet zoomControls */}
 
     .MuiAlertTitle-root,
     strong {
-        color: ${props => props.theme.text} !important;
+        color: ${props => props.theme.scrubBar} !important;
     }
 
 ${'' /* selected row in side bar */}
