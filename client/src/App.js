@@ -116,17 +116,17 @@ function App() {
 
                         <div className="Sidebar">
                             <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
-                                {tableType ? (
+                                
                                     <Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                ) : (
+                                
                                     <MUITable
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                )}
+                                
                             </Sidetabs>
                         </div>
 

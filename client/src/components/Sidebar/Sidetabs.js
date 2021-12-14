@@ -28,16 +28,11 @@ const Sidetabs = (props) => {
                 onClose={onClose}
                 onOpen={onOpen}
             >
-                <Tab id="/#schedule" header="Schedule" icon={<FiHome />}>
-                    {props.children}
+                <Tab id="/#schedule" header="Overview" icon={<FiHome />}>
+                    {props.children[0]}
                 </Tab>
-                <Tab id="/#spare" header="Spare" icon={<FiCompass />}>
-                    <h3>rehomeControls</h3>
-                    <h4>boolean</h4>
-                    <p>
-                        Whether or not to automatically adjust control elements
-                        to align with the sidetabs
-                    </p>
+                <Tab id="/#spare" header="Schedule" icon={<FiCompass />}>
+                    {props.children[1]}
                 </Tab>
                 <Tab
                     id="/#settings"
