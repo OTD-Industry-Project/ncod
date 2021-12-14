@@ -1,6 +1,13 @@
 .mui-table {
-    margin: 0 -12px;
+    margin: 0 0px;
+    padding: 1rem;
 }
+
+.MuiTableRow-root > td {
+    padding: 0 0 0 0px !important;
+    overflow: hidden !important;
+}
+
 
 .Search {
     width: 40%;
@@ -27,4 +34,8 @@ tbody > tr:hover {
 .circle-picker > span > div > span > div {
     background-image: url("../../assets/images/pngegg.png") !important;
     background-color: black !important;
+}
+
+.m-3 {
+    margin-left: 0px !important;
 }

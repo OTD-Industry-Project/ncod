@@ -51,7 +51,8 @@ export const GlobalStyle = createGlobalStyle`
         fill: ${props => props.theme.icon} !important;
         color: ${props => props.theme.icon} !important;
     }
-
+    
+${'' /* Alert colors */}
     .MuiAlert-standardWarning {
         background-color: ${props => props.theme.warning} !important;
     }
@@ -65,6 +66,7 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${props => props.theme.success} !important;
     }
 
+${'' /* scrub bar colours */}
     .MuiSlider-rail,
     .MuiSlider-track,
     .MuiSlider-valueLabelCircle,
@@ -75,6 +77,7 @@ export const GlobalStyle = createGlobalStyle`
     .MuiSlider-valueLabel {
         background-color: ${props => props.theme.body} !important;
     }
+
     .MuiAppBar-root,
     .sidebar-header {
         background-color: ${props => props.theme.appBar} !important;
@@ -82,6 +85,7 @@ export const GlobalStyle = createGlobalStyle`
     .sidebar-content,
     .sidebar-tabs,
     .MuiPaper-root,
+    .MuiPaper-root > div,
     .date-picker,
     select {
         background-color: ${props => props.theme.body};
@@ -92,9 +96,11 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${props => props.theme.scrubBar};
     }
 
+${'' /* dark mode map tiles */}
     .leaflet-tile {
         filter: ${props => props.theme.mapTiles} !important;
     } 
+${'' /* leaflet zoomControls */}
     .leaflet-bar a {
         background: ${props => props.theme.background};
     }
@@ -105,12 +111,24 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.background} !important;
     }
 
+${'' /* selected row in side bar */}
     .selected > td {
         opacity: 0.75;
         background: ${props => props.theme.selectedRow} !important;
     }
+
+${'' /* text color in Mui table */}
     .css-1m13d3u-MuiTableCell-root {
         color: ${props => props.theme.text} !important;
     }
+    .MuiTypography-root,
+    .MuiInput-root,
+    .MuiInputLabel-root {
+        color: ${props => props.theme.text} !important;
+    }
 
+${'' /* routes */}
+    .leaflet-interactive {
+        stroke: ${props => props.theme.scrubBar} !important;
+    }
 `;

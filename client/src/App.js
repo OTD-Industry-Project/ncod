@@ -78,6 +78,7 @@ function App() {
         let newColors = colors;
         newColors[key] = color;
         setColors(newColors);
+        console.log(colors);
     }
 
     // const handleChange = () => {
