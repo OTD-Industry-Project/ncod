@@ -27,6 +27,11 @@ tbody > tr:hover {
     left: 525px !important;
 }
 
+.MuiAlert-message,
+.MuiAlert-icon {
+    background-color: inherit !important;
+}
+
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper{
     left: 715px !important;
 }

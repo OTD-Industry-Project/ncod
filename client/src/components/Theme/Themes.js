@@ -74,7 +74,7 @@ ${'' /* scrub bar colours */}
         color: ${props => props.theme.scrubBar} !important;
     }
     .MuiSlider-valueLabel {
-        background-color: ${props => props.theme.body} !important;
+        background-color: ${props => props.theme.background} !important;
     }
 
     .MuiAppBar-root,
@@ -87,7 +87,7 @@ ${'' /* scrub bar colours */}
     .MuiPaper-root > div,
     .date-picker,
     select {
-        background-color: ${props => props.theme.body};
+        background-color: ${props => props.theme.background};
         color: ${props => props.theme.text};
     }
 
@@ -104,7 +104,6 @@ ${'' /* leaflet zoomControls */}
         background: ${props => props.theme.background};
     }
 
-    .MuiAlert-message,
     .MuiAlertTitle-root,
     strong {
         color: ${props => props.theme.text} !important;
