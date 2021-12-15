@@ -8,7 +8,7 @@ import {
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
-const OnTime = ({ schedule }) => {
+const OnTime = ({ schedule, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
 
@@ -24,7 +24,7 @@ const OnTime = ({ schedule }) => {
                         (buses) => (
                             (icon = divIcon({
                                 className: "marker OnTime",
-                                html: `<span>${buses.VehicleID}</span>`,
+                                html: `<div style="background-color: ${colors.ontime}; border-radius: 50%;"><span>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker
