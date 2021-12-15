@@ -21,9 +21,9 @@ const DarkModeToggle = ({ switchTheme, theme }) => {
                     onChange={handleChange}
                     handleDiameter={28}
                     offColor="#0074D9"
-                    onColor="#000"
+                    onColor="#23272A"
                     offHandleColor="#fff"
-                    onHandleColor="#0074D9"
+                    onHandleColor="#85b858"
                     height={40}
                     width={70}
                     borderRadius={10}
