@@ -20,6 +20,7 @@ function MapWrapper({ schedule, activeBus, colors }) {
             ]}
         >
             <Layers schedule={schedule} activeBus={activeBus} colors={colors} />
+            {console.log(colors)}
         </MapContainer>
     );
 }

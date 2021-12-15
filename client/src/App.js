@@ -107,7 +107,6 @@ function App() {
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     <div className="Map">
-                        {console.log(data)}
 
                         <div className="Sidebar">
                             <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
@@ -125,7 +124,7 @@ function App() {
                             </Sidetabs>
                         </div>
 
-                        <MapWrapper schedule={schedule} activeBus={activeBus} colors={colors} />
+                        <MapWrapper schedule={schedule} activeBus={activeBus} colors={colors}/>
 
 
                         <div className="Footer">

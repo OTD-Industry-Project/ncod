@@ -3,7 +3,7 @@ import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";
 import "./Sidebar.css";
 import ColorPicker from "./ColorPicker";
-import { colors } from "@mui/material";
+
 
 const Sidetabs = (props) => {
     const [openTab, setOpenTab] = useState("/#schedule");
@@ -49,6 +49,7 @@ const Sidetabs = (props) => {
                                 Switch theme
                             </button>
                         </div>
+                        
                         {/* PreDeparted Colour Picker */}
                         <div className="d-flex align-items-center mt-3">
                             <h3 className="m-3">Bus Icon Colours</h3>
@@ -61,11 +62,9 @@ const Sidetabs = (props) => {
                                 k={"predeparted"}
                                 color={props.colors.predeparted}
                                 changeColors={props.changeColors}
-                            />
+                            /> 
                             
                         </div>
-
-
 
                         {/* Ontime Colour Picker */}
 

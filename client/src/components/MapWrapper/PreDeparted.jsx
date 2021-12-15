@@ -12,7 +12,7 @@ const PreDeparted = ({ schedule, colors }) => {
         (buses) => buses.status === "Pre Departed"
     );
 
-    console.log(colors);
+    console.log(colors.predeparted);
 
     return (
         <>
