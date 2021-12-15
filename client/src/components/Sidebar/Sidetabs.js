@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";
+import DarkModeToggle from './DarkModeToggle';
 import "./Sidebar.css";
 import ColorPicker from "./ColorPicker";
 
@@ -45,12 +46,8 @@ const Sidetabs = (props) => {
                 >
                     <div className="container-fluid">
                         <div className="d-flex align-items-center mt-3">
-                            <button
-                                className="btn btn-primary m-3"
-                                onClick={props.switchTheme}
-                            >
-                                Switch theme
-                            </button>
+                        <h5 className="m-3">Dark Mode:</h5>
+                            <DarkModeToggle theme={props.theme} switchTheme={props.switchTheme} />
                         </div>
                         {/* PreDeparted Colour Picker */}
                         <div className="d-flex align-items-center mt-3">
