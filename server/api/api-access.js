@@ -1,14 +1,12 @@
 const axios = require('axios')
 const API_VERSION = '0.9'
-const USERNAME = ''
-const PASSWORD = ''
 //RETURNS API KEY
 export function getAPIKey() {
     axios
         .post('http://rest.nulinecharter.com.au:7920', {
             'Request': 'Login',
-            'Username': USERNAME,
-            'Password': PASSWORD,
+            'Username': process.env.APIUSERNAME,
+            'Password': process.env.APIPASSWORD,
             'API': API_VERSION
         })
         .then(res => {
