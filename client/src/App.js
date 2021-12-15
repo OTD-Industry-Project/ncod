@@ -108,6 +108,7 @@ function App() {
                             <Header
                                 changeTableType={changeTableType}
                                 theme={theme}
+                                switchTheme={switchTheme}
                             />
                         </div>
                     </div>
@@ -119,8 +120,6 @@ function App() {
 
                         <div className="Sidebar">
                             <Sidetabs
-                                switchTheme={switchTheme}
-                                theme={theme}
                                 colors={colors}
                                 changeColors={changeColors}
                             >
