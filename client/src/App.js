@@ -10,11 +10,7 @@ import { useState, useEffect } from "react";
 import { processedData } from "./data/DataHelper";
 import SimpleSlide from "./components/Sidebar/SimpleSlide";
 import { ThemeProvider } from "styled-components";
-import {
-    lightTheme,
-    darkTheme,
-    GlobalStyle,
-} from "./components/Theme/Themes";
+import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
 
 /* 
       This is the big picture view of the layout
@@ -42,14 +38,18 @@ function App() {
     const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(processedData());
     const [activeBus, setActiveBus] = useState(null);
-    const [theme, setTheme] = useState(true);
+    const [tableType, setTableType] = useState(true);
+    const [theme, setTheme] = useState(false);
     const [colors, setColors] = useState({
-        predeparted: '#1e90ff',
-        ontime: '#228b22',
-        delayed: '#ff4500',
-        completed: '#a9a9a9'
+        predeparted: "#1e90ff",
+        ontime: "#228b22",
+        delayed: "#ff4500",
+        completed: "#a9a9a9",
     });
 
+    const changeTableType = () => {
+        setTableType((prev) => !prev);
+    };
 
     const activeCallBack = (uid) => {
         const index = schedule.findIndex((obj) => obj.uid === uid);
@@ -65,11 +65,11 @@ function App() {
     };
 
     const switchTheme = () => {
+        localStorage.setItem("theme", theme ? "light" : "dark");
         setTheme((prev) => !prev);
     };
 
     const changeColors = (key, color) => {
-        
         let newColors = colors;
         newColors[key] = color;
         setColors(newColors);
@@ -84,15 +84,21 @@ function App() {
     //   };
 
     useEffect(() => {
+        const existingPreference = localStorage.getItem("theme");
+        if (existingPreference) {
+            existingPreference === "light" ? setTheme(false) : setTheme(true);
+        } else {
+            setTheme(false);
+            localStorage.setItem("theme", "light");
+        }
+
         fetch("/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
     }, []);
 
     return (
-        <ThemeProvider theme={
-            theme ? lightTheme : darkTheme
-        } >
+        <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
                 <GlobalStyle />
                 {/* Entire app container */}
@@ -100,7 +106,11 @@ function App() {
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
-                            <Header theme={theme} />
+                            <Header
+                                changeTableType={changeTableType}
+                                theme={theme}
+                                switchTheme={switchTheme}
+                            />
                         </div>
                     </div>
                     {/* Footer row with one col */}
@@ -108,7 +118,7 @@ function App() {
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     <div className="Map">
 
-                        <div className="Sidebar">
+                    <div className="Sidebar">
                             <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
                                 
                                     <Table

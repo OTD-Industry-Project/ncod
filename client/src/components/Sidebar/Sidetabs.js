@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";
+
 import "./Sidebar.css";
 import ColorPicker from "./ColorPicker";
 
@@ -41,14 +42,6 @@ const Sidetabs = (props) => {
                     anchor="bottom"
                 >
                     <div className="container-fluid">
-                        <div className="d-flex align-items-center mt-3">
-                            <button
-                                className="btn btn-primary m-3"
-                                onClick={props.switchTheme}
-                            >
-                                Switch theme
-                            </button>
-                        </div>
                         
                         {/* PreDeparted Colour Picker */}
                         <div className="d-flex align-items-center mt-3">

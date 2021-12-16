@@ -7,7 +7,7 @@ const Logo = ({ theme }) => {
     return (
         <div className="Logo d-flex justify-content-center">
             <Tooltip disableFocusListener disableTouchListener title="Round & Round" followCursor={true}>
-                <img  src={theme ? logo : logoWhite} alt="otd logo" height="45"/>
+                <img  src={theme ? logoWhite : logo} alt="otd logo" height="45"/>
             </Tooltip>
             
         </div>
