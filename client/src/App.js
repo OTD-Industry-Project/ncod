@@ -73,7 +73,8 @@ function App() {
         let newColors = colors;
         newColors[key] = color;
         setColors(newColors);
-    };
+        console.log(colors);
+    }
 
     // const handleChange = () => {
     //     setScheduleOpen((prev) => !prev);
@@ -116,32 +117,25 @@ function App() {
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     <div className="Map">
-                        {console.log(data)}
 
-                        <div className="Sidebar">
-                            <Sidetabs
-                                colors={colors}
-                                changeColors={changeColors}
-                            >
-                                {tableType ? (
+                    <div className="Sidebar">
+                            <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
+                                
                                     <Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                ) : (
+                                
                                     <MUITable
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                     />
-                                )}
+                                
                             </Sidetabs>
                         </div>
 
-                        <MapWrapper
-                            schedule={schedule}
-                            activeBus={activeBus}
-                            colors={colors}
-                        />
+                        <MapWrapper schedule={schedule} activeBus={activeBus} colors={colors}/>
+
 
                         <div className="Footer">
                             <Footer />

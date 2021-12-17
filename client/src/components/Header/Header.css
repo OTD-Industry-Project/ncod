@@ -30,3 +30,13 @@
 .css-jcn4dz-MuiBadge-badge {
     background-color: OrangeRed !important;
 }
+
+.MuiAlert-message,
+.MuiAlert-icon {
+    background-color: inherit !important; 
+}
+.MuiAlert-message,
+.MuiAlert-message > div,
+.MuiAlert-message > button {
+    color: rgba(0, 0, 0, 0.87) !important;
+}

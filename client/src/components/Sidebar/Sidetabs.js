@@ -5,6 +5,7 @@ import { Sidebar, Tab } from "./react-leaflet-sidetabs";
 import "./Sidebar.css";
 import ColorPicker from "./ColorPicker";
 
+
 const Sidetabs = (props) => {
     const [openTab, setOpenTab] = useState("/#schedule");
     
@@ -16,6 +17,7 @@ const Sidetabs = (props) => {
     const onOpen = (id) => {
         setOpenTab(id);
     };
+    console.log(props.colors.predeparted);
 
     return (
         <section>
@@ -27,16 +29,11 @@ const Sidetabs = (props) => {
                 onClose={onClose}
                 onOpen={onOpen}
             >
-                <Tab id="/#schedule" header="Schedule" icon={<FiHome />}>
-                    {props.children}
+                <Tab id="/#schedule" header="Overview" icon={<FiHome />}>
+                    {props.children[0]}
                 </Tab>
-                <Tab id="/#spare" header="Spare" icon={<FiCompass />}>
-                    <h3>rehomeControls</h3>
-                    <h4>boolean</h4>
-                    <p>
-                        Whether or not to automatically adjust control elements
-                        to align with the sidetabs
-                    </p>
+                <Tab id="/#spare" header="Schedule" icon={<FiCompass />}>
+                    {props.children[1]}
                 </Tab>
                 <Tab
                     id="/#settings"
@@ -48,7 +45,7 @@ const Sidetabs = (props) => {
                         
                         {/* PreDeparted Colour Picker */}
                         <div className="d-flex align-items-center mt-3">
-                            <h3 className="m-3">Colours</h3>
+                            <h3 className="m-3">Bus Icon Colours</h3>
                         </div>
 
                         <div className="d-flex flex-column mt-3">
@@ -58,11 +55,9 @@ const Sidetabs = (props) => {
                                 k={"predeparted"}
                                 color={props.colors.predeparted}
                                 changeColors={props.changeColors}
-                            />
+                            /> 
                             
                         </div>
-
-
 
                         {/* Ontime Colour Picker */}
 

@@ -20,9 +20,9 @@ const ColorPicker = ({ k, color, showColorPicker, changeColors }) => {
                 ]}
                 onChange={(updatedColor) => {
                     setThisColor(updatedColor);
-                    changeColors(k, thisColor.hex);
                 }}
-                // onChangeComplete={changeColors(k, thisColor.hex)}
+                onChangeComplete={changeColors(k, thisColor.hex)}
+                // only changes one at a time, not outputing all
             />
         </>
     );

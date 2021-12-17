@@ -8,7 +8,7 @@ import {
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
-const EmptyBus = ({ schedule }) => {
+const EmptyBus = ({ schedule, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls
@@ -23,7 +23,7 @@ const EmptyBus = ({ schedule }) => {
                         (buses) => (
                             (icon = divIcon({
                                 className: "marker Completed",
-                                html: `<span>${buses.VehicleID}</span>`,
+                                html: `<div style="background-color: ${colors.completed}; border-radius: 50%;"><span>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker

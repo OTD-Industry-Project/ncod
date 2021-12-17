@@ -16,7 +16,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 
     /* Global CSS variables here */
-    --header-height: 75px;
+    --header-height: 65px;
     --sidebar-width: 600px;
     --footer-height: 140px;
     --border: 1px solid var(--light-blue);
