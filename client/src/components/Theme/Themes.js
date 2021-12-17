@@ -73,6 +73,7 @@ ${'' /* scrub bar colours */}
     .MuiSlider-rail,
     .MuiSlider-track,
     .MuiSlider-valueLabelCircle,
+    .MuiSlider-markLabel,
     .css-eg0mwd-MuiSlider-thumb {
         fill: ${props => props.theme.scrubBar} !important;
         color: ${props => props.theme.scrubBar} !important;

@@ -1,3 +1,10 @@
+@import url('http://fonts.cdnfonts.com/css/led-digital-7');
+
 .MuiSlider-valueLabelLabel {
     color: white !important;
+}
+
+.MuiSlider-markLabel {
+    font-family: 'LED Digital 7', sans-serif !important;
+    font-size: 1.125rem !important;
 }
