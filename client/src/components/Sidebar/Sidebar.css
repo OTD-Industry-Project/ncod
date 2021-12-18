@@ -38,3 +38,8 @@ tbody > tr:hover {
 .m-3 {
     margin-left: 0px !important;
 }
+
+.info-card {
+    padding: 0.6rem 0.3rem;
+    width: 100;
+}

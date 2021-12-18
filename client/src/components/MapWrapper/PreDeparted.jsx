@@ -12,8 +12,6 @@ const PreDeparted = ({ schedule, colors }) => {
         (buses) => buses.status === "Pre Departed"
     );
 
-    console.log(colors.predeparted);
-
     return (
         <>
             {/* looping over the pickup points, and plotting with a coloured circle */}

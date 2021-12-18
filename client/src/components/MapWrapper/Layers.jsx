@@ -15,9 +15,6 @@ import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
 
 const Layers = ({ schedule, activeBus, colors }) => {
-
-    console.log(colors.predeparted);
-    
     // Create custom Marker Icons
     var icon = divIcon();
     // Initialise empty varibable to contain active bus status

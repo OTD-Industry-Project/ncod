@@ -5,10 +5,11 @@ import TableCell from "@mui/material/TableCell";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
+import InfoCard from "./InfoCard";
 
 class MUITable extends React.Component {
     render() {
-        const { schedule, activeCallBack } = this.props;
+        const { schedule, activeCallBack, colors } = this.props;
 
         const columns = [
             {
@@ -34,12 +35,16 @@ class MUITable extends React.Component {
                 name: "Destination",
                 options: {
                     filter: false,
+                    display: false,
+                    
                 },
             },
             {
                 name: "Times",
                 options: {
                     filter: false,
+                    
+                    
                 },
             },
             {
@@ -72,7 +77,7 @@ class MUITable extends React.Component {
             //   fixedHeader: true,
             expandableRows: true,
             elevation: 0,
-            rowsPerPage: 15,
+            rowsPerPage: 100,
             onRowClick: (rowData) => activeCallBack(rowData[0]),
             selectableRowsHideCheckboxes: true,
             expandableRowsHeader: false,
@@ -99,9 +104,10 @@ class MUITable extends React.Component {
             renderExpandableRow: (rowData, rowMeta) => {
                 const colSpan = rowData.length + 1;
                 return (
-                    <TableRow>
-                        <TableCell colSpan={colSpan}>
-                            {JSON.stringify(schedule[rowData[0]])}
+                    <TableRow >
+                        <TableCell colSpan={colSpan} >
+                            {/* {console.log(schedule[rowData[0]])} */}
+                            <InfoCard info={schedule[rowData[0]]} colors={colors} />
                         </TableCell>
                     </TableRow>
                 );

@@ -70,10 +70,11 @@ function App() {
     };
 
     const changeColors = (key, color) => {
-        let newColors = colors;
-        newColors[key] = color;
-        setColors(newColors);
-        console.log(colors);
+        
+        setColors(prevColors => ({
+            ...prevColors,
+            [key]: color,
+        }));
     }
 
     // const handleChange = () => {
@@ -84,6 +85,8 @@ function App() {
     //   };
 
     useEffect(() => {
+        
+        
         const existingPreference = localStorage.getItem("theme");
         if (existingPreference) {
             existingPreference === "light" ? setTheme(false) : setTheme(true);
@@ -129,6 +132,7 @@ function App() {
                                     <MUITable
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
+                                        colors={colors}
                                     />
                                 
                             </Sidetabs>
