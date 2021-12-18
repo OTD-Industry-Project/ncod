@@ -118,8 +118,9 @@ ${'' /* leaflet zoomControls */}
     }
 
 ${'' /* selected row in side bar */}
+    
     .selected > td {
-        opacity: 0.75;
+        color: white;
         background: ${props => props.theme.selectedRow} !important;
     }
 
@@ -137,6 +138,7 @@ ${'' /* text color in Mui table */}
     .MuiFormGroup-root > label > span > svg {
         color: ${props => props.theme.scrubBar} !important;
     }
+
 
 ${'' /* routes */}
     .leaflet-interactive {
