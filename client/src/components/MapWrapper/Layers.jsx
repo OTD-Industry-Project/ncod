@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
+    AttributionControl,
     TileLayer,
     LayersControl,
     FeatureGroup,
@@ -108,6 +109,8 @@ const Layers = ({ schedule, activeBus, colors }) => {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                {/* fully customisable attribution controls*/}
+                <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required
