@@ -101,7 +101,7 @@ class MUITable extends React.Component {
             expandableRows: true,
             elevation: 0,
             setRowProps: (row) => {
-                console.log(this.state.selectedRow + " " + row[0]);
+                // console.log(this.state.selectedRow + " " + row[0]);
                 return {
                     className: this.state.selectedRow === row[0] ? "selected" : "",
                 };

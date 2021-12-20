@@ -34,7 +34,7 @@
     z-index: 1000;
 }
 
-.marker {
+.marker > div {
     border-radius: 15px;
     border: 1px solid #fff;
     display: inline-block;
@@ -46,20 +46,4 @@
     line-height: 30px;
     color: #fff;
     font-weight: bold;
-}
-
-.PreDeparted {
-    background-color: #1e90ff;
-}
-
-.OnTime {
-    background-color: #228b22;
-}
-
-.Delayed {
-    background-color: #ff4500;
-}
-
-.Completed {
-    background-color: #a9a9a9;
 }

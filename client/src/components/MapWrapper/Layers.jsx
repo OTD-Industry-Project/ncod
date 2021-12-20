@@ -19,6 +19,7 @@ const Layers = ({ schedule, activeBus, colors }) => {
     var icon = divIcon();
     // Initialise empty varibable to contain active bus status
     var activeBusStatus;
+    var busColor;
 
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
@@ -40,16 +41,24 @@ const Layers = ({ schedule, activeBus, colors }) => {
 
             // Setting variable to be passed allowing access to CSS classes where 'activeBus.status' contains a space
             if (activeBus.status === "On Time") {
-                activeBusStatus = "OnTime";
+                activeBusStatus = "ontime";
+                busColor = colors.ontime;
             } else if (activeBus.status === "Pre Departed") {
-                activeBusStatus = "PreDeparted";
-            } else {
-                activeBusStatus = activeBus.status;
+                activeBusStatus = "predeparted";
+                busColor = colors.predeparted;
+            } else if (activeBus.status === "Delayed") {
+                activeBusStatus = "delayed";
+                busColor = colors.delayed;
             }
+            else {
+                activeBusStatus = "completed";
+                busColor = colors.completed;
+            }
+
             // Assigning CSS class based on bus status
             icon = divIcon({
-                className: "marker " + activeBusStatus,
-                html: `<span>${activeBus.VehicleID}</span>`,
+                className: "marker",
+                html: `<div style="background-color: ${busColor}"><span>${activeBus.VehicleID}</span>`,
             });
         }
 

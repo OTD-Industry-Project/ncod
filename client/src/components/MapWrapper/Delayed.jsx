@@ -22,8 +22,8 @@ const Delayed = ({ schedule, colors }) => {
                     {delayed.map(
                         (buses) => (
                             (icon = divIcon({
-                                className: "marker Delayed",
-                                html: `<div style="background-color: ${colors.delayed}; border-radius: 50%;"><span>${buses.VehicleID}</span>`,
+                                className: "marker",
+                                html: `<div style="background-color: ${colors.delayed};"><span>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker
