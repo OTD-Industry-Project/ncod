@@ -132,11 +132,16 @@ ${'' /* text color in Mui table */}
     .MuiInput-root,
     .MuidInput-root > input,
     .MuiInputLabel-root,
+    .MuiTableRow-root > td,
     thead > tr > th {
         color: ${props => props.theme.text} !important;
     }
     .MuiFormGroup-root > label > span > svg {
         color: ${props => props.theme.scrubBar} !important;
+    }
+
+    .info-card{
+        background: ${props => props.theme.selectedRow} !important;
     }
 
 
