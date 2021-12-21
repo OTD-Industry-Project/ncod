@@ -8,3 +8,7 @@
     font-family: 'LED Digital 7', sans-serif !important;
     font-size: 1.125rem !important;
 }
+
+.align-self-start {
+    padding-bottom: 10px;
+}

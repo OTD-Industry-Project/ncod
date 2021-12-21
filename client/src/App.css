@@ -25,7 +25,7 @@
 
 .Footer {
     position: absolute;
-    bottom: 0;
+    bottom: 1%;
     left: 0;
     max-height: var(--footer-height);
     min-height: var(--footer-height);
