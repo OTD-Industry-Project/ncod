@@ -38,3 +38,13 @@ tbody > tr:hover {
 .m-3 {
     margin-left: 0px !important;
 }
+
+.info-card {
+    padding: 0.6rem 0.3rem;
+    width: 100;
+    color: white ;
+}
+.info-card > table,
+.info-card > table > thead {
+    background-color: white !important;
+}

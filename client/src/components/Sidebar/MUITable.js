@@ -5,10 +5,34 @@ import TableCell from "@mui/material/TableCell";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
+import InfoCard from "./InfoCard";
 
 class MUITable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedRow: -1,
+        };
+    }
+
+    handleEvent = (i) => {
+        
+
+        if (i === this.state.selectedRow) {
+            this.setState({selectedRow: -1});
+            console.log('row number ' + i + " deselected"); 
+            return;
+        }
+        
+    
+        if (this.state.selectedRow !== undefined) {
+            this.setState({selectedRow: i}); 
+            console.log('row number ' + i + " selected"); 
+        }
+    }
+    
     render() {
-        const { schedule, activeCallBack } = this.props;
+        const { schedule, activeCallBack, colors } = this.props;
 
         const columns = [
             {
@@ -34,12 +58,16 @@ class MUITable extends React.Component {
                 name: "Destination",
                 options: {
                     filter: false,
+                    display: false,
+                    
                 },
             },
             {
                 name: "Times",
                 options: {
                     filter: false,
+                    
+                    
                 },
             },
             {
@@ -72,21 +100,27 @@ class MUITable extends React.Component {
             //   fixedHeader: true,
             expandableRows: true,
             elevation: 0,
-            rowsPerPage: 15,
-            onRowClick: (rowData) => activeCallBack(rowData[0]),
+            setRowProps: (row) => {
+                // console.log(this.state.selectedRow + " " + row[0]);
+                return {
+                    className: this.state.selectedRow === row[0] ? "selected" : "",
+                };
+            },
+            rowsPerPage: 100,
+            onRowClick: (rowData, rowMeta) => {
+                this.handleEvent(rowMeta.rowIndex);
+                activeCallBack(rowData[0]);
+            },
             selectableRowsHideCheckboxes: true,
             expandableRowsHeader: false,
             expandableRowsOnClick: true,
             setTableProps: () => {
                 return {
                     padding: "none",
-                    size: "small",
+                    size: "default",
                 };
             },
             isRowExpandable: (dataIndex, expandedRows) => {
-                // if (dataIndex === 3 || dataIndex === 4) return false;
-
-                // Prevent expand/collapse of any row if there are 4 rows expanded already (but allow those already expanded to be collapsed)
                 if (
                     expandedRows.data.length > 4 &&
                     expandedRows.data.filter((d) => d.dataIndex === dataIndex)
@@ -99,9 +133,10 @@ class MUITable extends React.Component {
             renderExpandableRow: (rowData, rowMeta) => {
                 const colSpan = rowData.length + 1;
                 return (
-                    <TableRow>
-                        <TableCell colSpan={colSpan}>
-                            {JSON.stringify(schedule[rowData[0]])}
+                    <TableRow className={this.state.selectedRow === rowMeta.rowIndex ? "selected" : ""}>
+                        <TableCell  colSpan={colSpan} >
+                            {/* {console.log(schedule[rowData[0]])} */}
+                            <InfoCard info={schedule[rowData[0]]} colors={colors} />
                         </TableCell>
                     </TableRow>
                 );

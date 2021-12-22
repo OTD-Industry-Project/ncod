@@ -17,7 +17,6 @@ const Sidetabs = (props) => {
     const onOpen = (id) => {
         setOpenTab(id);
     };
-    console.log(props.colors.predeparted);
 
     return (
         <section>

@@ -12,8 +12,6 @@ const PreDeparted = ({ schedule, colors }) => {
         (buses) => buses.status === "Pre Departed"
     );
 
-    console.log(colors.predeparted);
-
     return (
         <>
             {/* looping over the pickup points, and plotting with a coloured circle */}
@@ -22,8 +20,8 @@ const PreDeparted = ({ schedule, colors }) => {
                     {preDeparted.map(
                         (buses) => (
                             (icon = divIcon({
-                                className: "marker PreDeparted",
-                                html: `<div style="background-color: ${colors.predeparted}; border-radius: 50%;"><span>${buses.VehicleID}</span></div>`,
+                                className: "marker",
+                                html: `<div style="background-color: ${colors.predeparted};"><span>${buses.VehicleID}</span></div>`,
                             })),
                             (
                                 <Marker

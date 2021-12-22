@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
+    AttributionControl,
     TileLayer,
     LayersControl,
     FeatureGroup,
@@ -15,13 +16,11 @@ import PreDeparted from "./PreDeparted";
 import OnTime from "./OnTime";
 
 const Layers = ({ schedule, activeBus, colors }) => {
-
-    console.log(colors.predeparted);
-    
     // Create custom Marker Icons
     var icon = divIcon();
     // Initialise empty varibable to contain active bus status
     var activeBusStatus;
+    var busColor;
 
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
@@ -43,16 +42,24 @@ const Layers = ({ schedule, activeBus, colors }) => {
 
             // Setting variable to be passed allowing access to CSS classes where 'activeBus.status' contains a space
             if (activeBus.status === "On Time") {
-                activeBusStatus = "OnTime";
+                activeBusStatus = "ontime";
+                busColor = colors.ontime;
             } else if (activeBus.status === "Pre Departed") {
-                activeBusStatus = "PreDeparted";
-            } else {
-                activeBusStatus = activeBus.status;
+                activeBusStatus = "predeparted";
+                busColor = colors.predeparted;
+            } else if (activeBus.status === "Delayed") {
+                activeBusStatus = "delayed";
+                busColor = colors.delayed;
             }
+            else {
+                activeBusStatus = "completed";
+                busColor = colors.completed;
+            }
+
             // Assigning CSS class based on bus status
             icon = divIcon({
-                className: "marker " + activeBusStatus,
-                html: `<span>${activeBus.VehicleID}</span>`,
+                className: "marker",
+                html: `<div style="background-color: ${busColor}"><span>${activeBus.VehicleID}</span>`,
             });
         }
 
@@ -102,6 +109,8 @@ const Layers = ({ schedule, activeBus, colors }) => {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
+                {/* fully customisable attribution controls*/}
+                <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required

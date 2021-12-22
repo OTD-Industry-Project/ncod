@@ -23,8 +23,8 @@ const OnTime = ({ schedule, colors }) => {
                     {onTime.map(
                         (buses) => (
                             (icon = divIcon({
-                                className: "marker OnTime",
-                                html: `<div style="background-color: ${colors.ontime}; border-radius: 50%;"><span>${buses.VehicleID}</span>`,
+                                className: "marker",
+                                html: `<div style="background-color: ${colors.ontime};"><span>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker

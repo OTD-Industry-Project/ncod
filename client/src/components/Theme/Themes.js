@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, withTheme } from "styled-components";
 
 
 export const lightTheme = {
@@ -118,8 +118,9 @@ ${'' /* leaflet zoomControls */}
     }
 
 ${'' /* selected row in side bar */}
+    
     .selected > td {
-        opacity: 0.75;
+        color: white;
         background: ${props => props.theme.selectedRow} !important;
     }
 
@@ -131,12 +132,18 @@ ${'' /* text color in Mui table */}
     .MuiInput-root,
     .MuidInput-root > input,
     .MuiInputLabel-root,
+    .MuiTableRow-root > td,
     thead > tr > th {
         color: ${props => props.theme.text} !important;
     }
     .MuiFormGroup-root > label > span > svg {
         color: ${props => props.theme.scrubBar} !important;
     }
+
+    .info-card{
+        background: ${props => props.theme.selectedRow} !important;
+    }
+
 
 ${'' /* routes */}
     .leaflet-interactive {
