@@ -77,7 +77,7 @@ export default function FooterScrubBar() {
   };
 
   return (
-    <Box style={{'line-height':'0.9rem'}}>
+    <Box>
       <Slider
         min={0}
         step={5} //5 minutes
