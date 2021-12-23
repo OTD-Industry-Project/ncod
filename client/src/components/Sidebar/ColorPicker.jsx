@@ -8,7 +8,7 @@ const ColorPicker = ({ k, color, showColorPicker, changeColors }) => {
         <>
             <CirclePicker
                 width="364px"
-                color={thisColor}
+                color={color}
                 colors={[
                     "#1E90FF",
                     "#8ED1FC",

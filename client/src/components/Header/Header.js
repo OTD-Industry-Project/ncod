@@ -12,20 +12,7 @@ import DarkModeToggle from './DarkModeToggle';
 //each div calls another script to be placed inside the initial div
 class Header extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: null
-        }
-    }
-    
-    handleHistoryCallback = (childData) => {
-        this.setState({date: childData});
-    }  
-
     render() { 
-        //const for date and time
-        const { date } = this.state;
         
         return (
             <AppBar className="Header">
@@ -34,10 +21,10 @@ class Header extends React.Component {
                          <Logo theme={this.props.theme} />
                     </div>
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2" align="center">
-                        <Datetime date={date}/>
+                        <Datetime date={this.props.date}/>
                     </div>
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-7">
-                        <HistoryToggle parentCallback={this.handleHistoryCallback}/>
+                        <HistoryToggle changeDate={this.props.changeDate}/>
                     </div>
                     <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
                         <AlertBtn />

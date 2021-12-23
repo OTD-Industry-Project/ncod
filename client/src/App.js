@@ -46,9 +46,14 @@ function App() {
         delayed: "#ff4500",
         completed: "#a9a9a9",
     });
+    const [date, setDate] = useState(new Date());
 
     const changeTableType = () => {
         setTableType((prev) => !prev);
+    };
+
+    const changeDate = (newDate) => {
+        setDate(newDate);
     };
 
     const activeCallBack = (uid) => {
@@ -70,12 +75,23 @@ function App() {
     };
 
     const changeColors = (key, color) => {
-        
-        setColors(prevColors => ({
+        let existingColorScheme = JSON.parse(
+            localStorage.getItem("color-scheme")
+        );
+
+        if (existingColorScheme) {
+            existingColorScheme[key] = color;
+            localStorage.setItem(
+                "color-scheme",
+                JSON.stringify(existingColorScheme)
+            );
+        }
+
+        setColors((prevColors) => ({
             ...prevColors,
             [key]: color,
         }));
-    }
+    };
 
     // const handleChange = () => {
     //     setScheduleOpen((prev) => !prev);
@@ -85,11 +101,10 @@ function App() {
     //   };
 
     useEffect(() => {
-        
-        
-        const existingPreference = localStorage.getItem("theme");
-        if (existingPreference) {
-            existingPreference === "light" ? setTheme(false) : setTheme(true);
+        const existingTheme = localStorage.getItem("theme");
+
+        if (existingTheme) {
+            existingTheme === "light" ? setTheme(false) : setTheme(true);
         } else {
             setTheme(false);
             localStorage.setItem("theme", "light");
@@ -98,6 +113,32 @@ function App() {
         fetch("/api")
             .then((res) => res.json())
             .then((data) => setData(data.message));
+    }, []);
+
+    useEffect(() => {
+        const existingColorScheme = localStorage.getItem("color-scheme");
+
+        if (existingColorScheme) {
+            const existingColors = JSON.parse(
+                localStorage.getItem("color-scheme")
+            );
+            setColors({
+                predeparted: existingColors.predeparted,
+                ontime: existingColors.ontime,
+                delayed: existingColors.delayed,
+                completed: existingColors.completed,
+            });
+        } else {
+            setColors(
+                {
+                    predeparted: "#1e90ff",
+                    ontime: "#228b22",
+                    delayed: "#ff4500",
+                    completed: "#a9a9a9",
+                },
+                localStorage.setItem("color-scheme", JSON.stringify(colors))
+            );
+        }
     }, []);
 
     return (
@@ -110,6 +151,8 @@ function App() {
                     <div className="row Header">
                         <div className="col">
                             <Header
+                                changeDate={changeDate}
+                                date={date}
                                 changeTableType={changeTableType}
                                 theme={theme}
                                 switchTheme={switchTheme}
@@ -120,26 +163,30 @@ function App() {
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     <div className="Map">
+                        <div className="Sidebar">
+                            <Sidetabs
+                                switchTheme={switchTheme}
+                                colors={colors}
+                                changeColors={changeColors}
+                            >
+                                <Table
+                                    schedule={schedule}
+                                    activeCallBack={activeCallBack}
+                                />
 
-                    <div className="Sidebar">
-                            <Sidetabs switchTheme={switchTheme} colors={colors} changeColors={changeColors}>
-                                
-                                    <Table
-                                        schedule={schedule}
-                                        activeCallBack={activeCallBack}
-                                    />
-                                
-                                    <MUITable
-                                        schedule={schedule}
-                                        activeCallBack={activeCallBack}
-                                        colors={colors}
-                                    />
-                                
+                                <MUITable
+                                    schedule={schedule}
+                                    activeCallBack={activeCallBack}
+                                    colors={colors}
+                                />
                             </Sidetabs>
                         </div>
 
-                        <MapWrapper schedule={schedule} activeBus={activeBus} colors={colors}/>
-
+                        <MapWrapper
+                            schedule={schedule}
+                            activeBus={activeBus}
+                            colors={colors}
+                        />
 
                         <div className="Footer">
                             <Footer />
