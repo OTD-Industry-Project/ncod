@@ -4,8 +4,7 @@ import "./Header.css";
 //simple function for displaying current time and date
 //formatted to be more legable
 const Datetime = ({ date }) => {
-    console.log(Date.now());
-    console.log(new Date());
+
     console.log(date);
 
     function isSameDay(d1, d2) {
