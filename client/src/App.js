@@ -47,6 +47,11 @@ function App() {
         completed: "#a9a9a9",
     });
     const [date, setDate] = useState(new Date());
+    const [play, setPlay] = useState(false);
+
+    const handleCallback = (m) => {
+        setPlay(m);
+    };
 
     const changeTableType = () => {
         setTableType((prev) => !prev);
@@ -189,7 +194,7 @@ function App() {
                         />
 
                         <div className="Footer">
-                            <Footer />
+                            <Footer handleCallback={handleCallback} play={play} />
                         </div>
                     </div>
                 </div>

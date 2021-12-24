@@ -8,9 +8,14 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useTheme } from '@mui/material/styles';
 //function for displaying mnedia controls
 //practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
-function MediaControls() {
+function MediaControls({ handleCallback }) {
     const theme = useTheme();
     const [paused, setPaused] = React.useState(true);
+
+    const handleChange = () => {
+        setPaused(!paused);
+        handleCallback(paused);
+    };
 
     return (
         <div>
@@ -19,7 +24,7 @@ function MediaControls() {
             </IconButton>
             <IconButton
                 aria-label={paused ? 'play' : 'pause'}
-                onClick={() => setPaused(!paused)}
+                onClick={handleChange}
             >
                 {paused ? (
                     <PlayArrowRounded

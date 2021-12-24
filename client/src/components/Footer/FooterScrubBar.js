@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Footer.css';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
@@ -68,21 +68,31 @@ function valuetext(value) {
 min and max set time for day
 step is how often to set points
 marks are the labeling of regular intervals */
-export default function FooterScrubBar() {
+export default function FooterScrubBar({ play }) {
 
   //Setting state to use event changes and set new value when slider is moved
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(420); //420 = 7am in minutes
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    if (play) {
+      const interval = setInterval(() => {
+        setValue((oldValue) => oldValue + 5);
+      }, 500);
+      return () => clearInterval(interval);
+    }
+  });
+
   return (
     <Box>
       <Slider
+        key={`${value}`}
         min={0}
         step={5} //5 minutes
         max={1440} //total minutes per 24 hours
-        defaultValue={420} //7am in minutes
+        defaultValue={value} 
         valueLabelFormat={valuetext}
         marks={marks}
         valueLabelDisplay="auto"
