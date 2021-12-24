@@ -1,6 +1,7 @@
 // import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
+import { isSameDay } from "./components/Header/Datetime";
 import MUITable from "./components/Sidebar/MUITable";
 import Table from "./components/Sidebar/Table";
 import Sidetabs from "./components/Sidebar/Sidetabs";
@@ -48,6 +49,7 @@ function App() {
     });
     const [date, setDate] = useState(new Date());
     const [play, setPlay] = useState(false);
+    const [historyMode, setHistoryMode] = useState(false);
 
     const handleCallback = (m) => {
         setPlay(m);
@@ -58,6 +60,7 @@ function App() {
     };
 
     const changeDate = (newDate) => {
+        setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
     };
 
@@ -194,7 +197,11 @@ function App() {
                         />
 
                         <div className="Footer">
-                            <Footer handleCallback={handleCallback} play={play} />
+                            <Footer
+                                handleCallback={handleCallback}
+                                play={play}
+                                historyMode={historyMode}
+                            />
                         </div>
                     </div>
                 </div>
