@@ -68,7 +68,7 @@ function valuetext(value) {
 min and max set time for day
 step is how often to set points
 marks are the labeling of regular intervals */
-export default function FooterScrubBar({ play, historyMode }) {
+export default function FooterScrubBar({ play, historyMode, action, setDirection }) {
 
   //Setting state to use event changes and set new value when slider is moved
   const [value, setValue] = React.useState(420); //420 = 7am in minutes
@@ -77,7 +77,19 @@ export default function FooterScrubBar({ play, historyMode }) {
   };
 
   useEffect(() => {
+    
+    if (historyMode && (action === -1 || action === 1)) {
+      
+        if (action === -1) {
+          setValue((oldValue) => oldValue - 60);
+        } else {
+          setValue((oldValue) => oldValue + 60);
+        }
+        setDirection(0);
+    
+    }
     if (play && historyMode) {
+  
       const interval = setInterval(() => {
         setValue((oldValue) => oldValue + 5);
       }, 500);
