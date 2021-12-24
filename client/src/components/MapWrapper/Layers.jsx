@@ -10,10 +10,7 @@ import {
     useMap,
 } from "react-leaflet";
 import { divIcon } from "leaflet";
-import Delayed from "./Delayed";
-import EmptyBus from "./EmptyBus.jsx";
-import PreDeparted from "./PreDeparted";
-import OnTime from "./OnTime";
+import BusIcons from "./BusIcons";
 
 const Layers = ({ schedule, activeBus, colors }) => {
     // Create custom Marker Icons
@@ -115,10 +112,10 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
-                <PreDeparted schedule={schedule} colors={colors} />
-                <OnTime schedule={schedule} colors={colors} />
-                <Delayed schedule={schedule} colors={colors} />
-                <EmptyBus schedule={schedule} colors={colors} />
+                <BusIcons schedule={schedule} type={'predeparted'} colors={colors} />
+                <BusIcons schedule={schedule} type={'ontime'} colors={colors} />
+                <BusIcons schedule={schedule} type={'delayed'} colors={colors} />
+                <BusIcons schedule={schedule} type={'completed'} colors={colors} />
             </LayersControl>
         </>
     );
