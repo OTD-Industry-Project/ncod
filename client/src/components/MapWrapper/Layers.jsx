@@ -15,8 +15,7 @@ import BusIcons from "./BusIcons";
 const Layers = ({ schedule, activeBus, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
-    // Initialise empty varibable to contain active bus status
-    var activeBusStatus;
+    // Variable for icon colors
     var busColor;
 
     // Clicking an item on the sidebar, will change focused position and provide info
@@ -37,19 +36,15 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 { duration: 2 }
             );
 
-            // Setting variable to be passed allowing access to CSS classes where 'activeBus.status' contains a space
+            // Setting busColor variable depending no current bus status
             if (activeBus.status === "On Time") {
-                activeBusStatus = "ontime";
                 busColor = colors.ontime;
             } else if (activeBus.status === "Pre Departed") {
-                activeBusStatus = "predeparted";
                 busColor = colors.predeparted;
             } else if (activeBus.status === "Delayed") {
-                activeBusStatus = "delayed";
                 busColor = colors.delayed;
             }
             else {
-                activeBusStatus = "completed";
                 busColor = colors.completed;
             }
 
