@@ -3,16 +3,16 @@ import Clock from "react-live-clock";
 import "./Header.css";
 //simple function for displaying current time and date
 //formatted to be more legable
-const Datetime = ({ date }) => {
-   console.log(date);
 
-    function isSameDay(d1, d2) {
-        return (
-            d1.getFullYear() === d2.getFullYear() &&
-            d1.getDate() === d2.getDate() &&
-            d1.getMonth() === d2.getMonth()
-        );
-    }
+export const isSameDay = (d1, d2) => {
+    return (
+        d1.getFullYear() === d2.getFullYear() &&
+        d1.getDate() === d2.getDate() &&
+        d1.getMonth() === d2.getMonth()
+    );
+}
+
+const Datetime = ({ date }) => {
 
     return (
         <div className="Clock d-flex flex-column alignjustify-content-center">

@@ -60,6 +60,7 @@ function App() {
     };
 
     const changeDate = (newDate) => {
+        setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
     };
 
