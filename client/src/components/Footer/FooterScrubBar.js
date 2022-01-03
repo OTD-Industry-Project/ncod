@@ -77,24 +77,33 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
   };
 
   useEffect(() => {
-    
+
     if (historyMode && (action === -1 || action === 1)) {
-      
-        if (action === -1) {
-          setValue((oldValue) => oldValue - 60);
-        } else {
-          setValue((oldValue) => oldValue + 60);
-        }
-        setDirection(0);
-    
+
+      if (action === -1) {
+        setValue((oldValue) => oldValue - 60);
+      } else {
+        setValue((oldValue) => oldValue + 60);
+      }
+      setDirection(0);
+
     }
     if (play && historyMode) {
-  
+
       const interval = setInterval(() => {
         setValue((oldValue) => oldValue + 5);
       }, 500);
       return () => clearInterval(interval);
-    } 
+    }
+
+    // temporary for now, need to move in real time, minute by minute
+    if (play) {
+      const interval = setInterval(() => {
+        setValue((oldValue) => oldValue + 1);
+      }, 60000);
+      return () => clearInterval(interval);
+    }
+
   });
 
   return (
@@ -104,7 +113,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
         min={0}
         step={5} //5 minutes
         max={1440} //total minutes per 24 hours
-        defaultValue={value} 
+        defaultValue={value}
         valueLabelFormat={valuetext}
         marks={marks}
         valueLabelDisplay="auto"
