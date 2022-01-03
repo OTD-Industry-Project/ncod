@@ -17,15 +17,13 @@ function HistoryToggle({ changeDate }) {
         }
     };
 
-    const onTrigger = (d, reset) => {
-        
+    const onTrigger = (date, reset) => {
+        setStartDate(date);
 
         if (reset) {
             changeDate(new Date());
-            setStartDate(new Date());
         } else {
-            changeDate(d);
-            setStartDate(d);
+            changeDate(date);
         }
     };
 
@@ -58,7 +56,7 @@ function HistoryToggle({ changeDate }) {
                 className={checked ? "date-picker" : "date-picker d-none" }
                 selected={startDate}
                 onChange={(date) => {
-                    onTrigger(date, !checked);
+                    onTrigger(date, false);
                 }}
                 dateFormat="dd/MM/yyyy"
                 peekNextMonth

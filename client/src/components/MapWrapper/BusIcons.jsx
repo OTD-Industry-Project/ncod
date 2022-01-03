@@ -15,6 +15,7 @@ const BusIcons = (props) => {
     var schedule = null
     var name = ''
     var busColor
+    
     switch (props.type) {
         // ADD IN A COLOUR 
         case 'predeparted':
