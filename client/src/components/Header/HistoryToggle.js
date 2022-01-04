@@ -5,7 +5,7 @@ import "./Header.css";
 import Switch from "react-switch";
 
 
-function HistoryToggle({ parentCallback }) {
+function HistoryToggle({ changeDate }) {
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -17,13 +17,15 @@ function HistoryToggle({ parentCallback }) {
         }
     };
 
-    const onTrigger = (date, reset) => {
-        setStartDate(date);
+    const onTrigger = (d, reset) => {
+        
 
         if (reset) {
-            parentCallback(null);
+            changeDate(new Date());
+            setStartDate(new Date());
         } else {
-            parentCallback(date);
+            changeDate(d);
+            setStartDate(d);
         }
     };
 
@@ -50,10 +52,13 @@ function HistoryToggle({ parentCallback }) {
                 <span>History</span>
             </label>
             <DatePicker
+                todayButton="Reset"
+                minDate={new Date(2021, 10, 1)} // new Date(year, month (0-11), day)
+                maxDate={new Date()}
                 className={checked ? "date-picker" : "date-picker d-none" }
                 selected={startDate}
                 onChange={(date) => {
-                    onTrigger(date, false);
+                    onTrigger(date, !checked);
                 }}
                 dateFormat="dd/MM/yyyy"
                 peekNextMonth

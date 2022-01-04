@@ -7,11 +7,6 @@ CREATE DATABASE test;
 
 \c test
 
--- Install Extensions
-
-CREATE EXTENSION PostGIS; 
-CREATE EXTENSION pgRouting;
-
 --Create Tables
 
 CREATE TABLE IF NOT EXISTS ADDRESS (
@@ -19,29 +14,16 @@ CREATE TABLE IF NOT EXISTS ADDRESS (
   addr_Name VARCHAR(100),
   addr_Lat DECIMAL(11,6),
   addr_Long DECIMAL(11,6),
-  addr_Location GEOGRAPHY(POINT,4326) GENERATED ALWAYS AS(ST_SetSRID(ST_MakePoint(addr_Long, addr_Lat), 4326)) STORED,
   CONSTRAINT PK_ADDRESS PRIMARY KEY (addr_ID)
 );
 
 CREATE TABLE IF NOT EXISTS VEHICLE (
   vehicle_id INT NOT NULL, 
-  display_name VARCHAR(10) NOT NULL, 
+  display_name VARCHAR(10), 
   rego_plate VARCHAR(8), 
   capacity INT, 
   facilities VARCHAR(255),
   CONSTRAINT PK_VEHICLE PRIMARY KEY (vehicle_id)
-);
-
-CREATE TABLE IF NOT EXISTS HISTORY (
-  vehicle_id INT NOT NULL, 
-  time_stamp timestamp without time ZONE NOT NULL, 
-  latitude DECIMAL(11,6), 
-  longitude DECIMAL(11,6), 
-  ignition BOOLEAN, 
-  speed DECIMAL(11,6), 
-  bearing VARCHAR(20),
-  CONSTRAINT PK_HISTORY PRIMARY KEY ( vehicle_id, time_stamp ),
-  CONSTRAINT FK_VEHICLE FOREIGN KEY (vehicle_id) REFERENCES VEHICLE(vehicle_id)
 );
 
 CREATE TABLE IF NOT EXISTS JOB (
@@ -53,13 +35,24 @@ CREATE TABLE IF NOT EXISTS JOB (
   pickup_id INT,
   destination_time time without time zone,
   destination_id INT,
-  vehicle_to_stay BOOLEAN NOT NULL, 
-  single_journey BOOLEAN NOT NULL, 
-  empty_run BOOLEAN NOT NULL,
+  empty_run BOOLEAN,
   req_facilities VARCHAR(255),  
   routing_info TEXT,
   CONSTRAINT PK_JOB PRIMARY KEY ( job_id ),
   CONSTRAINT FK_VEHICLE FOREIGN KEY (vehicle_id) REFERENCES VEHICLE(vehicle_id),
   CONSTRAINT FK_PICKUP FOREIGN KEY (pickup_id) REFERENCES ADDRESS(addr_ID),
   CONSTRAINT FK_DESTINATION FOREIGN KEY (destination_id) REFERENCES ADDRESS(addr_ID)
+);
+
+CREATE TABLE IF NOT EXISTS HISTORY (
+  vehicle_id INT NOT NULL, 
+  time_stamp timestamp without time ZONE NOT NULL,
+  job_id INT NOT NULL, 
+  latitude DECIMAL(11,6), 
+  longitude DECIMAL(11,6), 
+  ignition BOOLEAN, 
+  speed DECIMAL(11,6), 
+  CONSTRAINT PK_HISTORY PRIMARY KEY ( vehicle_id, time_stamp ),
+  CONSTRAINT FK_VEHICLE FOREIGN KEY (vehicle_id) REFERENCES VEHICLE(vehicle_id),
+  CONSTRAINT FK_JOB FOREIGN KEY (job_id) REFERENCES JOB(job_id)
 );

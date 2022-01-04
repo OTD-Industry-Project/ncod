@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiHome, FiChevronLeft, FiCompass, FiSettings } from "react-icons/fi";
+import { FiHome, FiChevronLeft, FiCompass, FiSettings, FiList } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";
 
 import "./Sidebar.css";
@@ -31,7 +31,7 @@ const Sidetabs = (props) => {
                 <Tab id="/#schedule" header="Overview" icon={<FiHome />}>
                     {props.children[0]}
                 </Tab>
-                <Tab id="/#spare" header="Schedule" icon={<FiCompass />}>
+                <Tab id="/#spare" header="Schedule" icon={<FiList />}>
                     {props.children[1]}
                 </Tab>
                 <Tab

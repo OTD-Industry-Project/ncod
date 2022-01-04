@@ -8,35 +8,61 @@ import {
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
-const EmptyBus = ({ schedule, colors }) => {
+const BusIcons = (props) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls
-    var empty = schedule.filter((buses) => buses.status === "Completed");
+    var schedule = null
+    var name = ''
+    var busColor
+    
+    switch (props.type) {
+        // ADD IN A COLOUR 
+        case 'predeparted':
+            schedule = props.schedule.filter((buses) => buses.status === "Pre Departed");
+            busColor=props.colors.predeparted
+            name='predeparted'
+            break;
+        case 'ontime':
+            schedule = props.schedule.filter((buses) => buses.status === "On Time");
+            busColor=props.colors.ontime
+            name='ontime'
+            break;
+        case 'delayed':
+            schedule = props.schedule.filter((buses) => buses.status === "Delayed");
+            busColor=props.colors.delayed
+            name='delayed'
+            break;
+        case 'completed':
+            schedule = props.schedule.filter((buses) => buses.status === "Completed");
+            busColor=props.colors.completed
+            name='completed'
+            break;
+    }
 
     return (
         <>
             {/* looping over the pickup points, and plotting with a coloured circle */}
-            <LayersControl.Overlay checked name={"Empty"}>
+            <LayersControl.Overlay checked name={name}>
                 <FeatureGroup>
-                    {empty.map(
+                    {schedule.map(
                         (buses) => (
                             (icon = divIcon({
-                                className: "marker",
-                                html: `<div style="background-color: ${colors.completed};"><span>${buses.VehicleID}</span>`,
+                                className: "marker "+name,
+                                html: `<div style="background-color: ${busColor};"><span>${buses.VehicleID}</span>`,
                             })),
                             (
                                 <Marker
                                     icon={icon}
                                     key={buses.uid}
-                                    eventKey={empty.uid}
+                                    eventKey={schedule.uid}
                                     position={[
                                         buses.PickupPointLatitude,
                                         buses.PickupPointLongitude,
                                     ]}
                                     /* Using event handlers to access mouseover/out features for hover info
-                               to be defined inside the Popup tags  */
-                                    eventHandlers={{
+                                   to be defined inside the Popup tags  */
+                                   eventHandlers={{
                                         mouseover: (event) =>
                                             event.target.openPopup(),
                                         mouseout: (event) =>
@@ -60,4 +86,4 @@ const EmptyBus = ({ schedule, colors }) => {
 
 };
 
-export default EmptyBus;
+export default BusIcons;

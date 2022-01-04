@@ -10,16 +10,12 @@ import {
     useMap,
 } from "react-leaflet";
 import { divIcon } from "leaflet";
-import Delayed from "./Delayed";
-import EmptyBus from "./EmptyBus.jsx";
-import PreDeparted from "./PreDeparted";
-import OnTime from "./OnTime";
+import BusIcons from "./BusIcons";
 
 const Layers = ({ schedule, activeBus, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
-    // Initialise empty varibable to contain active bus status
-    var activeBusStatus;
+    // Variable for icon colors
     var busColor;
 
     // Clicking an item on the sidebar, will change focused position and provide info
@@ -40,19 +36,15 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 { duration: 2 }
             );
 
-            // Setting variable to be passed allowing access to CSS classes where 'activeBus.status' contains a space
+            // Setting busColor variable depending no current bus status
             if (activeBus.status === "On Time") {
-                activeBusStatus = "ontime";
                 busColor = colors.ontime;
             } else if (activeBus.status === "Pre Departed") {
-                activeBusStatus = "predeparted";
                 busColor = colors.predeparted;
             } else if (activeBus.status === "Delayed") {
-                activeBusStatus = "delayed";
                 busColor = colors.delayed;
             }
             else {
-                activeBusStatus = "completed";
                 busColor = colors.completed;
             }
 
@@ -115,10 +107,10 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
-                <PreDeparted schedule={schedule} colors={colors} />
-                <OnTime schedule={schedule} colors={colors} />
-                <Delayed schedule={schedule} colors={colors} />
-                <EmptyBus schedule={schedule} colors={colors} />
+                <BusIcons schedule={schedule} type={'predeparted'} colors={colors} />
+                <BusIcons schedule={schedule} type={'ontime'} colors={colors} />
+                <BusIcons schedule={schedule} type={'delayed'} colors={colors} />
+                <BusIcons schedule={schedule} type={'completed'} colors={colors} />
             </LayersControl>
         </>
     );

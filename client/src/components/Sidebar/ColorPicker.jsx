@@ -8,15 +8,15 @@ const ColorPicker = ({ k, color, showColorPicker, changeColors }) => {
         <>
             <CirclePicker
                 width="364px"
-                color={thisColor}
+                color={color}
                 colors={[
                     "#1E90FF",
-                    "#8ED1FC",
+                    "#85C0F9",
                     "#228B22",
                     "#00D084",
                     "#FF4500",
-                    "#FF9800",
-                    "#FFEB3B",
+                    "#F5793A",
+                    "#C9B458",
                     "#A9A9A9",
                 ]}
                 onChange={(updatedColor) => {

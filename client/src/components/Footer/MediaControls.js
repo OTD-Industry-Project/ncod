@@ -8,18 +8,23 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useTheme } from '@mui/material/styles';
 //function for displaying mnedia controls
 //practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
-function MediaControls() {
+function MediaControls({ handleCallback, setDirection }) {
     const theme = useTheme();
     const [paused, setPaused] = React.useState(true);
 
+    const handleChange = () => {
+        setPaused(!paused);
+        handleCallback(paused);
+    };
+
     return (
         <div>
-            <IconButton aria-label="rewind">
+            <IconButton aria-label="rewind" onClick={() => theme.direction === 'rtl' ? setDirection(1) : setDirection(-1)} >
                 {theme.direction === 'rtl' ? <FastForwardRounded /> : <FastRewindRounded fontSize="large" />}
             </IconButton>
             <IconButton
                 aria-label={paused ? 'play' : 'pause'}
-                onClick={() => setPaused(!paused)}
+                onClick={handleChange}
             >
                 {paused ? (
                     <PlayArrowRounded
@@ -29,7 +34,7 @@ function MediaControls() {
                     <PauseRounded sx={{ fontSize: '3rem' }} />
                 )}
             </IconButton>
-            <IconButton aria-label="forward">
+            <IconButton aria-label="forward" onClick={() => theme.direction === 'rtl' ? setDirection(-1) : setDirection(1)} >
                 {theme.direction === 'rtl' ? <FastRewindRounded /> : <FastForwardRounded fontSize="large" />}
             </IconButton>
         </div>
