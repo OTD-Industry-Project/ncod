@@ -70,8 +70,13 @@ step is how often to set points
 marks are the labeling of regular intervals */
 export default function FooterScrubBar({ play, historyMode, action, setDirection }) {
 
+  
+  function getTimeAsMinutes(date) {
+      return (date.getHours() * 60) + date.getMinutes();
+  }
+  
   //Setting state to use event changes and set new value when slider is moved
-  const [value, setValue] = React.useState(420); //420 = 7am in minutes
+  const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); //420 = 7am in minutes
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -97,10 +102,10 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
     }
 
     // temporary for now, need to move in real time, minute by minute
-    if (play) {
+    if (play && !historyMode) {
       const interval = setInterval(() => {
-        setValue((oldValue) => oldValue + 1);
-      }, 60000);
+        setValue(getTimeAsMinutes(new Date()));
+      }, 1000);
       return () => clearInterval(interval);
     }
 
@@ -117,7 +122,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
         valueLabelFormat={valuetext}
         marks={marks}
         valueLabelDisplay="auto"
-        onChange={handleChange}
+        onChangeCommitted={handleChange}
       />
 
     </Box>
