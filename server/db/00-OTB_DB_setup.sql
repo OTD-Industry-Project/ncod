@@ -1,7 +1,7 @@
 -- Usage: 
---    psql -U <username> -f <C:\some\file\path\ncod\server\db\otd-db.sql>
+--    psql -U <username> -f <C:\some\file\path\ncod\server\db\00-OTB_DB_setup.sql>
 -- or navigate into C:\some\file\path\ncod\server\db\ and run as:
---    psql -U <username> -f ./otd-db.sql
+--    psql -U <username> -f ./00-OTB_DB_setup.sql
 
 CREATE DATABASE test;
 
@@ -10,10 +10,10 @@ CREATE DATABASE test;
 --Create Tables
 
 CREATE TABLE IF NOT EXISTS ADDRESS (
-  addr_ID SERIAL NOT NULL,
-  addr_Name VARCHAR(100),
-  addr_Lat DECIMAL(11,6),
-  addr_Long DECIMAL(11,6),
+  addr_id SERIAL NOT NULL,
+  addr_name VARCHAR(100),
+  addr_lat DECIMAL(11,6),
+  addr_long DECIMAL(11,6),
   CONSTRAINT PK_ADDRESS PRIMARY KEY (addr_ID)
 );
 
