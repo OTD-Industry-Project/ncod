@@ -56,3 +56,8 @@ CREATE TABLE IF NOT EXISTS HISTORY (
   CONSTRAINT FK_VEHICLE FOREIGN KEY (vehicle_id) REFERENCES VEHICLE(vehicle_id),
   CONSTRAINT FK_JOB FOREIGN KEY (job_id) REFERENCES JOB(job_id)
 );
+
+\i 01-address_insert.sql
+\i 02-vehicles_insert.sql
+\i 03-jobs_insert.sql
+\i 04-history_insert.sql
