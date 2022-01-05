@@ -35,11 +35,16 @@ const getAddressID = async (req, res) => {
 
 const getSchedule = async (req, res) => {
     try {
-        const results = await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job, c.pickup_time, pick.addr_name, pick.addr_lat, pick.addr_long, 
-        c.destination_time, dest.addr_name, dest.addr_lat, dest.addr_long, c.empty_run, c.req_facilities, c.routing_info 
-        FROM job C 
-        INNER JOIN address pick ON (c.pickup_id = pick.addr_id) 
-        right JOIN address dest ON (c.destination_id = dest.addr_id);`);
+        const results = await db.query(
+            `SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
+            c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
+            c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
+            c.empty_run, c.req_facilities, c.routing_info
+            FROM job c
+            
+            INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
+            INNER JOIN address dest ON (c.destination_id = dest.addr_id)
+            ;`);
         console.log(results.rows);
         res.status(200).json({
             status: "success",
