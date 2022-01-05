@@ -118,10 +118,12 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        /* fetch("/api")
+        fetch("/api/schedule")
             .then((res) => res.json())
-            .then((data) => setData(data.message)); */
+            .then((data) => setData(data));
     }, []);
+
+    console.log(data);
 
     useEffect(() => {
         const existingColorScheme = localStorage.getItem("color-scheme");
