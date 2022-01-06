@@ -12,6 +12,7 @@ import { processedData } from "./data/DataHelper";
 import SimpleSlide from "./components/Sidebar/SimpleSlide";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
+import Loading from "./components/Loading";
 
 /* 
       This is the big picture view of the layout
@@ -118,9 +119,11 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        /* fetch("/api")
+        fetch("/api/schedule")
             .then((res) => res.json())
-            .then((data) => setData(data.message)); */
+            .then((data) => setData(data.data));
+
+        
     }, []);
 
     useEffect(() => {
@@ -152,6 +155,9 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
+            {console.log('schedule: ' + JSON.stringify(schedule, null, 2))}
+            {console.log('fetched sche: ' + JSON.stringify(data, null, 2))}
+
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -177,10 +183,14 @@ function App() {
                                 colors={colors}
                                 changeColors={changeColors}
                             >
-                                <Table
-                                    schedule={schedule}
-                                    activeCallBack={activeCallBack}
-                                />
+                                {data !== null ? (
+                                    <Table
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                    />
+                                ) : (
+                                    <Loading />
+                                )}
 
                                 <MUITable
                                     schedule={schedule}
@@ -191,6 +201,7 @@ function App() {
                         </div>
 
                         <MapWrapper
+                            data={data}
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}

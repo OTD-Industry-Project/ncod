@@ -1,6 +1,7 @@
 const db = require("../db");
+const dataHelper = require("../data/DataHelper");
 
-const getAllAddress = async(req, res) => {
+const getAllAddress = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM address");
         console.log(results.rows);
@@ -11,15 +12,17 @@ const getAllAddress = async(req, res) => {
                 address: results.rows,
             },
         });
-    } 
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
 };
 
-const getAddressID = async(req, res) => {
+const getAddressID = async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM address WHERE addr_id = $1", [req.params.id]);
+        const results = await db.query(
+            "SELECT * FROM address WHERE addr_id = $1",
+            [req.params.id]
+        );
         console.log(results.rows[0]);
         res.status(200).json({
             status: "success",
@@ -27,20 +30,41 @@ const getAddressID = async(req, res) => {
                 address: results.rows[0],
             },
         });
-    } 
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
 };
 
+const getSchedule = async (req, res) => {
+    try {
+        const results =
+            await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
+        c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
+        c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
+        c.empty_run, c.req_facilities, c.routing_info
+        FROM job C
+        
+        INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
+        INNER JOIN address dest ON (c.destination_id = dest.addr_id)
+        
+        ;`);
+        // console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                schedule: results.rows,
+            },
+        });
 
-
-
-
-
-
+        dataHelper.writeScheduleToFile(results.rows);
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 module.exports = {
-    getAllAddress, 
-    getAddressID
+    getAllAddress,
+    getAddressID,
+    getSchedule,
 };
