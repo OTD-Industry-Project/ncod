@@ -12,7 +12,8 @@ const getAllAddress = async (req, res) => {
                 address: results.rows,
             },
         });
-    } catch (err) {
+    }
+    catch (err) {
         console.log(err);
     }
 };

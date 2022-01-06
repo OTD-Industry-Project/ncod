@@ -126,6 +126,8 @@ function App() {
         
     }, []);
 
+    console.log(data);
+
     useEffect(() => {
         const existingColorScheme = localStorage.getItem("color-scheme");
 

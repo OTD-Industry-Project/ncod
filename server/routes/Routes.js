@@ -11,5 +11,4 @@ router.get("/api/address/:id", apiController.getAddressID);
 router.get("/api/schedule", apiController.getSchedule);
 
 
-
 module.exports = router;

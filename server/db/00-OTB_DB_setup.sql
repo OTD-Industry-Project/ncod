@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS JOB (
   vehicle_id INT, 
   driver_id VARCHAR(50), 
   description_of_job VARCHAR(255),
-  pickup_time time without time zone,
+  pickup_time TIMESTAMP WITHOUT TIME ZONE,
   pickup_id INT,
-  destination_time time without time zone,
+  destination_time TIMESTAMP WITHOUT TIME ZONE,
   destination_id INT,
   empty_run BOOLEAN,
   req_facilities VARCHAR(255),  
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS JOB (
 
 CREATE TABLE IF NOT EXISTS HISTORY (
   vehicle_id INT NOT NULL, 
-  time_stamp timestamp without time ZONE NOT NULL,
+  time_stamp TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   job_id INT NOT NULL, 
   latitude DECIMAL(11,6), 
   longitude DECIMAL(11,6), 
