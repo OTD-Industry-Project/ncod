@@ -118,9 +118,9 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        fetch("/api/schedule")
-            .then((res) => res.json())
-            .then((data) => setData(data));
+        // fetch("/api/schedule")
+        //     .then((res) => res.json())
+        //     .then((data) => setData(data));
     }, []);
 
     console.log(data);
