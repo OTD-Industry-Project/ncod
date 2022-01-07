@@ -26,7 +26,6 @@ function MapWrapper({ schedule, activeBus, colors, activeCallBack }) {
                     schedule={schedule}
                     activeBus={activeBus}
                     colors={colors}
-                    activeCallBack={activeCallBack}
                 />
             ) : (
                 <Loading center />

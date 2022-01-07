@@ -48,8 +48,6 @@ function App() {
     // Update active bus state
     const activeCallBack = (job_id) => {
         
-        console.log("Bus Clicked");
-
         const index = schedule.findIndex((obj) => obj.job_id === job_id);
          
 
@@ -198,7 +196,6 @@ function App() {
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
-                            activeCallBack={activeCallBack}
                         />
                         
 

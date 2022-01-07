@@ -77,8 +77,6 @@ const BusIcons = (props) => {
                                             event.target.openPopup(),
                                         mouseout: (event) =>
                                             event.target.closePopup(),
-                                        click: () =>
-                                            props.activeCallBack(buses.job_id),
                                     }}
                                 >
                                     <Popup offset={[10, 0]}>

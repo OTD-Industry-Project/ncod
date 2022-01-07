@@ -11,7 +11,7 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors, activeCallBack }) => {
+const Layers = ({ schedule, activeBus, colors }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
@@ -107,25 +107,17 @@ const Layers = ({ schedule, activeBus, colors, activeCallBack }) => {
                     schedule={schedule}
                     type={"predeparted"}
                     colors={colors}
-                    activeCallBack={activeCallBack}
                 />
-                <BusIcons
-                    schedule={schedule}
-                    type={"ontime"}
-                    colors={colors}
-                    activeCallBack={activeCallBack}
-                />
+                <BusIcons schedule={schedule} type={"ontime"} colors={colors} />
                 <BusIcons
                     schedule={schedule}
                     type={"delayed"}
                     colors={colors}
-                    activeCallBack={activeCallBack}
                 />
                 <BusIcons
                     schedule={schedule}
                     type={"completed"}
                     colors={colors}
-                    activeCallBack={activeCallBack}
                 />
             </LayersControl>
         </>
