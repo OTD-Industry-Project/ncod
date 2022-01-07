@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS ADDRESS (
 CREATE TABLE IF NOT EXISTS VEHICLE (
   vehicle_id INT NOT NULL, 
   display_name VARCHAR(10), 
-  rego_plate VARCHAR(8), 
-  capacity INT, 
+  rego_plate VARCHAR(8),  
   facilities VARCHAR(255),
   CONSTRAINT PK_VEHICLE PRIMARY KEY (vehicle_id)
 );
