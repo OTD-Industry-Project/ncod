@@ -67,7 +67,7 @@ const GetGPSVehicles = async (req, res) => {
 
 const GetScheduledActivity = async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM api WHERE DATE(endtime)='2022/01/18'"); // Jan 18 for demo, DATE(NOW()) for jobs ending current date
+        const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");
         console.log(results.rows);
         res.status(200).json({
             status: "success",
