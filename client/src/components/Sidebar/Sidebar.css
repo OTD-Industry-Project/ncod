@@ -42,7 +42,7 @@ tbody > tr:hover {
 .info-card {
     padding: 0.6rem 0.3rem;
     width: 100;
-    color: white ;
+    color: white;
 }
 .info-card > table,
 .info-card > table > thead {

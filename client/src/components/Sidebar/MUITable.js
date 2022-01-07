@@ -43,6 +43,13 @@ class MUITable extends React.Component {
                 },
             },
             {
+                name: "Job ID",
+                options: {
+                    filter: false,
+                    display: false,
+                },
+            },
+            {
                 name: "Status",
                 options: {
                     filter: true,
@@ -83,6 +90,7 @@ class MUITable extends React.Component {
             bus.uid = index;
             data.push([
                 bus.uid,
+                bus.job_id,
                 bus.status,
                 bus.vehicle_id,
                 bus.destination,
@@ -108,7 +116,7 @@ class MUITable extends React.Component {
             rowsPerPage: 100,
             onRowClick: (rowData, rowMeta) => {
                 this.handleEvent(rowMeta.rowIndex);
-                activeCallBack(rowData[0]);
+                activeCallBack(rowData[1]);
             },
             selectableRowsHideCheckboxes: true,
             expandableRowsHeader: false,

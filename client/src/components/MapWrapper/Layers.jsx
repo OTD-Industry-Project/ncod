@@ -13,6 +13,7 @@ import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
 const Layers = ({ schedule, activeBus, colors }) => {
+    console.log(activeBus);
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors

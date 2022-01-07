@@ -55,7 +55,7 @@ const InfoCard = ({ info, colors }) => {
     }
 
     return (
-        <div className="container-fljob_id info-card" >
+        <div className="container-fljob_id info-card" style={{backgroundColor: color}} >
             <div className="d-flex justify-content-between">
                 <h6>
                     Driver: <strong>{driver_id}</strong>
@@ -85,14 +85,16 @@ const InfoCard = ({ info, colors }) => {
                     </tr>
                     <tr>
                         <th scope="row">Times</th>
-                        <td>{pickup_time}</td>
-                        <td>{destination_time}</td>
+                        <td>{getTime(new Date(pickup_time))}</td>
+                        <td>{getTime(new Date(destination_time))}</td>
                     </tr>
+                    { description_of_job && (
                     <tr>
                         <th scope="row">Info</th>
                         <td>{description_of_job}</td>
                         <td>{description_of_job}</td>
                     </tr>
+                    )}
                     <tr>
                         <th scope="row">Lat</th>
                         <td>{pickup_latitude}</td>
