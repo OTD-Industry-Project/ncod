@@ -1,23 +1,6 @@
 const db = require("../db");
 const dataHelper = require("../data/DataHelper");
 
-const getAllAddress = async (req, res) => {
-    try {
-        const results = await db.query("SELECT * FROM address");
-        console.log(results.rows);
-        res.status(200).json({
-            status: "success",
-            results: results.rows.length,
-            data: {
-                address: results.rows,
-            },
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-};
-
 const getAddressID = async (req, res) => {
     try {
         const results = await db.query(
@@ -44,12 +27,8 @@ const getSchedule = async (req, res) => {
         c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
         c.empty_run, c.req_facilities, c.routing_info
         FROM job C
-        
         INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
-        
-        
-
         ;`);
         // console.log(results.rows);
         res.status(200).json({
@@ -88,7 +67,7 @@ const GetGPSVehicles = async (req, res) => {
 
 const GetScheduledActivity = async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM api");
+        const results = await db.query("SELECT * FROM api WHERE DATE(endtime)='2022/01/18'"); // Jan 18 for demo, DATE(NOW()) for jobs ending current date
         console.log(results.rows);
         res.status(200).json({
             status: "success",
@@ -105,7 +84,6 @@ const GetScheduledActivity = async (req, res) => {
 
 
 module.exports = {
-    getAllAddress,
     getAddressID,
     getSchedule,
     GetGPSVehicles,
