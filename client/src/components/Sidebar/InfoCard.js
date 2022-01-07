@@ -10,9 +10,6 @@ const getRuntime = (pickup, dest) => {
     const pickupMinutes = (t1.getHours() * 60) + t1.getMinutes();
     const destMinutes = (t2.getHours() * 60) + t2.getMinutes();
 
-    console.log(pickupMinutes);
-    console.log(destMinutes);
-
     return destMinutes - pickupMinutes;
 }
 
@@ -28,14 +25,11 @@ const InfoCard = ({ info, colors }) => {
         destination_latitude,
         destination_longitude,
         destination_time,
-        vehicle_id,
         driver_id,
-        job_id,
         status,
     } = info;
 
     let color;
-    console.log(colors);
 
     switch (status) {
         case 'On Time':
@@ -73,9 +67,11 @@ const InfoCard = ({ info, colors }) => {
 
             <table className="table mt-3">
                 <thead>
-                    <th scope="col"></th>
-                    <th scope="col">Pickup</th>
-                    <th scope="col">Destination</th>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Pickup</th>
+                        <th scope="col">Destination</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>

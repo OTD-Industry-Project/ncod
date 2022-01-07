@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import "./Sidebar.css";
 import { Filter } from "./Filter";
@@ -41,9 +41,10 @@ export const Table = ({ schedule, activeCallBack }) => {
     const NUM_OF_VEHICLES = schedule.length;
     
     // Keep track of last updated. Will be more useful when we are pulling live GPS data
+    // eslint-disable-next-line no-unused-vars
     const [lastUpdated, setLastUpdated] = useState(new Date());
     const [selectedRow, setSelectedRow] = useState(-1);
-
+    
     const handleEvent = (row, i) => {
         
         activeCallBack(row.job_id);
@@ -61,7 +62,11 @@ export const Table = ({ schedule, activeCallBack }) => {
     
     // Memoize the columns and data for the table. 
     // This is essentially caching all the data, so react doesn't need to rebuild the data and columns on every refresh.
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const columns = useMemo(() => COLUMNS, []);
+    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const data = useMemo(() => schedule.slice(0, NUM_OF_VEHICLES), []);
 
     // Create a table instance with useTable hook provided by the React-Table package

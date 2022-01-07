@@ -6,7 +6,7 @@ import Loading from "../Loading";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-function MapWrapper({ schedule, activeBus, colors }) {
+function MapWrapper({ schedule, activeBus, colors, activeCallBack }) {
     return (
         <MapContainer
             className="MapWrapper"
@@ -26,6 +26,7 @@ function MapWrapper({ schedule, activeBus, colors }) {
                     schedule={schedule}
                     activeBus={activeBus}
                     colors={colors}
+                    activeCallBack={activeCallBack}
                 />
             ) : (
                 <Loading center />

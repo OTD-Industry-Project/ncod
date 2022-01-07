@@ -3,7 +3,6 @@ import {
     AttributionControl,
     TileLayer,
     LayersControl,
-    FeatureGroup,
     Popup,
     ZoomControl,
     Marker,
@@ -12,8 +11,7 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors }) => {
-    console.log(activeBus);
+const Layers = ({ schedule, activeBus, colors, activeCallBack }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
@@ -109,17 +107,25 @@ const Layers = ({ schedule, activeBus, colors }) => {
                     schedule={schedule}
                     type={"predeparted"}
                     colors={colors}
+                    activeCallBack={activeCallBack}
                 />
-                <BusIcons schedule={schedule} type={"ontime"} colors={colors} />
+                <BusIcons
+                    schedule={schedule}
+                    type={"ontime"}
+                    colors={colors}
+                    activeCallBack={activeCallBack}
+                />
                 <BusIcons
                     schedule={schedule}
                     type={"delayed"}
                     colors={colors}
+                    activeCallBack={activeCallBack}
                 />
                 <BusIcons
                     schedule={schedule}
                     type={"completed"}
                     colors={colors}
+                    activeCallBack={activeCallBack}
                 />
             </LayersControl>
         </>

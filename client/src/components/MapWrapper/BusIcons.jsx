@@ -59,6 +59,7 @@ const BusIcons = (props) => {
                             (icon = divIcon({
                                 className: "marker " + name,
                                 html: `<div style="background-color: ${busColor};"><span>${buses.vehicle_id}</span>`,
+                                // eslint-disable-next-line no-sequences
                             })),
                             (
                                 <Marker
@@ -76,6 +77,8 @@ const BusIcons = (props) => {
                                             event.target.openPopup(),
                                         mouseout: (event) =>
                                             event.target.closePopup(),
+                                        click: () =>
+                                            props.activeCallBack(buses.job_id),
                                     }}
                                 >
                                     <Popup offset={[10, 0]}>
