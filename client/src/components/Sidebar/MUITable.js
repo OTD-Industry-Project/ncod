@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
 import InfoCard from "./InfoCard";
-
+import { getTime } from "./Table";
 class MUITable extends React.Component {
     constructor(props) {
         super(props);
@@ -66,9 +66,7 @@ class MUITable extends React.Component {
                 name: "Times",
                 options: {
                     filter: false,
-                    
-                    
-                },
+                }
             },
             {
                 name: "ETA",
@@ -81,14 +79,15 @@ class MUITable extends React.Component {
 
         const data = [];
 
-        schedule.forEach((bus) => {
+        schedule.forEach((bus, index) => {
+            bus.uid = index;
             data.push([
                 bus.uid,
                 bus.status,
-                bus.VehicleID,
-                bus.Destination,
-                bus.PickupDateTime,
-                bus.eta,
+                bus.vehicle_id,
+                bus.destination,
+                getTime(bus.pickup_time),
+                getTime(bus.destination_time),
             ]);
         });
 

@@ -48,6 +48,8 @@ const getSchedule = async (req, res) => {
         INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
         
+        
+
         ;`);
         // console.log(results.rows);
         res.status(200).json({
@@ -69,3 +71,6 @@ module.exports = {
     getAddressID,
     getSchedule,
 };
+
+
+

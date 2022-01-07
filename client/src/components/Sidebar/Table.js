@@ -1,12 +1,41 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import "./Sidebar.css";
-
-
-import { COLUMNS } from "./Columns";
 import { Filter } from "./Filter";
 
+export const getTime = (value) => {
+    const time = new Date(value);
+    return <>{time.toLocaleTimeString([], { hour12: false })}</>;
+};
+
 export const Table = ({ schedule, activeCallBack }) => {
+    
+    
+    const COLUMNS = [
+        {
+            Header: "Status",
+            accessor: 'status',
+            
+        },
+        {
+            Header: "ID",
+            accessor: "vehicle_id",
+        },
+        {
+            Header: "Dest.",
+            accessor: "destination",
+        },
+        {
+            Header: "From",
+            accessor: "pickup_time",
+            Cell: ({ cell: { value } }) => getTime(value),
+        },
+        {
+            Header: "To",
+            accessor: "destination_time",
+            Cell: ({ cell: { value } }) => getTime(value),
+        },
+    ];
     
     // Load all vehicles to sidebar
     const NUM_OF_VEHICLES = schedule.length;
@@ -17,7 +46,7 @@ export const Table = ({ schedule, activeCallBack }) => {
 
     const handleEvent = (row, i) => {
         
-        activeCallBack(row.uid);
+        activeCallBack(row.job_id);
         
         if (i === selectedRow) {
             setSelectedRow(-1);

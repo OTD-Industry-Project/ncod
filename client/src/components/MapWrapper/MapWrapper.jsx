@@ -6,7 +6,7 @@ import Loading from "../Loading";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-function MapWrapper({ schedule, activeBus, colors, data }) {
+function MapWrapper({ schedule, activeBus, colors }) {
     return (
         <MapContainer
             className="MapWrapper"
@@ -21,7 +21,7 @@ function MapWrapper({ schedule, activeBus, colors, data }) {
                 [-48.102563, 164.401997],
             ]}
         >
-            {data !== null ? (
+            {schedule !== null ? (
                 <Layers
                     schedule={schedule}
                     activeBus={activeBus}

@@ -13,32 +13,13 @@ import SimpleSlide from "./components/Sidebar/SimpleSlide";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
 import Loading from "./components/Loading";
-
-/* 
-      This is the big picture view of the layout
-                                COL
-             --------------------------------------------
-         ROW |                                          |
-             |               Header                     |
-             --------------------------------------------
-             |            |                             |
-             |            |                             |
-             |     Side   |                             |
-         ROW |     Bar    |     Map Section             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             --------------------------------------------
-                  COL                 COL
-*/
+import { calculatedSchedule } from "./components/Sidebar/ScheduleHelper";
 
 function App() {
     // Commented out fetching to work on layout
 
-    const [data, setData] = useState(null);
-    const [schedule, setSchedule] = useState(processedData());
+    
+    const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [tableType, setTableType] = useState(true);
     const [theme, setTheme] = useState(false);
@@ -65,17 +46,17 @@ function App() {
         setDate(newDate);
     };
 
-    const activeCallBack = (uid) => {
-        const index = schedule.findIndex((obj) => obj.uid === uid);
-        let newSchedule = schedule;
+    const activeCallBack = (job_id) => {
+        const index = schedule.findIndex((obj) => obj.job_id === job_id);
+         
 
-        if (activeBus !== null && activeBus.uid === uid) {
+        if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
             console.log("Row is unselected and Active bus is set back to null");
         } else {
-            setActiveBus(newSchedule[index]);
+            setActiveBus(schedule[index]);
         }
-        // setSchedule(newSchedule);
+
     };
 
     const switchTheme = () => {
@@ -121,12 +102,10 @@ function App() {
 
         fetch("/api/schedule")
             .then((res) => res.json())
-            .then((data) => setData(data.data));
-
+            .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
+        
         
     }, []);
-
-    console.log(data);
 
     useEffect(() => {
         const existingColorScheme = localStorage.getItem("color-scheme");
@@ -154,12 +133,9 @@ function App() {
         }
     }, []);
 
-    return (
+    return schedule && (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-            {console.log('schedule: ' + JSON.stringify(schedule, null, 2))}
-            {console.log('fetched sche: ' + JSON.stringify(data, null, 2))}
-
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -185,7 +161,7 @@ function App() {
                                 colors={colors}
                                 changeColors={changeColors}
                             >
-                                {data !== null ? (
+                                {schedule !== null ? (
                                     <Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
@@ -193,21 +169,23 @@ function App() {
                                 ) : (
                                     <Loading />
                                 )}
-
+                                {schedule && (
                                 <MUITable
                                     schedule={schedule}
                                     activeCallBack={activeCallBack}
                                     colors={colors}
                                 />
+                                )}
                             </Sidetabs>
                         </div>
 
+                        
                         <MapWrapper
-                            data={data}
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
                         />
+                        
 
                         <div className="Footer">
                             <Footer
@@ -219,6 +197,7 @@ function App() {
                     </div>
                 </div>
             </>
+
         </ThemeProvider>
     );
 }
