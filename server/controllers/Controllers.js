@@ -59,14 +59,47 @@ const getSchedule = async (req, res) => {
 };
 
 
+//API Calls
 
+const GetGPSVehicles = async (req, res) => {
+    try {
+        const results = await db.query("SELECT * FROM vehicle");
+        console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                address: results.rows,
+            },
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
-
+const GetScheduledActivity = async (req, res) => {
+    try {
+        const results = await db.query("SELECT * FROM api");
+        console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            data: {
+                schedule: results.rows,
+            },
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
 
 
 module.exports = {
     getAllAddress,
     getAddressID,
-    getSchedule
+    getSchedule,
+    GetGPSVehicles,
+    GetScheduledActivity
 };
