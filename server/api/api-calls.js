@@ -18,6 +18,7 @@ const GetGPSVehicles = async (req, res) => {
     }
 };
 
+
 const GetScheduledActivity = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");
@@ -34,7 +35,7 @@ const GetScheduledActivity = async (req, res) => {
             scheduledActivity.push(row);
         })
 
-
+        //looping over schedule, inserting new pickup address in database if not exist, returning matching ID
         for (i = 0; i < scheduledActivity.length; i++) {
             console.log("\n"+scheduledActivity[i].startlocation);
             const pickupId = await db.query(`INSERT INTO address (addr_name, addr_lat, addr_long)
@@ -44,9 +45,13 @@ const GetScheduledActivity = async (req, res) => {
         LIMIT 1 RETURNING addr_id;
         SELECT addr_id from address where addr_name ='${scheduledActivity[i].startlocation}';`);
 
-            console.log(pickupId[1].rows);
+            var {rows: [{addr_id}]} = pickupId[1];
+            console.log(addr_id);
+            await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
         }
 
+
+         //looping over schedule, inserting new destination address in database if not exist, returning matching ID
         for (i = 0; i < scheduledActivity.length; i++) {
             console.log("\n"+scheduledActivity[i].endlocation);
             const destId = await db.query(`INSERT INTO address (addr_name, addr_lat, addr_long)
@@ -56,7 +61,8 @@ const GetScheduledActivity = async (req, res) => {
         LIMIT 1 RETURNING addr_id;
         SELECT addr_id from address where addr_name ='${scheduledActivity[i].endlocation}';`);
 
-            console.log(destId[1].rows);
+            var {rows: [{addr_id}]} = destId[1];
+            console.log(addr_id);
         }
 
     }
