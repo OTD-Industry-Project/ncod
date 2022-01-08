@@ -26,4 +26,4 @@
 // SERVER
 /node_modules
 
-/server/data/temp-data.json
+*.json
