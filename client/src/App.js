@@ -101,9 +101,9 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        fetch("/api/schedule")
-            .then((res) => res.json())
-            .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
+        // fetch("/api/schedule")
+        //     .then((res) => res.json())
+        //     .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
             
         fetch("/api/GetScheduledActivity")
             .then((res) => res.json())
