@@ -3,7 +3,6 @@ import {
     AttributionControl,
     TileLayer,
     LayersControl,
-    FeatureGroup,
     Popup,
     ZoomControl,
     Marker,

@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Switch from "react-switch";
 
 const DarkModeToggle = ({ switchTheme, theme }) => {
-    const [checked, setChecked] = useState(theme);
+    
 
     const handleChange = (nextChecked) => {
-        setChecked(nextChecked);
         switchTheme();
     };
-
-    useEffect(() => {
-        setChecked(theme);
-    }, []);
 
     return (
         <div>

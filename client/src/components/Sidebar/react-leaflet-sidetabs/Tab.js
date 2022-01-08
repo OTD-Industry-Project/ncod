@@ -11,6 +11,7 @@ const Tab = props => {
         {props.header}
         <div
           className='sidebar-close'
+          // eslint-disable-next-line jsx-a11y/aria-role
           role='btn'
           onClick={props.onClose}
         >{closeIcon}

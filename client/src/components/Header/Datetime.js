@@ -23,7 +23,7 @@ const Datetime = ({ date }) => {
                         ? "day-date"
                         : "day-date history-date"
                 }
-                date={date}
+                date={date.getTime()}
                 format={"Do MMMM  YYYY"}
             />
         </div>

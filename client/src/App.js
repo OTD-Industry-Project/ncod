@@ -8,20 +8,23 @@ import Sidetabs from "./components/Sidebar/Sidetabs";
 import Footer from "./components/Footer/Footer";
 import MapWrapper from "./components/MapWrapper/MapWrapper.jsx";
 import { useState, useEffect } from "react";
-import { processedData } from "./data/DataHelper";
-import SimpleSlide from "./components/Sidebar/SimpleSlide";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
 import Loading from "./components/Loading";
-import { calculatedSchedule } from "./components/Sidebar/ScheduleHelper";
+import { calculatedSchedule } from "./helpers/ScheduleHelper";
+import * as ROUTES from './constants/routes';
 
 function App() {
-    // Commented out fetching to work on layout
+    
+    /***** Hooks *****/
 
+    // App State
     const [data, setData] = useState(null);
+    const [date, setDate] = useState(new Date());
+    const [play, setPlay] = useState(false);
+    const [historyMode, setHistoryMode] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
-    const [tableType, setTableType] = useState(true);
     const [theme, setTheme] = useState(false);
     const [colors, setColors] = useState({
         predeparted: "#1e90ff",
@@ -29,23 +32,21 @@ function App() {
         delayed: "#ff4500",
         completed: "#a9a9a9",
     });
-    const [date, setDate] = useState(new Date());
-    const [play, setPlay] = useState(false);
-    const [historyMode, setHistoryMode] = useState(false);
 
+    /***** Callbacks *****/
+    
+    // Set Play state
     const handleCallback = (m) => {
         setPlay(m);
     };
 
-    const changeTableType = () => {
-        setTableType((prev) => !prev);
-    };
-
+    // Update Date state
     const changeDate = (newDate) => {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
     };
 
+    // Update active bus state
     const activeCallBack = (job_id) => {
         
         const index = schedule.findIndex((obj) => obj.job_id === job_id);
@@ -60,11 +61,13 @@ function App() {
 
     };
 
+    // Switch theme and set local storage
     const switchTheme = () => {
         localStorage.setItem("theme", theme ? "light" : "dark");
         setTheme((prev) => !prev);
     };
 
+    // Change color scheme and set local storage
     const changeColors = (key, color) => {
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
@@ -84,14 +87,12 @@ function App() {
         }));
     };
 
-    // const handleChange = () => {
-    //     setScheduleOpen((prev) => !prev);
-    //     if (schedule) {
-    //         setActiveBus(null);
-    //     }
-    //   };
 
+    /***** On App load *****/
+
+    // Get/Set theme and color scheme from local storage
     useEffect(() => {
+        
         const existingTheme = localStorage.getItem("theme");
 
         if (existingTheme) {
@@ -101,17 +102,6 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        // fetch("/api/schedule")
-        //     .then((res) => res.json())
-        //     .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
-            
-        fetch("/api/GetScheduledActivity")
-            .then((res) => res.json())
-            .then((data) => setData(data));
-        
-    }, []);
-
-    useEffect(() => {
         const existingColorScheme = localStorage.getItem("color-scheme");
 
         if (existingColorScheme) {
@@ -135,9 +125,27 @@ function App() {
                 localStorage.setItem("color-scheme", JSON.stringify(colors))
             );
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return schedule && (
+
+    // Fetch schedule
+    useEffect(() => {
+        
+                // fetch("/api/schedule")
+        //     .then((res) => res.json())
+        //     .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
+            
+        fetch("/api/GetScheduledActivity")
+            .then((res) => res.json())
+            .then((data) => setData(data));
+        
+
+    }, []);
+
+    
+
+    return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
             {data && console.log(data)}
@@ -147,13 +155,14 @@ function App() {
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
+                            
                             <Header
                                 changeDate={changeDate}
                                 date={date}
-                                changeTableType={changeTableType}
                                 theme={theme}
                                 switchTheme={switchTheme}
                             />
+                            
                         </div>
                     </div>
                     {/* Footer row with one col */}
@@ -170,16 +179,21 @@ function App() {
                                     <Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
+                                        activeBus={activeBus}
                                     />
                                 ) : (
                                     <Loading />
                                 )}
-                                {schedule && (
+                                
+                                {schedule !== null ? (
                                 <MUITable
                                     schedule={schedule}
                                     activeCallBack={activeCallBack}
                                     colors={colors}
+                                    activeBus={activeBus}
                                 />
+                                ) : (
+                                    <Loading />
                                 )}
                             </Sidetabs>
                         </div>

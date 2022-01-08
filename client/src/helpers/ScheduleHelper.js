@@ -1,4 +1,3 @@
-import { isSameDay } from "../Header/Datetime";
 
 function getStatus(bus, currentTime) {
     const pickup = new Date(bus.pickup_time);
@@ -21,13 +20,12 @@ function getStatus(bus, currentTime) {
         }
     } else {
         return 'On Time';
-    }
-        
+    }  
 }
 
 
 export const calculatedSchedule = (rawData, time) => {
-    console.log(rawData);
+    
     let newData = rawData;
 
     newData.forEach(bus => {

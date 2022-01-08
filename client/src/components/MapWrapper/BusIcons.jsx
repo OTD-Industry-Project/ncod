@@ -59,6 +59,7 @@ const BusIcons = (props) => {
                             (icon = divIcon({
                                 className: "marker " + name,
                                 html: `<div style="background-color: ${busColor};"><span>${buses.vehicle_id}</span>`,
+                                // eslint-disable-next-line no-sequences
                             })),
                             (
                                 <Marker

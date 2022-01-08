@@ -1,4 +1,4 @@
-import TEST_DATA from './TEST_DATA.json';
+import TEST_DATA from '../TEST_DATA.json';
 
 export const processedData = () => {
     // Make a copy of the TEST_DATA file

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiHome, FiChevronLeft, FiCompass, FiSettings, FiList } from "react-icons/fi";
+import { FiHome, FiChevronLeft, FiSettings, FiList } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";
 
 import "./Sidebar.css";
