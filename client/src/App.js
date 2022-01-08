@@ -18,7 +18,7 @@ import { calculatedSchedule } from "./components/Sidebar/ScheduleHelper";
 function App() {
     // Commented out fetching to work on layout
 
-    
+    const [data, setData] = useState(null);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [tableType, setTableType] = useState(true);
@@ -104,7 +104,10 @@ function App() {
         fetch("/api/schedule")
             .then((res) => res.json())
             .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
-        
+            
+        fetch("/api/GetScheduledActivity")
+            .then((res) => res.json())
+            .then((data) => setData(data));
         
     }, []);
 
@@ -137,6 +140,7 @@ function App() {
     return schedule && (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
+            {data && console.log(data)}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
