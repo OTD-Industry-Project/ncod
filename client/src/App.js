@@ -15,7 +15,7 @@ import { calculatedSchedule } from "./helpers/ScheduleHelper";
 import * as ROUTES from './constants/routes';
 
 function App() {
-    
+
     /***** Hooks *****/
 
     // App State
@@ -34,7 +34,7 @@ function App() {
     });
 
     /***** Callbacks *****/
-    
+
     // Set Play state
     const handleCallback = (m) => {
         setPlay(m);
@@ -48,9 +48,9 @@ function App() {
 
     // Update active bus state
     const activeCallBack = (job_id) => {
-        
+
         const index = schedule.findIndex((obj) => obj.job_id === job_id);
-         
+
 
         if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
@@ -92,7 +92,7 @@ function App() {
 
     // Get/Set theme and color scheme from local storage
     useEffect(() => {
-        
+
         const existingTheme = localStorage.getItem("theme");
 
         if (existingTheme) {
@@ -125,44 +125,44 @@ function App() {
                 localStorage.setItem("color-scheme", JSON.stringify(colors))
             );
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
     // Fetch schedule
     useEffect(() => {
-        
-                // fetch("/api/schedule")
-        //     .then((res) => res.json())
-        //     .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
-            
+
         fetch("/api/GetScheduledActivity")
             .then((res) => res.json())
             .then((data) => setData(data));
-        
+
+        fetch("/api/schedule")
+            .then((res) => res.json())
+            .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
+
 
     }, []);
 
-    
+
 
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-            {data && console.log(data)}
+                {data && console.log(data)}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
-                            
+
                             <Header
                                 changeDate={changeDate}
                                 date={date}
                                 theme={theme}
                                 switchTheme={switchTheme}
                             />
-                            
+
                         </div>
                     </div>
                     {/* Footer row with one col */}
@@ -184,27 +184,27 @@ function App() {
                                 ) : (
                                     <Loading />
                                 )}
-                                
+
                                 {schedule !== null ? (
-                                <MUITable
-                                    schedule={schedule}
-                                    activeCallBack={activeCallBack}
-                                    colors={colors}
-                                    activeBus={activeBus}
-                                />
+                                    <MUITable
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                        colors={colors}
+                                        activeBus={activeBus}
+                                    />
                                 ) : (
                                     <Loading />
                                 )}
                             </Sidetabs>
                         </div>
 
-                        
+
                         <MapWrapper
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
                         />
-                        
+
 
                         <div className="Footer">
                             <Footer
