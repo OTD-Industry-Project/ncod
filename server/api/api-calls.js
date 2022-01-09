@@ -36,7 +36,7 @@ const GetScheduledActivity = async (req, res) => {
         let dailySchedule = {};
         let pickup_id = [];
         let dest_id = [];
-        console.log(scheduledActivity[0].driverid);
+
 
         //looping over schedule, inserting new pickup address in database if not exist, returning matching ID
         for (i = 0; i < scheduledActivity.length; i++) {
@@ -69,10 +69,11 @@ const GetScheduledActivity = async (req, res) => {
 
             dailySchedule[i] = (scheduledActivity[i].vehicleid + ", " + scheduledActivity[i].driverid + ", " + 
             (scheduledActivity[i].starttime.toLocaleDateString() + " " + scheduledActivity[i].starttime.toLocaleTimeString([], {hour12: false})) + ", " + pickup_id[i] + ", " + 
-            (scheduledActivity[i].endtime.toLocaleDateString() + " " + scheduledActivity[i].endtime.toLocaleDateString([], {hour12: false})) + ", " + dest_id[i]);
+            (scheduledActivity[i].endtime.toLocaleDateString() + " " + scheduledActivity[i].endtime.toLocaleTimeString([], {hour12: false})) + ", " + dest_id[i]);
 
                 // await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) 
                 // VALUES ('${dailySchedule[i]}');`); //inserting values into jobs table
+                console.log(dailySchedule[i]);
 
         }
 
