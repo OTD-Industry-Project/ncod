@@ -19,6 +19,7 @@ function App() {
     /***** Hooks *****/
 
     // App State
+    const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
     const [play, setPlay] = useState(false);
     const [historyMode, setHistoryMode] = useState(false);
@@ -43,6 +44,7 @@ function App() {
     const changeDate = (newDate) => {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
+        fetchHistory(newDate);
     };
 
     // Update active bus state
@@ -127,6 +129,23 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    const fetchHistory = (date) => {
+        // Yesterday's date
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({date: date})
+        };
+
+        fetch(ROUTES.getHistory(), options)
+            .then((res) => res.json())
+            .then((data) =>  setData(data));
+ 
+
+    } 
 
     // Fetch schedule
     useEffect(() => {
@@ -135,6 +154,7 @@ function App() {
             .then((res) => res.json())
             .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
 
+        
     }, []);
 
     
@@ -142,6 +162,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
+            {data && console.log(data)}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">

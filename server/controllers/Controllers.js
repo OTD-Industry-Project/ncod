@@ -4,7 +4,7 @@ const dataHelper = require("../data/DataHelper");
 const getAllAddress = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM address");
-        console.log(results.rows);
+        // console.log(results.rows);
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -18,13 +18,37 @@ const getAllAddress = async (req, res) => {
     }
 };
 
+const getHistory = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
+    try {
+        const results = await db.query(
+            "SELECT * FROM job WHERE DATE(destination_time) = $1",
+            [`"${date.toLocaleDateString('fr-ca')} ${date.toLocaleTimeString([], { hour12: false })}"`]
+        );
+        // console.log(results.rows[0]);
+        res.status(200).json({
+            status: "success",
+            data: {
+                address: results.rows[0],
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    
+    // res.send({data: `Post Request handled - recieved the date: ${date}`});
+
+};
+
 const getAddressID = async (req, res) => {
     try {
         const results = await db.query(
             "SELECT * FROM address WHERE addr_id = $1",
             [req.params.id]
         );
-        console.log(results.rows[0]);
+        // console.log(results.rows[0]);
         res.status(200).json({
             status: "success",
             data: {
@@ -70,6 +94,7 @@ module.exports = {
     getAllAddress,
     getAddressID,
     getSchedule,
+    getHistory,
 };
 
 

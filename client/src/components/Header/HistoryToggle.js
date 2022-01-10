@@ -53,7 +53,7 @@ function HistoryToggle({ changeDate }) {
             </label>
             <DatePicker
                 todayButton="Reset"
-                minDate={new Date(2021, 10, 1)} // new Date(year, month (0-11), day)
+                minDate={new Date(2018, 10, 1)} // new Date(year, month (0-11), day)
                 maxDate={new Date()}
                 className={checked ? "date-picker" : "date-picker d-none" }
                 selected={startDate}
