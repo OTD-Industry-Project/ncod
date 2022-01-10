@@ -130,7 +130,6 @@ function App() {
     }, []);
 
     const fetchHistory = (date) => {
-        // Yesterday's date
 
         const options = {
             method: 'POST',
@@ -142,8 +141,8 @@ function App() {
 
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
-            .then((data) =>  setData(data));
- 
+            .then((data) =>  setSchedule(calculatedSchedule(data.data.schedule, date )));
+            
 
     } 
 

@@ -23,8 +23,14 @@ const getHistory = async (req, res) => {
     const date = new Date(req.body.date);
 
     try {
-        const results = await db.query(
-            "SELECT * FROM job WHERE DATE(destination_time) = DATE($1)",
+        const results = await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
+        c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
+        c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
+        c.empty_run, c.req_facilities, c.routing_info
+        FROM job C
+        INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
+        INNER JOIN address dest ON (c.destination_id = dest.addr_id)
+        where DATE(destination_time) = DATE($1)`,
             [`"${date.toISOString().substring(0, 10)}"`]
         );
 //testing logs
@@ -35,7 +41,7 @@ const getHistory = async (req, res) => {
         res.status(200).json({
             status: "success",
             data: {
-                address: results.rows[0],
+                schedule: results.rows,
             },
         });
     } catch (err) {
