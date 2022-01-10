@@ -31,11 +31,11 @@ const getHistory = async (req, res) => {
         INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
         where DATE(destination_time) = DATE($1)`,
-            [`"${date.toISOString().substring(0, 10)}"`]
+            [`"${date.toLocaleDateString('fr-CA')}"`]
         );
 //testing logs
-        console.log(date);
-        console.log(date.toISOString().substring(0, 10) + " " + date.toLocaleTimeString(['en-AU'], { hour12: false }));
+        console.log(date.toLocaleDateString('fr-CA'));
+        console.log(date.toLocaleDateString('fr-CA') + " " + date.toLocaleTimeString(['en-AU'], { hourCycle: 'h23' }));
         console.log(results.rows[0]);
 
         res.status(200).json({

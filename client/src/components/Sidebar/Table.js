@@ -67,7 +67,7 @@ export const Table = ({ schedule, activeCallBack }) => {
     const columns = useMemo(() => COLUMNS, []);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const data = useMemo(() => schedule.slice(0, NUM_OF_VEHICLES), []);
+    const data = useMemo(() => schedule.slice(0, NUM_OF_VEHICLES), [schedule]);
 
     // Create a table instance with useTable hook provided by the React-Table package
     // We are passing in colums and data, as well as Filter and Sorting functions
