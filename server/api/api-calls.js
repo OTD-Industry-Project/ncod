@@ -65,17 +65,21 @@ const GetScheduledActivity = async (req, res) => {
             var { rows: [{ addr_id }] } = destId[1];
             dest_id[i] = addr_id;
         }
+
         for (i = 0; i < scheduledActivity.length; i++) {
 
             dailySchedule[i] = (scheduledActivity[i].vehicleid + ", '" + scheduledActivity[i].driverid + "', '" +
                 (scheduledActivity[i].starttime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].starttime.toLocaleTimeString([], { hour12: false })) + "', " + pickup_id[i] + ", '" +
                 (scheduledActivity[i].endtime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].endtime.toLocaleTimeString([], { hour12: false })) + "', " + dest_id[i]);
 
-            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) VALUES ( ${dailySchedule[i]} );
-            select * from job where DATE(destination_time)=DATE(NOW());`); //inserting values into jobs table
-
-            console.log(jobInsert[1].rows);
-
+            var dateCheck = (scheduledActivity[i].starttime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].starttime.toLocaleTimeString([], { hour12: false }));
+            
+            //inserting values into jobs table
+            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) SELECT ${dailySchedule[i]}
+            FROM job
+            WHERE NOT EXISTS (SELECT vehicle_id FROM job WHERE pickup_time = '"${dateCheck}"')
+            LIMIT 1;
+            select * from job where DATE(destination_time)=DATE(NOW());`);
         }
 
     }
