@@ -70,12 +70,13 @@ const GetScheduledActivity = async (req, res) => {
 
             dailySchedule[i] = (scheduledActivity[i].vehicleid + ", '" + scheduledActivity[i].driverid + "', '" +
                 (scheduledActivity[i].starttime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].starttime.toLocaleTimeString([], { hour12: false })) + "', " + pickup_id[i] + ", '" +
-                (scheduledActivity[i].endtime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].endtime.toLocaleTimeString([], { hour12: false })) + "', " + dest_id[i]);
+                (scheduledActivity[i].endtime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].endtime.toLocaleTimeString([], { hour12: false })) + "', " + dest_id[i]
+                + ", " + scheduledActivity[i].routing_info);
 
             var dateCheck = (scheduledActivity[i].starttime.toLocaleDateString("fr-CA") + " " + scheduledActivity[i].starttime.toLocaleTimeString([], { hour12: false }));
-            
+
             //inserting values into jobs table
-            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) SELECT ${dailySchedule[i]}
+            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id,routing_info) SELECT ${dailySchedule[i]}
             FROM job
             WHERE NOT EXISTS (SELECT vehicle_id FROM job WHERE pickup_time = '"${dateCheck}"')
             LIMIT 1;
