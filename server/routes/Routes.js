@@ -9,13 +9,11 @@ router.get("/api/address/:id", apiController.getAddressID);
 
 router.get("/api/schedule", apiController.getSchedule);
 
-//API Calls
+router.post("/api/history", apiController.getHistory);
 
 router.get("/api/GetGPSVehicles", apiCalls.GetGPSVehicles);
 
 router.get("/api/GetScheduledActivity", apiCalls.GetScheduledActivity);
-
-
 
 
 module.exports = router;
