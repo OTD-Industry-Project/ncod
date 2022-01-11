@@ -19,6 +19,7 @@ function App() {
     /***** Hooks *****/
 
     // App State
+    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
     const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
     const [play, setPlay] = useState(false);
@@ -151,7 +152,12 @@ function App() {
 
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())
-            .then((data) => setSchedule(calculatedSchedule(data.data.schedule, new Date())));
+            .then((data) => {
+                setSchedule(calculatedSchedule(data.data.schedule, new Date()))
+                let dates = [];
+                data.data.availableHistory.forEach(({date}) => dates.push(new Date(date)));
+                setAvaliableHistoryDates(dates);
+            });
 
         
     }, []);
@@ -174,6 +180,7 @@ function App() {
                                 date={date}
                                 theme={theme}
                                 switchTheme={switchTheme}
+                                availableHistoryDates={availableHistoryDates}
                             />
 
                         </div>

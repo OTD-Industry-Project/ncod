@@ -84,12 +84,15 @@ const getSchedule = async (req, res) => {
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
         where DATE(destination_time)=DATE(NOW());
         ;`);
+
+        const availableHistory = await db.query(`SELECT DISTINCT DATE(pickup_time), DATE(destination_time) FROM job;`)
         // console.log(results.rows);
         res.status(200).json({
             status: "success",
             results: results.rows.length,
             data: {
                 schedule: results.rows,
+                availableHistory: availableHistory.rows,
             },
         });
 

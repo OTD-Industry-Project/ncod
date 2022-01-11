@@ -48,3 +48,14 @@ tbody > tr:hover {
 .info-card > table > thead {
     background-color: white !important;
 }
+
+.refresh {
+    color: #0074d9;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.refresh:hover {
+    font-size: 1.8rem;
+}

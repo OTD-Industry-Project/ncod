@@ -24,7 +24,7 @@ class Header extends React.Component {
                         <Datetime date={this.props.date}/>
                     </div>
                     <div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-7">
-                        <HistoryToggle changeDate={this.props.changeDate}/>
+                        <HistoryToggle changeDate={this.props.changeDate} availableHistoryDates={this.props.availableHistoryDates}/>
                     </div>
                     <div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
                         <AlertBtn />

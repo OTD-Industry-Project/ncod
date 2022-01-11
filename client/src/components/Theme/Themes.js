@@ -45,6 +45,10 @@ export const GlobalStyle = createGlobalStyle`
         color: ${props => props.theme.text};
         background-color: ${props => props.theme.background} !important;
     }
+
+    .refresh {
+        color: ${props => props.theme.scrubBar};
+    }
     
     
 ${'' /* Alert colors */}
