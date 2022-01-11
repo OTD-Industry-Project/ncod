@@ -148,10 +148,6 @@ function App() {
 
     // Fetch schedule
     useEffect(() => {
-        
-        fetch("/api/GetScheduledActivity")
-        .then((res) => res.json())
-        .then((data) => setData(data));
 
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())

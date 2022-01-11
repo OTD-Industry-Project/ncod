@@ -71,6 +71,8 @@ const getAddressID = async (req, res) => {
 };
 
 const getSchedule = async (req, res) => {
+    
+    await dataHelper.getScheduledActivity();
     try {
         const results =
             await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
