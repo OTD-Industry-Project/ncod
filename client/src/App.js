@@ -13,6 +13,7 @@ import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
 import Loading from "./components/Loading";
 import { calculatedSchedule } from "./helpers/ScheduleHelper";
 import * as ROUTES from './constants/routes';
+import L from 'leaflet';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);
+    const [routesArray, setRoutesArray] = useState(null);
     const [colors, setColors] = useState({
         predeparted: "#1e90ff",
         ontime: "#228b22",
@@ -149,6 +151,33 @@ function App() {
 
     // Fetch schedule
     useEffect(() => {
+        //GENERATE ROUTES ON LOAD
+        var controlarray = []
+        schedule.map((value, index) => (
+            controlarray.push(
+                {
+                    route: L.Routing.control({
+                        serviceUrl: '//localhost:5000/route/v1',
+                        waypoints: [
+                            L.latLng(value.PickupPointLatitude, value.PickupPointLongitude),
+                            L.latLng(value.DestinationLatitude, value.DestinationLongitude)
+                        ],
+                        lineOptions: {
+                            styles: [{ color: 'rgb(0, 220, 240)', weight: 6 }]
+                        },
+                        show: false,
+                        showAlternatives: false,
+                        createMarker: function () { return null },
+                        fitSelectedRoutes: false,
+                        addWaypoints: false,
+                        draggableWaypoints: false,
+                    }),
+                    onScreen: false
+                }
+            )
+        ))
+        console.log(controlarray)
+        setRoutesArray(controlarray)
 
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())
@@ -223,6 +252,7 @@ function App() {
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
+                            routesArray={routesArray}
                         />
 
 
