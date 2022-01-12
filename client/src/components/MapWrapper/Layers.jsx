@@ -11,7 +11,7 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors }) => {
+const Layers = ({ schedule, activeBus, colors, routesArray }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
@@ -21,9 +21,24 @@ const Layers = ({ schedule, activeBus, colors }) => {
     function LocationMarker() {
         const [position, setPosition] = useState(null);
 
+        
+
         // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap();
+        if(activeBus==null && routesArray!=null){
+            for(let route of routesArray){
+                maps.removeControl(route[0])
+            }
+        }
         if (position === null && activeBus !== null) {
+            //display a route
+            // console.log(activeBus.vehicle_id)
+            for(let route of routesArray){
+                if(route[1]==activeBus.vehicle_id){
+                    route[0].route.addTo(maps);
+                }
+                // console.log
+            }
             setPosition(
                 activeBus.pickup_longitude + ", " + activeBus.pickup_latitude
             );
