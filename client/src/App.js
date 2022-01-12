@@ -178,7 +178,7 @@ function App() {
                 }
             )
         ))
-        console.log(controlarray)
+        console.log('c-array',controlarray)
         setRoutesArray(controlarray)
 
         fetch(ROUTES.getSchedule())
