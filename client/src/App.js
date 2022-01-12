@@ -85,6 +85,7 @@ function App() {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
         fetchHistory(newDate);
+        setActiveBus(null);
     };
 
     // Update active bus state
