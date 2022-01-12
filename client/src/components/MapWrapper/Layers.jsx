@@ -27,13 +27,14 @@ const Layers = ({ schedule, activeBus, colors, routesArray }) => {
         const maps = useMap();
         if(activeBus==null && routesArray!=null){
             for(let route of routesArray){
-                maps.removeControl(route[0])
+                maps.removeControl(route[0].route)
             }
         }
         if (position === null && activeBus !== null) {
             //display a route
             // console.log(activeBus.vehicle_id)
             for(let route of routesArray){
+                maps.removeControl(route[0].route)
                 if(route[1]==activeBus.vehicle_id){
                     route[0].route.addTo(maps);
                 }

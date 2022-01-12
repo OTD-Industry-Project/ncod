@@ -26,7 +26,7 @@ function CreateRoutes(data, setRoutesArray){
             controlsArray.push(
                 [{
                     route: L.Routing.control({
-                        serviceUrl: '//localhost:5000/route/v1',
+                        // serviceUrl: '//localhost:5000/route/v1',
                         waypoints: [
                             L.latLng(value.pickup_latitude, value.pickup_longitude),
                             L.latLng(value.destination_latitude, value.destination_longitude),
