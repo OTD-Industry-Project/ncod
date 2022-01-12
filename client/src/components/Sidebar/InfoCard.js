@@ -1,31 +1,35 @@
 import React from "react";
 import "./Sidebar.css";
+import { getTime } from "./Table";
+
+const getRuntime = (pickup, dest) => {
+    
+    const t1 = new Date(pickup);
+    const t2 = new Date(dest);
+
+    const pickupMinutes = (t1.getHours() * 60) + t1.getMinutes();
+    const destMinutes = (t2.getHours() * 60) + t2.getMinutes();
+
+    return destMinutes - pickupMinutes;
+}
 
 const InfoCard = ({ info, colors }) => {
+    
     const {
-        PickupDateTime,
-        PickupPoint,
-        PickupInstructions,
-        PickupPointLatitude,
-        PickupPointLongitude,
-        Destination,
-        DestinationLatitude,
-        DestinationLongitude,
-        DestinationInstructions,
-        ArrivalDateTime,
-        SingleJourney,
-        VehicleToStay,
-        VehicleID,
-        FleetNo,
-        DriverID,
-        DurationMinutes,
-        uid,
-        eta,
+        pickup_time,
+        pickup_point,
+        description_of_job,
+        pickup_latitude,
+        pickup_longitude,
+        destination,
+        destination_latitude,
+        destination_longitude,
+        destination_time,
+        driver_id,
         status,
     } = info;
 
     let color;
-    console.log(colors);
 
     switch (status) {
         case 'On Time':
@@ -45,55 +49,57 @@ const InfoCard = ({ info, colors }) => {
     }
 
     return (
-        <div className="container-fluid info-card" >
+        <div className="container-fljob_id info-card" style={{backgroundColor: color}} >
             <div className="d-flex justify-content-between">
                 <h6>
-                    Driver: <strong>{DriverID}</strong>
+                    Driver: <strong>{driver_id}</strong>
                 </h6>
                 <h6>
-                    ETA: <strong className="eta" style={{backgroundColor: color, padding: '0.2rem', borderRadius: '10px'}}>{eta}</strong>
+                    ETA: <strong className="eta" style={{backgroundColor: color, padding: '0.2rem', borderRadius: '10px'}}>{getTime(new Date(destination_time))}</strong>
                 </h6>
             </div>
             <div className="d-flex justify-content-between">
+                
                 <h6>
-                    Stay: <strong>{VehicleToStay === 1 ? "Yes" : "No"}</strong>
-                </h6>
-                <h6>
-                    Duration: <strong>{DurationMinutes}mins</strong>
+                    Duration: <strong>{getRuntime(pickup_time, destination_time)}mins</strong>
                 </h6>
             </div>
 
             <table className="table mt-3">
                 <thead>
-                    <th scope="col"></th>
-                    <th scope="col">Pickup</th>
-                    <th scope="col">Destination</th>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Pickup</th>
+                        <th scope="col">Destination</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th scope="row">Name</th>
-                        <td>{PickupPoint}</td>
-                        <td>{Destination}</td>
+                        <td>{pickup_point}</td>
+                        <td>{destination}</td>
                     </tr>
                     <tr>
                         <th scope="row">Times</th>
-                        <td>{PickupDateTime}</td>
-                        <td>{ArrivalDateTime}</td>
+                        <td>{getTime(new Date(pickup_time))}</td>
+                        <td>{getTime(new Date(destination_time))}</td>
                     </tr>
+                    { description_of_job && (
                     <tr>
                         <th scope="row">Info</th>
-                        <td>{PickupInstructions}</td>
-                        <td>{DestinationInstructions}</td>
+                        <td>{description_of_job}</td>
+                        <td>{description_of_job}</td>
                     </tr>
+                    )}
                     <tr>
                         <th scope="row">Lat</th>
-                        <td>{PickupPointLatitude}</td>
-                        <td>{DestinationLatitude}</td>
+                        <td>{pickup_latitude}</td>
+                        <td>{destination_latitude}</td>
                     </tr>
                     <tr>
                         <th scope="row">Long</th>
-                        <td>{PickupPointLongitude}</td>
-                        <td>{DestinationLongitude}</td>
+                        <td>{pickup_longitude}</td>
+                        <td>{destination_longitude}</td>
                     </tr>
                 </tbody>
             </table>

@@ -42,9 +42,20 @@ tbody > tr:hover {
 .info-card {
     padding: 0.6rem 0.3rem;
     width: 100;
-    color: white ;
+    color: white;
 }
 .info-card > table,
 .info-card > table > thead {
     background-color: white !important;
+}
+
+.refresh {
+    color: #0074d9;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.refresh:hover {
+    font-size: 1.8rem;
 }

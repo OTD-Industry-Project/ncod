@@ -5,7 +5,7 @@ import "./Header.css";
 import Switch from "react-switch";
 
 
-function HistoryToggle({ changeDate }) {
+function HistoryToggle({ changeDate, availableHistoryDates }) {
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -53,7 +53,7 @@ function HistoryToggle({ changeDate }) {
             </label>
             <DatePicker
                 todayButton="Reset"
-                minDate={new Date(2021, 10, 1)} // new Date(year, month (0-11), day)
+                includeDates={availableHistoryDates}
                 maxDate={new Date()}
                 className={checked ? "date-picker" : "date-picker d-none" }
                 selected={startDate}

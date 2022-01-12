@@ -8,38 +8,24 @@ import Sidetabs from "./components/Sidebar/Sidetabs";
 import Footer from "./components/Footer/Footer";
 import MapWrapper from "./components/MapWrapper/MapWrapper.jsx";
 import { useState, useEffect } from "react";
-import { processedData } from "./data/DataHelper";
-import SimpleSlide from "./components/Sidebar/SimpleSlide";
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
-
-/* 
-      This is the big picture view of the layout
-                                COL
-             --------------------------------------------
-         ROW |                                          |
-             |               Header                     |
-             --------------------------------------------
-             |            |                             |
-             |            |                             |
-             |     Side   |                             |
-         ROW |     Bar    |     Map Section             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             |            |                             |
-             --------------------------------------------
-                  COL                 COL
-*/
+import Loading from "./components/Loading";
+import { calculatedSchedule } from "./helpers/ScheduleHelper";
+import * as ROUTES from './constants/routes';
 
 function App() {
-    // Commented out fetching to work on layout
 
+    /***** Hooks *****/
+
+    // App State
+    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
     const [data, setData] = useState(null);
-    const [schedule, setSchedule] = useState(processedData());
+    const [date, setDate] = useState(new Date());
+    const [play, setPlay] = useState(false);
+    const [historyMode, setHistoryMode] = useState(false);
+    const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
-    const [tableType, setTableType] = useState(true);
     const [theme, setTheme] = useState(false);
     const [colors, setColors] = useState({
         predeparted: "#1e90ff",
@@ -47,41 +33,43 @@ function App() {
         delayed: "#ff4500",
         completed: "#a9a9a9",
     });
-    const [date, setDate] = useState(new Date());
-    const [play, setPlay] = useState(false);
-    const [historyMode, setHistoryMode] = useState(false);
 
+    /***** Callbacks *****/
+
+    // Set Play state
     const handleCallback = (m) => {
         setPlay(m);
     };
 
-    const changeTableType = () => {
-        setTableType((prev) => !prev);
-    };
-
+    // Update Date state
     const changeDate = (newDate) => {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
+        fetchHistory(newDate);
     };
 
-    const activeCallBack = (uid) => {
-        const index = schedule.findIndex((obj) => obj.uid === uid);
-        let newSchedule = schedule;
+    // Update active bus state
+    const activeCallBack = (job_id) => {
 
-        if (activeBus !== null && activeBus.uid === uid) {
+        const index = schedule.findIndex((obj) => obj.job_id === job_id);
+
+
+        if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
             console.log("Row is unselected and Active bus is set back to null");
         } else {
-            setActiveBus(newSchedule[index]);
+            setActiveBus(schedule[index]);
         }
-        // setSchedule(newSchedule);
+
     };
 
+    // Switch theme and set local storage
     const switchTheme = () => {
         localStorage.setItem("theme", theme ? "light" : "dark");
         setTheme((prev) => !prev);
     };
 
+    // Change color scheme and set local storage
     const changeColors = (key, color) => {
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
@@ -101,14 +89,12 @@ function App() {
         }));
     };
 
-    // const handleChange = () => {
-    //     setScheduleOpen((prev) => !prev);
-    //     if (schedule) {
-    //         setActiveBus(null);
-    //     }
-    //   };
 
+    /***** On App load *****/
+
+    // Get/Set theme and color scheme from local storage
     useEffect(() => {
+
         const existingTheme = localStorage.getItem("theme");
 
         if (existingTheme) {
@@ -118,12 +104,6 @@ function App() {
             localStorage.setItem("theme", "light");
         }
 
-        /* fetch("/api")
-            .then((res) => res.json())
-            .then((data) => setData(data.message)); */
-    }, []);
-
-    useEffect(() => {
         const existingColorScheme = localStorage.getItem("color-scheme");
 
         if (existingColorScheme) {
@@ -147,24 +127,62 @@ function App() {
                 localStorage.setItem("color-scheme", JSON.stringify(colors))
             );
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const fetchHistory = (date) => {
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({date: date})
+        };
+
+        fetch(ROUTES.getHistory(), options)
+            .then((res) => res.json())
+            .then((data) =>  setSchedule(calculatedSchedule(data.data.schedule, date )));
+            
+
+    } 
+
+    // Fetch schedule
+    useEffect(() => {
+
+        fetch(ROUTES.getSchedule())
+            .then((res) => res.json())
+            .then((data) => {
+                setSchedule(calculatedSchedule(data.data.schedule, new Date()))
+                let dates = [];
+                data.data.availableHistory.forEach(({date}) => dates.push(new Date(date)));
+                setAvaliableHistoryDates(dates);
+            });
+
+        
+    }, []);
+
+
 
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
+            {data && console.log(data)}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
                     {/* Header row with one col */}
                     <div className="row Header">
                         <div className="col">
+
                             <Header
                                 changeDate={changeDate}
                                 date={date}
-                                changeTableType={changeTableType}
                                 theme={theme}
                                 switchTheme={switchTheme}
+                                availableHistoryDates={availableHistoryDates}
                             />
+
                         </div>
                     </div>
                     {/* Footer row with one col */}
@@ -177,24 +195,36 @@ function App() {
                                 colors={colors}
                                 changeColors={changeColors}
                             >
-                                <Table
-                                    schedule={schedule}
-                                    activeCallBack={activeCallBack}
-                                />
+                                {schedule !== null ? (
+                                    <Table
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                        activeBus={activeBus}
+                                    />
+                                ) : (
+                                    <Loading />
+                                )}
 
-                                <MUITable
-                                    schedule={schedule}
-                                    activeCallBack={activeCallBack}
-                                    colors={colors}
-                                />
+                                {schedule !== null ? (
+                                    <MUITable
+                                        schedule={schedule}
+                                        activeCallBack={activeCallBack}
+                                        colors={colors}
+                                        activeBus={activeBus}
+                                    />
+                                ) : (
+                                    <Loading />
+                                )}
                             </Sidetabs>
                         </div>
+
 
                         <MapWrapper
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
                         />
+
 
                         <div className="Footer">
                             <Footer
@@ -206,6 +236,7 @@ function App() {
                     </div>
                 </div>
             </>
+
         </ThemeProvider>
     );
 }

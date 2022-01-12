@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { CirclePicker } from "react-color";
 
-const ColorPicker = ({ k, color, showColorPicker, changeColors }) => {
-    const [thisColor, setThisColor] = useState(color);
-
+const ColorPicker = ({ k, color, changeColors }) => {
     return (
         <>
             <CirclePicker
@@ -20,11 +18,8 @@ const ColorPicker = ({ k, color, showColorPicker, changeColors }) => {
                     "#A9A9A9",
                 ]}
                 onChange={(updatedColor) => {
-                    setThisColor(updatedColor);
                     changeColors(k, updatedColor.hex);
                 }}
-                // onChangeComplete={changeColors(k, thisColor.hex)}
-                // only changes one at a time, not outputing all
             />
         </>
     );

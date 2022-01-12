@@ -2,10 +2,11 @@ import React from "react";
 import "./MapWrapper.css";
 import { MapContainer } from "react-leaflet";
 import Layers from "./Layers";
+import Loading from "../Loading";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-function MapWrapper({ schedule, activeBus, colors }) {
+function MapWrapper({ schedule, activeBus, colors, activeCallBack }) {
     return (
         <MapContainer
             className="MapWrapper"
@@ -20,7 +21,15 @@ function MapWrapper({ schedule, activeBus, colors }) {
                 [-48.102563, 164.401997],
             ]}
         >
-            <Layers schedule={schedule} activeBus={activeBus} colors={colors} />
+            {schedule !== null ? (
+                <Layers
+                    schedule={schedule}
+                    activeBus={activeBus}
+                    colors={colors}
+                />
+            ) : (
+                <Loading center />
+            )}
         </MapContainer>
     );
 }

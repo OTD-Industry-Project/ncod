@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    LayersControl,
-    FeatureGroup,
-    Popup,
-    Marker,
-} from "react-leaflet";
+import { LayersControl, FeatureGroup, Popup, Marker } from "react-leaflet";
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
@@ -12,32 +7,46 @@ const BusIcons = (props) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls
-    var schedule = null
-    var name = ''
-    var busColor
-    
+    var schedule = null;
+    var name = "";
+    var busColor;
+
     switch (props.type) {
-        // ADD IN A COLOUR 
-        case 'predeparted':
-            schedule = props.schedule.filter((buses) => buses.status === "Pre Departed");
-            busColor=props.colors.predeparted
-            name='predeparted'
+        // ADD IN A COLOUR
+        case "predeparted":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Pre Departed"
+            );
+            busColor = props.colors.predeparted;
+            name = "predeparted";
             break;
-        case 'ontime':
-            schedule = props.schedule.filter((buses) => buses.status === "On Time");
-            busColor=props.colors.ontime
-            name='ontime'
+        case "ontime":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "On Time"
+            );
+            busColor = props.colors.ontime;
+            name = "ontime";
             break;
-        case 'delayed':
-            schedule = props.schedule.filter((buses) => buses.status === "Delayed");
-            busColor=props.colors.delayed
-            name='delayed'
+        case "delayed":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Delayed"
+            );
+            busColor = props.colors.delayed;
+            name = "delayed";
             break;
-        case 'completed':
-            schedule = props.schedule.filter((buses) => buses.status === "Completed");
-            busColor=props.colors.completed
-            name='completed'
+        case "completed":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Completed"
+            );
+            busColor = props.colors.completed;
+            name = "completed";
             break;
+        default:
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Pre Departed"
+            );
+            busColor = props.colors.predeparted;
+            name = "predeparted";
     }
 
     return (
@@ -48,21 +57,22 @@ const BusIcons = (props) => {
                     {schedule.map(
                         (buses) => (
                             (icon = divIcon({
-                                className: "marker "+name,
-                                html: `<div style="background-color: ${busColor};"><span>${buses.VehicleID}</span>`,
+                                className: "marker " + name,
+                                html: `<div style="background-color: ${busColor};"><span>${buses.vehicle_id}</span>`,
+                                // eslint-disable-next-line no-sequences
                             })),
                             (
                                 <Marker
                                     icon={icon}
-                                    key={buses.uid}
-                                    eventKey={schedule.uid}
+                                    key={buses.job_id}
+                                    eventKey={schedule.job_id}
                                     position={[
-                                        buses.PickupPointLatitude,
-                                        buses.PickupPointLongitude,
+                                        buses.pickup_latitude,
+                                        buses.pickup_longitude,
                                     ]}
                                     /* Using event handlers to access mouseover/out features for hover info
                                    to be defined inside the Popup tags  */
-                                   eventHandlers={{
+                                    eventHandlers={{
                                         mouseover: (event) =>
                                             event.target.openPopup(),
                                         mouseout: (event) =>
@@ -71,9 +81,9 @@ const BusIcons = (props) => {
                                 >
                                     <Popup offset={[10, 0]}>
                                         <h5>{buses.status}</h5> <br />
-                                        Location: {buses.PickupPoint} <br />
-                                        VehicleID : {buses.VehicleID} <br />
-                                        DriverID : {buses.DriverID} <br />
+                                        Location: {buses.pickup_point} <br />
+                                        VehicleID : {buses.vehicle_id} <br />
+                                        DriverID : {buses.driver_id} <br />
                                     </Popup>
                                 </Marker>
                             )
@@ -83,7 +93,6 @@ const BusIcons = (props) => {
             </LayersControl.Overlay>
         </>
     );
-
 };
 
 export default BusIcons;

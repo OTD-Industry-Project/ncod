@@ -109,7 +109,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
       return () => clearInterval(interval);
     }
 
-  });
+  }, [historyMode, action, play, setDirection]);
 
   return (
     <Box>

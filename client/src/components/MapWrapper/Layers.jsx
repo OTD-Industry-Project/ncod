@@ -3,7 +3,6 @@ import {
     AttributionControl,
     TileLayer,
     LayersControl,
-    FeatureGroup,
     Popup,
     ZoomControl,
     Marker,
@@ -26,12 +25,10 @@ const Layers = ({ schedule, activeBus, colors }) => {
         const maps = useMap();
         if (position === null && activeBus !== null) {
             setPosition(
-                activeBus.PickupPointLongitude +
-                    ", " +
-                    activeBus.PickupPointLatitude
+                activeBus.pickup_longitude + ", " + activeBus.pickup_latitude
             );
             maps.flyTo(
-                [activeBus.PickupPointLatitude, activeBus.PickupPointLongitude],
+                [activeBus.pickup_latitude, activeBus.pickup_longitude],
                 14,
                 { duration: 2 }
             );
@@ -43,15 +40,14 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 busColor = colors.predeparted;
             } else if (activeBus.status === "Delayed") {
                 busColor = colors.delayed;
-            }
-            else {
+            } else {
                 busColor = colors.completed;
             }
 
             // Assigning CSS class based on bus status
             icon = divIcon({
                 className: "marker",
-                html: `<div style="background-color: ${busColor}"><span>${activeBus.VehicleID}</span>`,
+                html: `<div style="background-color: ${busColor}"><span>${activeBus.vehicle_id}</span>`,
             });
         }
 
@@ -69,8 +65,8 @@ const Layers = ({ schedule, activeBus, colors }) => {
             <MyMarker
                 icon={icon}
                 position={[
-                    activeBus.PickupPointLatitude,
-                    activeBus.PickupPointLongitude,
+                    activeBus.pickup_latitude,
+                    activeBus.pickup_longitude,
                 ]}
                 /* Using event handlers to access mouseover/out features for hover info
                 to be defined inside the Popup tags  */
@@ -81,9 +77,9 @@ const Layers = ({ schedule, activeBus, colors }) => {
             >
                 <Popup direction="top" offset={[8, -5]}>
                     <h5>{activeBus.status}</h5> <br />
-                    Location: {activeBus.PickupPoint} <br />
-                    VehicleID : {activeBus.VehicleID} <br />
-                    DriverID : {activeBus.DriverID} <br />
+                    Location: {activeBus.pickup_point} <br />
+                    VehicleID : {activeBus.vehicle_id} <br />
+                    DriverID : {activeBus.driver_id} <br />
                 </Popup>
             </MyMarker>
         );
@@ -107,10 +103,22 @@ const Layers = ({ schedule, activeBus, colors }) => {
                 <LocationMarker />
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
-                <BusIcons schedule={schedule} type={'predeparted'} colors={colors} />
-                <BusIcons schedule={schedule} type={'ontime'} colors={colors} />
-                <BusIcons schedule={schedule} type={'delayed'} colors={colors} />
-                <BusIcons schedule={schedule} type={'completed'} colors={colors} />
+                <BusIcons
+                    schedule={schedule}
+                    type={"predeparted"}
+                    colors={colors}
+                />
+                <BusIcons schedule={schedule} type={"ontime"} colors={colors} />
+                <BusIcons
+                    schedule={schedule}
+                    type={"delayed"}
+                    colors={colors}
+                />
+                <BusIcons
+                    schedule={schedule}
+                    type={"completed"}
+                    colors={colors}
+                />
             </LayersControl>
         </>
     );

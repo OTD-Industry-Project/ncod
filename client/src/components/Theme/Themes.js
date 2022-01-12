@@ -1,4 +1,4 @@
-import { createGlobalStyle, withTheme } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 
 export const lightTheme = {
@@ -44,6 +44,10 @@ export const GlobalStyle = createGlobalStyle`
     td {
         color: ${props => props.theme.text};
         background-color: ${props => props.theme.background} !important;
+    }
+
+    .refresh {
+        color: ${props => props.theme.scrubBar};
     }
     
     

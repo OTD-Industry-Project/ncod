@@ -20,8 +20,7 @@ CREATE TABLE IF NOT EXISTS ADDRESS (
 CREATE TABLE IF NOT EXISTS VEHICLE (
   vehicle_id INT NOT NULL, 
   display_name VARCHAR(10), 
-  rego_plate VARCHAR(8), 
-  capacity INT, 
+  rego_plate VARCHAR(8),  
   facilities VARCHAR(255),
   CONSTRAINT PK_VEHICLE PRIMARY KEY (vehicle_id)
 );
@@ -31,9 +30,9 @@ CREATE TABLE IF NOT EXISTS JOB (
   vehicle_id INT, 
   driver_id VARCHAR(50), 
   description_of_job VARCHAR(255),
-  pickup_time time without time zone,
+  pickup_time TIMESTAMP WITHOUT TIME ZONE,
   pickup_id INT,
-  destination_time time without time zone,
+  destination_time TIMESTAMP WITHOUT TIME ZONE,
   destination_id INT,
   empty_run BOOLEAN,
   req_facilities VARCHAR(255),  
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS JOB (
 
 CREATE TABLE IF NOT EXISTS HISTORY (
   vehicle_id INT NOT NULL, 
-  time_stamp timestamp without time ZONE NOT NULL,
+  time_stamp TIMESTAMP WITHOUT TIME ZONE NOT NULL,
   job_id INT NOT NULL, 
   latitude DECIMAL(11,6), 
   longitude DECIMAL(11,6), 
@@ -61,3 +60,8 @@ CREATE TABLE IF NOT EXISTS HISTORY (
 \i 02-vehicles_insert.sql
 \i 03-jobs_insert.sql
 \i 04-history_insert.sql
+\i 05-api_table.sql
+\i 06-api_dummy_schedule.sql
+
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"address"', 'addr_id')), (SELECT (MAX("addr_id") + 1) FROM "address"), FALSE);
+SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"job"', 'job_id')), (SELECT (MAX("job_id") + 1) FROM "job"), FALSE);

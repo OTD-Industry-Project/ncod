@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
 import InfoCard from "./InfoCard";
-
+import { getTime } from "./Table";
 class MUITable extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +43,13 @@ class MUITable extends React.Component {
                 },
             },
             {
+                name: "Job ID",
+                options: {
+                    filter: false,
+                    display: false,
+                },
+            },
+            {
                 name: "Status",
                 options: {
                     filter: true,
@@ -66,9 +73,7 @@ class MUITable extends React.Component {
                 name: "Times",
                 options: {
                     filter: false,
-                    
-                    
-                },
+                }
             },
             {
                 name: "ETA",
@@ -81,14 +86,16 @@ class MUITable extends React.Component {
 
         const data = [];
 
-        schedule.forEach((bus) => {
+        schedule.forEach((bus, index) => {
+            bus.uid = index;
             data.push([
                 bus.uid,
+                bus.job_id,
                 bus.status,
-                bus.VehicleID,
-                bus.Destination,
-                bus.PickupDateTime,
-                bus.eta,
+                bus.vehicle_id,
+                bus.destination,
+                getTime(bus.pickup_time),
+                getTime(bus.destination_time),
             ]);
         });
 
@@ -109,7 +116,7 @@ class MUITable extends React.Component {
             rowsPerPage: 100,
             onRowClick: (rowData, rowMeta) => {
                 this.handleEvent(rowMeta.rowIndex);
-                activeCallBack(rowData[0]);
+                activeCallBack(rowData[1]);
             },
             selectableRowsHideCheckboxes: true,
             expandableRowsHeader: false,

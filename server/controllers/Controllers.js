@@ -1,9 +1,10 @@
 const db = require("../db");
+const dataHelper = require("../data/DataHelper");
 
-const getAllAddress = async(req, res) => {
+const getAllAddress = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM address");
-        console.log(results.rows);
+        // console.log(results.rows);
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -11,29 +12,95 @@ const getAllAddress = async(req, res) => {
                 address: results.rows,
             },
         });
-    } 
+    }
     catch (err) {
         console.log(err);
     }
 };
 
-const getAddressID = async(req, res) => {
+const getHistory = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
     try {
-        const results = await db.query("SELECT * FROM address WHERE addr_id = $1", [req.params.id]);
+        const results = await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
+        c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
+        c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
+        c.empty_run, c.req_facilities, c.routing_info
+        FROM job C
+        INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
+        INNER JOIN address dest ON (c.destination_id = dest.addr_id)
+        where DATE(destination_time) = DATE($1)`,
+            [`"${date.toLocaleDateString('fr-CA')}"`]
+        );
+//testing logs
+        console.log(date.toLocaleDateString('fr-CA'));
+        console.log(date.toLocaleDateString('fr-CA') + " " + date.toLocaleTimeString(['en-AU'], { hourCycle: 'h23' }));
         console.log(results.rows[0]);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                schedule: results.rows,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    
+    // res.send({data: `Post Request handled - recieved the date: ${date}`});
+
+};
+
+const getAddressID = async (req, res) => {
+    try {
+        const results = await db.query(
+            "SELECT * FROM address WHERE addr_id = $1",
+            [req.params.id]
+        );
+        // console.log(results.rows[0]);
         res.status(200).json({
             status: "success",
             data: {
                 address: results.rows[0],
             },
         });
-    } 
-    catch (err) {
+    } catch (err) {
         console.log(err);
     }
 };
 
+const getSchedule = async (req, res) => {
+    
+    await dataHelper.getScheduledActivity();
+    try {
+        const results =
+            await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
+        c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
+        c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
+        c.empty_run, c.req_facilities, c.routing_info
+        FROM job C
+        INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
+        INNER JOIN address dest ON (c.destination_id = dest.addr_id)
+        where DATE(destination_time)=DATE(NOW());
+        ;`);
 
+        const availableHistory = await db.query(`SELECT DISTINCT DATE(pickup_time), DATE(destination_time) FROM job;`)
+        // console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            results: results.rows.length,
+            data: {
+                schedule: results.rows,
+                availableHistory: availableHistory.rows,
+            },
+        });
+
+        dataHelper.writeScheduleToFile(results.rows);
+    } catch (err) {
+        console.log(err);
+    }
+};
 
 
 
@@ -41,6 +108,7 @@ const getAddressID = async(req, res) => {
 
 
 module.exports = {
-    getAllAddress, 
-    getAddressID
+    getAddressID,
+    getSchedule,
+    getHistory,
 };
