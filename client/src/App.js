@@ -16,6 +16,7 @@ import * as ROUTES from './constants/routes';
 import L from 'leaflet';
 import "leaflet-routing-machine";
 import '../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import { useMap } from 'leaflet';
 
 function CreateRoutes(data, setRoutesArray){
     //GENERATE ROUTES ON LOAD
@@ -64,6 +65,7 @@ function App() {
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);
     const [routesArray, setRoutesArray] = useState(null);
+    const [oldRoutesArray, setOldRoutesArray] = useState(null);
     const [colors, setColors] = useState({
         predeparted: "#1e90ff",
         ontime: "#228b22",
@@ -176,16 +178,19 @@ function App() {
             },
             body: JSON.stringify({ date: date })
         };
-
+        
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
-                setSchedule(calculatedSchedule(data.data.schedule, date))
+                console.log('ra',routesArray);
+                if(routesArray!=null){
+                    console.log('setting routes');
+                    setOldRoutesArray(routesArray);
+                }
+                setSchedule(calculatedSchedule(data.data.schedule, date));
                 console.log('ROUTES:',data);
                 CreateRoutes(data, setRoutesArray);
             });
-            
-
     }
 
     // Fetch schedule
@@ -200,7 +205,6 @@ function App() {
                 let dates = [];
                 data.data.availableHistory.forEach(({ date }) => dates.push(new Date(date)));
                 setAvaliableHistoryDates(dates);
-
                 CreateRoutes(data, setRoutesArray);
             });
     }, []);
@@ -267,6 +271,7 @@ function App() {
                             activeBus={activeBus}
                             colors={colors}
                             routesArray={routesArray}
+                            oldRoutesArray={oldRoutesArray}
                         />
 
 

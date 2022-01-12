@@ -11,7 +11,7 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors, routesArray }) => {
+const Layers = ({ schedule, activeBus, colors, routesArray, oldRoutesArray }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
@@ -20,11 +20,16 @@ const Layers = ({ schedule, activeBus, colors, routesArray }) => {
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
         const [position, setPosition] = useState(null);
-
         
 
         // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap();
+        if(oldRoutesArray!=null){
+            for(let route of oldRoutesArray){
+                maps.removeControl(route[0].route);
+                console.log('removing');
+            }
+        }
         if(activeBus==null && routesArray!=null){
             for(let route of routesArray){
                 maps.removeControl(route[0].route)
