@@ -6,3 +6,4 @@ psql -U postgres -f ./00-OTB_DB_setup.sql
 cd..
 cd..
 npm run i
+npm run dev
