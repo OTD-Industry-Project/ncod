@@ -126,4 +126,5 @@ INSERT INTO ADDRESS(addr_name,addr_lat,addr_long) VALUES
 ,('Convergint Technologies Australia',-37.83159,144.93294)
 ,('Bounce Inc',-37.8502,145.0452)
 ,('Sephardi Shule 79 Hotham Street',-37.86723,144.99964)
-,('Bililia Mansion Brighton',-37.9178,145.00118);
+,('Bililia Mansion Brighton',-37.9178,145.00118)
+;

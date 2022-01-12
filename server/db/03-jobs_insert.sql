@@ -380,5 +380,4 @@ INSERT INTO JOB(vehicle_id,driver_id,pickup_time,pickup_id,destination_time,dest
 ,(89,'ASHKAR','2022/01/11 19:25:00',26,'2022/01/11 21:20:00',32)
 ,(93,'JOHNSTON','2022/01/11 19:30:00',78,'2022/01/11 21:20:00',7)
 ,(101,'SCALES','2022/01/11 19:35:00',81,'2022/01/11 21:30:00',9)
-
 ;
