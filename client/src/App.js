@@ -147,8 +147,6 @@ function App() {
             .then((data) => {
                 setSchedule(calculatedSchedule(data.data.schedule, date ));
                 
-                // console.log(data.data.waypoints)
-                
                 const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
 
                 let historyWaypoints = [];

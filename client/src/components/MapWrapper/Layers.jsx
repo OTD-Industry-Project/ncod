@@ -7,6 +7,7 @@ import {
     ZoomControl,
     Marker,
     useMap,
+    Polyline,
 } from "react-leaflet";
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
@@ -17,7 +18,7 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
     // Variable for icon colors
     var busColor;
 
-    waypoints.length !== 0 && console.log(waypoints);
+    // waypoints.length !== 0 && console.log(waypoints[0]);
 
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
@@ -103,6 +104,18 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
                 <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
+                {waypoints &&
+                    waypoints.map((bus, index) => {
+                        let k = Object.keys(bus);
+                        console.log(bus[k[0]]);
+                        return (
+                            <Polyline
+                                key={`${index}`}
+                                weight={8}
+                                positions={bus[k[0]]}
+                            />
+                        );
+                    })}
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
                 <BusIcons
