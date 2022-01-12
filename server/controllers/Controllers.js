@@ -33,6 +33,8 @@ const getHistory = async (req, res) => {
         where DATE(destination_time) = DATE($1)`,
             [`"${date.toLocaleDateString('fr-CA')}"`]
         );
+
+        const waypoints = await db.query(`SELECT job_id, vehicle_id, latitude, longitude FROM history where DATE(time_stamp) = DATE($1)`, [`"${date.toLocaleDateString('fr-CA')}"`]);
 //testing logs
         console.log(date.toLocaleDateString('fr-CA'));
         console.log(date.toLocaleDateString('fr-CA') + " " + date.toLocaleTimeString(['en-AU'], { hourCycle: 'h23' }));
@@ -42,6 +44,7 @@ const getHistory = async (req, res) => {
             status: "success",
             data: {
                 schedule: results.rows,
+                waypoints: waypoints.rows,
             },
         });
     } catch (err) {
@@ -86,6 +89,7 @@ const getSchedule = async (req, res) => {
         ;`);
 
         const availableHistory = await db.query(`SELECT DISTINCT DATE(pickup_time), DATE(destination_time) FROM job;`)
+
         // console.log(results.rows);
         res.status(200).json({
             status: "success",

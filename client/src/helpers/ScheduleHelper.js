@@ -12,6 +12,10 @@ function getStatus(bus, currentTime) {
         return 'Pre Departed';
     } 
 
+    if (currentMinutes > pickupMinutes && destMinutes > currentMinutes) {
+        return 'On Time';
+    }
+
     if (destMinutes < currentMinutes) {
         if (Math.abs(destMinutes, currentMinutes) < 30) {
             return 'Delayed';

@@ -1,5 +1,5 @@
 -- Usage: 
---    psql -U <username> -f <C:\some\file\path\ncod\server\db\00-OTB_DB_setup.sql>
+--    psql -U <username> -f <C:/some/file/path/ncod/server/db/00-OTB_DB_setup.sql>
 -- or navigate into C:\some\file\path\ncod\server\db\ and run as:
 --    psql -U <username> -f ./00-OTB_DB_setup.sql
 
@@ -62,3 +62,4 @@ CREATE TABLE IF NOT EXISTS HISTORY (
 \i 04-history_insert.sql
 \i 05-api_table.sql
 \i 06-api_dummy_schedule.sql
+\i 07-api_gps_snapshots.sql

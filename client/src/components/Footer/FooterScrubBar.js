@@ -111,6 +111,8 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
 
   }, [historyMode, action, play, setDirection]);
 
+  console.log(valuetext(value));
+
   return (
     <Box>
       <Slider
