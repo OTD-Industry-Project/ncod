@@ -118,5 +118,5 @@ INSERT INTO api(vehicleid,starttime,startlocation,startlatitude,startlongitude,e
 (61,'2022-01-18 19:20:00','Tucker Road Primary School',-37.93234,145.04938,'2022-01-18 21:00:00','Metro Watergardens Run 189 Shift N214',-37.70137,144.77391,'LIPSZYC'),
 (89,'2022-01-18 19:25:00','CGS Caulfield',-37.87607,145.00442,'2022-01-18 21:20:00','Metro Watergardens Run 189 Shift N214',-37.70137,144.77391,'ASHKAR'),
 (93,'2022-01-18 19:30:00','Genazzano College - Group 2',-37.80873,145.05601,'2022-01-18 21:20:00','Wesley College Glen Waverley Campus',-37.8752,145.15483,'JOHNSTON'),
-(101,'2022-01-18 19:35:00','Rosebud Country Club',-38.37888,144.89827,'2022-01-18 21:30:00','Albert Pk Tennis & Hockey Centre',-37.85617,144.97552,'SCALES'),
+(101,'2022-01-18 19:35:00','Rosebud Country Club',-38.37888,144.89827,'2022-01-18 21:30:00','Albert Pk Tennis & Hockey Centre',-37.85617,144.97552,'SCALES')
 ;

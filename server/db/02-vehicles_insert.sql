@@ -18,6 +18,7 @@ INSERT INTO VEHICLE(vehicle_id,display_name) VALUES
 ,(38,'bus')
 ,(39,'bus')
 ,(43,'bus')
+,(53,'bus')
 ,(59,'bus')
 ,(61,'bus')
 ,(62,'bus')
