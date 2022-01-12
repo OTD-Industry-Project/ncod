@@ -126,7 +126,7 @@ const Layers = ({ schedule, activeBus, colors, waypoints, routesArray, oldRoutes
                 <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
-                <LayersControl.Overlay checked name='routes'>
+                <LayersControl.Overlay name='All Routes'>
                 <FeatureGroup>
                 {waypoints &&
                     waypoints.map((bus, index) => {
