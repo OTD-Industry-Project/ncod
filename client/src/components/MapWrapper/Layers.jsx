@@ -8,6 +8,7 @@ import {
     Marker,
     useMap,
     Polyline,
+    FeatureGroup,
 } from "react-leaflet";
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
@@ -104,6 +105,8 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
                 <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
+                <LayersControl.Overlay checked name='routes'>
+                <FeatureGroup>
                 {waypoints &&
                     waypoints.map((bus, index) => {
                         let k = Object.keys(bus);
@@ -116,6 +119,8 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
                             />
                         );
                     })}
+                    </FeatureGroup>
+                    </LayersControl.Overlay>
                 {/* Adding each layer for visibility to be toggled on and off as required
                 by looping through the array*/}
                 <BusIcons
