@@ -14,6 +14,8 @@ import Loading from "./components/Loading";
 import { calculatedSchedule } from "./helpers/ScheduleHelper";
 import * as ROUTES from './constants/routes';
 import L from 'leaflet';
+import "leaflet-routing-machine";
+import '../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 function App() {
 
