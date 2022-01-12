@@ -6,16 +6,7 @@ import Loading from "../Loading";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-<<<<<<< HEAD
-function MapWrapper({
-    schedule,
-    activeBus,
-    colors,
-    activeCallBack,
-    waypoints,
-}) {
-=======
-function MapWrapper({ schedule, activeBus, colors, activeCallBack, routesArray, oldRoutesArray }) {
+function MapWrapper({ schedule, activeBus, colors, activeCallBack, waypoints, routesArray, oldRoutesArray }) {
     function Event() {
         var map = useMap();
         if (routesArray != null) {
@@ -28,7 +19,6 @@ function MapWrapper({ schedule, activeBus, colors, activeCallBack, routesArray, 
         return null;
     }
 
->>>>>>> 86b618554b3d57fc4aa390545a4b8c684d7d5c55
     return (
         <MapContainer
             className="MapWrapper"
@@ -49,12 +39,9 @@ function MapWrapper({ schedule, activeBus, colors, activeCallBack, routesArray, 
                     schedule={schedule}
                     activeBus={activeBus}
                     colors={colors}
-<<<<<<< HEAD
                     waypoints={waypoints}
-=======
                     routesArray={routesArray}
                     oldRoutesArray={oldRoutesArray}
->>>>>>> 86b618554b3d57fc4aa390545a4b8c684d7d5c55
                 />
             ) : (
                 <Loading center />
