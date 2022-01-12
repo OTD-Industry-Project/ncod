@@ -62,6 +62,3 @@ CREATE TABLE IF NOT EXISTS HISTORY (
 \i 04-history_insert.sql
 \i 05-api_table.sql
 \i 06-api_dummy_schedule.sql
-
-SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"address"', 'addr_id')), (SELECT (MAX("addr_id") + 1) FROM "address"), FALSE);
-SELECT SETVAL((SELECT PG_GET_SERIAL_SEQUENCE('"job"', 'job_id')), (SELECT (MAX("job_id") + 1) FROM "job"), FALSE);
