@@ -1,5 +1,5 @@
 -- Usage: 
---    psql -U <username> -f <C:\some\file\path\ncod\server\db\00-OTB_DB_setup.sql>
+--    psql -U <username> -f <C:/some/file/path/ncod/server/db/00-OTB_DB_setup.sql>
 -- or navigate into C:\some\file\path\ncod\server\db\ and run as:
 --    psql -U <username> -f ./00-OTB_DB_setup.sql
 

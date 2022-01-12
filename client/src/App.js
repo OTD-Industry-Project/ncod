@@ -13,12 +13,14 @@ import { lightTheme, darkTheme, GlobalStyle } from "./components/Theme/Themes";
 import Loading from "./components/Loading";
 import { calculatedSchedule } from "./helpers/ScheduleHelper";
 import * as ROUTES from './constants/routes';
+import { timestampFormat } from "concurrently/src/defaults";
 
 function App() {
 
     /***** Hooks *****/
 
     // App State
+    const [waypoints, setWaypoints] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
     const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
@@ -142,7 +144,29 @@ function App() {
 
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
-            .then((data) =>  setSchedule(calculatedSchedule(data.data.schedule, date )));
+            .then((data) => {
+                setSchedule(calculatedSchedule(data.data.schedule, date ));
+                
+                // console.log(data.data.waypoints)
+                
+                const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
+
+                let historyWaypoints = [];
+
+                uniqueBuses.forEach(uniqueBus => {
+                    
+                    const tmp = data.data.waypoints.filter(({vehicle_id}) => vehicle_id === uniqueBus);
+                    let temp = [];
+                    tmp.forEach(bus => temp.push([bus.latitude, bus.longitude]));
+                    
+                    historyWaypoints.push({     
+                        [uniqueBus]: temp,
+                    });
+                })
+                
+                setWaypoints(historyWaypoints);
+
+            });
             
 
     } 
@@ -223,6 +247,7 @@ function App() {
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
+                            waypoints={waypoints}
                         />
 
 

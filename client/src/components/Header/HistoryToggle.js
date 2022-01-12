@@ -53,6 +53,7 @@ function HistoryToggle({ changeDate, availableHistoryDates }) {
             </label>
             <DatePicker
                 todayButton="Reset"
+                minDate={new Date(2019, 0, 1)}
                 includeDates={availableHistoryDates}
                 maxDate={new Date()}
                 className={checked ? "date-picker" : "date-picker d-none" }

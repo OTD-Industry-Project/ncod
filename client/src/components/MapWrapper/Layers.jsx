@@ -11,11 +11,13 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors }) => {
+const Layers = ({ schedule, activeBus, colors, waypoints }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
     var busColor;
+
+    waypoints.length !== 0 && console.log(waypoints);
 
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
