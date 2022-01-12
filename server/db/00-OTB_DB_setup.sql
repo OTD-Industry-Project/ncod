@@ -62,3 +62,4 @@ CREATE TABLE IF NOT EXISTS HISTORY (
 \i 04-history_insert.sql
 \i 05-api_table.sql
 \i 06-api_dummy_schedule.sql
+\i 07-api_gps_snapshots.sql
