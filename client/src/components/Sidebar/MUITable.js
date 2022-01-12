@@ -32,7 +32,7 @@ class MUITable extends React.Component {
     }
     
     render() {
-        const { schedule, activeCallBack, colors } = this.props;
+        const { schedule, activeCallBack, colors, activeBus } = this.props;
 
         const columns = [
             {
@@ -110,7 +110,7 @@ class MUITable extends React.Component {
             setRowProps: (row) => {
                 // console.log(this.state.selectedRow + " " + row[0]);
                 return {
-                    className: this.state.selectedRow === row[0] ? "selected" : "",
+                    className: this.state.selectedRow === row[0] && activeBus !== null ? "selected" : "",
                 };
             },
             rowsPerPage: 100,
