@@ -82,6 +82,7 @@ const BusIcons = (props) => {
                                     <Popup offset={[10, 0]}>
                                         <h5>{buses.status}</h5> <br />
                                         Location: {buses.pickup_point} <br />
+                                        destination: {buses.destination} <br />
                                         VehicleID : {buses.vehicle_id} <br />
                                         DriverID : {buses.driver_id} <br />
                                     </Popup>

@@ -19,10 +19,10 @@ import "leaflet-routing-machine";
 import '../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useMap } from 'leaflet';
 
-function CreateRoutes(data, setRoutesArray){
+function CreateRoutes(data, setRoutesArray) {
     //GENERATE ROUTES ON LOAD
-    var controlsArray=[];
-    console.log('data:',data)
+    var controlsArray = [];
+    console.log('data:', data)
     if (data != null) {
         data.data.schedule.map((value, index) => (
             controlsArray.push(
@@ -43,7 +43,7 @@ function CreateRoutes(data, setRoutesArray){
                         draggableWaypoints: false,
                     }),
                     onScreen: false
-                },value.vehicle_id]
+                }, value.vehicle_id]
             )
         ))
         setRoutesArray(controlsArray);
@@ -56,6 +56,7 @@ function App() {
 
     // App State
     const [waypoints, setWaypoints] = useState([]);
+    const [tracking, setTracking] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
     const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
@@ -74,7 +75,7 @@ function App() {
     });
 
     /***** Callbacks *****/
-
+    
     // Set Play state
     const handleCallback = (m) => {
         setPlay(m);
@@ -97,7 +98,7 @@ function App() {
         if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
         } else {
-            setActiveBus(schedule[index]);
+            setActiveBus(schedule[index])            
         }
 
     };
@@ -178,25 +179,25 @@ function App() {
             },
             body: JSON.stringify({ date: date })
         };
-        
+
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
-                setSchedule(calculatedSchedule(data.data.schedule, date ));
-                
+                setSchedule(calculatedSchedule(data.data.schedule, date));
+
                 const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
 
                 let historyWaypoints = [];
                 let historyTracking = [];
 
                 uniqueBuses.forEach(uniqueBus => {
-                    
-                    const tmp = data.data.waypoints.filter(({vehicle_id}) => vehicle_id === uniqueBus);
+
+                    const tmp = data.data.waypoints.filter(({ vehicle_id }) => vehicle_id === uniqueBus);
                     let temp = [];
                     let temp2 = [];
                     tmp.forEach(bus => temp.push([bus.latitude, bus.longitude]));
-                    
-                    historyWaypoints.push({     
+
+                    historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
                     tmp.forEach(bus => temp2.push(bus));
@@ -204,19 +205,20 @@ function App() {
                         [uniqueBus]: temp2,
                     });
                 })
-                
+
                 setWaypoints(historyWaypoints);
+                setTracking(historyTracking);
                 console.log(historyTracking);
-                if(routesArray!=null){
+                if (routesArray != null) {
                     setOldRoutesArray(routesArray);
                 }
                 setSchedule(calculatedSchedule(data.data.schedule, date));
                 CreateRoutes(data, setRoutesArray);
 
             });
-            
 
-    } 
+
+    }
 
     // Fetch schedule
     useEffect(() => {
@@ -239,7 +241,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-                {data && console.log(data)}
+                {/* {data && console.log(data)} */}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -296,6 +298,7 @@ function App() {
                             activeBus={activeBus}
                             colors={colors}
                             waypoints={waypoints}
+                            tracking={tracking}
                             routesArray={routesArray}
                             oldRoutesArray={oldRoutesArray}
                         />

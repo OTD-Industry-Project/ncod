@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Footer.css';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
@@ -63,6 +63,19 @@ function valuetext(value) {
     hrs + ":" + padZero(mins) + timeType);
 }
 
+function scrubTimer(value) {
+  if (value < 0)
+    value = 0;
+  var hrs = ~~((value / 60) % 24),
+    mins = ~~(value % 60);
+  if (hrs === 24)
+    hrs = "00";
+  if (hrs < 12)
+    hrs = "0" + hrs;
+  return (
+    hrs + ":" + padZero(mins));
+}
+
 
 /* scrub bar function to display actual scrub bar
 min and max set time for day
@@ -70,11 +83,11 @@ step is how often to set points
 marks are the labeling of regular intervals */
 export default function FooterScrubBar({ play, historyMode, action, setDirection }) {
 
-  
+
   function getTimeAsMinutes(date) {
-      return (date.getHours() * 60) + date.getMinutes();
+    return (date.getHours() * 60) + date.getMinutes();
   }
-  
+
   //Setting state to use event changes and set new value when slider is moved
   const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); //420 = 7am in minutes
   const handleChange = (event, newValue) => {
@@ -111,7 +124,9 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
 
   }, [historyMode, action, play, setDirection]);
 
-  console.log(valuetext(value));
+
+
+  console.log(scrubTimer(value));
 
   return (
     <Box>
