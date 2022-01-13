@@ -187,20 +187,26 @@ function App() {
                 const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
 
                 let historyWaypoints = [];
+                let historyTracking = [];
 
                 uniqueBuses.forEach(uniqueBus => {
                     
                     const tmp = data.data.waypoints.filter(({vehicle_id}) => vehicle_id === uniqueBus);
                     let temp = [];
+                    let temp2 = [];
                     tmp.forEach(bus => temp.push([bus.latitude, bus.longitude]));
                     
                     historyWaypoints.push({     
                         [uniqueBus]: temp,
                     });
+                    tmp.forEach(bus => temp2.push(bus));
+                    historyTracking.push({
+                        [uniqueBus]: temp2,
+                    });
                 })
                 
                 setWaypoints(historyWaypoints);
-                console.log(historyWaypoints);
+                console.log(historyTracking);
                 if(routesArray!=null){
                     setOldRoutesArray(routesArray);
                 }

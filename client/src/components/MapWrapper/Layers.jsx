@@ -130,7 +130,6 @@ const Layers = ({ schedule, activeBus, colors, waypoints, routesArray, oldRoutes
                 {waypoints &&
                     waypoints.map((bus, index) => {
                         let k = Object.keys(bus);
-                        console.log(bus);
                         return (
                             <Polyline
                                 key={`${index}`}
