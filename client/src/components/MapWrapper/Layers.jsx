@@ -31,7 +31,6 @@ const Layers = ({ schedule, activeBus, colors, waypoints, routesArray, oldRoutes
         if(oldRoutesArray!=null){
             for(let route of oldRoutesArray){
                 maps.removeControl(route[0].route);
-                console.log('removing');
             }
         }
         if(activeBus==null && routesArray!=null){
@@ -131,7 +130,7 @@ const Layers = ({ schedule, activeBus, colors, waypoints, routesArray, oldRoutes
                 {waypoints &&
                     waypoints.map((bus, index) => {
                         let k = Object.keys(bus);
-                        //console.log(bus[k[0]]);
+                        console.log(bus);
                         return (
                             <Polyline
                                 key={`${index}`}

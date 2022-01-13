@@ -28,7 +28,6 @@ function CreateRoutes(data, setRoutesArray){
             controlsArray.push(
                 [{
                     route: L.Routing.control({
-                        // serviceUrl: '//localhost:5000/route/v1',
                         waypoints: [
                             L.latLng(value.pickup_latitude, value.pickup_longitude),
                             L.latLng(value.destination_latitude, value.destination_longitude),
@@ -47,7 +46,6 @@ function CreateRoutes(data, setRoutesArray){
                 },value.vehicle_id]
             )
         ))
-        console.log('c-array', controlsArray);
         setRoutesArray(controlsArray);
     }
 }
@@ -98,7 +96,6 @@ function App() {
 
         if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
-            console.log("Row is unselected and Active bus is set back to null");
         } else {
             setActiveBus(schedule[index]);
         }
@@ -203,13 +200,11 @@ function App() {
                 })
                 
                 setWaypoints(historyWaypoints);
-                console.log('ra',routesArray);
+                console.log(historyWaypoints);
                 if(routesArray!=null){
-                    console.log('setting routes');
                     setOldRoutesArray(routesArray);
                 }
                 setSchedule(calculatedSchedule(data.data.schedule, date));
-                console.log('ROUTES:',data);
                 CreateRoutes(data, setRoutesArray);
 
             });
