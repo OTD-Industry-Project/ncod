@@ -14,6 +14,43 @@ import Loading from "./components/Loading";
 import { calculatedSchedule } from "./helpers/ScheduleHelper";
 import * as ROUTES from './constants/routes';
 import { timestampFormat } from "concurrently/src/defaults";
+import L from 'leaflet';
+import "leaflet-routing-machine";
+import '../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css';
+import { useMap } from 'leaflet';
+
+function CreateRoutes(data, setRoutesArray){
+    //GENERATE ROUTES ON LOAD
+    var controlsArray=[];
+    console.log('data:',data)
+    if (data != null) {
+        data.data.schedule.map((value, index) => (
+            controlsArray.push(
+                [{
+                    route: L.Routing.control({
+                        // serviceUrl: '//localhost:5000/route/v1',
+                        waypoints: [
+                            L.latLng(value.pickup_latitude, value.pickup_longitude),
+                            L.latLng(value.destination_latitude, value.destination_longitude),
+                        ],
+                        lineOptions: {
+                            styles: [{ color: 'rgb(0, 220, 240)', weight: 6 }]
+                        },
+                        show: false,
+                        showAlternatives: false,
+                        createMarker: function () { return null },
+                        fitSelectedRoutes: false,
+                        addWaypoints: false,
+                        draggableWaypoints: false,
+                    }),
+                    onScreen: false
+                },value.vehicle_id]
+            )
+        ))
+        console.log('c-array', controlsArray);
+        setRoutesArray(controlsArray);
+    }
+}
 
 function App() {
 
@@ -29,6 +66,8 @@ function App() {
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);
+    const [routesArray, setRoutesArray] = useState(null);
+    const [oldRoutesArray, setOldRoutesArray] = useState(null);
     const [colors, setColors] = useState({
         predeparted: "#1e90ff",
         ontime: "#228b22",
@@ -48,6 +87,7 @@ function App() {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
         fetchHistory(newDate);
+        setActiveBus(null);
     };
 
     // Update active bus state
@@ -139,9 +179,9 @@ function App() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({date: date})
+            body: JSON.stringify({ date: date })
         };
-
+        
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
@@ -163,6 +203,14 @@ function App() {
                 })
                 
                 setWaypoints(historyWaypoints);
+                console.log('ra',routesArray);
+                if(routesArray!=null){
+                    console.log('setting routes');
+                    setOldRoutesArray(routesArray);
+                }
+                setSchedule(calculatedSchedule(data.data.schedule, date));
+                console.log('ROUTES:',data);
+                CreateRoutes(data, setRoutesArray);
 
             });
             
@@ -172,16 +220,17 @@ function App() {
     // Fetch schedule
     useEffect(() => {
 
+
+
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())
             .then((data) => {
-                setSchedule(calculatedSchedule(data.data.schedule, new Date()))
+                setSchedule(calculatedSchedule(data.data.schedule, new Date()));
                 let dates = [];
-                data.data.availableHistory.forEach(({date}) => dates.push(new Date(date)));
+                data.data.availableHistory.forEach(({ date }) => dates.push(new Date(date)));
                 setAvaliableHistoryDates(dates);
+                CreateRoutes(data, setRoutesArray);
             });
-
-        
     }, []);
 
 
@@ -189,7 +238,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-            {data && console.log(data)}
+                {data && console.log(data)}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -246,6 +295,8 @@ function App() {
                             activeBus={activeBus}
                             colors={colors}
                             waypoints={waypoints}
+                            routesArray={routesArray}
+                            oldRoutesArray={oldRoutesArray}
                         />
 
 

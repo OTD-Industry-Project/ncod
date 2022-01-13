@@ -1,18 +1,24 @@
 import React from "react";
 import "./MapWrapper.css";
-import { MapContainer } from "react-leaflet";
+import { MapContainer, useMap } from "react-leaflet";
 import Layers from "./Layers";
 import Loading from "../Loading";
 
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
-function MapWrapper({
-    schedule,
-    activeBus,
-    colors,
-    activeCallBack,
-    waypoints,
-}) {
+function MapWrapper({ schedule, activeBus, colors, activeCallBack, waypoints, routesArray, oldRoutesArray }) {
+    function Event() {
+        var map = useMap();
+        if (routesArray != null) {
+            for (let route of routesArray) {
+                // console.log(route);
+                // route[0].route.addTo(map);
+            }
+        }
+
+        return null;
+    }
+
     return (
         <MapContainer
             className="MapWrapper"
@@ -27,12 +33,15 @@ function MapWrapper({
                 [-48.102563, 164.401997],
             ]}
         >
+            <Event />
             {schedule !== null ? (
                 <Layers
                     schedule={schedule}
                     activeBus={activeBus}
                     colors={colors}
                     waypoints={waypoints}
+                    routesArray={routesArray}
+                    oldRoutesArray={oldRoutesArray}
                 />
             ) : (
                 <Loading center />

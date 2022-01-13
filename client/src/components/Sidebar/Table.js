@@ -9,7 +9,7 @@ export const getTime = (value) => {
     return <>{time.toLocaleTimeString([], { hour12: false })}</>;
 };
 
-export const Table = ({ schedule, activeCallBack }) => {
+export const Table = ({ schedule, activeCallBack, activeBus }) => {
     const COLUMNS = [
         {
             Header: "Status",
@@ -166,7 +166,7 @@ export const Table = ({ schedule, activeCallBack }) => {
                             <tr
                                 key={i}
                                 onClick={() => handleEvent(row.original, i)}
-                                className={selectedRow === i ? "selected" : ""}
+                                className={selectedRow === i && activeBus !== null ? "selected" : ""}
                                 {...row.getRowProps()}
                             >
                                 {/* Iterate over each cell in the row and return the rendered cell */}

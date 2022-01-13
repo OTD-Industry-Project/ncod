@@ -13,7 +13,7 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
-const Layers = ({ schedule, activeBus, colors, waypoints }) => {
+const Layers = ({ schedule, activeBus, colors, waypoints, routesArray, oldRoutesArray }) => {
     // Create custom Marker Icons
     var icon = divIcon();
     // Variable for icon colors
@@ -24,10 +24,31 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
         const [position, setPosition] = useState(null);
+        
 
         // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap();
+        if(oldRoutesArray!=null){
+            for(let route of oldRoutesArray){
+                maps.removeControl(route[0].route);
+                console.log('removing');
+            }
+        }
+        if(activeBus==null && routesArray!=null){
+            for(let route of routesArray){
+                maps.removeControl(route[0].route)
+            }
+        }
         if (position === null && activeBus !== null) {
+            //display a route
+            // console.log(activeBus.vehicle_id)
+            for(let route of routesArray){
+                maps.removeControl(route[0].route)
+                if(route[1]==activeBus.vehicle_id){
+                    route[0].route.addTo(maps);
+                }
+                // console.log
+            }
             setPosition(
                 activeBus.pickup_longitude + ", " + activeBus.pickup_latitude
             );
@@ -105,7 +126,7 @@ const Layers = ({ schedule, activeBus, colors, waypoints }) => {
                 <AttributionControl position="bottomleft" />
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
-                <LayersControl.Overlay checked name='routes'>
+                <LayersControl.Overlay name='All Routes'>
                 <FeatureGroup>
                 {waypoints &&
                     waypoints.map((bus, index) => {
