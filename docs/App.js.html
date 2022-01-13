@@ -1,4 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: App.js</title>
 
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: App.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 import "./App.css";
 import Header from "./components/Header/Header";
 import { isSameDay } from "./components/Header/Datetime";
@@ -128,7 +156,7 @@ function App() {
         const index = schedule.findIndex((obj) => obj.job_id === job_id);
 
 
-        if (activeBus !== null && activeBus.job_id === job_id) {
+        if (activeBus !== null &amp;&amp; activeBus.job_id === job_id) {
             setActiveBus(null);
             console.log("Row is unselected and Active bus is set back to null");
         } else {
@@ -173,9 +201,9 @@ function App() {
     };
 
 
-    /**
-     * function 
-     */
+    /***** On App load *****/
+
+    // Get/Set theme and color scheme from local storage
     useEffect(() => {
 
         const existingTheme = localStorage.getItem("theme");
@@ -278,17 +306,17 @@ function App() {
 
 
     return (
-        <ThemeProvider theme={theme ? darkTheme : lightTheme}>
-            <>
-                {data && console.log(data)}
-                <GlobalStyle />
+        &lt;ThemeProvider theme={theme ? darkTheme : lightTheme}>
+            &lt;>
+                {data &amp;&amp; console.log(data)}
+                &lt;GlobalStyle />
                 {/* Entire app container */}
-                <div className="container-fluid vh-100 d-flex flex-column">
+                &lt;div className="container-fluid vh-100 d-flex flex-column">
                     {/* Header row with one col */}
-                    <div className="row Header">
-                        <div className="col">
+                    &lt;div className="row Header">
+                        &lt;div className="col">
 
-                            <Header
+                            &lt;Header
                                 changeDate={changeDate}
                                 date={date}
                                 theme={theme}
@@ -296,43 +324,43 @@ function App() {
                                 availableHistoryDates={availableHistoryDates}
                             />
 
-                        </div>
-                    </div>
+                        &lt;/div>
+                    &lt;/div>
                     {/* Footer row with one col */}
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
-                    <div className="Map">
-                        <div className="Sidebar">
-                            <Sidetabs
+                    &lt;div className="Map">
+                        &lt;div className="Sidebar">
+                            &lt;Sidetabs
                                 switchTheme={switchTheme}
                                 colors={colors}
                                 changeColors={changeColors}
                             >
                                 {schedule !== null ? (
-                                    <Table
+                                    &lt;Table
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                         activeBus={activeBus}
                                     />
                                 ) : (
-                                    <Loading />
+                                    &lt;Loading />
                                 )}
 
                                 {schedule !== null ? (
-                                    <MUITable
+                                    &lt;MUITable
                                         schedule={schedule}
                                         activeCallBack={activeCallBack}
                                         colors={colors}
                                         activeBus={activeBus}
                                     />
                                 ) : (
-                                    <Loading />
+                                    &lt;Loading />
                                 )}
-                            </Sidetabs>
-                        </div>
+                            &lt;/Sidetabs>
+                        &lt;/div>
 
 
-                        <MapWrapper
+                        &lt;MapWrapper
                             schedule={schedule}
                             activeBus={activeBus}
                             colors={colors}
@@ -342,19 +370,42 @@ function App() {
                         />
 
 
-                        <div className="Footer">
-                            <Footer
+                        &lt;div className="Footer">
+                            &lt;Footer
                                 handleCallback={playCallback}
                                 play={play}
                                 historyMode={historyMode}
                             />
-                        </div>
-                    </div>
-                </div>
-            </>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/>
 
-        </ThemeProvider>
+        &lt;/ThemeProvider>
     );
 }
 
 export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a></li></ul><h3>Global</h3><ul><li><a href="global.html#MapWrapper">MapWrapper</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu Jan 13 2022 16:04:53 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

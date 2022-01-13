@@ -34,7 +34,7 @@ const getHistory = async (req, res) => {
             [`"${date.toLocaleDateString('fr-CA')}"`]
         );
 
-        const waypoints = await db.query(`SELECT vehicle_id, latitude, longitude FROM history where DATE(time_stamp) = DATE($1)`, [`"${date.toLocaleDateString('fr-CA')}"`]);
+        const waypoints = await db.query(`SELECT vehicle_id, time_stamp::time, latitude, longitude FROM history where DATE(time_stamp) = DATE($1)`, [`"${date.toLocaleDateString('fr-CA')}"`]);
 //testing logs
         console.log(date.toLocaleDateString('fr-CA'));
         console.log(date.toLocaleDateString('fr-CA') + " " + date.toLocaleTimeString(['en-AU'], { hourCycle: 'h23' }));
