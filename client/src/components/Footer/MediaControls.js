@@ -7,6 +7,8 @@ import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useTheme } from '@mui/material/styles';
 
+/** @module MediaControls */
+
 /**
  * function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
  * 

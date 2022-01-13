@@ -16,5 +16,8 @@
       "recurse": true,
       "destination": "./docs/",
       "readme": "README.md"
+    },
+    "templates": {
+      "search": true
     }
   }
