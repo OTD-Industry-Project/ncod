@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/Header/HistoryToggle.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,64 +75,117 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/Header/HistoryToggle.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>NCOD</h1>
-<p>Single-Page fleet management app using PERN stack by:</p>
-<ol>
-<li>Jamie Garner</li>
-<li>James Hawes</li>
-<li>Joesph Ising</li>
-<li>Mark Dodson</li>
-</ol>
-<h2>Get Started</h2>
-<h2>Clone the repo</h2>
-<p><code>git clone https://github.com/OTD-Industry-Project/ncod.git</code></p>
-<h2>Installing Dependencies</h2>
-<p>From within the root directory, run <code>npm run i</code> to install both client and server dependencies</p>
-<h2>Starting the App</h2>
-<p>Running <code>npm run dev</code> will run both the React app and Express server concurrently in the same terminal.</p>
-<p>To kill both processes, hit <code>Ctrl-C</code> twice.</p>
-<h3>Starting each individually</h3>
-<p>You will need two terminals open - One for the Express server, and the other for the React app</p>
-<h4>Start the Express Server</h4>
-<p>In the first terminal, and from within the <code>server</code> folder run <code>npm start</code></p>
-<h4>Start the React app</h4>
-<p>In the second terminal, and from within the <code>client</code> folder run <code>npm start</code></p>
-<h2>Making Changes</h2>
-<ul>
-<li>While running in both terminals, go to http://localhost:3000</li>
-<li>Any changes made to the client should automatically refresh the react app</li>
-<li>Any changes made to the server should automatically restart the server</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./Header.css";
+import Switch from "react-switch";
+
+/** @module HistoryToggle */
+/**
+ * When toggled, datepicker is displayed. If date is changed, sets Global date of App.
+ * 
+ * @function HistoryToggle
+ * @param {callback} changeDate Callback that sets the the global state of App.
+ * @param {array} availableHistoryDates Array of dates used to populate the calendar.
+ * @returns {Component} Renderable component
+ */
+function HistoryToggle({ changeDate, availableHistoryDates }) {
+
+    /**
+     * Inner state variables
+     * @function state_hooks
+     * @param {date} startDate Date that the datepicker defaults to
+     * @param {boolean} checked Track state of toggle 
+     */
+    const [startDate, setStartDate] = useState(new Date());
+    const [checked, setChecked] = useState(false);
+    
+    /**
+     * The logic behind the toggle. 
+     * @function handleChange
+     * @param {boolean} nextChecked Boolean value that is used to set state.
+     */
+    const handleChange = (nextChecked) => {
+        setChecked(nextChecked);
+        if (checked) {
+            onTrigger(startDate, true);
+        }
+    };
+
+    /**
+     * Event handling. When toggleState changes, this fires.
+     * @function onTrigger
+     * @param {date} d New Date to set 
+     * @param {boolean} reset Flag. If true, date should be reset back to current day.
+     */
+    const onTrigger = (d, reset) => {
+
+        if (reset) {
+            changeDate(new Date());
+            setStartDate(new Date());
+        } else {
+            changeDate(d);
+            setStartDate(d);
+        }
+    };
+
+    return (
+        &lt;div className="container-fluid d-flex">
+            &lt;label className="switch d-flex align-items-center">
+                &lt;span>Live&lt;/span>
+                &lt;Switch
+                    onChange={handleChange}
+                    checked={checked}
+                    className="react-switch"
+                    onColor="#86d3ff"
+                    offColor="#85b858"
+                    offHandleColor="#567a36"
+                    onHandleColor="#2693e6"
+                    handleDiameter={30}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                    height={20}
+                    width={48}
+                />
+                &lt;span>History&lt;/span>
+            &lt;/label>
+            &lt;DatePicker
+                todayButton="Reset"
+                minDate={new Date(2021, 9, 1)} //YYYY, M, D format
+                includeDates={availableHistoryDates}
+                maxDate={new Date()}
+                className={checked ? "date-picker" : "date-picker d-none" }
+                selected={startDate}
+                onChange={(date) => {
+                    onTrigger(date, !checked);
+                }}
+                dateFormat="dd/MM/yyyy"
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                height={2000}
+            />
+        &lt;/div>
+    );
+}
+
+export default HistoryToggle;</code></pre>
+        </article>
     </section>
-
-
 
 
 

@@ -72,10 +72,25 @@ function CreateRoutes(data, setRoutesArray){
  * @author Joseph Ising
  * 
  * @returns The entire app as JSX
+ * 
  */
 function App() {
 
-    /** Global state hooks */
+    /** 
+     * @function Hooks global state hooks 
+     * @param {array} waypoints array of waypoints in format [lat, long]
+     * @param {array} availableHistoryDates array of Dates
+     * @param {Object} data raw Data fetched from database
+     * @param {date} date global Date
+     * @param {boolean} play True = Play, false = Paused
+     * @param {boolean} historyMode Switch history mode on and off
+     * @param {array} schedule array of objects containing job info
+     * @param {Object} activeBus Single Job object
+     * @param {boolean} theme true = dark, false = light
+     * @param {array} routesArray array of routes
+     * @param {array} oldRoutesArray array of old routes
+     * @param {Object} colors Object containing a color for each status.
+     */
     const [waypoints, setWaypoints] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
     const [data, setData] = useState(null);
@@ -154,10 +169,13 @@ function App() {
      * @param {string} color Hex code of new color to be set 
      */
     const changeColors = (key, color) => {
+        
+        // Try and get local color scheme from browser
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
         );
 
+        // If a color scheme already exists in local storage, update it.
         if (existingColorScheme) {
             existingColorScheme[key] = color;
             localStorage.setItem(
@@ -166,6 +184,7 @@ function App() {
             );
         }
 
+        // Set Global color scheme
         setColors((prevColors) => ({
             ...prevColors,
             [key]: color,
@@ -174,7 +193,9 @@ function App() {
 
 
     /**
-     * function 
+     * Checks if browser has existing theme and color scheme set and loads it up. Otherwise, loads a default theme.
+     * @function useEffect__Theme React Life Cycle method - Run's on app load. 
+     * 
      */
     useEffect(() => {
 
@@ -213,8 +234,14 @@ function App() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    /**
+     * Takes a date and attaches it to a post request to fetch history
+     * @function fetchHistory Takes a date and makes a post request to the server to get relevant history information.
+     * @param {date} date Date object
+     */
     const fetchHistory = (date) => {
 
+        // Define the options to attach to the http request
         const options = {
             method: 'POST',
             headers: {
@@ -223,6 +250,7 @@ function App() {
             body: JSON.stringify({ date: date })
         };
         
+        // fetch with predefined routes
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
@@ -258,11 +286,12 @@ function App() {
 
     } 
 
-    // Fetch schedule
+    /**
+     * On app load, makes a get request to Express server. Server queries database and responds with raw Scheduled data
+     * @function useEffect__Load_Schedule React Life Cycle method - Run's on app load. 
+     * 
+     */
     useEffect(() => {
-
-
-
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())
             .then((data) => {

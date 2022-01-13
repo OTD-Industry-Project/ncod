@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/Header/Logo.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,64 +75,44 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/Header/Logo.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>NCOD</h1>
-<p>Single-Page fleet management app using PERN stack by:</p>
-<ol>
-<li>Jamie Garner</li>
-<li>James Hawes</li>
-<li>Joesph Ising</li>
-<li>Mark Dodson</li>
-</ol>
-<h2>Get Started</h2>
-<h2>Clone the repo</h2>
-<p><code>git clone https://github.com/OTD-Industry-Project/ncod.git</code></p>
-<h2>Installing Dependencies</h2>
-<p>From within the root directory, run <code>npm run i</code> to install both client and server dependencies</p>
-<h2>Starting the App</h2>
-<p>Running <code>npm run dev</code> will run both the React app and Express server concurrently in the same terminal.</p>
-<p>To kill both processes, hit <code>Ctrl-C</code> twice.</p>
-<h3>Starting each individually</h3>
-<p>You will need two terminals open - One for the Express server, and the other for the React app</p>
-<h4>Start the Express Server</h4>
-<p>In the first terminal, and from within the <code>server</code> folder run <code>npm start</code></p>
-<h4>Start the React app</h4>
-<p>In the second terminal, and from within the <code>client</code> folder run <code>npm start</code></p>
-<h2>Making Changes</h2>
-<ul>
-<li>While running in both terminals, go to http://localhost:3000</li>
-<li>Any changes made to the client should automatically refresh the react app</li>
-<li>Any changes made to the server should automatically restart the server</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import logo from '../../assets/images/logo.png';
+import logoWhite from '../../assets/images/logo-white.png';
+import Tooltip from '@mui/material/Tooltip';
+import PropTypes from 'prop-types';
+
+/** @module Logo */
+
+/**
+ * Render the Logo
+ * @function Logo
+ * @param {boolean} theme Conditionally render the logo based on theme. 
+ * @returns {Component} Renderable Logo component
+ */
+const Logo = ({ theme }) => {
+    return (
+        &lt;div className="Logo d-flex justify-content-center">
+            &lt;Tooltip disableFocusListener disableTouchListener title="Round &amp; Round" followCursor={true}>
+                &lt;img  src={theme ? logoWhite : logo} alt="otd logo" height="45"/>
+            &lt;/Tooltip>
+            
+        &lt;/div>
+    )
+}
+
+export default Logo;</code></pre>
+        </article>
     </section>
-
-
 
 
 

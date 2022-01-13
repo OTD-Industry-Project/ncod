@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/Footer/Footer.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,64 +75,71 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/Footer/Footer.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>NCOD</h1>
-<p>Single-Page fleet management app using PERN stack by:</p>
-<ol>
-<li>Jamie Garner</li>
-<li>James Hawes</li>
-<li>Joesph Ising</li>
-<li>Mark Dodson</li>
-</ol>
-<h2>Get Started</h2>
-<h2>Clone the repo</h2>
-<p><code>git clone https://github.com/OTD-Industry-Project/ncod.git</code></p>
-<h2>Installing Dependencies</h2>
-<p>From within the root directory, run <code>npm run i</code> to install both client and server dependencies</p>
-<h2>Starting the App</h2>
-<p>Running <code>npm run dev</code> will run both the React app and Express server concurrently in the same terminal.</p>
-<p>To kill both processes, hit <code>Ctrl-C</code> twice.</p>
-<h3>Starting each individually</h3>
-<p>You will need two terminals open - One for the Express server, and the other for the React app</p>
-<h4>Start the Express Server</h4>
-<p>In the first terminal, and from within the <code>server</code> folder run <code>npm start</code></p>
-<h4>Start the React app</h4>
-<p>In the second terminal, and from within the <code>client</code> folder run <code>npm start</code></p>
-<h2>Making Changes</h2>
-<ul>
-<li>While running in both terminals, go to http://localhost:3000</li>
-<li>Any changes made to the client should automatically refresh the react app</li>
-<li>Any changes made to the server should automatically restart the server</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Toolbar, Box } from "@mui/material";
+import React, { Component } from "react";
+import FooterScrubBar from "./FooterScrubBar";
+import MediaControls from "./MediaControls";
+import "./Footer.css";
+
+/** @module Footer */
+
+/**
+ * Container for Media Controls and Scrub bar
+ * @function Footer
+ * @param {props} props Passes various variables and props further down to child Components
+ * @return {Component} Returns renderable component
+ */
+class Footer extends Component {
+    constructor(props) {
+        super(props);
+        
+        /**
+         * @name action
+         * @type {number}
+         * @description Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing 
+         */
+        this.state = {
+            action: 0, // -1 = rewind, 1 = fast-forward and 0 = nothing.
+        };
+    }
+
+    /**
+     * Update the state with the provided number
+     * @function handleDirectionChange
+     * @param {number} dir Number. either -1, 0 or 1. 
+     */
+    handleDirectionChange = (dir) => {
+        this.setState({action: dir});
+    }
+    
+    render() {
+        return (
+            //toolbar returns divs which has responsive resizing and calls other scripts to be placed inside divs
+            &lt;Toolbar>
+                &lt;Box sx={{ flexGrow: 1 }} className="align-self-start">
+                    &lt;MediaControls handleCallback={this.props.handleCallback} setDirection={this.handleDirectionChange}/>
+                &lt;/Box>
+                &lt;Box sx={{ flexGrow: 99 }} className="align-self-end">
+                    &lt;FooterScrubBar play={this.props.play} historyMode={this.props.historyMode} action={this.state.action} setDirection={this.handleDirectionChange}/>
+                &lt;/Box>
+            &lt;/Toolbar>
+        );
+    }
+}
+export default Footer;
+</code></pre>
+        </article>
     </section>
-
-
 
 
 

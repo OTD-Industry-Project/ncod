@@ -1,6 +1,11 @@
 # NCOD
 
-Single-Page fleet management app using PERN stack
+Single-Page fleet management app using PERN stack by:
+
+1. Jamie Garner
+2. James Hawes
+3. Joesph Ising
+4. Mark Dodson
 
 ## Get Started
 

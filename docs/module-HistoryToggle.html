@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Global</title>
+  <title> HistoryToggle</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Title</p>
-                    <h1>Global</h1>
+                    <p>Module</p>
+                    <h1>HistoryToggle</h1>
                 </header>
                 
 
@@ -85,7 +85,6 @@
 
 <header>
     
-        <h2></h2>
         
     
 </header>
@@ -94,44 +93,6 @@
     <div class="container-overview">
     
         
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-</dl>
-
 
         
     
@@ -150,82 +111,6 @@
     
 
     
-        <div class='vertical-section'>
-            <h1>Members</h1>
-            <div class="members">
-            
-                <div class="member">
-
-<h4 class="name" id="State">
-    <a class="href-link" href="#State">#</a>
-    
-    <span class="code-name">
-        State
-    </span>
-    
-</h4>
-
-
-
-
-<div class="description">
-    <p>State hooks</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
-            <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line19">line 19</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
-            
-            </div>
-        </div>
-    
 
     
         <div class='vertical-section'>
@@ -236,12 +121,16 @@
 
 
     
-    <h4 class="name" id="MapWrapper">
-        <a class="href-link" href="#MapWrapper">#</a>
+    <h4 class="name" id="~handleChange">
+        <a class="href-link" href="#~handleChange">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
         
         <span class="code-name">
             
-                MapWrapper<span class="signature">(props)</span><span class="type-signature"></span>
+                handleChange<span class="signature">(nextChecked)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -250,7 +139,7 @@
     
     
     <div class="description">
-        <p>Component that wraps the Map, Layers and Event handling</p>
+        <p>The logic behind the toggle.</p>
     </div>
     
 
@@ -288,10 +177,15 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>props</code></td>
+      <td class="name"><code>nextChecked</code></td>
   
 
   <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
   
   </td>
 
@@ -299,7 +193,7 @@
 
   
 
-  <td class="description last"><p>Destructure into schedule, activeBus, waypoints, Routes and callbacks</p></td>
+  <td class="description last"><p>Boolean value that is used to set state.</p></td>
 </tr>
 
 
@@ -345,9 +239,9 @@
 
     
         <p class="tag-source">
-            <a href="components_MapWrapper_MapWrapper.jsx.html" class="button">View Source</a>
+            <a href="components_Header_HistoryToggle.js.html" class="button">View Source</a>
             <span>
-                <a href="components_MapWrapper_MapWrapper.jsx.html">components/MapWrapper/MapWrapper.jsx</a>, <a href="components_MapWrapper_MapWrapper.jsx.html#line16">line 16</a>
+                <a href="components_Header_HistoryToggle.js.html">components/Header/HistoryToggle.js</a>, <a href="components_Header_HistoryToggle.js.html#line27">line 27</a>
             </span>
         </p>
     
@@ -370,23 +264,6 @@
 
 
 
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>Component</p></div>
-    
-    
-</div>
-
-                
-        </div>
-    </div>
-
 
 
 
@@ -396,12 +273,16 @@
 
 
     
-    <h4 class="name" id="MediaControls">
-        <a class="href-link" href="#MediaControls">#</a>
+    <h4 class="name" id="~HistoryToggle">
+        <a class="href-link" href="#~HistoryToggle">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
         
         <span class="code-name">
             
-                MediaControls<span class="signature">(handleCallback)</span><span class="type-signature"> &rarr; {Component}</span>
+                HistoryToggle<span class="signature">(changeDate, availableHistoryDates)</span><span class="type-signature"> &rarr; {Component}</span>
             
         </span>
     </h4>
@@ -410,7 +291,7 @@
     
     
     <div class="description">
-        <p>function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in &quot;HistoryToggle.js&quot;</p>
+        <p>When toggled, datepicker is displayed. If date is changed, sets Global date of App.</p>
     </div>
     
 
@@ -448,7 +329,7 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>handleCallback</code></td>
+      <td class="name"><code>changeDate</code></td>
   
 
   <td class="type">
@@ -464,7 +345,32 @@
 
   
 
-  <td class="description last"><p>Callback function to track state of play</p></td>
+  <td class="description last"><p>Callback that sets the the global state of App.</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>availableHistoryDates</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">array</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Array of dates used to populate the calendar.</p></td>
 </tr>
 
 
@@ -510,9 +416,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <a href="components_Header_HistoryToggle.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line10">line 10</a>
+                <a href="components_Header_HistoryToggle.js.html">components/Header/HistoryToggle.js</a>, <a href="components_Header_HistoryToggle.js.html#line8">line 8</a>
             </span>
         </p>
     
@@ -559,6 +465,360 @@
                 
         </div>
     </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="~onTrigger">
+        <a class="href-link" href="#~onTrigger">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
+        
+        <span class="code-name">
+            
+                onTrigger<span class="signature">(d, reset)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Event handling. When toggleState changes, this fires.</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>d</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">date</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>New Date to set</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>reset</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Flag. If true, date should be reset back to current day.</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_Header_HistoryToggle.js.html" class="button">View Source</a>
+            <span>
+                <a href="components_Header_HistoryToggle.js.html">components/Header/HistoryToggle.js</a>, <a href="components_Header_HistoryToggle.js.html#line39">line 39</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="~state_hooks">
+        <a class="href-link" href="#~state_hooks">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
+        
+        <span class="code-name">
+            
+                state_hooks<span class="signature">(startDate, checked)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Inner state variables</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>startDate</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">date</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Date that the datepicker defaults to</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>checked</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">boolean</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Track state of toggle</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_Header_HistoryToggle.js.html" class="button">View Source</a>
+            <span>
+                <a href="components_Header_HistoryToggle.js.html">components/Header/HistoryToggle.js</a>, <a href="components_Header_HistoryToggle.js.html#line18">line 18</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

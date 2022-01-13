@@ -1,10 +1,22 @@
 import React from "react";
 import Switch from "react-switch";
 
+/** @module DarkModeToggle */
+
+/**
+ * @funtion A toggle that animates on toggle, and sets state theme with a callback
+ * @param {callback} switchTheme Callback function to switch theme 
+ * @param {boolean} theme Sets inner state according to this.
+ * @returns {Component} A toggle
+ */
 const DarkModeToggle = ({ switchTheme, theme }) => {
     
-
-    const handleChange = (nextChecked) => {
+    /**
+     * Initiates the callback to App.js
+     * @function handleChange 
+     * @description Extends the onChange method provided by react 
+     */
+    const handleChange = () => {
         switchTheme();
     };
 

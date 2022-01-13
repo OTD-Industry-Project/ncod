@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/Header/Header.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,64 +75,88 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/Header/Header.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>NCOD</h1>
-<p>Single-Page fleet management app using PERN stack by:</p>
-<ol>
-<li>Jamie Garner</li>
-<li>James Hawes</li>
-<li>Joesph Ising</li>
-<li>Mark Dodson</li>
-</ol>
-<h2>Get Started</h2>
-<h2>Clone the repo</h2>
-<p><code>git clone https://github.com/OTD-Industry-Project/ncod.git</code></p>
-<h2>Installing Dependencies</h2>
-<p>From within the root directory, run <code>npm run i</code> to install both client and server dependencies</p>
-<h2>Starting the App</h2>
-<p>Running <code>npm run dev</code> will run both the React app and Express server concurrently in the same terminal.</p>
-<p>To kill both processes, hit <code>Ctrl-C</code> twice.</p>
-<h3>Starting each individually</h3>
-<p>You will need two terminals open - One for the Express server, and the other for the React app</p>
-<h4>Start the Express Server</h4>
-<p>In the first terminal, and from within the <code>server</code> folder run <code>npm start</code></p>
-<h4>Start the React app</h4>
-<p>In the second terminal, and from within the <code>client</code> folder run <code>npm start</code></p>
-<h2>Making Changes</h2>
-<ul>
-<li>While running in both terminals, go to http://localhost:3000</li>
-<li>Any changes made to the client should automatically refresh the react app</li>
-<li>Any changes made to the server should automatically restart the server</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+
+import React from 'react';
+import './Header.css';
+import Logo from './Logo';
+import Datetime from './Datetime';
+import HistoryToggle from './HistoryToggle';
+import AlertBtn from './AlertBtn';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import DarkModeToggle from './DarkModeToggle';
+
+
+/**@module Header */
+/**
+ * Main Header script for header component, design to give a top AppBar return an appbar with toolbar, with divs with responsive resizing each div calls another script to be placed inside the initial div
+ * @function Header
+ * @param {props} props Various variables and callbacks that are further passed down to the children Components
+ * @example
+ * 
+    &lt;AppBar className="Header">
+        &lt;Toolbar>
+            &lt;div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                    &lt;Logo theme={this.props.theme} />
+            &lt;/div>
+            &lt;div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2" align="center">
+                &lt;Datetime date={this.props.date}/>
+            &lt;/div>
+            &lt;div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-7">
+                &lt;HistoryToggle changeDate={this.props.changeDate} availableHistoryDates={this.props.availableHistoryDates}/>
+            &lt;/div>
+            &lt;div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
+                &lt;AlertBtn />
+            &lt;/div>
+            &lt;div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
+                &lt;DarkModeToggle theme={this.props.theme} switchTheme={this.props.switchTheme} />
+            &lt;/div>
+            
+        &lt;/Toolbar>
+    &lt;/AppBar>
+  
+ */
+class Header extends React.Component {
+    render() {    
+        return (
+            &lt;AppBar className="Header">
+                &lt;Toolbar>
+                    &lt;div className="col-8 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                         &lt;Logo theme={this.props.theme} />
+                    &lt;/div>
+                    &lt;div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-2" align="center">
+                        &lt;Datetime date={this.props.date}/>
+                    &lt;/div>
+                    &lt;div className="d-none d-sm-block col-sm-2 col-md-2 col-lg-2 col-xl-7">
+                        &lt;HistoryToggle changeDate={this.props.changeDate} availableHistoryDates={this.props.availableHistoryDates}/>
+                    &lt;/div>
+                    &lt;div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
+                        &lt;AlertBtn />
+                    &lt;/div>
+                    &lt;div className="d-none d-sm-none d-md-none d-lg-block col-lg-1 col-xl-1">
+                        &lt;DarkModeToggle theme={this.props.theme} switchTheme={this.props.switchTheme} />
+                    &lt;/div>
+                    
+                &lt;/Toolbar>
+            &lt;/AppBar>
+        );
+    }
+}
+ 
+export default Header;</code></pre>
+        </article>
     </section>
-
-
 
 
 

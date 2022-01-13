@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Global</title>
+  <title> Footer</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,8 +73,8 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Title</p>
-                    <h1>Global</h1>
+                    <p>Module</p>
+                    <h1>Footer</h1>
                 </header>
                 
 
@@ -85,7 +85,6 @@
 
 <header>
     
-        <h2></h2>
         
     
 </header>
@@ -94,44 +93,6 @@
     <div class="container-overview">
     
         
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-</dl>
-
 
         
     
@@ -156,11 +117,23 @@
             
                 <div class="member">
 
-<h4 class="name" id="State">
-    <a class="href-link" href="#State">#</a>
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<span class="param-type">number</span>
+
+
+    </span>
+
+<h4 class="name" id="~action">
+    <a class="href-link" href="#~action">#</a>
+    
+        
+            <span class='tag'>inner</span>
+        
     
     <span class="code-name">
-        State
+        action
     </span>
     
 </h4>
@@ -169,7 +142,7 @@
 
 
 <div class="description">
-    <p>State hooks</p>
+    <p>Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing</p>
 </div>
 
 
@@ -209,9 +182,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <a href="components_Footer_Footer.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line19">line 19</a>
+                <a href="components_Footer_Footer.js.html">components/Footer/Footer.js</a>, <a href="components_Footer_Footer.js.html#line19">line 19</a>
             </span>
         </p>
     
@@ -236,12 +209,16 @@
 
 
     
-    <h4 class="name" id="MapWrapper">
-        <a class="href-link" href="#MapWrapper">#</a>
+    <h4 class="name" id="~Footer">
+        <a class="href-link" href="#~Footer">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
         
         <span class="code-name">
             
-                MapWrapper<span class="signature">(props)</span><span class="type-signature"></span>
+                Footer<span class="signature">(props)</span><span class="type-signature"> &rarr; {Component}</span>
             
         </span>
     </h4>
@@ -250,7 +227,7 @@
     
     
     <div class="description">
-        <p>Component that wraps the Map, Layers and Event handling</p>
+        <p>Container for Media Controls and Scrub bar</p>
     </div>
     
 
@@ -293,13 +270,18 @@
 
   <td class="type">
   
+      
+<span class="param-type">props</span>
+
+
+  
   </td>
 
   
 
   
 
-  <td class="description last"><p>Destructure into schedule, activeBus, waypoints, Routes and callbacks</p></td>
+  <td class="description last"><p>Passes various variables and props further down to child Components</p></td>
 </tr>
 
 
@@ -345,9 +327,9 @@
 
     
         <p class="tag-source">
-            <a href="components_MapWrapper_MapWrapper.jsx.html" class="button">View Source</a>
+            <a href="components_Footer_Footer.js.html" class="button">View Source</a>
             <span>
-                <a href="components_MapWrapper_MapWrapper.jsx.html">components/MapWrapper/MapWrapper.jsx</a>, <a href="components_MapWrapper_MapWrapper.jsx.html#line16">line 16</a>
+                <a href="components_Footer_Footer.js.html">components/Footer/Footer.js</a>, <a href="components_Footer_Footer.js.html#line9">line 9</a>
             </span>
         </p>
     
@@ -378,8 +360,16 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Component</p></div>
+    <div class='param-desc column is-7'><p>Returns renderable component</p></div>
     
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Component</span>
+
+
+    </div>
     
 </div>
 
@@ -396,12 +386,16 @@
 
 
     
-    <h4 class="name" id="MediaControls">
-        <a class="href-link" href="#MediaControls">#</a>
+    <h4 class="name" id="~handleDirectionChange">
+        <a class="href-link" href="#~handleDirectionChange">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
         
         <span class="code-name">
             
-                MediaControls<span class="signature">(handleCallback)</span><span class="type-signature"> &rarr; {Component}</span>
+                handleDirectionChange<span class="signature">(dir)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -410,7 +404,7 @@
     
     
     <div class="description">
-        <p>function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in &quot;HistoryToggle.js&quot;</p>
+        <p>Update the state with the provided number</p>
     </div>
     
 
@@ -448,13 +442,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>handleCallback</code></td>
+      <td class="name"><code>dir</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">callback</span>
+<span class="param-type">number</span>
 
 
   
@@ -464,7 +458,7 @@
 
   
 
-  <td class="description last"><p>Callback function to track state of play</p></td>
+  <td class="description last"><p>Number. either -1, 0 or 1.</p></td>
 </tr>
 
 
@@ -510,9 +504,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <a href="components_Footer_Footer.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line10">line 10</a>
+                <a href="components_Footer_Footer.js.html">components/Footer/Footer.js</a>, <a href="components_Footer_Footer.js.html#line29">line 29</a>
             </span>
         </p>
     
@@ -534,31 +528,6 @@
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>Renderable component</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">Component</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 

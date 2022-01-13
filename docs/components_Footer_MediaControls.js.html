@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> components/Footer/MediaControls.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -73,64 +75,72 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>components/Footer/MediaControls.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>NCOD</h1>
-<p>Single-Page fleet management app using PERN stack by:</p>
-<ol>
-<li>Jamie Garner</li>
-<li>James Hawes</li>
-<li>Joesph Ising</li>
-<li>Mark Dodson</li>
-</ol>
-<h2>Get Started</h2>
-<h2>Clone the repo</h2>
-<p><code>git clone https://github.com/OTD-Industry-Project/ncod.git</code></p>
-<h2>Installing Dependencies</h2>
-<p>From within the root directory, run <code>npm run i</code> to install both client and server dependencies</p>
-<h2>Starting the App</h2>
-<p>Running <code>npm run dev</code> will run both the React app and Express server concurrently in the same terminal.</p>
-<p>To kill both processes, hit <code>Ctrl-C</code> twice.</p>
-<h3>Starting each individually</h3>
-<p>You will need two terminals open - One for the Express server, and the other for the React app</p>
-<h4>Start the Express Server</h4>
-<p>In the first terminal, and from within the <code>server</code> folder run <code>npm start</code></p>
-<h4>Start the React app</h4>
-<p>In the second terminal, and from within the <code>client</code> folder run <code>npm start</code></p>
-<h2>Making Changes</h2>
-<ul>
-<li>While running in both terminals, go to http://localhost:3000</li>
-<li>Any changes made to the client should automatically refresh the react app</li>
-<li>Any changes made to the server should automatically restart the server</li>
-</ul></article>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import './Footer.css';
+import IconButton from '@mui/material/IconButton';
+import PauseRounded from '@mui/icons-material/PauseRounded';
+import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
+import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
+import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
+import { useTheme } from '@mui/material/styles';
+
+/**
+ * function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
+ * 
+ * @function MediaControls
+ * @param {callback} handleCallback Callback function to track state of play 
+ * @returns {Component} Renderable component 
+ */
+function MediaControls({ handleCallback, setDirection }) {
+    
+    /**
+     * @name State
+     * @description State hooks
+     */
+    const theme = useTheme();
+    const [paused, setPaused] = useState(true);
+
+    const handleChange = () => {
+        setPaused(!paused);
+        handleCallback(paused);
+    };
+
+    return (
+        &lt;div>
+            &lt;IconButton aria-label="rewind" onClick={() => theme.direction === 'rtl' ? setDirection(1) : setDirection(-1)} >
+                {theme.direction === 'rtl' ? &lt;FastForwardRounded /> : &lt;FastRewindRounded fontSize="large" />}
+            &lt;/IconButton>
+            &lt;IconButton
+                aria-label={paused ? 'play' : 'pause'}
+                onClick={handleChange}
+            >
+                {paused ? (
+                    &lt;PlayArrowRounded
+                        sx={{ fontSize: '3rem' }}
+                    />
+                ) : (
+                    &lt;PauseRounded sx={{ fontSize: '3rem' }} />
+                )}
+            &lt;/IconButton>
+            &lt;IconButton aria-label="forward" onClick={() => theme.direction === 'rtl' ? setDirection(-1) : setDirection(1)} >
+                {theme.direction === 'rtl' ? &lt;FastRewindRounded /> : &lt;FastForwardRounded fontSize="large" />}
+            &lt;/IconButton>
+        &lt;/div>
+    )
+}
+export default MediaControls;</code></pre>
+        </article>
     </section>
-
-
 
 
 
