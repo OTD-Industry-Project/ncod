@@ -33,7 +33,7 @@ const Layers = ({
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
         const [position, setPosition] = useState(null);
-        console.log(tracking);
+        //console.log(tracking);
         console.log(time);
 
         // When clicked on sidebar, will update position of active selection, flyTo location

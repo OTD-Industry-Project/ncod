@@ -4,17 +4,24 @@ import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
 const BusIcons = (props) => {
-    console.log(props.time);
+    //console.log(props.time);
     const [currentLocations, setCurrentLocations] = useState(props.time);
 
     {props.tracking &&
         props.tracking.map((bus, index) => {
-            //console.log(bus);
-            let k = Object.keys(bus)
-            for (let i=0;i<bus.length;i++){
-               // console.log(bus[i])
-            }
-        //console.log(bus)
+            //console.log(bus,index);
+            let k = Object.keys(bus);
+            props.schedule.forEach(trip => {
+               // console.log(trip.vehicle_id);
+                bus[k].forEach(updated => {
+                    //console.log(updated.time_stamp);
+                    if (updated.time_stamp.substring(0, 5) === props.time) {
+                        console.log("match found : " + updated.latitude + ", " + updated.longitude);
+                    }
+                });
+            });
+        //console.log(bus);
+        //console.log(props.schedule);
     });}
 
     const getNearestMinute = () => {
