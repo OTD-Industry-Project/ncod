@@ -1,4 +1,12 @@
+/**@module ScheduleHelper */
 
+/**
+ * Takes a bus and time and returns an approximate status
+ * @function getStatus
+ * @param {Object} bus Bus object 
+ * @param {date} currentTime Datetime object of current time 
+ * @returns {string} The calculated status of the bus
+ */
 function getStatus(bus, currentTime) {
     const pickup = new Date(bus.pickup_time);
     const dest = new Date(bus.destination_time);
@@ -27,7 +35,12 @@ function getStatus(bus, currentTime) {
     }  
 }
 
-
+/**
+ * Takes a raw schedule and calculates a status for each bus and returns new schedule
+ * @param {Object} rawData Raw schedule data
+ * @param {date} time Datetime object
+ * @returns {Object} With an appended status to each bus
+ */
 export const calculatedSchedule = (rawData, time) => {
     
     let newData = rawData;

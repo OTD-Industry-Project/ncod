@@ -2,6 +2,16 @@ import React from "react";
 import "./Sidebar.css";
 import { getTime } from "./Table";
 
+
+/** @module InfoCard */
+
+/**
+ * Takes two dates and returns the difference in minutes
+ * @function getRuntime
+ * @param {date} pickup Pickup datetime
+ * @param {date} dest Destination datetime 
+ * @returns {number} Minutes between two dates
+ */
 const getRuntime = (pickup, dest) => {
     
     const t1 = new Date(pickup);
@@ -13,8 +23,16 @@ const getRuntime = (pickup, dest) => {
     return destMinutes - pickupMinutes;
 }
 
+/**
+ * Takes a json data as info and outputs to a component with styling and tabularized data.
+ * @function InfoCard
+ * @param {Object} info Schedule information
+ * @param {string} colors Hex codes to style with
+ * @returns {Component} Information with table and styled display
+ */
 const InfoCard = ({ info, colors }) => {
     
+    // Destructure out all relevant fields from info object
     const {
         pickup_time,
         pickup_point,
@@ -29,8 +47,8 @@ const InfoCard = ({ info, colors }) => {
         status,
     } = info;
 
+    // Conditionally set color
     let color;
-
     switch (status) {
         case 'On Time':
             color = colors.ontime;

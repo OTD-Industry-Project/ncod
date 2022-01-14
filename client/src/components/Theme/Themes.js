@@ -1,6 +1,25 @@
 import { createGlobalStyle } from "styled-components";
 
+/** @module Theme */
 
+/**
+ * @constant lightTheme
+ * @description All the properties and colors that make up the styling for the light theme
+ * 
+ * <img src="light-theme.png">
+ * 
+ * @example
+ * export const lightTheme = {
+    appBar: '#0074d9',
+    scrubBar: '#1976d2',
+    warning: 'rgb(255, 244, 229)',
+    info: 'rgb(229, 246, 253)',
+    error: 'rgb(253, 237, 237)',
+    success: 'rgb(237, 247, 237)',
+    selectedRow: '#1976d2'
+};
+ * 
+ */
 export const lightTheme = {
     appBar: '#0074d9',
     scrubBar: '#1976d2',
@@ -11,6 +30,29 @@ export const lightTheme = {
     selectedRow: '#1976d2'
 };
 
+
+/**
+ * @constant darkTheme
+ * @description All the properties and colors that make up the styling for the dark theme
+ * <img src="dark-theme.png">
+ * @example
+ * 
+ * export const darkTheme = {
+    body: '#2C2F33',
+    text: '#FFF',
+    background: '#2C2F33',
+    appBar: '#23272A',
+    icon: 'rgb(133, 184, 88)',
+    scrubBar: 'rgb(133, 184, 88)',
+    warning: 'rgb(255, 215, 157)',
+    info: 'rgb(153, 186, 240)',
+    error: 'rgb(247, 186, 186)',
+    success: 'rgb(153, 240, 169)',
+    mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
+    selectedRow: 'rgb(133, 184, 88)'
+};
+ * 
+ */
 export const darkTheme = {
     body: '#2C2F33',
     text: '#FFF',
@@ -26,6 +68,11 @@ export const darkTheme = {
     selectedRow: 'rgb(133, 184, 88)'
 };
 
+/**
+ * Create a Global style component using the style-components react library
+ * @function GlobalStyle
+ * @description Mixes Javascript and CSS to create dynamic styling that is cascaded down the heirarchy of components whereby, each child component has access to the context.
+ */
 export const GlobalStyle = createGlobalStyle`
     
     ${'' /* * {

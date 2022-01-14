@@ -1,7 +1,17 @@
 import React from "react";
 import "./Sidebar.css";
 
-// Return a simple input field. Updates the filter prop with every key typed
+/** @module Filter */
+
+/**
+ * Return a simple input field. Updates the filter prop with every key typed
+ * @function Filter
+ * @param {string} filter The value after being filtered 
+ * @param {callback} setFilter Sets the value in the parent method
+ * @returns {Component} A search bar
+ * 
+ * <img src="search-bar.png" >
+ */
 export const Filter = ({ filter, setFilter }) => {
     return (
         <div className="Search">

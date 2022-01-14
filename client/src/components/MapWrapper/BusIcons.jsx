@@ -3,14 +3,71 @@ import { LayersControl, FeatureGroup, Popup, Marker } from "react-leaflet";
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
+/**@module BusIcon */
+
+/**
+ * Each entry in the schedule is mapped to a BusIcon
+ * @function BusIcon
+ * @param {props} props Various Objects and variables used to setup each Bus Icon
+ * @returns {Component} Renderable Component
+ *
+ * <img src="bus-icon.png" >
+ */
 const BusIcons = (props) => {
     // Create custom Marker Icons
     var icon = divIcon();
-    // Filtering the schedule to apply different layer controls
+
+    /**
+     * @name Schedule
+     * @description Building the icons with a name and color.
+     * 
+     * @example
+     * 
+     * var schedule = null;
+    var name = "";
+    var busColor;
+    switch (props.type) {
+        // ADD IN A COLOUR
+        case "predeparted":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Pre Departed"
+            );
+            busColor = props.colors.predeparted;
+            name = "predeparted";
+            break;
+        case "ontime":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "On Time"
+            );
+            busColor = props.colors.ontime;
+            name = "ontime";
+            break;
+        case "delayed":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Delayed"
+            );
+            busColor = props.colors.delayed;
+            name = "delayed";
+            break;
+        case "completed":
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Completed"
+            );
+            busColor = props.colors.completed;
+            name = "completed";
+            break;
+        default:
+            schedule = props.schedule.filter(
+                (buses) => buses.status === "Pre Departed"
+            );
+            busColor = props.colors.predeparted;
+            name = "predeparted";
+    }
+     * 
+     */
     var schedule = null;
     var name = "";
     var busColor;
-
     switch (props.type) {
         // ADD IN A COLOUR
         case "predeparted":

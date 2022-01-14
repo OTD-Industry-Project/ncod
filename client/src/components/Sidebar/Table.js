@@ -4,12 +4,29 @@ import "./Sidebar.css";
 import { Filter } from "./Filter";
 import { FiRefreshCw } from "react-icons/fi";
 
+/** @module Table */
+
+/**
+ * @function getTime
+ * @param {date} value Datetime object 
+ * @returns {Component} Stringified local time in 24 hour format
+ */
 export const getTime = (value) => {
     const time = new Date(value);
     return <>{time.toLocaleTimeString([], { hour12: false })}</>;
 };
 
+
+/**
+ * @function Table
+ * @param {Object} schedule Raw schedule data
+ * @param {callback} activeCallBack Update state of activeBus in parent component
+ * @param {Object} activeBus An entry from the schedule that represents on vehicle 
+ * @returns {Component} A functional table with styling and sort/search features
+ */
 export const Table = ({ schedule, activeCallBack, activeBus }) => {
+    
+    // Used to map schedule data to Headers in order to build table
     const COLUMNS = [
         {
             Header: "Status",
@@ -26,11 +43,13 @@ export const Table = ({ schedule, activeCallBack, activeBus }) => {
         {
             Header: "From",
             accessor: "pickup_time",
+            // Format time into human readable format
             Cell: ({ cell: { value } }) => getTime(value),
         },
         {
             Header: "To",
             accessor: "destination_time",
+            // Format time into human readable format
             Cell: ({ cell: { value } }) => getTime(value),
         },
     ];
@@ -43,6 +62,13 @@ export const Table = ({ schedule, activeCallBack, activeBus }) => {
     const [lastUpdated, setLastUpdated] = useState(new Date());
     const [selectedRow, setSelectedRow] = useState(-1);
 
+    /**
+     * Essentially an event handler that sets the activeBus of the row that is selected.
+     * @function handleEvent
+     * @param {Object} row Object containing schedule data from a particular entry 
+     * @param {number} i Index of row in Schedule 
+     *  
+     */
     const handleEvent = (row, i) => {
         activeCallBack(row.job_id);
 

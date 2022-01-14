@@ -4,11 +4,14 @@ import { MapContainer, useMap } from "react-leaflet";
 import Layers from "./Layers";
 import Loading from "../Loading";
 
+/**@module MapWrapper */
+
 /**
  * Default Position map is centered about
  * @name defaultPosition
  * @type {Object}
- * @description In form of: lat: 'coord', long: 'coord'
+ * @example
+ * const defaultPosition = { lat: -37.813629, lng: 144.963058 };
  *
  */
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD

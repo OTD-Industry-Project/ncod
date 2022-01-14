@@ -5,15 +5,36 @@ import { Sidebar, Tab } from "./react-leaflet-sidetabs";
 import "./Sidebar.css";
 import ColorPicker from "./ColorPicker";
 
+/** @module Sidetabs */
 
+/**
+ * Extends the react-leaflet-sidetabs package
+ * @function Sidetabs
+ * @param {props} props Various components and variables
+ * @returns {Component} Floating sidebar
+ */
 const Sidetabs = (props) => {
+    
+    /**
+     * Track state of which tab is open
+     * @function setOpenTab
+     * @param {string} openTab String that represents an internal route to each tab  
+     */
     const [openTab, setOpenTab] = useState("/#schedule");
     
 
+    /**
+     * Event listener that updates state of tabs
+     * @function onClose
+     */
     const onClose = () => {
         setOpenTab(false);
     };
 
+    /**
+     * Event listener that updates state of tabs
+     * @function onOpen
+     */
     const onOpen = (id) => {
         setOpenTab(id);
     };
