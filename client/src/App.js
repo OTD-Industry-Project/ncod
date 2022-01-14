@@ -77,7 +77,7 @@ function App() {
     /***** Callbacks *****/
 
     const timeCallback = (newTime) => {
-       
+        console.log('log called', newTime)
         setTime(newTime);
     }
     
@@ -246,7 +246,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-                { tracking && console.log(tracking) }
+                {/* { tracking && console.log(tracking) } */}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">

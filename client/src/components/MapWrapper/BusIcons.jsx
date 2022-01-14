@@ -18,7 +18,7 @@ const BusIcons = (props) => {
     };
 
     const getNearestMinute = () => {
-        props.tracking && console.log(props.tracking);
+        // props.tracking && props.tracking.forEach(bus => );
     };
 
     useEffect(() => {
