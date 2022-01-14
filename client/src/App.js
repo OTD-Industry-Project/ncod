@@ -22,7 +22,6 @@ import { useMap } from 'leaflet';
 function CreateRoutes(data, setRoutesArray) {
     //GENERATE ROUTES ON LOAD
     var controlsArray = [];
-    console.log('data:', data)
     if (data != null) {
         data.data.schedule.map((value, index) => (
             controlsArray.push(
@@ -55,6 +54,7 @@ function App() {
     /***** Hooks *****/
 
     // App State
+    const [time, setTime] = useState(null);
     const [waypoints, setWaypoints] = useState([]);
     const [tracking, setTracking] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
@@ -75,6 +75,11 @@ function App() {
     });
 
     /***** Callbacks *****/
+
+    const timeCallback = (newTime) => {
+       
+        setTime(newTime);
+    }
     
     // Set Play state
     const handleCallback = (m) => {
@@ -200,6 +205,7 @@ function App() {
                     historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
+                    
                     tmp.forEach(bus => temp2.push(bus));
                     historyTracking.push({
                         [uniqueBus]: temp2,
@@ -208,7 +214,6 @@ function App() {
 
                 setWaypoints(historyWaypoints);
                 setTracking(historyTracking);
-                console.log(historyTracking);
                 if (routesArray != null) {
                     setOldRoutesArray(routesArray);
                 }
@@ -241,7 +246,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-                {/* {data && console.log(data)} */}
+                { tracking && console.log(tracking) }
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -301,6 +306,7 @@ function App() {
                             tracking={tracking}
                             routesArray={routesArray}
                             oldRoutesArray={oldRoutesArray}
+                            time={time}
                         />
 
 
@@ -309,6 +315,7 @@ function App() {
                                 handleCallback={handleCallback}
                                 play={play}
                                 historyMode={historyMode}
+                                timeCallback={timeCallback}
                             />
                         </div>
                     </div>

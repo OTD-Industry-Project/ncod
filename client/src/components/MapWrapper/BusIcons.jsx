@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LayersControl, FeatureGroup, Popup, Marker } from "react-leaflet";
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
 const BusIcons = (props) => {
+    console.log(props.time);
+
+    const [currentLocations, setCurrentLocations] = useState(props.time);
+
+    const compareTimes = (t1, t2) => {
+        const time1 = new Date(t1);
+        const time2 = new Date(t2);
+        console.log(t1, time1);
+        console.log(t2, time2);
+
+        return time1.getMinutes() === time2.getMinutes();
+    };
+
+    const getNearestMinute = () => {
+        props.tracking && console.log(props.tracking);
+    };
+
+    useEffect(() => {
+        getNearestMinute();
+    }, []);
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls

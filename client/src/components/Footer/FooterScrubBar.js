@@ -70,7 +70,7 @@ function scrubTimer(value) {
     mins = ~~(value % 60);
   if (hrs === 24)
     hrs = "00";
-  if (hrs < 12)
+  if (hrs < 10)
     hrs = "0" + hrs;
   return (
     hrs + ":" + padZero(mins));
@@ -81,7 +81,7 @@ function scrubTimer(value) {
 min and max set time for day
 step is how often to set points
 marks are the labeling of regular intervals */
-export default function FooterScrubBar({ play, historyMode, action, setDirection }) {
+export default function FooterScrubBar({ play, historyMode, action, setDirection, timeCallback }) {
 
 
   function getTimeAsMinutes(date) {
@@ -92,6 +92,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
   const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); //420 = 7am in minutes
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    timeCallback(scrubTimer(newValue));
   };
 
   useEffect(() => {
@@ -125,8 +126,8 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
   }, [historyMode, action, play, setDirection]);
 
 
-
-  console.log(scrubTimer(value));
+  
+  
 
   return (
     <Box>
