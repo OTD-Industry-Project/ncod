@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Datetime</title>
+  <title> MediaControls <img src="media-controls.png"></title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -78,7 +78,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Module</p>
-                    <h1>Datetime</h1>
+                    <h1>MediaControls <img src="media-controls.png"></h1>
                 </header>
                 
 
@@ -89,14 +89,57 @@
 
 <header>
     
-        
-    
 </header>
 
 <article>
     <div class="container-overview">
     
         
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <span>
+                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
 
         
     
@@ -125,8 +168,8 @@
 
 
     
-    <h4 class="name" id="~Datetime">
-        <a class="href-link" href="#~Datetime">#</a>
+    <h4 class="name" id="~MediaControls">
+        <a class="href-link" href="#~MediaControls">#</a>
         
             
                 <span class='tag'>inner</span>
@@ -134,7 +177,7 @@
         
         <span class="code-name">
             
-                Datetime<span class="signature">(date)</span><span class="type-signature"> &rarr; {Component}</span>
+                MediaControls<span class="signature">(handleCallback)</span><span class="type-signature"> &rarr; {Component}</span>
             
         </span>
     </h4>
@@ -143,7 +186,7 @@
     
     
     <div class="description">
-        <p>Component that keeps track of live time.</p>
+        <p>function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in &quot;HistoryToggle.js&quot;</p>
     </div>
     
 
@@ -181,13 +224,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>date</code></td>
+      <td class="name"><code>handleCallback</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">date</span>
+<span class="param-type">callback</span>
 
 
   
@@ -197,7 +240,7 @@
 
   
 
-  <td class="description last"><p>Inner state is set with this</p></td>
+  <td class="description last"><p>Callback function to track state of play</p></td>
 </tr>
 
 
@@ -243,9 +286,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Header_Datetime.js.html" class="button">View Source</a>
+            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Header_Datetime.js.html">components/Header/Datetime.js</a>, <a href="components_Header_Datetime.js.html#line23">line 23</a>
+                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line16">line 16</a>
             </span>
         </p>
     
@@ -276,7 +319,8 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Renderable component</p></div>
+    <div class='param-desc column is-7'><p>Renderable component</p>
+<img src="media-controls.png"></div>
     
     
     <div class='column is-5 has-text-left'>
@@ -302,8 +346,8 @@
 
 
     
-    <h4 class="name" id="~isSameDay">
-        <a class="href-link" href="#~isSameDay">#</a>
+    <h4 class="name" id="~setPaused">
+        <a class="href-link" href="#~setPaused">#</a>
         
             
                 <span class='tag'>inner</span>
@@ -311,7 +355,7 @@
         
         <span class="code-name">
             
-                isSameDay<span class="signature">(d1, d2)</span><span class="type-signature"> &rarr; {boolean}</span>
+                setPaused<span class="signature">(paused)</span><span class="type-signature"></span>
             
         </span>
     </h4>
@@ -320,7 +364,7 @@
     
     
     <div class="description">
-        <p>Takes two Date objects returns true if they are same day (time of day is irrevelant).</p>
+        <p>Handle state of play and paused</p>
     </div>
     
 
@@ -358,13 +402,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>d1</code></td>
+      <td class="name"><code>paused</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">date</span>
+<span class="param-type">boolean</span>
 
 
   
@@ -374,32 +418,7 @@
 
   
 
-  <td class="description last"><p>First Date</p></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>d2</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">date</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Second Date</p></td>
+  <td class="description last"></td>
 </tr>
 
 
@@ -445,9 +464,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Header_Datetime.js.html" class="button">View Source</a>
+            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Header_Datetime.js.html">components/Header/Datetime.js</a>, <a href="components_Header_Datetime.js.html#line7">line 7</a>
+                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line28">line 28</a>
             </span>
         </p>
     
@@ -469,31 +488,6 @@
 
 
 
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'><p>If dates are same: True. Otherwise false.</p></div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<span class="param-type">boolean</span>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
 
 
 

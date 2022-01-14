@@ -14,17 +14,27 @@ import { useTheme } from '@mui/material/styles';
  * 
  * @function MediaControls
  * @param {callback} handleCallback Callback function to track state of play 
- * @returns {Component} Renderable component 
+ * @returns {Component} Renderable component
+ *         
+ * <img src="media-controls.png">
+ * 
  */
 function MediaControls({ handleCallback, setDirection }) {
     
     /**
-     * @name State
-     * @description State hooks
+     * Handle state of play and paused
+     * @function setPaused
+     * @param {boolean} paused
      */
-    const theme = useTheme();
     const [paused, setPaused] = useState(true);
+    
+    const theme = useTheme();
 
+    /**
+     * Extends the onCLick for the play pause buttons
+     * @function handleChange
+     * 
+     */
     const handleChange = () => {
         setPaused(!paused);
         handleCallback(paused);

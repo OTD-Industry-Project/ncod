@@ -11,7 +11,7 @@ import "./Footer.css";
  * @function Footer
  * @param {props} props Passes various variables and props further down to child Components
  * @return {Component} Returns renderable component
- * @category Footer
+ * 
  * <img src="footer.png">
  */
 class Footer extends Component {
