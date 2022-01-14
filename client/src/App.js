@@ -54,14 +54,14 @@ function App() {
     /***** Hooks *****/
 
     // App State
+    const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(null);
+    const [historyMode, setHistoryMode] = useState(false);
+    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]); 
     const [waypoints, setWaypoints] = useState([]);
     const [tracking, setTracking] = useState([]);
-    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
-    const [data, setData] = useState(null);
-    const [date, setDate] = useState(new Date());
+    const [data, setData] = useState(null);   
     const [play, setPlay] = useState(false);
-    const [historyMode, setHistoryMode] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);

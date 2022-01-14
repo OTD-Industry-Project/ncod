@@ -5,7 +5,6 @@ import "./MapWrapper.css";
 
 const BusIcons = (props) => {
     console.log(props.time);
-
     const [currentLocations, setCurrentLocations] = useState(props.time);
 
     {props.tracking &&

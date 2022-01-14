@@ -89,7 +89,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
   }
 
   //Setting state to use event changes and set new value when slider is moved
-  const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); //420 = 7am in minutes
+  const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); 
 
 
 
