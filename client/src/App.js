@@ -77,13 +77,8 @@ function App() {
     /***** Callbacks *****/
 
     const timeCallback = (newTime) => {
-<<<<<<< HEAD
-        console.log('log called', newTime)
-=======
-        console.log(newTime);
-       
->>>>>>> b96df217315cfa7eca22b09d779229322c0e329f
         setTime(newTime);
+        console.log(newTime);
     }
     
     // Set Play state

@@ -90,13 +90,13 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
 
   //Setting state to use event changes and set new value when slider is moved
   const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); //420 = 7am in minutes
-  
-  
-    
-    
-    
-    
- 
+
+
+
+
+
+
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -118,15 +118,15 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
     if (play && historyMode) {
 
       const interval = setInterval(() => {
-        
+
         setValue((oldValue) => {
 
           timeCallback(scrubTimer(oldValue + 5));
           return oldValue + 5;
-        
+
         });
-        
-        
+
+
       }, 500);
       timeCallback(scrubTimer(value + 5));
       return () => clearInterval(interval);
@@ -134,18 +134,22 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
 
     // temporary for now, need to move in real time, minute by minute
     if (play && !historyMode) {
+      const checkTimer = getTimeAsMinutes(new Date());
+      setValue(getTimeAsMinutes(new Date()));
       const interval = setInterval(() => {
-        setValue(getTimeAsMinutes(new Date()));
-        timeCallback(scrubTimer(getTimeAsMinutes(new Date())));
-      }, 30000);
+        if (checkTimer < getTimeAsMinutes(new Date())) {
+          setValue(getTimeAsMinutes(new Date()));
+          timeCallback(scrubTimer(getTimeAsMinutes(new Date())));
+        }
+      }, 1000);
       return () => clearInterval(interval);
     }
 
   }, [historyMode, action, play, setDirection, timeCallback]);
 
 
-  console.log(scrubTimer(value));
-  
+ 
+
 
   return (
     <Box>

@@ -34,6 +34,7 @@ const Layers = ({
     function LocationMarker() {
         const [position, setPosition] = useState(null);
         console.log(tracking);
+        console.log(time);
 
         // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap();
