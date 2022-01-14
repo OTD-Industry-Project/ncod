@@ -6,21 +6,26 @@ import "./MapWrapper.css";
 const BusIcons = (props) => {
     //console.log(props.time);
     const [currentLocations, setCurrentLocations] = useState(props.time);
-
+    const currentLocation = {};
     {props.tracking &&
         props.tracking.map((bus, index) => {
             //console.log(bus,index);
             let k = Object.keys(bus);
             props.schedule.forEach(trip => {
+                currentLocation[k] = {"latitude" : trip.pickup_latitude, "longitude" : trip.pickup_longitude};
                // console.log(trip.vehicle_id);
                 bus[k].forEach(updated => {
                     //console.log(updated.time_stamp);
                     if (updated.time_stamp.substring(0, 5) === props.time) {
-                        console.log("match found : " + updated.latitude + ", " + updated.longitude);
+                        //console.log("match found : " + updated.latitude + ", " + updated.longitude);
+                        Object.assign(currentLocation[k], { latitude : updated.latitude, longitude : updated.longitude});
+                    }
+                    else {
+                        Object.assign(currentLocation[k], { latitude : trip.pickup_latitude, longitude : trip.pickup_longitude});
                     }
                 });
             });
-        //console.log(bus);
+        console.log(currentLocation);
         //console.log(props.schedule);
     });}
 
