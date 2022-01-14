@@ -128,6 +128,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
         
         
       }, 500);
+      timeCallback(scrubTimer(value + 5));
       return () => clearInterval(interval);
     }
 
@@ -143,7 +144,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
   }, [historyMode, action, play, setDirection, timeCallback]);
 
 
-  
+  console.log(scrubTimer(value));
   
 
   return (

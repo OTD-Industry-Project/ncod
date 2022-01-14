@@ -33,6 +33,7 @@ const Layers = ({
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
         const [position, setPosition] = useState(null);
+        console.log(tracking);
 
         // When clicked on sidebar, will update position of active selection, flyTo location
         const maps = useMap();
@@ -41,7 +42,7 @@ const Layers = ({
                 maps.removeControl(route[0].route);
             }
         }
-        if (activeBus == null && routesArray != null) {
+        if (activeBus === null && routesArray != null) {
             for (let route of routesArray) {
                 maps.removeControl(route[0].route);
             }
@@ -51,7 +52,7 @@ const Layers = ({
             // console.log(activeBus.vehicle_id)
             for (let route of routesArray) {
                 maps.removeControl(route[0].route);
-                if (route[1] == activeBus.vehicle_id) {
+                if (route[1] === activeBus.vehicle_id) {
                     route[0].route.addTo(maps);
                 }
                 // console.log
@@ -110,6 +111,7 @@ const Layers = ({
                 <Popup direction="top" offset={[8, -5]}>
                     <h5>{activeBus.status}</h5> <br />
                     Location: {activeBus.pickup_point} <br />
+                    destination: {activeBus.destination} <br />
                     VehicleID : {activeBus.vehicle_id} <br />
                     DriverID : {activeBus.driver_id} <br />
                 </Popup>

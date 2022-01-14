@@ -8,18 +8,20 @@ const BusIcons = (props) => {
 
     const [currentLocations, setCurrentLocations] = useState(props.time);
 
-    const compareTimes = (t1, t2) => {
-        const time1 = new Date(t1);
-        const time2 = new Date(t2);
-        console.log(t1, time1);
-        console.log(t2, time2);
-
-        return time1.getMinutes() === time2.getMinutes();
-    };
+    {props.tracking &&
+        props.tracking.map((bus, index) => {
+            //console.log(bus);
+            let k = Object.keys(bus)
+            for (let i=0;i<bus.length;i++){
+               // console.log(bus[i])
+            }
+        //console.log(bus)
+    });}
 
     const getNearestMinute = () => {
         // props.tracking && props.tracking.forEach(bus => );
     };
+    
 
     useEffect(() => {
         getNearestMinute();
