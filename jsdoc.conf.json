@@ -8,7 +8,7 @@
       "includePattern": ".+\\.js(doc|x)?$",
       "excludePattern": "(node_modules/|docs)"
     },
-    "plugins": ["plugins/markdown", "node_modules/better-docs/component"],
+    "plugins": ["plugins/markdown", "node_modules/better-docs/category"],
     "cleverLinks": true,
     "monospaceLinks": true,
     "opts": {
@@ -18,6 +18,13 @@
       "readme": "README.md"
     },
     "templates": {
-      "search": true
+      "search": true,
+      "default": {
+        "staticFiles": {
+          "include": [
+            "./client/src/assets/images"
+          ]
+        }
+      }
     }
   }

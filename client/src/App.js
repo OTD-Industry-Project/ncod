@@ -21,7 +21,6 @@ import { useMap } from 'leaflet';
 
 /**@module App */
 
-
 /**
  * @function CreateRoutes
  * @author Joseph Ising
@@ -72,6 +71,9 @@ function CreateRoutes(data, setRoutesArray){
  * @author Joseph Ising
  * 
  * @returns The entire app as JSX
+ * 
+ * 
+ * <img src="demo.png" >
  * 
  */
 function App() {
@@ -193,8 +195,9 @@ function App() {
 
 
     /**
-     * Checks if browser has existing theme and color scheme set and loads it up. Otherwise, loads a default theme.
-     * @function useEffect__Theme React Life Cycle method - Run's on app load. 
+     * React Life Cycle method - Run's on app load.
+     * @function useEffect
+     * @description Checks if browser has existing theme and color scheme set and loads it up. Otherwise, loads a default theme.
      * 
      */
     useEffect(() => {
@@ -287,8 +290,29 @@ function App() {
     } 
 
     /**
-     * On app load, makes a get request to Express server. Server queries database and responds with raw Scheduled data
-     * @function useEffect__Load_Schedule React Life Cycle method - Run's on app load. 
+     * React Life Cycle method - Run's on app load. 
+     * 
+     * @function useEffect 
+     * @description On app load, makes a get request to Express server. Server queries database and responds with raw Scheduled data
+     * @example
+     * 
+     * {
+    "job_id": 400,
+    "vehicle_id": 93,
+    "driver_id": "JOHNSTON",
+    "description_of_job": null,
+    "pickup_time": "2022-01-13T08:30:00.000Z",
+    "pickup_point": "Genazzano College - Group 2",
+    "pickup_latitude": "-37.808730",
+    "pickup_longitude": "145.056010",
+    "destination_time": "2022-01-13T10:20:00.000Z",
+    "destination": "Wesley College Glen Waverley Campus",
+    "destination_latitude": "-37.875200",
+    "destination_longitude": "145.154830",
+    "empty_run": null,
+    "req_facilities": null,
+    "routing_info": null
+  }
      * 
      */
     useEffect(() => {

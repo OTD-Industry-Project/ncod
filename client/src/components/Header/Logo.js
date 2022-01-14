@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../../assets/images/logo.png';
 import logoWhite from '../../assets/images/logo-white.png';
 import Tooltip from '@mui/material/Tooltip';
-import PropTypes from 'prop-types';
 
 /** @module Logo */
 
@@ -11,6 +10,9 @@ import PropTypes from 'prop-types';
  * @function Logo
  * @param {boolean} theme Conditionally render the logo based on theme. 
  * @returns {Component} Renderable Logo component
+ * 
+ * <img src="logo.png" >
+ * 
  */
 const Logo = ({ theme }) => {
     return (
