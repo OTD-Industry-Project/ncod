@@ -10,16 +10,18 @@ const BusIcons = (props) => {
 
     {props.tracking &&
         props.tracking.map((bus, index) => {
-            console.log(bus);
+            //console.log(bus);
             let k = Object.keys(bus)
             for (let i=0;i<bus.length;i++){
-                console.log(bus[i].vehicle_id)
+               // console.log(bus[i])
             }
-        console.log(bus)});}
+        //console.log(bus)
+    });}
 
     const getNearestMinute = () => {
         props.tracking && console.log(props.tracking);
     };
+    
 
     useEffect(() => {
         getNearestMinute();

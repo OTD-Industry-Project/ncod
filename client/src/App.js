@@ -77,6 +77,7 @@ function App() {
     /***** Callbacks *****/
 
     const timeCallback = (newTime) => {
+        console.log(newTime);
        
         setTime(newTime);
     }

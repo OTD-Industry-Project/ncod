@@ -112,6 +112,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
       const interval = setInterval(() => {
         setValue((oldValue) => oldValue + 5);
       }, 500);
+      timeCallback(scrubTimer(value + 5));
       return () => clearInterval(interval);
     }
 
