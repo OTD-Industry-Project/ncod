@@ -122,6 +122,9 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
         setValue((oldValue) => {
 
           timeCallback(scrubTimer(oldValue + 5));
+          if (oldValue >= 1440) {
+            return oldValue = 0 + (oldValue-1440+5);
+          }
           return oldValue + 5;
 
         });
@@ -141,6 +144,10 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
           setValue(getTimeAsMinutes(new Date()));
           timeCallback(scrubTimer(getTimeAsMinutes(new Date())));
         }
+        else {
+          setValue(getTimeAsMinutes(new Date()));
+        }
+
       }, 1000);
       return () => clearInterval(interval);
     }
