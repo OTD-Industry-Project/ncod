@@ -4,6 +4,21 @@ import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
 const BusIcons = (props) => {
+    {props.tracking &&
+        props.tracking.map((bus, index) => {
+            let k = Object.keys(bus);
+            props.schedule.forEach(trip => {
+                bus[k].forEach(updated => {
+                    if (updated.time_stamp.substring(0, 5) === props.time) {
+                        if (trip.vehicle_id.toString() === k.toString()) {
+                            trip.pickup_latitude = updated.latitude;
+                            trip.pickup_longitude = updated.longitude;
+                        }
+                    }
+                });
+            });
+    });}
+
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls
@@ -82,6 +97,7 @@ const BusIcons = (props) => {
                                     <Popup offset={[10, 0]}>
                                         <h5>{buses.status}</h5> <br />
                                         Location: {buses.pickup_point} <br />
+                                        destination: {buses.destination} <br />
                                         VehicleID : {buses.vehicle_id} <br />
                                         DriverID : {buses.driver_id} <br />
                                     </Popup>

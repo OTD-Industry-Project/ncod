@@ -20,14 +20,12 @@ class MUITable extends React.Component {
 
         if (i === this.state.selectedRow) {
             this.setState({selectedRow: -1});
-            console.log('row number ' + i + " deselected"); 
             return;
         }
         
     
         if (this.state.selectedRow !== undefined) {
-            this.setState({selectedRow: i}); 
-            console.log('row number ' + i + " selected"); 
+            this.setState({selectedRow: i});  
         }
     }
     

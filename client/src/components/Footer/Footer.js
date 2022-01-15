@@ -25,7 +25,7 @@ class Footer extends Component {
                     <MediaControls handleCallback={this.props.handleCallback} setDirection={this.handleDirectionChange}/>
                 </Box>
                 <Box sx={{ flexGrow: 99 }} className="align-self-end">
-                    <FooterScrubBar play={this.props.play} historyMode={this.props.historyMode} action={this.state.action} setDirection={this.handleDirectionChange}/>
+                    <FooterScrubBar timeCallback={this.props.timeCallback} play={this.props.play} historyMode={this.props.historyMode} action={this.state.action} setDirection={this.handleDirectionChange}/>
                 </Box>
             </Toolbar>
         );
