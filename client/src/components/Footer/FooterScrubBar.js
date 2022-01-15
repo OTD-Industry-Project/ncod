@@ -148,12 +148,16 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
    * @description Track the state of the value
    */
   const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); 
+<<<<<<< HEAD
   
   /**
    * Updates the value state
    * @param {e} event  
    * @param {number} newValue Value to be set  
    */
+=======
+
+>>>>>>> main
   const handleChange = (event, newValue) => {
     setValue(newValue);
     timeCallback(scrubTimer(newValue));
@@ -218,9 +222,6 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
     }
 
   }, [historyMode, action, play, setDirection, timeCallback, value]);
-
-
- 
 
 
   return (

@@ -114,8 +114,8 @@ class MUITable extends React.Component {
                 bus.status,
                 bus.vehicle_id,
                 bus.destination,
-                getTime(bus.pickup_time),
-                getTime(bus.destination_time),
+                new Date(bus.pickup_time).toLocaleTimeString([], {hour12: false}),
+                new Date(bus.destination_time).toLocaleTimeString([], {hour12: false}),
             ]);
         });
 
