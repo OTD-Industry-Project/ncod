@@ -9,7 +9,13 @@ Single-Page fleet management app using PERN stack by:
 
 ## Generate Docs File
 
-This line will generate docs as Markdown `jsdoc2md --files './client/src/**/*.{js,jsx}' './server/**/*.js' > docs.md`
+### As a website
+
+To generate docs, use  `npm run docs` from within the root directory.
+
+### Generate as Markdown (github flavoured)
+
+From within the root directory, run `jsdoc2md --files './client/src/**/*.{js,jsx}' './server/**/*.js' > docs.md`
 
 ## Get Started
 
