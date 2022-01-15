@@ -7,6 +7,10 @@ Single-Page fleet management app using PERN stack by:
 -   Joesph Ising
 -   Mark Dodson
 
+## Generate Docs File
+
+This line will generate docs as Markdown `jsdoc2md --files './client/src/**/*.{js,jsx}' './server/**/*.js' > docs.md`
+
 ## Get Started
 
 ## Clone the repo
