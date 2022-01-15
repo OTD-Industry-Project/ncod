@@ -23,7 +23,6 @@ import { useMap } from 'leaflet';
 
 /**
  * @function CreateRoutes
- * @author Joseph Ising
  * @param {Object} data Scheduled data that is fetched from database
  * @param {callback} setRoutesArray Call back function to update state of App
  */
@@ -76,7 +75,8 @@ function CreateRoutes(data, setRoutesArray){
 function App() {
 
     /** 
-     * @function Hooks global state hooks 
+     * @function Hooks 
+     * @description global state hooks 
      * @param {array} waypoints array of waypoints in format [lat, long]
      * @param {array} availableHistoryDates array of Dates
      * @param {Object} data raw Data fetched from database
@@ -248,9 +248,11 @@ function App() {
     }, []);
 
     /**
-     * Takes a date and attaches it to a post request to fetch history
-     * @function fetchHistory Takes a date and makes a post request to the server to get relevant history information.
+     * 
+     * @function fetchHistory 
+     * @description Takes a date and makes a post request to the server to get relevant history information.
      * @param {date} date Date object
+     * 
      */
     const fetchHistory = (date) => {
 
