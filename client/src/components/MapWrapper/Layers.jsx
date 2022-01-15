@@ -23,7 +23,8 @@ import BusIcons from "./BusIcons";
  * @param {array} waypoints Array of lat, long coords
  * @param {array} routesArray Array of routes
  * @param {array} oldRoutesArray Array of old routes
- *
+ * @param {date} time Current time selected by Scrub bar
+ * @param {array} tracking Array of tracking objects.
  *
  */
 const Layers = ({
@@ -38,6 +39,7 @@ const Layers = ({
 }) => {
     // Create custom Marker Icons
     var icon = divIcon();
+
     // Variable for icon colors
     var busColor;
 

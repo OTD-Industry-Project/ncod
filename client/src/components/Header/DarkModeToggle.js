@@ -26,14 +26,14 @@ const DarkModeToggle = ({ switchTheme, theme }) => {
                 <Switch
                     checked={theme}
                     onChange={handleChange}
-                    handleDiameter={28}
+                    handleDiameter={30}
                     offColor="#0074D9"
                     onColor="#23272A"
                     offHandleColor="#fff"
                     onHandleColor="#85b858"
                     height={40}
                     width={70}
-                    borderRadius={10}
+                    borderRadius={20}
                     activeBoxShadow="0px 0px 1px 2px #fffc35"
                     uncheckedIcon={
                         <div

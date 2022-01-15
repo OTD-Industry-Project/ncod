@@ -7,7 +7,7 @@
   tracking-code-which-will-go-to-the-HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On The Day components/Footer/Footer.js</title>
+  <title>On The Day client/src/helpers/DataHelper.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-Controllers.html">Controllers</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#processedData">processedData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -93,7 +93,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>components/Footer/Footer.js</h1>
+                    <h1>client/src/helpers/DataHelper.js</h1>
                 </header>
                 
 
@@ -102,60 +102,66 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Toolbar, Box } from "@mui/material";
-import React, { Component } from "react";
-import FooterScrubBar from "./FooterScrubBar";
-import MediaControls from "./MediaControls";
-import "./Footer.css";
-
-/** @module Footer */
-
+            <pre class="prettyprint source linenums"><code>import TEST_DATA from '../TEST_DATA.json';
 /**
- * Container for Media Controls and Scrub bar
- * @function Footer
- * @param {props} props Passes various variables and props further down to child Components
- * @return {Component} Returns renderable component
  * 
- * &lt;img src="footer.png">
+ * @deprecated
  */
-class Footer extends Component {
-    constructor(props) {
-        super(props);
-        
-        /**
-         * @name action
-         * @type {number}
-         * @description Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing 
-         */
-        this.state = {
-            action: 0, // -1 = rewind, 1 = fast-forward and 0 = nothing.
-        };
+export const processedData = () => {
+    // Make a copy of the TEST_DATA file
+    const newData = TEST_DATA;
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
     }
 
-    /**
-     * Update the state with the provided number
-     * @function handleDirectionChange
-     * @param {number} dir Number. either -1, 0 or 1. 
-     */
-    handleDirectionChange = (dir) => {
-        this.setState({action: dir});
-    }
+    // Iterate through each object in newData
+    // Add a randomised status property to each object
+    // Add an ETA property to each object
+    // Remove date from times
+    newData.forEach((el, index) => {
+        
+        // Only reformat string once
+        if (el.ArrivalDateTime.search("/") !== -1) {
+
+            el.uid = index;
+            
+            // Remove dates from PickupDateTime and ArrivalDataTime
+            el.PickupDateTime = el.PickupDateTime.substr(
+                el.PickupDateTime.indexOf(" ") + 1
+            );
+            
+            el.ArrivalDateTime = el.ArrivalDateTime.substr(
+                el.ArrivalDateTime.indexOf(" ") + 1
+            );
+
+            // Set the eta as arrival date time
+            el.eta = el.ArrivalDateTime;
     
-    render() {
-        return (
-            //toolbar returns divs which has responsive resizing and calls other scripts to be placed inside divs
-            &lt;Toolbar>
-                &lt;Box sx={{ flexGrow: 1 }} className="align-self-start">
-                    &lt;MediaControls handleCallback={this.props.handleCallback} setDirection={this.handleDirectionChange}/>
-                &lt;/Box>
-                &lt;Box sx={{ flexGrow: 99 }} className="align-self-end">
-                    &lt;FooterScrubBar play={this.props.play} historyMode={this.props.historyMode} action={this.state.action} setDirection={this.handleDirectionChange}/>
-                &lt;/Box>
-            &lt;/Toolbar>
-        );
-    }
+            // Randomly pick a status
+            switch (getRandomInt(4)) {
+                case 0:
+                    el.status = "On Time";
+                    break;
+                case 1:
+                    el.status = "Pre Departed";
+                    break;
+                case 2:
+                    el.status = "Delayed";
+                    break;
+                case 3:
+                    el.status = "Completed";
+                    break;
+                default:
+                    el.status = "Error";
+            }
+        }
+       
+
+    });
+    return newData;
 }
-export default Footer;
+
 </code></pre>
         </article>
     </section>

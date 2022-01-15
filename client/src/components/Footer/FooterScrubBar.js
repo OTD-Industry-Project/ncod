@@ -96,6 +96,19 @@ function valuetext(value) {
     hrs + ":" + padZero(mins) + timeType);
 }
 
+/**
+ * @function scrubTimer
+ * @description scrub bar function to display actual scrub bar
+min and max set time for day
+step is how often to set points
+marks are the labeling of regular intervals
+ * @param {number} value A time in minutes converted to hh:mm
+ * @returns {string} formatted time string in 24hour time
+ * @example
+ * 
+ * scrubTimer(420) // returns 07:00
+ * scrubTimer(930) // returns 15:30
+ */
 function scrubTimer(value) {
   if (value < 0)
     value = 0;
@@ -110,10 +123,7 @@ function scrubTimer(value) {
 }
 
 
-/* scrub bar function to display actual scrub bar
-min and max set time for day
-step is how often to set points
-marks are the labeling of regular intervals */
+/*  */
 
 /**
  * Tracks state of the Scrub bar and interval and renders it
@@ -148,16 +158,12 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
    * @description Track the state of the value
    */
   const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); 
-<<<<<<< HEAD
   
   /**
    * Updates the value state
    * @param {e} event  
    * @param {number} newValue Value to be set  
    */
-=======
-
->>>>>>> main
   const handleChange = (event, newValue) => {
     setValue(newValue);
     timeCallback(scrubTimer(newValue));

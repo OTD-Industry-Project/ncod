@@ -1,5 +1,8 @@
 import TEST_DATA from '../TEST_DATA.json';
-
+/**
+ * 
+ * @deprecated
+ */
 export const processedData = () => {
     // Make a copy of the TEST_DATA file
     const newData = TEST_DATA;
