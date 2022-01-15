@@ -3,13 +3,12 @@ const db = require("../db");
 
 const GetGPSVehicles = async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM vehicle");
+        const GPSVehicle = await db.query("SELECT vehicle_id, display_name, rego_plate FROM vehicle;");
         console.log(results.rows);
         res.status(200).json({
             status: "success",
-            results: results.rows.length,
             data: {
-                address: results.rows,
+                GPSVehicles: GPSVehicle.rows,
             },
         });
     }
@@ -18,6 +17,59 @@ const GetGPSVehicles = async (req, res) => {
     }
 };
 
+const GetGPSLocationHistory = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
+    try {
+        const locationHistory = await db.query(`SELECT latitude, longitude, ignition, speed, time_stamp FROM history
+        WHERE (DATE(time_stamp) BETWEEN ($1) AND ($2)) AND vehicle_id=($3);`, [`"${date.toLocaleDateString('fr-CA')}", "${date.toLocaleDateString('fr-CA')}", vehicle`]);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                locationHistory: locationHistory.rows
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const GetCurrentGPSSnapshot = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
+    try {
+        const currentGPSShot = await db.query(`SELECT vehicle_id, latitude, longitude, ignition, speed, time_stamp::time 
+        FROM history where DATE(time_stamp) = DATE(now());`);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                currentGPSShot: currentGPSShot.rows,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const GetScheduledVehicles = async (req, res) => {
+    try {
+        const scheduledVehicles = await db.query("SELECT vehicle_id, display_name, facilities FROM vehicle;");
+        console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            data: {
+                scheduledVehicles: scheduledVehicles.rows,
+            },
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
 
 const GetScheduledActivity = async (req, res) => {
     try {
@@ -49,7 +101,6 @@ const GetScheduledActivity = async (req, res) => {
 
             var { rows: [{ addr_id }] } = pickupId[1];
             pickup_id[i] = addr_id;
-            //await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
         }
 
 
@@ -87,11 +138,12 @@ const GetScheduledActivity = async (req, res) => {
     catch (err) {
         console.log(err);
     }
-
-
 };
 
 module.exports = {
     GetGPSVehicles,
+    GetGPSLocationHistory,
+    GetCurrentGPSSnapshot,
+    GetScheduledVehicles,
     GetScheduledActivity
 }
