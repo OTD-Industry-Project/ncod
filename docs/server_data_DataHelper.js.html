@@ -7,7 +7,7 @@
   tracking-code-which-will-go-to-the-HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On The Day client/src/helpers/ScheduleHelper.js</title>
+  <title>On The Day server/data/DataHelper.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -93,7 +93,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Source</p>
-                    <h1>client/src/helpers/ScheduleHelper.js</h1>
+                    <h1>server/data/DataHelper.js</h1>
                 </header>
                 
 
@@ -102,67 +102,132 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**@module ScheduleHelper */
+            <pre class="prettyprint source linenums"><code>/** @module DataHelper */
+
+const fs = require("fs");
 
 /**
- * Takes a bus and time and returns an approximate status
- * @function getStatus
- * @param {Object} bus Bus object 
- * @param {date} currentTime Datetime object of current time 
- * @returns {string} The calculated status of the bus
+ * @const {string} FILE filepath of temp file
  */
-function getStatus(bus, currentTime, tracking) {
-    const pickup = new Date(bus.pickup_time);
-    const dest = new Date(bus.destination_time);
+const FILE = "./server/data/temp-data.json";
+const db = require("../db");
 
-    const pickupMinutes = pickup.getHours() * 60 + pickup.getMinutes();
-    const destMinutes = dest.getHours() * 60 + dest.getMinutes();
-    const currentMinutes =
-        currentTime.getHours() * 60 + currentTime.getMinutes();
-
-    let lastMinutes = 0;
-
-    tracking &amp;&amp;
-        tracking.forEach((b) => {
-            // console.log(b[bus.vehicle_id]);
-            if (b[bus.vehicle_id]) {
-                const indexOfLastEntry = b[bus.vehicle_id].length - 1;
-                const tmp =
-                    b[bus.vehicle_id][indexOfLastEntry].time_stamp.split(":");
-
-                const tempDate = dest;
-                tempDate.setHours(tmp[0], tmp[1]);
-                lastMinutes = tempDate.getHours() * 60 + tempDate.getMinutes();
-
-                // const trackingMinutes = (new Date(b[bus.vehicle_id][indexOfLastEntry].time_stamp).getHours() * 60) + new Date(b[bus.vehicle_id][indexOfLastEntry].time_stamp).getMinutes();
-            }
-        });
-
-    if (destMinutes &lt; currentMinutes &amp;&amp; currentMinutes &lt; lastMinutes) {
-        return "Delayed";
-    } else if (pickupMinutes > currentMinutes) {
-        return "Pre Departed";
-    } else if (currentMinutes > pickupMinutes &amp;&amp; destMinutes > currentMinutes) {
-        return "On Time";
-    } else {
-        return "Completed";
-    }
-}
 
 /**
- * Takes a raw schedule and calculates a status for each bus and returns new schedule
- * @param {Object} rawData Raw schedule data
- * @param {date} time Datetime object
- * @returns {Object} With an appended status to each bus
- */ 
-export const calculatedSchedule = (rawData, time, tracking = null) => {
-    let newData = rawData;
-
-    newData.forEach((bus) => {
-        bus.status = getStatus(bus, time, tracking);
+ * @function writeScheduleToFile
+ * @description Caches the day's schedule to disk. Writes the raw schedule to a .JSON file
+ * @param {array} schedule Array of objects (JSON data) 
+ */
+const writeScheduleToFile = (schedule) => {
+    
+    let data = JSON.stringify(schedule, null, 2);
+    fs.writeFile(FILE, data, (err) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("File written successfully\n");
+            console.log("The written has the following contents:");
+            console.log(fs.readFileSync(FILE, "utf8"));
+        }
     });
+};
 
-    return newData;
+/**
+ * @function readScheduleFromFile
+ * @async
+ * @description Reads the cached schedule from file
+ * @returns {Object} JSON object of day's schedule
+ */
+const readScheduleFromFile = async () => {
+    fs.readFile(FILE, "utf8", (err, jsonString) => {
+        if (err) {
+            console.log("Error reading file from disk:", err);
+            return null;
+        }
+        try {
+            const schedule = JSON.parse(jsonString);
+            console.log(schedule);
+            return schedule;
+        } catch (err) {
+            console.log("Error parsing JSON string:", err);
+        }
+    });
+};
+
+/**
+ * @function getScheduledActivity
+ * @async
+ * @description Reads the cached schedule from file
+ * @returns {Object} JSON object of day's schedule
+ */
+const getScheduledActivity = async () => {
+    try {
+        const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");
+
+        let scheduledActivity = [];
+        results.rows.forEach(row => {
+            scheduledActivity.push(row);
+        })
+        let dailySchedule = {};
+        let pickup_id = [];
+        let dest_id = [];
+
+
+        //looping over schedule, inserting new pickup address in database if not exist, returning matching ID
+        for (i = 0; i &lt; scheduledActivity.length; i++) {
+            const pickupId = await db.query(`INSERT INTO address (addr_name, addr_lat, addr_long)
+        SELECT '${scheduledActivity[i].startlocation}',    ${scheduledActivity[i].startlatitude},    ${scheduledActivity[i].startlongitude}
+        FROM address
+        WHERE NOT EXISTS (SELECT addr_id FROM address WHERE addr_name ='${scheduledActivity[i].startlocation}')
+        LIMIT 1 RETURNING addr_id;
+        SELECT addr_id from address where addr_name ='${scheduledActivity[i].startlocation}';`);
+
+            var { rows: [{ addr_id }] } = pickupId[1];
+            pickup_id[i] = addr_id;
+            //await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
+        }
+
+
+        //looping over schedule, inserting new destination address in database if not exist, returning matching ID
+        for (i = 0; i &lt; scheduledActivity.length; i++) {
+            const destId = await db.query(`INSERT INTO address (addr_name, addr_lat, addr_long)
+        SELECT '${scheduledActivity[i].endlocation}',    ${scheduledActivity[i].endlatitude},    ${scheduledActivity[i].endlongitude}
+        FROM address
+        WHERE NOT EXISTS (SELECT addr_id FROM address WHERE addr_name ='${scheduledActivity[i].endlocation}')
+        LIMIT 1 RETURNING addr_id;
+        SELECT addr_id from address where addr_name ='${scheduledActivity[i].endlocation}';`);
+
+            var { rows: [{ addr_id }] } = destId[1];
+            dest_id[i] = addr_id;
+        }
+
+        for (i = 0; i &lt; scheduledActivity.length; i++) {
+
+            dailySchedule[i] = (scheduledActivity[i].vehicleid + ", '" + scheduledActivity[i].driverid + "', '" +
+                (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + pickup_id[i] + ", '" +
+                (scheduledActivity[i].endtime.toISOString().substring(0, 10) + " " + scheduledActivity[i].endtime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + dest_id[i]
+                + ", " + scheduledActivity[i].routing_info);
+
+            var dateCheck = (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false }));
+
+            //inserting values into jobs table
+            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id,routing_info) SELECT ${dailySchedule[i]}
+            FROM job
+            WHERE NOT EXISTS (SELECT vehicle_id FROM job WHERE pickup_time = '"${dateCheck}"')
+            LIMIT 1;
+            select * from job where DATE(destination_time)=DATE(NOW());`);
+        }
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+
+module.exports = {
+    writeScheduleToFile,
+    readScheduleFromFile,
+    getScheduledActivity,
 };
 </code></pre>
         </article>

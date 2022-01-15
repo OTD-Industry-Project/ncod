@@ -5,7 +5,7 @@
   tracking-code-which-will-go-to-the-HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On The Day Footer</title>
+  <title>On The Day DataHelper</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -91,7 +91,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Module</p>
-                    <h1>Footer</h1>
+                    <h1>DataHelper</h1>
                 </header>
                 
 
@@ -137,20 +137,22 @@
     <span class="method-parameter is-pulled-right">
         <label>Type:</label>
         
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
     </span>
 
-<h4 class="name" id="~action">
-    <a class="href-link" href="#~action">#</a>
+<h4 class="name" id="~FILE">
+    <a class="href-link" href="#~FILE">#</a>
     
         
             <span class='tag'>inner</span>
         
+            <span class='tag'>constant</span>
+        
     
     <span class="code-name">
-        action
+        FILE
     </span>
     
 </h4>
@@ -159,7 +161,7 @@
 
 
 <div class="description">
-    <p>Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing</p>
+    <p>filepath of temp file</p>
 </div>
 
 
@@ -199,9 +201,9 @@
 
     
         <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
+            <a href="server_data_DataHelper.js.html" class="button">View Source</a>
             <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line21">line 21</a>
+                <a href="server_data_DataHelper.js.html">server/data/DataHelper.js</a>, <a href="server_data_DataHelper.js.html#line5">line 5</a>
             </span>
         </p>
     
@@ -226,16 +228,18 @@
 
 
     
-    <h4 class="name" id="~Footer">
-        <a class="href-link" href="#~Footer">#</a>
+    <h4 class="name" id="~getScheduledActivity">
+        <a class="href-link" href="#~getScheduledActivity">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                Footer<span class="signature">(props)</span><span class="type-signature"> &rarr; {Component}</span>
+                getScheduledActivity<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -244,7 +248,7 @@
     
     
     <div class="description">
-        <p>Container for Media Controls and Scrub bar</p>
+        <p>Reads the cached schedule from file</p>
     </div>
     
 
@@ -255,57 +259,6 @@
 
 
 
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>props</code></td>
-  
-
-  <td class="type">
-  
-      
-<span class="param-type">props</span>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"><p>Passes various variables and props further down to child Components</p></td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
 
 
 
@@ -344,9 +297,9 @@
 
     
         <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
+            <a href="server_data_DataHelper.js.html" class="button">View Source</a>
             <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line9">line 9</a>
+                <a href="server_data_DataHelper.js.html">server/data/DataHelper.js</a>, <a href="server_data_DataHelper.js.html#line53">line 53</a>
             </span>
         </p>
     
@@ -377,14 +330,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Returns renderable component</p>
-<img src="footer.png"></div>
+    <div class='param-desc column is-7'><p>JSON object of day's schedule</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Component</span>
+<span class="param-type">Object</span>
 
 
     </div>
@@ -404,16 +356,18 @@
 
 
     
-    <h4 class="name" id="~handleDirectionChange">
-        <a class="href-link" href="#~handleDirectionChange">#</a>
+    <h4 class="name" id="~readScheduleFromFile">
+        <a class="href-link" href="#~readScheduleFromFile">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                handleDirectionChange<span class="signature">(dir)</span><span class="type-signature"></span>
+                readScheduleFromFile<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -422,7 +376,133 @@
     
     
     <div class="description">
-        <p>Update the state with the provided number</p>
+        <p>Reads the cached schedule from file</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_data_DataHelper.js.html" class="button">View Source</a>
+            <span>
+                <a href="server_data_DataHelper.js.html">server/data/DataHelper.js</a>, <a href="server_data_DataHelper.js.html#line31">line 31</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>JSON object of day's schedule</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="~writeScheduleToFile">
+        <a class="href-link" href="#~writeScheduleToFile">#</a>
+        
+            
+                <span class='tag'>inner</span>
+            
+        
+        <span class="code-name">
+            
+                writeScheduleToFile<span class="signature">(schedule)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>Caches the day's schedule to disk. Writes the raw schedule to a .JSON file</p>
     </div>
     
 
@@ -460,13 +540,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>dir</code></td>
+      <td class="name"><code>schedule</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">number</span>
+<span class="param-type">array</span>
 
 
   
@@ -476,7 +556,7 @@
 
   
 
-  <td class="description last"><p>Number. either -1, 0 or 1.</p></td>
+  <td class="description last"><p>Array of objects (JSON data)</p></td>
 </tr>
 
 
@@ -522,9 +602,9 @@
 
     
         <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
+            <a href="server_data_DataHelper.js.html" class="button">View Source</a>
             <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line31">line 31</a>
+                <a href="server_data_DataHelper.js.html">server/data/DataHelper.js</a>, <a href="server_data_DataHelper.js.html#line12">line 12</a>
             </span>
         </p>
     

@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-Controllers.html">Controllers</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
                 
             </nav>
         </div>
@@ -133,14 +133,12 @@ import { useMap } from 'leaflet';
  */
 function CreateRoutes(data, setRoutesArray){
     //GENERATE ROUTES ON LOAD
-    var controlsArray=[];
-    console.log('data:',data)
+    var controlsArray = [];
     if (data != null) {
         data.data.schedule.map((value, index) => (
             controlsArray.push(
                 [{
                     route: L.Routing.control({
-                        // serviceUrl: '//localhost:5000/route/v1',
                         waypoints: [
                             L.latLng(value.pickup_latitude, value.pickup_longitude),
                             L.latLng(value.destination_latitude, value.destination_longitude),
@@ -156,10 +154,9 @@ function CreateRoutes(data, setRoutesArray){
                         draggableWaypoints: false,
                     }),
                     onScreen: false
-                },value.vehicle_id]
+                }, value.vehicle_id]
             )
         ))
-        console.log('c-array', controlsArray);
         setRoutesArray(controlsArray);
     }
 }
@@ -199,10 +196,12 @@ function App() {
      */
     const [waypoints, setWaypoints] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
-    const [play, setPlay] = useState(false);
+    const [time, setTime] = useState(null);
     const [historyMode, setHistoryMode] = useState(false);
+    const [tracking, setTracking] = useState([]);
+    const [play, setPlay] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);
@@ -225,7 +224,19 @@ function App() {
      */
     const playCallback = (e) => {
         setPlay(e);
+
     };
+    
+    
+    const timeCallback = (newTime) => {
+       
+        const datetime = date;
+        const hourMinSec = newTime.split(":");
+        datetime.setHours(hourMinSec[0], hourMinSec[1], 0);
+        
+        setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
+        setTime(newTime);
+    }
 
     /**
      * Callback function to set and update global date of app 
@@ -251,9 +262,8 @@ function App() {
 
         if (activeBus !== null &amp;&amp; activeBus.job_id === job_id) {
             setActiveBus(null);
-            console.log("Row is unselected and Active bus is set back to null");
         } else {
-            setActiveBus(schedule[index]);
+            setActiveBus(schedule[index])            
         }
 
     };
@@ -361,37 +371,42 @@ function App() {
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
-                setSchedule(calculatedSchedule(data.data.schedule, date ));
-                
+                setSchedule(calculatedSchedule(data.data.schedule, date));
+
                 const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
 
                 let historyWaypoints = [];
+                let historyTracking = [];
 
                 uniqueBuses.forEach(uniqueBus => {
-                    
-                    const tmp = data.data.waypoints.filter(({vehicle_id}) => vehicle_id === uniqueBus);
+
+                    const tmp = data.data.waypoints.filter(({ vehicle_id }) => vehicle_id === uniqueBus);
                     let temp = [];
+                    let temp2 = [];
                     tmp.forEach(bus => temp.push([bus.latitude, bus.longitude]));
-                    
-                    historyWaypoints.push({     
+
+                    historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
+                    
+                    tmp.forEach(bus => temp2.push(bus));
+                    historyTracking.push({
+                        [uniqueBus]: temp2,
+                    });
                 })
-                
+
                 setWaypoints(historyWaypoints);
-                console.log('ra',routesArray);
-                if(routesArray!=null){
-                    console.log('setting routes');
+                setTracking(historyTracking);
+                if (routesArray != null) {
                     setOldRoutesArray(routesArray);
                 }
                 setSchedule(calculatedSchedule(data.data.schedule, date));
-                console.log('ROUTES:',data);
                 CreateRoutes(data, setRoutesArray);
 
             });
-            
 
-    } 
+
+    }
 
     /**
      * React Life Cycle method - Run's on app load. 
@@ -437,7 +452,7 @@ function App() {
     return (
         &lt;ThemeProvider theme={theme ? darkTheme : lightTheme}>
             &lt;>
-                {data &amp;&amp; console.log(data)}
+                {/* { tracking &amp;&amp; console.log(tracking) } */}
                 &lt;GlobalStyle />
                 {/* Entire app container */}
                 &lt;div className="container-fluid vh-100 d-flex flex-column">
@@ -494,8 +509,10 @@ function App() {
                             activeBus={activeBus}
                             colors={colors}
                             waypoints={waypoints}
+                            tracking={tracking}
                             routesArray={routesArray}
                             oldRoutesArray={oldRoutesArray}
+                            time={time}
                         />
 
 
@@ -504,6 +521,7 @@ function App() {
                                 handleCallback={playCallback}
                                 play={play}
                                 historyMode={historyMode}
+                                timeCallback={timeCallback}
                             />
                         &lt;/div>
                     &lt;/div>

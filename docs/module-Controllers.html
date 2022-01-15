@@ -5,7 +5,7 @@
   tracking-code-which-will-go-to-the-HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>On The Day Footer</title>
+  <title>On The Day Controllers</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -91,7 +91,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Module</p>
-                    <h1>Footer</h1>
+                    <h1>Controllers</h1>
                 </header>
                 
 
@@ -128,94 +128,6 @@
     
 
     
-        <div class='vertical-section'>
-            <h1>Members</h1>
-            <div class="members">
-            
-                <div class="member">
-
-    <span class="method-parameter is-pulled-right">
-        <label>Type:</label>
-        
-<span class="param-type">number</span>
-
-
-    </span>
-
-<h4 class="name" id="~action">
-    <a class="href-link" href="#~action">#</a>
-    
-        
-            <span class='tag'>inner</span>
-        
-    
-    <span class="code-name">
-        action
-    </span>
-    
-</h4>
-
-
-
-
-<div class="description">
-    <p>Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing</p>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
-            <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line21">line 21</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-</div>
-            
-            </div>
-        </div>
-    
 
     
         <div class='vertical-section'>
@@ -226,16 +138,18 @@
 
 
     
-    <h4 class="name" id="~Footer">
-        <a class="href-link" href="#~Footer">#</a>
+    <h4 class="name" id="~getAddressID">
+        <a class="href-link" href="#~getAddressID">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                Footer<span class="signature">(props)</span><span class="type-signature"> &rarr; {Component}</span>
+                getAddressID<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -244,7 +158,7 @@
     
     
     <div class="description">
-        <p>Container for Media Controls and Scrub bar</p>
+        <p>queries database for a specific address and returns to client</p>
     </div>
     
 
@@ -282,13 +196,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>props</code></td>
+      <td class="name"><code>req</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">props</span>
+<span class="param-type">Object</span>
 
 
   
@@ -298,7 +212,32 @@
 
   
 
-  <td class="description last"><p>Passes various variables and props further down to child Components</p></td>
+  <td class="description last"><p>Http request containing an address id</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
 </tr>
 
 
@@ -344,9 +283,9 @@
 
     
         <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
+            <a href="server_controllers_Controllers.js.html" class="button">View Source</a>
             <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line9">line 9</a>
+                <a href="server_controllers_Controllers.js.html">server/controllers/Controllers.js</a>, <a href="server_controllers_Controllers.js.html#line77">line 77</a>
             </span>
         </p>
     
@@ -377,14 +316,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Returns renderable component</p>
-<img src="footer.png"></div>
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Component</span>
+<span class="param-type">Object</span>
 
 
     </div>
@@ -404,16 +342,18 @@
 
 
     
-    <h4 class="name" id="~handleDirectionChange">
-        <a class="href-link" href="#~handleDirectionChange">#</a>
+    <h4 class="name" id="~getAllAddress">
+        <a class="href-link" href="#~getAllAddress">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                handleDirectionChange<span class="signature">(dir)</span><span class="type-signature"></span>
+                getAllAddress<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -422,7 +362,7 @@
     
     
     <div class="description">
-        <p>Update the state with the provided number</p>
+        <p>queries database for address data and returns to client</p>
     </div>
     
 
@@ -460,13 +400,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>dir</code></td>
+      <td class="name"><code>req</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">number</span>
+<span class="param-type">Object</span>
 
 
   
@@ -476,7 +416,32 @@
 
   
 
-  <td class="description last"><p>Number. either -1, 0 or 1.</p></td>
+  <td class="description last"><p>Http request</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
 </tr>
 
 
@@ -522,9 +487,9 @@
 
     
         <p class="tag-source">
-            <a href="client_src_components_Footer_Footer.js.html" class="button">View Source</a>
+            <a href="server_controllers_Controllers.js.html" class="button">View Source</a>
             <span>
-                <a href="client_src_components_Footer_Footer.js.html">client/src/components/Footer/Footer.js</a>, <a href="client_src_components_Footer_Footer.js.html#line31">line 31</a>
+                <a href="server_controllers_Controllers.js.html">server/controllers/Controllers.js</a>, <a href="server_controllers_Controllers.js.html#line6">line 6</a>
             </span>
         </p>
     
@@ -546,6 +511,439 @@
 
 
 
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="~getHistory">
+        <a class="href-link" href="#~getHistory">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+                <span class='tag'>inner</span>
+            
+        
+        <span class="code-name">
+            
+                getHistory<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>queries database for history data and returns to client</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>req</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http request containing a specific date.</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_controllers_Controllers.js.html" class="button">View Source</a>
+            <span>
+                <a href="server_controllers_Controllers.js.html">server/controllers/Controllers.js</a>, <a href="server_controllers_Controllers.js.html#line32">line 32</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="~getSchedule">
+        <a class="href-link" href="#~getSchedule">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+                <span class='tag'>inner</span>
+            
+        
+        <span class="code-name">
+            
+                getSchedule<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        <p>queries database for schedule data and returns to client</p>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>req</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http request</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="server_controllers_Controllers.js.html" class="button">View Source</a>
+            <span>
+                <a href="server_controllers_Controllers.js.html">server/controllers/Controllers.js</a>, <a href="server_controllers_Controllers.js.html#line103">line 103</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
 
 
 

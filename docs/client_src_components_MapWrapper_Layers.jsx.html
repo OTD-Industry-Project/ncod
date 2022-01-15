@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-Controllers.html">Controllers</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
                 
             </nav>
         </div>
@@ -116,7 +116,6 @@ import {
 } from "react-leaflet";
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
-import { Component } from "react/cjs/react.production.min";
 
 /**@module Layers */
 
@@ -138,6 +137,8 @@ const Layers = ({
     waypoints,
     routesArray,
     oldRoutesArray,
+    time,
+    tracking,
 }) => {
     // Create custom Marker Icons
     var icon = divIcon();
@@ -160,10 +161,9 @@ const Layers = ({
         if (oldRoutesArray != null) {
             for (let route of oldRoutesArray) {
                 maps.removeControl(route[0].route);
-                console.log("removing");
             }
         }
-        if (activeBus == null &amp;&amp; routesArray != null) {
+        if (activeBus === null &amp;&amp; routesArray != null) {
             for (let route of routesArray) {
                 maps.removeControl(route[0].route);
             }
@@ -237,6 +237,7 @@ const Layers = ({
                 &lt;Popup direction="top" offset={[8, -5]}>
                     &lt;h5>{activeBus.status}&lt;/h5> &lt;br />
                     Location: {activeBus.pickup_point} &lt;br />
+                    destination: {activeBus.destination} &lt;br />
                     VehicleID : {activeBus.vehicle_id} &lt;br />
                     DriverID : {activeBus.driver_id} &lt;br />
                 &lt;/Popup>
@@ -265,7 +266,6 @@ const Layers = ({
                         {waypoints &amp;&amp;
                             waypoints.map((bus, index) => {
                                 let k = Object.keys(bus);
-                                console.log(bus);
                                 return (
                                     &lt;Polyline
                                         key={`${index}`}
@@ -282,17 +282,29 @@ const Layers = ({
                     schedule={schedule}
                     type={"predeparted"}
                     colors={colors}
+                    time={time}
+                    tracking={tracking}
                 />
-                &lt;BusIcons schedule={schedule} type={"ontime"} colors={colors} />
+                &lt;BusIcons
+                    schedule={schedule}
+                    type={"ontime"}
+                    colors={colors}
+                    tracking={tracking}
+                    time={time}
+                />
                 &lt;BusIcons
                     schedule={schedule}
                     type={"delayed"}
                     colors={colors}
+                    tracking={tracking}
+                    time={time}
                 />
                 &lt;BusIcons
                     schedule={schedule}
                     type={"completed"}
                     colors={colors}
+                    tracking={tracking}
+                    time={time}
                 />
             &lt;/LayersControl>
         &lt;/>
