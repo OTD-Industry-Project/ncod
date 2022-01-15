@@ -21,14 +21,13 @@
         "search": true,
         "default": {
             "staticFiles": {
-                "include": ["./client/src/assets/images"]
+                "include": ["./client/src/assets/images", "./style.css"]
             }
         },
         "better-docs": {
             "name": "On The Day",
             "title": "On The Day",
-            "css": "style.css",
-            "trackingCode": "tracking-code-which-will-go-to-the-HEAD",
+            "css": "./style.css",
             "hideGenerator": true,
             "navLinks": [
                 {
