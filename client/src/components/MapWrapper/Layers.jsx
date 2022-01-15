@@ -12,7 +12,6 @@ import {
 } from "react-leaflet";
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
-import { Component } from "react/cjs/react.production.min";
 
 /**@module Layers */
 
@@ -34,6 +33,8 @@ const Layers = ({
     waypoints,
     routesArray,
     oldRoutesArray,
+    time,
+    tracking,
 }) => {
     // Create custom Marker Icons
     var icon = divIcon();
@@ -56,10 +57,9 @@ const Layers = ({
         if (oldRoutesArray != null) {
             for (let route of oldRoutesArray) {
                 maps.removeControl(route[0].route);
-                console.log("removing");
             }
         }
-        if (activeBus == null && routesArray != null) {
+        if (activeBus === null && routesArray != null) {
             for (let route of routesArray) {
                 maps.removeControl(route[0].route);
             }
@@ -133,6 +133,7 @@ const Layers = ({
                 <Popup direction="top" offset={[8, -5]}>
                     <h5>{activeBus.status}</h5> <br />
                     Location: {activeBus.pickup_point} <br />
+                    destination: {activeBus.destination} <br />
                     VehicleID : {activeBus.vehicle_id} <br />
                     DriverID : {activeBus.driver_id} <br />
                 </Popup>
@@ -161,7 +162,6 @@ const Layers = ({
                         {waypoints &&
                             waypoints.map((bus, index) => {
                                 let k = Object.keys(bus);
-                                console.log(bus);
                                 return (
                                     <Polyline
                                         key={`${index}`}
@@ -178,17 +178,29 @@ const Layers = ({
                     schedule={schedule}
                     type={"predeparted"}
                     colors={colors}
+                    time={time}
+                    tracking={tracking}
                 />
-                <BusIcons schedule={schedule} type={"ontime"} colors={colors} />
+                <BusIcons
+                    schedule={schedule}
+                    type={"ontime"}
+                    colors={colors}
+                    tracking={tracking}
+                    time={time}
+                />
                 <BusIcons
                     schedule={schedule}
                     type={"delayed"}
                     colors={colors}
+                    tracking={tracking}
+                    time={time}
                 />
                 <BusIcons
                     schedule={schedule}
                     type={"completed"}
                     colors={colors}
+                    tracking={tracking}
+                    time={time}
                 />
             </LayersControl>
         </>

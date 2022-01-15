@@ -96,6 +96,19 @@ function valuetext(value) {
     hrs + ":" + padZero(mins) + timeType);
 }
 
+function scrubTimer(value) {
+  if (value < 0)
+    value = 0;
+  var hrs = ~~((value / 60) % 24),
+    mins = ~~(value % 60);
+  if (hrs === 24)
+    hrs = "00";
+  if (hrs < 10)
+    hrs = "0" + hrs;
+  return (
+    hrs + ":" + padZero(mins));
+}
+
 
 /* scrub bar function to display actual scrub bar
 min and max set time for day
@@ -113,7 +126,7 @@ marks are the labeling of regular intervals */
  * 
  * 
  */
-export default function FooterScrubBar({ play, historyMode, action, setDirection }) {
+export default function FooterScrubBar({ play, historyMode, action, setDirection, timeCallback }) {
 
   /**
    * Convers a time of the day to minutes
@@ -127,7 +140,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
    * = 150 minutes
    */
   function getTimeAsMinutes(date) {
-      return (date.getHours() * 60) + date.getMinutes();
+    return (date.getHours() * 60) + date.getMinutes();
   }
   
   /**
@@ -143,6 +156,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
    */
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    timeCallback(scrubTimer(newValue));
   };
 
   /**
@@ -169,22 +183,45 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
     if (play && historyMode) {
 
       const interval = setInterval(() => {
-        setValue((oldValue) => oldValue + 5);
+
+        setValue((oldValue) => {
+
+          timeCallback(scrubTimer(oldValue + 5));
+          if (oldValue >= 1440) {
+            return oldValue = 0 + (oldValue-1440+5);
+          }
+          return oldValue + 5;
+
+        });
+
+
       }, 500);
+      timeCallback(scrubTimer(value + 5));
       return () => clearInterval(interval);
     }
 
     // Play and NOT history mode (ie. live mode playing)
     if (play && !historyMode) {
+      const checkTimer = getTimeAsMinutes(new Date());
+      setValue(getTimeAsMinutes(new Date()));
       const interval = setInterval(() => {
-        setValue(getTimeAsMinutes(new Date()));
+        if (checkTimer < getTimeAsMinutes(new Date())) {
+          setValue(getTimeAsMinutes(new Date()));
+          timeCallback(scrubTimer(getTimeAsMinutes(new Date())));
+        }
+        else {
+          setValue(getTimeAsMinutes(new Date()));
+        }
+
       }, 1000);
       return () => clearInterval(interval);
     }
 
-  }, [historyMode, action, play, setDirection]);
+  }, [historyMode, action, play, setDirection, timeCallback, value]);
 
-  console.log(valuetext(value));
+
+ 
+
 
   return (
     <Box>

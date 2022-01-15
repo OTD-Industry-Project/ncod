@@ -29,14 +29,12 @@ import { useMap } from 'leaflet';
  */
 function CreateRoutes(data, setRoutesArray){
     //GENERATE ROUTES ON LOAD
-    var controlsArray=[];
-    console.log('data:',data)
+    var controlsArray = [];
     if (data != null) {
         data.data.schedule.map((value, index) => (
             controlsArray.push(
                 [{
                     route: L.Routing.control({
-                        // serviceUrl: '//localhost:5000/route/v1',
                         waypoints: [
                             L.latLng(value.pickup_latitude, value.pickup_longitude),
                             L.latLng(value.destination_latitude, value.destination_longitude),
@@ -52,10 +50,9 @@ function CreateRoutes(data, setRoutesArray){
                         draggableWaypoints: false,
                     }),
                     onScreen: false
-                },value.vehicle_id]
+                }, value.vehicle_id]
             )
         ))
-        console.log('c-array', controlsArray);
         setRoutesArray(controlsArray);
     }
 }
@@ -95,10 +92,12 @@ function App() {
      */
     const [waypoints, setWaypoints] = useState([]);
     const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
-    const [data, setData] = useState(null);
+    // const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
-    const [play, setPlay] = useState(false);
+    const [time, setTime] = useState(null);
     const [historyMode, setHistoryMode] = useState(false);
+    const [tracking, setTracking] = useState([]);
+    const [play, setPlay] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
     const [theme, setTheme] = useState(false);
@@ -121,7 +120,19 @@ function App() {
      */
     const playCallback = (e) => {
         setPlay(e);
+
     };
+    
+    
+    const timeCallback = (newTime) => {
+       
+        const datetime = date;
+        const hourMinSec = newTime.split(":");
+        datetime.setHours(hourMinSec[0], hourMinSec[1], 0);
+        
+        setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
+        setTime(newTime);
+    }
 
     /**
      * Callback function to set and update global date of app 
@@ -147,9 +158,8 @@ function App() {
 
         if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
-            console.log("Row is unselected and Active bus is set back to null");
         } else {
-            setActiveBus(schedule[index]);
+            setActiveBus(schedule[index])            
         }
 
     };
@@ -257,37 +267,42 @@ function App() {
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
-                setSchedule(calculatedSchedule(data.data.schedule, date ));
-                
+                setSchedule(calculatedSchedule(data.data.schedule, date));
+
                 const uniqueBuses = [...new Set(data.data.waypoints.map(bus => bus.vehicle_id))];
 
                 let historyWaypoints = [];
+                let historyTracking = [];
 
                 uniqueBuses.forEach(uniqueBus => {
-                    
-                    const tmp = data.data.waypoints.filter(({vehicle_id}) => vehicle_id === uniqueBus);
+
+                    const tmp = data.data.waypoints.filter(({ vehicle_id }) => vehicle_id === uniqueBus);
                     let temp = [];
+                    let temp2 = [];
                     tmp.forEach(bus => temp.push([bus.latitude, bus.longitude]));
-                    
-                    historyWaypoints.push({     
+
+                    historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
+                    
+                    tmp.forEach(bus => temp2.push(bus));
+                    historyTracking.push({
+                        [uniqueBus]: temp2,
+                    });
                 })
-                
+
                 setWaypoints(historyWaypoints);
-                console.log('ra',routesArray);
-                if(routesArray!=null){
-                    console.log('setting routes');
+                setTracking(historyTracking);
+                if (routesArray != null) {
                     setOldRoutesArray(routesArray);
                 }
                 setSchedule(calculatedSchedule(data.data.schedule, date));
-                console.log('ROUTES:',data);
                 CreateRoutes(data, setRoutesArray);
 
             });
-            
 
-    } 
+
+    }
 
     /**
      * React Life Cycle method - Run's on app load. 
@@ -333,7 +348,7 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-                {data && console.log(data)}
+                {/* { tracking && console.log(tracking) } */}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -390,8 +405,10 @@ function App() {
                             activeBus={activeBus}
                             colors={colors}
                             waypoints={waypoints}
+                            tracking={tracking}
                             routesArray={routesArray}
                             oldRoutesArray={oldRoutesArray}
+                            time={time}
                         />
 
 
@@ -400,6 +417,7 @@ function App() {
                                 handleCallback={playCallback}
                                 play={play}
                                 historyMode={historyMode}
+                                timeCallback={timeCallback}
                             />
                         </div>
                     </div>

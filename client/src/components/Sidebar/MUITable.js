@@ -37,14 +37,12 @@ class MUITable extends React.Component {
         // If row has already been selected, then unselect it. Then return
         if (i === this.state.selectedRow) {
             this.setState({selectedRow: -1});
-            console.log('row number ' + i + " deselected"); 
             return;
         }
         
         // If row has not been already selected, then set the state of the class
         if (this.state.selectedRow !== undefined) {
-            this.setState({selectedRow: i}); 
-            console.log('row number ' + i + " selected"); 
+            this.setState({selectedRow: i});  
         }
     }
     
