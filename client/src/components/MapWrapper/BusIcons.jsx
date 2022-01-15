@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { LayersControl, FeatureGroup, Popup, Marker } from "react-leaflet";
 import { divIcon } from "leaflet";
 import "./MapWrapper.css";
 
 const BusIcons = (props) => {
-    const [currentLocations, setCurrentLocations] = useState(props.time);
     {props.tracking &&
         props.tracking.map((bus, index) => {
             let k = Object.keys(bus);
             props.schedule.forEach(trip => {
                 bus[k].forEach(updated => {
                     if (updated.time_stamp.substring(0, 5) === props.time) {
-                        console.log("match found : \n vehicle_id " + k + ": " + updated.latitude + ", " + updated.longitude);
-                        console.log(trip.vehicle_id + ": " + trip.pickup_latitude + ", " + trip.pickup_longitude);
                         if (trip.vehicle_id.toString() === k.toString()) {
                             trip.pickup_latitude = updated.latitude;
                             trip.pickup_longitude = updated.longitude;
@@ -22,14 +19,6 @@ const BusIcons = (props) => {
             });
     });}
 
-    const getNearestMinute = () => {
-        // props.tracking && props.tracking.forEach(bus => );
-    };
-    
-
-    useEffect(() => {
-        getNearestMinute();
-    }, []);
     // Create custom Marker Icons
     var icon = divIcon();
     // Filtering the schedule to apply different layer controls

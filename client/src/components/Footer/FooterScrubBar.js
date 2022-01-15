@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Footer.css';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
@@ -152,7 +152,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
       return () => clearInterval(interval);
     }
 
-  }, [historyMode, action, play, setDirection, timeCallback]);
+  }, [historyMode, action, play, setDirection, timeCallback, value]);
 
 
  

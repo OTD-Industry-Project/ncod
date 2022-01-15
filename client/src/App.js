@@ -78,7 +78,6 @@ function App() {
 
     const timeCallback = (newTime) => {
         setTime(newTime);
-        console.log(newTime);
     }
     
     // Set Play state
