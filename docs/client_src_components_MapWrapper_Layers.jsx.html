@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  tracking-code-which-will-go-to-the-HEAD
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On The Day client/src/components/MapWrapper/Layers.jsx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="style.css">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">On The Day</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/OTD-Industry-Project/"
+                        >
+                            Github
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>client/src/components/MapWrapper/Layers.jsx</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useRef, useEffect } from "react";
+import {
+    AttributionControl,
+    TileLayer,
+    LayersControl,
+    Popup,
+    ZoomControl,
+    Marker,
+    useMap,
+    Polyline,
+    FeatureGroup,
+} from "react-leaflet";
+import { divIcon } from "leaflet";
+import BusIcons from "./BusIcons";
+import { Component } from "react/cjs/react.production.min";
+
+/**@module Layers */
+
+/**
+ * @function Layers
+ * @param {Object} schedule Raw schedule data - JSON object
+ * @param {Object} activeBus A single entry from schedule data w/ a status attached
+ * @param {Object} colors Global color scheme that is used for layers
+ * @param {array} waypoints Array of lat, long coords
+ * @param {array} routesArray Array of routes
+ * @param {array} oldRoutesArray Array of old routes
+ *
+ *
+ */
+const Layers = ({
+    schedule,
+    activeBus,
+    colors,
+    waypoints,
+    routesArray,
+    oldRoutesArray,
+}) => {
+    // Create custom Marker Icons
+    var icon = divIcon();
+    // Variable for icon colors
+    var busColor;
+
+    // Clicking an item on the sidebar, will change focused position and provide info
+    function LocationMarker() {
+        /**
+         * Track position state
+         * @function setPosition
+         * @param {array} position Array of lat long coords
+         * @example
+         * const position = [144.040383, -37.405732]
+         */
+        const [position, setPosition] = useState(null);
+
+        // When clicked on sidebar, will update position of active selection, flyTo location
+        const maps = useMap();
+        if (oldRoutesArray != null) {
+            for (let route of oldRoutesArray) {
+                maps.removeControl(route[0].route);
+                console.log("removing");
+            }
+        }
+        if (activeBus == null &amp;&amp; routesArray != null) {
+            for (let route of routesArray) {
+                maps.removeControl(route[0].route);
+            }
+        }
+        if (position === null &amp;&amp; activeBus !== null) {
+            //display a route
+            // console.log(activeBus.vehicle_id)
+            for (let route of routesArray) {
+                maps.removeControl(route[0].route);
+                if (route[1] === activeBus.vehicle_id) {
+                    route[0].route.addTo(maps);
+                }
+                // console.log
+            }
+            setPosition(
+                activeBus.pickup_longitude + ", " + activeBus.pickup_latitude
+            );
+            maps.flyTo(
+                [activeBus.pickup_latitude, activeBus.pickup_longitude],
+                14,
+                { duration: 2 }
+            );
+
+            // Setting busColor variable depending no current bus status
+            if (activeBus.status === "On Time") {
+                busColor = colors.ontime;
+            } else if (activeBus.status === "Pre Departed") {
+                busColor = colors.predeparted;
+            } else if (activeBus.status === "Delayed") {
+                busColor = colors.delayed;
+            } else {
+                busColor = colors.completed;
+            }
+
+            // Assigning CSS class based on bus status
+            icon = divIcon({
+                className: "marker",
+                html: `&lt;div style="background-color: ${busColor}">&lt;span>${activeBus.vehicle_id}&lt;/span>`,
+            });
+        }
+
+        /**
+         * Access active bus Marker to force open Popup on selection
+         * @function MyMarker
+         * @param {props} props Props required to build the marker
+         * @returns {Component} A leaflet Marker component
+         */
+        const MyMarker = (props) => {
+            const leafletRef = useRef();
+            useEffect(() => {
+                leafletRef.current.openPopup();
+            }, []);
+            return &lt;Marker ref={leafletRef} {...props} />;
+        };
+
+        // Places a marker at the location, with an open Popup conating info, closeable
+        return position === null ? null : (
+            &lt;MyMarker
+                icon={icon}
+                position={[
+                    activeBus.pickup_latitude,
+                    activeBus.pickup_longitude,
+                ]}
+                /* Using event handlers to access mouseover/out features for hover info
+                to be defined inside the Popup tags  */
+                eventHandlers={{
+                    mouseover: (event) => event.target.openPopup(),
+                    mouseout: (event) => event.target.closePopup(),
+                }}
+            >
+                &lt;Popup direction="top" offset={[8, -5]}>
+                    &lt;h5>{activeBus.status}&lt;/h5> &lt;br />
+                    Location: {activeBus.pickup_point} &lt;br />
+                    VehicleID : {activeBus.vehicle_id} &lt;br />
+                    DriverID : {activeBus.driver_id} &lt;br />
+                &lt;/Popup>
+            &lt;/MyMarker>
+        );
+    }
+
+    // Map layer rendering and marker plots
+    return (
+        &lt;>
+            &lt;ZoomControl position="topright" />{" "}
+            {/* fully customisable zoom controls*/}
+            &lt;LayersControl position="topright">
+                {" "}
+                {/* default map layer */}
+                &lt;TileLayer
+                    attribution='&amp;copy; &lt;a href="http://osm.org/copyright">OpenStreetMap&lt;/a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                {/* fully customisable attribution controls*/}
+                &lt;AttributionControl position="bottomleft" />
+                {/* flyTo function call to focus on active bus*/}
+                &lt;LocationMarker />
+                &lt;LayersControl.Overlay name="All Routes">
+                    &lt;FeatureGroup>
+                        {waypoints &amp;&amp;
+                            waypoints.map((bus, index) => {
+                                let k = Object.keys(bus);
+                                console.log(bus);
+                                return (
+                                    &lt;Polyline
+                                        key={`${index}`}
+                                        weight={8}
+                                        positions={bus[k[0]]}
+                                    />
+                                );
+                            })}
+                    &lt;/FeatureGroup>
+                &lt;/LayersControl.Overlay>
+                {/* Adding each layer for visibility to be toggled on and off as required
+                by looping through the array*/}
+                &lt;BusIcons
+                    schedule={schedule}
+                    type={"predeparted"}
+                    colors={colors}
+                />
+                &lt;BusIcons schedule={schedule} type={"ontime"} colors={colors} />
+                &lt;BusIcons
+                    schedule={schedule}
+                    type={"delayed"}
+                    colors={colors}
+                />
+                &lt;BusIcons
+                    schedule={schedule}
+                    type={"completed"}
+                    colors={colors}
+                />
+            &lt;/LayersControl>
+        &lt;/>
+    );
+};
+
+export default Layers;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

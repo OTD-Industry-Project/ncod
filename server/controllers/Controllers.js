@@ -1,6 +1,16 @@
 const db = require("../db");
 const dataHelper = require("../data/DataHelper");
 
+/** @module Controllers */
+
+/**
+ * @function getAllAddress
+ * @async
+ * @description queries database for address data and returns to client 
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getAllAddress = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM address");
@@ -18,6 +28,15 @@ const getAllAddress = async (req, res) => {
     }
 };
 
+
+/**
+ * @function getHistory
+ * @async
+ * @description queries database for history data and returns to client 
+ * @param {Object} req Http request containing a specific date.
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getHistory = async (req, res) => {
     
     const date = new Date(req.body.date);
@@ -55,6 +74,14 @@ const getHistory = async (req, res) => {
 
 };
 
+/**
+ * @function getAddressID
+ * @async
+ * @description queries database for a specific address and returns to client 
+ * @param {Object} req Http request containing an address id
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getAddressID = async (req, res) => {
     try {
         const results = await db.query(
@@ -73,6 +100,14 @@ const getAddressID = async (req, res) => {
     }
 };
 
+/**
+ * @function getSchedule
+ * @async
+ * @description queries database for schedule data and returns to client 
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getSchedule = async (req, res) => {
     
     await dataHelper.getScheduledActivity();

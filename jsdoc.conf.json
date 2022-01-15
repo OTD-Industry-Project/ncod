@@ -1,30 +1,41 @@
 {
     "tags": {
-      "allowUnknownTags": true,
-      "dictionaries": ["jsdoc", "closure"]
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc", "closure"]
     },
     "source": {
-      "include": ["client/src", "server"],
-      "includePattern": ".+\\.js(doc|x)?$",
-      "excludePattern": "(node_modules/|docs)"
+        "include": ["client/src", "server"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(node_modules/|docs)"
     },
     "plugins": ["plugins/markdown", "node_modules/better-docs/category"],
     "cleverLinks": true,
     "monospaceLinks": true,
     "opts": {
-      "template": "node_modules/better-docs",
-      "recurse": true,
-      "destination": "./docs/",
-      "readme": "README.md"
+        "template": "node_modules/better-docs",
+        "recurse": true,
+        "destination": "./docs/",
+        "readme": "README.md"
     },
     "templates": {
-      "search": true,
-      "default": {
-        "staticFiles": {
-          "include": [
-            "./client/src/assets/images"
-          ]
+        "search": true,
+        "default": {
+            "staticFiles": {
+                "include": ["./client/src/assets/images"]
+            }
+        },
+        "better-docs": {
+            "name": "On The Day",
+            "title": "On The Day",
+            "css": "style.css",
+            "trackingCode": "tracking-code-which-will-go-to-the-HEAD",
+            "hideGenerator": true,
+            "navLinks": [
+                {
+                    "label": "Github",
+                    "href": "https://github.com/OTD-Industry-Project/"
+                }
+            ]
         }
-      }
     }
-  }
+}

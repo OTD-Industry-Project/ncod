@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-  
+  tracking-code-which-will-go-to-the-HEAD
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> MediaControls <img src="media-controls.png"></title>
+  <title>On The Day api-calls</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -19,7 +19,7 @@
   <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
   <link type="text/css" rel="stylesheet" href="styles/app.min.css">
   <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
+  <link type="text/css" rel="stylesheet" href="style.css">
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   
@@ -40,6 +40,10 @@
         </a>
         <div class="logo">
             
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">On The Day</h1>
+                </a>
             
         </div>
         <div class="menu">
@@ -52,6 +56,15 @@
                     API Documentation
                 </a>
                 
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/OTD-Industry-Project/"
+                        >
+                            Github
+                        </a>
+                    
                 
                 
             </div>
@@ -70,7 +83,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="MediaControls%2520%250D%250D_img%2520src=_media-controls.png__module_.html">MediaControls <img src="media-controls.png"></a></li><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-App.html">App</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-Logo.html">Logo</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultPosition">defaultPosition</a></li><li><a href="global.html#MapWrapper">MapWrapper</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul></div>
                 
             </nav>
         </div>
@@ -78,7 +91,7 @@
             <div class="content">
                 <header class="page-title">
                     <p>Module</p>
-                    <h1>MediaControls <img src="media-controls.png"></h1>
+                    <h1>api-calls</h1>
                 </header>
                 
 
@@ -89,57 +102,14 @@
 
 <header>
     
+        
+    
 </header>
 
 <article>
     <div class="container-overview">
     
         
-
-        
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
-            <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line10">line 10</a>
-            </span>
-        </p>
-    
-</dl>
-
 
         
     
@@ -168,16 +138,18 @@
 
 
     
-    <h4 class="name" id="~MediaControls">
-        <a class="href-link" href="#~MediaControls">#</a>
+    <h4 class="name" id="~GetGPSVehicles">
+        <a class="href-link" href="#~GetGPSVehicles">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                MediaControls<span class="signature">(handleCallback)</span><span class="type-signature"> &rarr; {Component}</span>
+                GetGPSVehicles<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -186,7 +158,7 @@
     
     
     <div class="description">
-        <p>function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in &quot;HistoryToggle.js&quot;</p>
+        <p>queries database for Vehicle data and returns to client</p>
     </div>
     
 
@@ -224,13 +196,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>handleCallback</code></td>
+      <td class="name"><code>req</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">callback</span>
+<span class="param-type">Object</span>
 
 
   
@@ -240,7 +212,32 @@
 
   
 
-  <td class="description last"><p>Callback function to track state of play</p></td>
+  <td class="description last"><p>Http request</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
 </tr>
 
 
@@ -286,9 +283,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <a href="server_api_api-calls.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line16">line 16</a>
+                <a href="server_api_api-calls.js.html">server/api/api-calls.js</a>, <a href="server_api_api-calls.js.html#line7">line 7</a>
             </span>
         </p>
     
@@ -319,14 +316,13 @@
 
 <div class="columns">
     
-    <div class='param-desc column is-7'><p>Renderable component</p>
-<img src="media-controls.png"></div>
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<span class="param-type">Component</span>
+<span class="param-type">Object</span>
 
 
     </div>
@@ -346,16 +342,18 @@
 
 
     
-    <h4 class="name" id="~setPaused">
-        <a class="href-link" href="#~setPaused">#</a>
+    <h4 class="name" id="~GetScheduledActivity">
+        <a class="href-link" href="#~GetScheduledActivity">#</a>
         
+            
+                <span class='tag'>async</span>
             
                 <span class='tag'>inner</span>
             
         
         <span class="code-name">
             
-                setPaused<span class="signature">(paused)</span><span class="type-signature"></span>
+                GetScheduledActivity<span class="signature">(req, res)</span><span class="type-signature"> &rarr; {Object}</span>
             
         </span>
     </h4>
@@ -364,7 +362,7 @@
     
     
     <div class="description">
-        <p>Handle state of play and paused</p>
+        <p>queries database for scheduled activity data and returns to client</p>
     </div>
     
 
@@ -402,13 +400,13 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>paused</code></td>
+      <td class="name"><code>req</code></td>
   
 
   <td class="type">
   
       
-<span class="param-type">boolean</span>
+<span class="param-type">Object</span>
 
 
   
@@ -418,7 +416,32 @@
 
   
 
-  <td class="description last"></td>
+  <td class="description last"><p>Http request</p></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">Object</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"><p>Http response</p></td>
 </tr>
 
 
@@ -464,9 +487,9 @@
 
     
         <p class="tag-source">
-            <a href="components_Footer_MediaControls.js.html" class="button">View Source</a>
+            <a href="server_api_api-calls.js.html" class="button">View Source</a>
             <span>
-                <a href="components_Footer_MediaControls.js.html">components/Footer/MediaControls.js</a>, <a href="components_Footer_MediaControls.js.html#line28">line 28</a>
+                <a href="server_api_api-calls.js.html">server/api/api-calls.js</a>, <a href="server_api_api-calls.js.html#line32">line 32</a>
             </span>
         </p>
     
@@ -489,6 +512,31 @@
 
 
 
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'><p>Http response with data and a status code attached</p></div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<span class="param-type">Object</span>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
 
 
 
@@ -509,16 +557,6 @@
 
 
             </div>
-            
-            <footer class="footer">
-                <div class="content has-text-centered">
-                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a></p>
-                    <p class="sidebar-created-by">
-                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
-                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
-                    </p>
-                </div>
-            </footer>
             
         </div>
         <div id="side-nav" class="side-nav">

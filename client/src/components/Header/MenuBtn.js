@@ -3,7 +3,18 @@ import './Header.css';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { List, Drawer, ListItem } from '@mui/material';
+
+/** 
+ * @module MenuBtn
+ * @deprecated
+ *  */
+
 //function for menu hamburger button
+/**
+ * @function MenuBtn
+ * @deprecated
+ * @returns {Component} Hamburger Menu icon
+ */
 function MenuBtn(){
 
     const [state, setState] = React.useState(false)

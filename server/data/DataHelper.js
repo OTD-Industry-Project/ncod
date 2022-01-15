@@ -1,7 +1,19 @@
+/** @module DataHelper */
+
 const fs = require("fs");
+
+/**
+ * @const {string} FILE filepath of temp file
+ */
 const FILE = "./server/data/temp-data.json";
 const db = require("../db");
 
+
+/**
+ * @function writeScheduleToFile
+ * @description Caches the day's schedule to disk. Writes the raw schedule to a .JSON file
+ * @param {array} schedule Array of objects (JSON data) 
+ */
 const writeScheduleToFile = (schedule) => {
     
     let data = JSON.stringify(schedule, null, 2);
@@ -16,6 +28,12 @@ const writeScheduleToFile = (schedule) => {
     });
 };
 
+/**
+ * @function readScheduleFromFile
+ * @async
+ * @description Reads the cached schedule from file
+ * @returns {Object} JSON object of day's schedule
+ */
 const readScheduleFromFile = async () => {
     fs.readFile(FILE, "utf8", (err, jsonString) => {
         if (err) {
@@ -32,6 +50,12 @@ const readScheduleFromFile = async () => {
     });
 };
 
+/**
+ * @function getScheduledActivity
+ * @async
+ * @description Reads the cached schedule from file
+ * @returns {Object} JSON object of day's schedule
+ */
 const getScheduledActivity = async () => {
     try {
         const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");
