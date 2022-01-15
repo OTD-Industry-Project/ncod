@@ -77,6 +77,12 @@ function App() {
     /***** Callbacks *****/
 
     const timeCallback = (newTime) => {
+       
+        const datetime = date;
+        const hourMinSec = newTime.split(":");
+        datetime.setHours(hourMinSec[0], hourMinSec[1], 0);
+        
+        setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
         setTime(newTime);
     }
     

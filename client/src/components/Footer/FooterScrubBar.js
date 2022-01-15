@@ -93,11 +93,6 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
 
 
 
-
-
-
-
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
     timeCallback(scrubTimer(newValue));
