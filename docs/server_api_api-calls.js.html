@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-Controllers.html">Controllers</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -118,13 +118,12 @@ const db = require("../db");
  */
 const GetGPSVehicles = async (req, res) => {
     try {
-        const results = await db.query("SELECT * FROM vehicle");
+        const GPSVehicle = await db.query("SELECT vehicle_id, display_name, rego_plate FROM vehicle;");
         console.log(results.rows);
         res.status(200).json({
             status: "success",
-            results: results.rows.length,
             data: {
-                address: results.rows,
+                GPSVehicles: GPSVehicle.rows,
             },
         });
     }
@@ -140,6 +139,82 @@ const GetGPSVehicles = async (req, res) => {
  * @param {Object} req Http request
  * @param {Object} res Http response
  * @returns {Object} Http response with data and a status code attached
+ */
+const GetGPSLocationHistory = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
+    try {
+        const locationHistory = await db.query(`SELECT latitude, longitude, ignition, speed, time_stamp FROM history
+        WHERE (DATE(time_stamp) BETWEEN ($1) AND ($2)) AND vehicle_id=($3);`, [`"${date.toLocaleDateString('fr-CA')}", "${date.toLocaleDateString('fr-CA')}", vehicle`]);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                locationHistory: locationHistory.rows
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+
+/**
+ * @function GetCurrentGPSSnapshot
+ * @description Simulate pulling current GPS snapshots. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
+const GetCurrentGPSSnapshot = async (req, res) => {
+    
+    const date = new Date(req.body.date);
+
+    try {
+        const currentGPSShot = await db.query(`SELECT vehicle_id, latitude, longitude, ignition, speed, time_stamp::time 
+        FROM history where DATE(time_stamp) = DATE(now());`);
+
+        res.status(200).json({
+            status: "success",
+            data: {
+                currentGPSShot: currentGPSShot.rows,
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+/**
+ * @function GetScheduledVehicles
+ * @description Simulate pulling scheduled Vehicles from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
+const GetScheduledVehicles = async (req, res) => {
+    try {
+        const scheduledVehicles = await db.query("SELECT vehicle_id, display_name, facilities FROM vehicle;");
+        console.log(results.rows);
+        res.status(200).json({
+            status: "success",
+            data: {
+                scheduledVehicles: scheduledVehicles.rows,
+            },
+        });
+    }
+    catch (err) {
+        console.log(err);
+    }
+};
+
+/**
+ * @function GetScheduledActivity
+ * @description Simulate pulling scheduled activity from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
  */
 const GetScheduledActivity = async (req, res) => {
     try {
@@ -171,7 +246,6 @@ const GetScheduledActivity = async (req, res) => {
 
             var { rows: [{ addr_id }] } = pickupId[1];
             pickup_id[i] = addr_id;
-            //await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
         }
 
 
@@ -209,12 +283,13 @@ const GetScheduledActivity = async (req, res) => {
     catch (err) {
         console.log(err);
     }
-
-
 };
 
 module.exports = {
     GetGPSVehicles,
+    GetGPSLocationHistory,
+    GetCurrentGPSSnapshot,
+    GetScheduledVehicles,
     GetScheduledActivity
 }</code></pre>
         </article>

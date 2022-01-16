@@ -55,6 +55,14 @@ const GetGPSLocationHistory = async (req, res) => {
     }
 };
 
+
+/**
+ * @function GetCurrentGPSSnapshot
+ * @description Simulate pulling current GPS snapshots. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetCurrentGPSSnapshot = async (req, res) => {
     
     const date = new Date(req.body.date);
@@ -74,6 +82,13 @@ const GetCurrentGPSSnapshot = async (req, res) => {
     }
 };
 
+/**
+ * @function GetScheduledVehicles
+ * @description Simulate pulling scheduled Vehicles from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetScheduledVehicles = async (req, res) => {
     try {
         const scheduledVehicles = await db.query("SELECT vehicle_id, display_name, facilities FROM vehicle;");
@@ -90,6 +105,13 @@ const GetScheduledVehicles = async (req, res) => {
     }
 };
 
+/**
+ * @function GetScheduledActivity
+ * @description Simulate pulling scheduled activity from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetScheduledActivity = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");
