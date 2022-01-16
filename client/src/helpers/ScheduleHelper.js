@@ -11,7 +11,6 @@ function getStatus(bus, currentTime, tracking) {
 
     tracking &&
         tracking.forEach((b) => {
-            // console.log(b[bus.vehicle_id]);
             if (b[bus.vehicle_id]) {
                 const indexOfLastEntry = b[bus.vehicle_id].length - 1;
                 const tmp =
@@ -20,8 +19,6 @@ function getStatus(bus, currentTime, tracking) {
                 const tempDate = dest;
                 tempDate.setHours(tmp[0], tmp[1]);
                 lastMinutes = tempDate.getHours() * 60 + tempDate.getMinutes();
-
-                // const trackingMinutes = (new Date(b[bus.vehicle_id][indexOfLastEntry].time_stamp).getHours() * 60) + new Date(b[bus.vehicle_id][indexOfLastEntry].time_stamp).getMinutes();
             }
         });
 
