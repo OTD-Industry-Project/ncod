@@ -29,7 +29,7 @@ function getStatus(bus, currentTime, tracking) {
         return "Delayed";
     } else if (pickupMinutes > currentMinutes) {
         return "Pre Departed";
-    } else if (currentMinutes > pickupMinutes && destMinutes > currentMinutes) {
+    } else if ((currentMinutes > pickupMinutes && destMinutes > currentMinutes) || currentMinutes === pickupMinutes) {
         return "On Time";
     } else {
         return "Completed";
