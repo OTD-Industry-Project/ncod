@@ -1,42 +1,6 @@
 const db = require("../db");
 const dataHelper = require("../data/DataHelper");
 
-/** @module Controllers */
-
-/**
- * @function getAllAddress
- * @async
- * @description queries database for address data and returns to client 
- * @param {Object} req Http request
- * @param {Object} res Http response
- * @returns {Object} Http response with data and a status code attached
- */
-const getAllAddress = async (req, res) => {
-    try {
-        const results = await db.query("SELECT * FROM address");
-        // console.log(results.rows);
-        res.status(200).json({
-            status: "success",
-            results: results.rows.length,
-            data: {
-                address: results.rows,
-            },
-        });
-    }
-    catch (err) {
-        console.log(err);
-    }
-};
-
-
-/**
- * @function getHistory
- * @async
- * @description queries database for history data and returns to client 
- * @param {Object} req Http request containing a specific date.
- * @param {Object} res Http response
- * @returns {Object} Http response with data and a status code attached
- */
 const getHistory = async (req, res) => {
     
     const date = new Date(req.body.date);
@@ -54,45 +18,12 @@ const getHistory = async (req, res) => {
         );
 
         const waypoints = await db.query(`SELECT vehicle_id, time_stamp::time, latitude, longitude FROM history where DATE(time_stamp) = DATE($1)`, [`"${date.toLocaleDateString('fr-CA')}"`]);
-//testing logs
-        // console.log(date.toLocaleDateString('fr-CA'));
-        // console.log(date.toLocaleDateString('fr-CA') + " " + date.toLocaleTimeString(['en-AU'], { hourCycle: 'h23' }));
-        // console.log(results.rows[0]);
 
         res.status(200).json({
             status: "success",
             data: {
                 schedule: results.rows,
                 waypoints: waypoints.rows,
-            },
-        });
-    } catch (err) {
-        console.log(err);
-    }
-    
-    // res.send({data: `Post Request handled - recieved the date: ${date}`});
-
-};
-
-/**
- * @function getAddressID
- * @async
- * @description queries database for a specific address and returns to client 
- * @param {Object} req Http request containing an address id
- * @param {Object} res Http response
- * @returns {Object} Http response with data and a status code attached
- */
-const getAddressID = async (req, res) => {
-    try {
-        const results = await db.query(
-            "SELECT * FROM address WHERE addr_id = $1",
-            [req.params.id]
-        );
-        // console.log(results.rows[0]);
-        res.status(200).json({
-            status: "success",
-            data: {
-                address: results.rows[0],
             },
         });
     } catch (err) {
@@ -125,7 +56,6 @@ const getSchedule = async (req, res) => {
 
         const availableHistory = await db.query(`SELECT DISTINCT DATE(pickup_time), DATE(destination_time) FROM job;`)
 
-        // console.log(results.rows);
         res.status(200).json({
             status: "success",
             results: results.rows.length,
@@ -141,13 +71,7 @@ const getSchedule = async (req, res) => {
     }
 };
 
-
-
-
-
-
 module.exports = {
-    getAddressID,
     getSchedule,
     getHistory,
 };
