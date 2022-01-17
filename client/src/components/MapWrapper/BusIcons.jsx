@@ -94,7 +94,7 @@ const BusIcons = (props) => {
                                             event.target.closePopup(),
                                     }}
                                 >
-                                    <Popup offset={[10, 0]}>
+                                    <Popup offset={[-4, -6]}>
                                         <h5>{buses.status}</h5> <br />
                                         Location: {buses.pickup_point} <br />
                                         destination: {buses.destination} <br />
