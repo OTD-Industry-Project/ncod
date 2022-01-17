@@ -29,10 +29,10 @@ const Sidetabs = (props) => {
                 onOpen={onOpen}
             >
                 <Tab id="/#schedule" header="Overview" icon={<FiHome />}>
-                    {props.children[0]}
+                    {props.children[1]}
                 </Tab>
                 <Tab id="/#spare" header="Schedule" icon={<FiList />}>
-                    {props.children[1]}
+                    {props.children[0]}
                 </Tab>
                 <Tab
                     id="/#settings"
