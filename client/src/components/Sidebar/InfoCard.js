@@ -91,16 +91,11 @@ const InfoCard = ({ info, colors }) => {
                         <td>{description_of_job}</td>
                     </tr>
                     )}
-                    {/* <tr>
-                        <th scope="row">Lat</th>
-                        <td>{pickup_latitude}</td>
-                        <td>{destination_latitude}</td>
-                    </tr>
                     <tr>
-                        <th scope="row">Long</th>
+                        <th scope="row">Position</th>
+                        <td>{pickup_latitude}</td>
                         <td>{pickup_longitude}</td>
-                        <td>{destination_longitude}</td>
-                    </tr> */}
+                    </tr>
                 </tbody>
             </table>
         </div>
