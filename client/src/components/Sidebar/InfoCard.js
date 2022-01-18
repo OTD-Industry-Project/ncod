@@ -91,7 +91,7 @@ const InfoCard = ({ info, colors }) => {
                         <td>{description_of_job}</td>
                     </tr>
                     )}
-                    <tr>
+                    {/* <tr>
                         <th scope="row">Lat</th>
                         <td>{pickup_latitude}</td>
                         <td>{destination_latitude}</td>
@@ -100,7 +100,7 @@ const InfoCard = ({ info, colors }) => {
                         <th scope="row">Long</th>
                         <td>{pickup_longitude}</td>
                         <td>{destination_longitude}</td>
-                    </tr>
+                    </tr> */}
                 </tbody>
             </table>
         </div>

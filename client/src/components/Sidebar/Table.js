@@ -41,19 +41,19 @@ export const Table = ({ schedule, activeCallBack, activeBus }) => {
     // Keep track of last updated. Will be more useful when we are pulling live GPS data
     // eslint-disable-next-line no-unused-vars
     const [lastUpdated, setLastUpdated] = useState(new Date());
-    const [selectedRow, setSelectedRow] = useState(-1);
+    const [selectedRow, setSelectedRow] = useState(null);
 
     const handleEvent = (row, i) => {
         activeCallBack(row.job_id);
 
-        if (i === selectedRow) {
-            setSelectedRow(-1);
+        if (row.job_id === selectedRow) {
+            setSelectedRow(null);
             return;
         }
 
-        if (selectedRow !== undefined) {
-            setSelectedRow(i);
-        }
+        
+        setSelectedRow(row.job_id);
+        
     };
 
     // Memoize the columns and data for the table.
@@ -166,7 +166,7 @@ export const Table = ({ schedule, activeCallBack, activeBus }) => {
                             <tr
                                 key={i}
                                 onClick={() => handleEvent(row.original, i)}
-                                className={selectedRow === i && activeBus !== null ? "selected" : ""}
+                                className={selectedRow && selectedRow === row.original.job_id && activeBus !== null ? "selected" : ""}
                                 {...row.getRowProps()}
                             >
                                 {/* Iterate over each cell in the row and return the rendered cell */}
