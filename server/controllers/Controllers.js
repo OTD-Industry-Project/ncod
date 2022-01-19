@@ -9,7 +9,7 @@ const getHistory = async (req, res) => {
         const results = await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
         c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
         c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
-        c.empty_run, c.req_facilities, c.routing_info
+        c.empty_run, c.req_facilities
         FROM job C
         INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
@@ -39,7 +39,7 @@ const getSchedule = async (req, res) => {
             await db.query(`SELECT c.job_id, c.vehicle_id, c.driver_id, c.description_of_job,
         c.pickup_time, pickup.addr_name pickup_point, pickup.addr_lat pickup_latitude, pickup.addr_long pickup_longitude,
         c.destination_time, dest.addr_name destination, dest.addr_lat destination_latitude, dest.addr_long destination_longitude,
-        c.empty_run, c.req_facilities, c.routing_info
+        c.empty_run, c.req_facilities
         FROM job C
         INNER JOIN address pickup ON (c.pickup_id = pickup.addr_id)
         INNER JOIN address dest ON (c.destination_id = dest.addr_id)
