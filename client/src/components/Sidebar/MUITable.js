@@ -23,7 +23,7 @@ class MUITable extends React.Component {
         
         // Set default state.
         this.state = {
-            selectedRow: -1,
+            selectedRow: null,
         };
     }
 
@@ -36,14 +36,12 @@ class MUITable extends React.Component {
         
         // If row has already been selected, then unselect it. Then return
         if (i === this.state.selectedRow) {
-            this.setState({selectedRow: -1});
+            this.setState({selectedRow: null});
             return;
         }
         
         // If row has not been already selected, then set the state of the class
-        if (this.state.selectedRow !== undefined) {
-            this.setState({selectedRow: i});  
-        }
+        this.setState({selectedRow: i});
     }
     
     render() {
@@ -124,19 +122,17 @@ class MUITable extends React.Component {
             filter: true,
             filterType: "dropdown",
             responsive: "standard",
-            download: false,
-            //   fixedHeader: true,
+            download: true,
             expandableRows: true,
             elevation: 0,
             setRowProps: (row) => {
-                // console.log(this.state.selectedRow + " " + row[0]);
                 return {
-                    className: this.state.selectedRow === row[0] && activeBus !== null ? "selected" : "",
+                    className: this.state.selectedRow && this.state.selectedRow === row[1] ? "selected" : "",
                 };
             },
             rowsPerPage: 100,
-            onRowClick: (rowData, rowMeta) => {
-                this.handleEvent(rowMeta.rowIndex);
+            onRowClick: (rowData) => {
+                this.handleEvent(rowData[1]);
                 activeCallBack(rowData[1]);
             },
             selectableRowsHideCheckboxes: true,

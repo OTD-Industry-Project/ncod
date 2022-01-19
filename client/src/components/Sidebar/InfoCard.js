@@ -110,14 +110,9 @@ const InfoCard = ({ info, colors }) => {
                     </tr>
                     )}
                     <tr>
-                        <th scope="row">Lat</th>
+                        <th scope="row">Position</th>
                         <td>{pickup_latitude}</td>
-                        <td>{destination_latitude}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Long</th>
                         <td>{pickup_longitude}</td>
-                        <td>{destination_longitude}</td>
                     </tr>
                 </tbody>
             </table>

@@ -240,7 +240,7 @@ export default function FooterScrubBar({ play, historyMode, action, setDirection
         defaultValue={value}
         valueLabelFormat={valuetext}
         marks={marks}
-        valueLabelDisplay="auto"
+        valueLabelDisplay={historyMode ? 'on' : 'auto'}
         onChangeCommitted={handleChange}
       />
 

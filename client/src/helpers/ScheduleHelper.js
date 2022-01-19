@@ -54,7 +54,7 @@ function getStatus(bus, currentTime, tracking) {
         return "Pre Departed";
 
     // Bus has departed, and is still on within the scheduled destination time
-    } else if (currentMinutes > pickupMinutes && destMinutes > currentMinutes) {
+    } else if ((currentMinutes > pickupMinutes && destMinutes > currentMinutes) || currentMinutes === pickupMinutes) {
         return "On Time";
     
     // If we made it this far. It must be completed 
