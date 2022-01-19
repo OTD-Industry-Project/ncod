@@ -31,6 +31,14 @@ const getHistory = async (req, res) => {
     }
 };
 
+/**
+ * @function getSchedule
+ * @async
+ * @description queries database for schedule data and returns to client 
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getSchedule = async (req, res) => {
     
     await dataHelper.getScheduledActivity();

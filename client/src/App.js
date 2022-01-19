@@ -1,4 +1,4 @@
-// import React, { useState, useEffect } from "react";
+
 import "./App.css";
 import Header from "./components/Header/Header";
 import { isSameDay } from "./components/Header/Datetime";
@@ -19,7 +19,14 @@ import "leaflet-routing-machine";
 import '../node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { useMap } from 'leaflet';
 
-function CreateRoutes(data, setRoutesArray) {
+/**@module App */
+
+/**
+ * @function CreateRoutes
+ * @param {Object} data Scheduled data that is fetched from database
+ * @param {callback} setRoutesArray Call back function to update state of App
+ */
+function CreateRoutes(data, setRoutesArray){
     //GENERATE ROUTES ON LOAD
     var controlsArray = [];
     if (data != null) {
@@ -49,18 +56,47 @@ function CreateRoutes(data, setRoutesArray) {
     }
 }
 
+
+/**
+ * Entry point for entire application - Is injected into the 'body' DOM element with a class of 'root'. 
+ * @function App
+ * 
+ * @author Mark Dodson 
+ * @author James Hawes 
+ * @author Jamie Garner
+ * @author Joseph Ising
+ * 
+ * @returns The entire app as JSX
+ * 
+ * 
+ * <img src="demo.png" >
+ * 
+ */
 function App() {
 
-    /***** Hooks *****/
-
-    // App State
+    /** 
+     * @function Hooks 
+     * @description global state hooks 
+     * @param {array} waypoints array of waypoints in format [lat, long]
+     * @param {array} availableHistoryDates array of Dates
+     * @param {Object} data raw Data fetched from database
+     * @param {date} date global Date
+     * @param {boolean} play True = Play, false = Paused
+     * @param {boolean} historyMode Switch history mode on and off
+     * @param {array} schedule array of objects containing job info
+     * @param {Object} activeBus Single Job object
+     * @param {boolean} theme true = dark, false = light
+     * @param {array} routesArray array of routes
+     * @param {array} oldRoutesArray array of old routes
+     * @param {Object} colors Object containing a color for each status.
+     */
+    const [waypoints, setWaypoints] = useState([]);
+    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]);
+    // const [data, setData] = useState(null);
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(null);
     const [historyMode, setHistoryMode] = useState(false);
-    const [availableHistoryDates, setAvaliableHistoryDates] = useState([]); 
-    const [waypoints, setWaypoints] = useState([]);
     const [tracking, setTracking] = useState([]);
-    const [data, setData] = useState(null);   
     const [play, setPlay] = useState(false);
     const [schedule, setSchedule] = useState(null);
     const [activeBus, setActiveBus] = useState(null);
@@ -74,8 +110,20 @@ function App() {
         completed: "#a9a9a9",
     });
 
-    /***** Callbacks *****/
+    /** Callbacks */
 
+    /**
+     * Callback to switch between play states
+     * @function playCallback
+     * 
+     * @param {boolean} e switches between play and pause 
+     */
+    const playCallback = (e) => {
+        setPlay(e);
+
+    };
+    
+    
     const timeCallback = (newTime) => {
        
         const datetime = date;
@@ -85,13 +133,12 @@ function App() {
         setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
         setTime(newTime);
     }
-    
-    // Set Play state
-    const handleCallback = (m) => {
-        setPlay(m);
-    };
 
-    // Update Date state
+    /**
+     * Callback function to set and update global date of app 
+     * @function changeDate 
+     * @param {date} newDate Use this date to update the global date tracked in the app
+     */
     const changeDate = (newDate) => {
         setHistoryMode(!isSameDay(newDate, new Date()));
         setDate(newDate);
@@ -99,7 +146,11 @@ function App() {
         setActiveBus(null);
     };
 
-    // Update active bus state
+    /**
+     * Callback function to update which bus is being tracked as active 
+     * @function activeCallBack
+     * @param {number} job_id Unique number to identify each job 
+     */
     const activeCallBack = (job_id) => {
 
         const index = schedule.findIndex((obj) => obj.job_id === job_id);
@@ -113,18 +164,30 @@ function App() {
 
     };
 
-    // Switch theme and set local storage
+    /**
+     * Switches between true and false and sets the new theme to local storage
+     * @function switchTheme
+     * 
+     */
     const switchTheme = () => {
         localStorage.setItem("theme", theme ? "light" : "dark");
         setTheme((prev) => !prev);
     };
 
-    // Change color scheme and set local storage
+    /**
+     * Callback function to update colorscheme of app. New color scheme is set to local storage
+     * @function changeColors
+     * @param {number} key number between 0 and existingColorScheme.length to update correct color
+     * @param {string} color Hex code of new color to be set 
+     */
     const changeColors = (key, color) => {
+        
+        // Try and get local color scheme from browser
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
         );
 
+        // If a color scheme already exists in local storage, update it.
         if (existingColorScheme) {
             existingColorScheme[key] = color;
             localStorage.setItem(
@@ -133,6 +196,7 @@ function App() {
             );
         }
 
+        // Set Global color scheme
         setColors((prevColors) => ({
             ...prevColors,
             [key]: color,
@@ -140,9 +204,12 @@ function App() {
     };
 
 
-    /***** On App load *****/
-
-    // Get/Set theme and color scheme from local storage
+    /**
+     * React Life Cycle method - Run's on app load.
+     * @function useEffect
+     * @description Checks if browser has existing theme and color scheme set and loads it up. Otherwise, loads a default theme.
+     * 
+     */
     useEffect(() => {
 
         const existingTheme = localStorage.getItem("theme");
@@ -180,8 +247,16 @@ function App() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    /**
+     * 
+     * @function fetchHistory 
+     * @description Takes a date and makes a post request to the server to get relevant history information.
+     * @param {date} date Date object
+     * 
+     */
     const fetchHistory = (date) => {
 
+        // Define the options to attach to the http request
         const options = {
             method: 'POST',
             headers: {
@@ -189,7 +264,8 @@ function App() {
             },
             body: JSON.stringify({ date: date })
         };
-
+        
+        // fetch with predefined routes
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
             .then((data) => {
@@ -230,11 +306,33 @@ function App() {
 
     }
 
-    // Fetch schedule
+    /**
+     * React Life Cycle method - Run's on app load. 
+     * 
+     * @function useEffect 
+     * @description On app load, makes a get request to Express server. Server queries database and responds with raw Scheduled data
+     * @example
+     * 
+     * {
+    "job_id": 400,
+    "vehicle_id": 93,
+    "driver_id": "JOHNSTON",
+    "description_of_job": null,
+    "pickup_time": "2022-01-13T08:30:00.000Z",
+    "pickup_point": "Genazzano College - Group 2",
+    "pickup_latitude": "-37.808730",
+    "pickup_longitude": "145.056010",
+    "destination_time": "2022-01-13T10:20:00.000Z",
+    "destination": "Wesley College Glen Waverley Campus",
+    "destination_latitude": "-37.875200",
+    "destination_longitude": "145.154830",
+    "empty_run": null,
+    "req_facilities": null,
+    "routing_info": null
+  }
+     * 
+     */
     useEffect(() => {
-
-
-
         fetch(ROUTES.getSchedule())
             .then((res) => res.json())
             .then((data) => {
@@ -244,6 +342,7 @@ function App() {
                 setAvaliableHistoryDates(dates);
                 CreateRoutes(data, setRoutesArray);
             });
+
     }, []);
 
 
@@ -317,7 +416,7 @@ function App() {
 
                         <div className="Footer">
                             <Footer
-                                handleCallback={handleCallback}
+                                handleCallback={playCallback}
                                 play={play}
                                 historyMode={historyMode}
                                 timeCallback={timeCallback}

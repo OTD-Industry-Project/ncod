@@ -1,6 +1,17 @@
+/** @module api-calls  */
+
+
 //API Calls
 const db = require("../db");
 
+/**
+ * @function GetGPSVehicles
+ * @async
+ * @description queries database for Vehicle data and returns to client 
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const GetGPSVehicles = async (req, res) => {
     try {
         const GPSVehicle = await db.query("SELECT vehicle_id, display_name, rego_plate FROM vehicle;");
@@ -17,6 +28,14 @@ const GetGPSVehicles = async (req, res) => {
     }
 };
 
+/**
+ * @function GetScheduledActivity
+ * @async
+ * @description queries database for scheduled activity data and returns to client 
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const GetGPSLocationHistory = async (req, res) => {
     
     const date = new Date(req.body.date);
@@ -36,6 +55,14 @@ const GetGPSLocationHistory = async (req, res) => {
     }
 };
 
+
+/**
+ * @function GetCurrentGPSSnapshot
+ * @description Simulate pulling current GPS snapshots. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetCurrentGPSSnapshot = async (req, res) => {
     
     const date = new Date(req.body.date);
@@ -55,6 +82,13 @@ const GetCurrentGPSSnapshot = async (req, res) => {
     }
 };
 
+/**
+ * @function GetScheduledVehicles
+ * @description Simulate pulling scheduled Vehicles from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetScheduledVehicles = async (req, res) => {
     try {
         const scheduledVehicles = await db.query("SELECT vehicle_id, display_name, facilities FROM vehicle;");
@@ -71,6 +105,13 @@ const GetScheduledVehicles = async (req, res) => {
     }
 };
 
+/**
+ * @function GetScheduledActivity
+ * @description Simulate pulling scheduled activity from the database. Queries local database.
+ * @async
+ * @param {Object} req Http request
+ * @param {Object} res Http response
+ */
 const GetScheduledActivity = async (req, res) => {
     try {
         const results = await db.query("SELECT * FROM api WHERE DATE(endtime)=DATE(NOW());");

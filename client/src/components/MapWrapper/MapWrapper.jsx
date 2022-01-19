@@ -4,8 +4,25 @@ import { MapContainer, useMap } from "react-leaflet";
 import Layers from "./Layers";
 import Loading from "../Loading";
 
+/**@module MapWrapper */
+
+/**
+ * Default Position map is centered about
+ * @name defaultPosition
+ * @type {Object}
+ * @example
+ * const defaultPosition = { lat: -37.813629, lng: 144.963058 };
+ *
+ */
 const defaultPosition = { lat: -37.813629, lng: 144.963058 }; //Centre of Melbourne CBD
 
+/**
+ * Component that wraps the Map, Layers and Event handling
+ *
+ * @function MapWrapper
+ * @param props Destructure into schedule, activeBus, waypoints, Routes and callbacks
+ * @returns Component
+ */
 function MapWrapper({
     schedule,
     activeBus,

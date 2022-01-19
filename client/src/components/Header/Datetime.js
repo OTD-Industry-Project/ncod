@@ -1,9 +1,17 @@
 import React from "react";
 import Clock from "react-live-clock";
 import "./Header.css";
-//simple function for displaying current time and date
-//formatted to be more legable
 
+/** @module Datetime */
+
+/**
+ * Takes two Date objects returns true if they are same day (time of day is irrevelant).
+ * 
+ * @function isSameDay
+ * @param {date} d1 First Date
+ * @param {date} d2 Second Date
+ * @returns {boolean} If dates are same: True. Otherwise false.
+ */
 export const isSameDay = (d1, d2) => {
     return (
         d1.getFullYear() === d2.getFullYear() &&
@@ -12,6 +20,12 @@ export const isSameDay = (d1, d2) => {
     );
 }
 
+/**
+ * Component that keeps track of live time.
+ * @function Datetime
+ * @param {date} date Inner state is set with this 
+ * @returns {Component} Renderable component
+ */
 const Datetime = ({ date }) => {
 
     return (

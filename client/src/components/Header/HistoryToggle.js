@@ -4,12 +4,31 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./Header.css";
 import Switch from "react-switch";
 
-
+/** @module HistoryToggle */
+/**
+ * When toggled, datepicker is displayed. If date is changed, sets Global date of App.
+ * 
+ * @function HistoryToggle
+ * @param {callback} changeDate Callback that sets the the global state of App.
+ * @param {array} availableHistoryDates Array of dates used to populate the calendar.
+ * @returns {Component} Renderable component
+ */
 function HistoryToggle({ changeDate, availableHistoryDates }) {
 
+    /**
+     * Inner state variables
+     * @function state_hooks
+     * @param {date} startDate Date that the datepicker defaults to
+     * @param {boolean} checked Track state of toggle 
+     */
     const [startDate, setStartDate] = useState(new Date());
-
     const [checked, setChecked] = useState(false);
+    
+    /**
+     * The logic behind the toggle. 
+     * @function handleChange
+     * @param {boolean} nextChecked Boolean value that is used to set state.
+     */
     const handleChange = (nextChecked) => {
         setChecked(nextChecked);
         if (checked) {
@@ -17,8 +36,13 @@ function HistoryToggle({ changeDate, availableHistoryDates }) {
         }
     };
 
+    /**
+     * Event handling. When toggleState changes, this fires.
+     * @function onTrigger
+     * @param {date} d New Date to set 
+     * @param {boolean} reset Flag. If true, date should be reset back to current day.
+     */
     const onTrigger = (d, reset) => {
-        
 
         if (reset) {
             changeDate(new Date());

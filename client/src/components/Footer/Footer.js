@@ -4,15 +4,35 @@ import FooterScrubBar from "./FooterScrubBar";
 import MediaControls from "./MediaControls";
 import "./Footer.css";
 
-//main script for the footer component returns a toolbar with divs
+/** @module Footer */
+
+/**
+ * Container for Media Controls and Scrub bar
+ * @function Footer
+ * @param {props} props Passes various variables and props further down to child Components
+ * @return {Component} Returns renderable component
+ * 
+ * <img src="footer.png">
+ */
 class Footer extends Component {
     constructor(props) {
         super(props);
+        
+        /**
+         * @name action
+         * @type {number}
+         * @description Keep track of the direction of the scrub bar. Where -1 = rewind, 1 = fast-forward and 0 = nothing 
+         */
         this.state = {
             action: 0, // -1 = rewind, 1 = fast-forward and 0 = nothing.
         };
     }
 
+    /**
+     * Update the state with the provided number
+     * @function handleDirectionChange
+     * @param {number} dir Number. either -1, 0 or 1. 
+     */
     handleDirectionChange = (dir) => {
         this.setState({action: dir});
     }

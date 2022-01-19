@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On The Day client/src/components/Theme/Themes.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="./style.css">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">On The Day</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/OTD-Industry-Project/"
+                        >
+                            Github
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>client/src/components/Theme/Themes.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createGlobalStyle } from "styled-components";
+
+/** @module Theme */
+
+/**
+ * @constant lightTheme
+ * @description All the properties and colors that make up the styling for the light theme
+ * 
+ * &lt;img src="light-theme.png">
+ * 
+ * @example
+ * export const lightTheme = {
+    appBar: '#0074d9',
+    scrubBar: '#1976d2',
+    warning: 'rgb(255, 244, 229)',
+    info: 'rgb(229, 246, 253)',
+    error: 'rgb(253, 237, 237)',
+    success: 'rgb(237, 247, 237)',
+    selectedRow: '#1976d2'
+};
+ * 
+ */
+export const lightTheme = {
+    appBar: '#0074d9',
+    scrubBar: '#1976d2',
+    warning: 'rgb(255, 244, 229)',
+    info: 'rgb(229, 246, 253)',
+    error: 'rgb(253, 237, 237)',
+    success: 'rgb(237, 247, 237)',
+    selectedRow: '#1976d2'
+};
+
+
+/**
+ * @constant darkTheme
+ * @description All the properties and colors that make up the styling for the dark theme
+ * &lt;img src="dark-theme.png">
+ * @example
+ * 
+ * export const darkTheme = {
+    body: '#2C2F33',
+    text: '#FFF',
+    background: '#2C2F33',
+    appBar: '#23272A',
+    icon: 'rgb(133, 184, 88)',
+    scrubBar: 'rgb(133, 184, 88)',
+    warning: 'rgb(255, 215, 157)',
+    info: 'rgb(153, 186, 240)',
+    error: 'rgb(247, 186, 186)',
+    success: 'rgb(153, 240, 169)',
+    mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
+    selectedRow: 'rgb(133, 184, 88)'
+};
+ * 
+ */
+export const darkTheme = {
+    body: '#2C2F33',
+    text: '#FFF',
+    background: '#2C2F33',
+    appBar: '#23272A',
+    icon: 'rgb(133, 184, 88)',
+    scrubBar: 'rgb(133, 184, 88)',
+    warning: 'rgb(255, 215, 157)',
+    info: 'rgb(153, 186, 240)',
+    error: 'rgb(247, 186, 186)',
+    success: 'rgb(153, 240, 169)',
+    mapTiles: 'brightness(0.6) invert(1) contrast(4) hue-rotate(220deg) saturate(0.4) brightness(0.4)',
+    selectedRow: 'rgb(133, 184, 88)'
+};
+
+/**
+ * Create a Global style component using the style-components react library
+ * @function GlobalStyle
+ * @description Mixes Javascript and CSS to create dynamic styling that is cascaded down the heirarchy of components whereby, each child component has access to the context.
+ */
+export const GlobalStyle = createGlobalStyle`
+    
+    ${'' /* * {
+        color: ${props => props.theme.text};
+    } */}
+
+    body, 
+    .leaflet-popup-content-wrapper, 
+    .leaflet-popup-tip, 
+    .leaflet-control {
+        color: ${props => props.theme.text};
+        body: ${props => props.theme.body};
+        background: ${props => props.theme.background}; 
+    }
+    th, 
+    td {
+        color: ${props => props.theme.text};
+        background-color: ${props => props.theme.background} !important;
+    }
+
+    .refresh {
+        color: ${props => props.theme.scrubBar};
+    }
+    
+    
+${'' /* Alert colors */}
+    .MuiAlert-standardWarning {
+        background-color: ${props => props.theme.warning} !important;
+    }
+    .MuiAlert-standardInfo {
+        background-color: ${props => props.theme.info} !important;
+    }
+    .MuiAlert-standardError {
+        background-color: ${props => props.theme.error} !important;
+    }
+    .MuiAlert-standardSuccess {
+        background-color: ${props => props.theme.success} !important;
+    }
+
+    .MuiIconButton-root,
+    .MuiTablePagination-toolbar,
+    .MuiTablePagination-selectIcon,
+    .MuiTouchRipple-root {
+        color: ${props => props.theme.text} !important;
+    }
+
+
+${'' /* scrub bar colours */}
+    .MuiSlider-rail,
+    .MuiSlider-track,
+    .MuiSlider-valueLabelCircle,
+    .MuiSlider-markLabel,
+    .css-eg0mwd-MuiSlider-thumb {
+        fill: ${props => props.theme.scrubBar} !important;
+        color: ${props => props.theme.scrubBar} !important;
+    }
+    .MuiSlider-valueLabel {
+        background-color: ${props => props.theme.background} !important;
+    }
+${'' /* media controls */}
+    .Footer > div > div > div > button > svg {
+        fill: ${props => props.theme.scrubBar} !important;
+    }
+
+    .MuiAppBar-root,
+    .sidebar-header {
+        background-color: ${props => props.theme.appBar} !important;
+    }
+    .sidebar-content,
+    .sidebar-tabs,
+    .MuiPaper-root,
+    .MuiPaper-root > div,
+    .date-picker,
+    select {
+        background-color: ${props => props.theme.background};
+        color: ${props => props.theme.text};
+    }
+    .sidebar-tabs > ul > li > button {
+        color: ${props => props.theme.text};
+    }
+
+${'' /* row select in sidebar schedule */}
+    .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
+        background-color: ${props => props.theme.scrubBar};
+    }
+
+${'' /* dark mode map tiles */}
+    .leaflet-tile {
+        filter: ${props => props.theme.mapTiles} !important;
+    } 
+${'' /* leaflet zoomControls */}
+    .leaflet-bar a {
+        background: ${props => props.theme.background};
+    }
+
+${'' /* selected row in side bar */}
+    
+    .selected > td {
+        color: white;
+        background: ${props => props.theme.selectedRow} !important;
+    }
+
+${'' /* text color in Mui table */}
+    .css-1m13d3u-MuiTableCell-root {
+        color: ${props => props.theme.text} !important;
+    }
+    .MuiTypography-root,
+    .MuiInput-root,
+    .MuidInput-root > input,
+    .MuiInputLabel-root,
+    .MuiTableRow-root > td,
+    thead > tr > th {
+        color: ${props => props.theme.text} !important;
+    }
+    .MuiFormGroup-root > label > span > svg {
+        color: ${props => props.theme.scrubBar} !important;
+    }
+
+    .info-card{
+        background: ${props => props.theme.selectedRow} !important;
+    }
+
+
+${'' /* routes */}
+    .leaflet-interactive {
+        stroke: ${props => props.theme.scrubBar} !important;
+    }
+`;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

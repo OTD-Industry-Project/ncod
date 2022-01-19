@@ -7,28 +7,49 @@ import { createTheme } from "@mui/material/styles";
 import "./Sidebar.css";
 import InfoCard from "./InfoCard";
 import { getTime } from "./Table";
+
+/** @module MUITable */
+
+/**
+ * Extends external MuiDatables package
+ * @function MUITable
+ * @param {props} props
+ * @param {number} state.selectedRow Track state of table rows
+ * @return {Component} Component containing interactive table with styling and additional features
+ */
 class MUITable extends React.Component {
     constructor(props) {
         super(props);
+        
+        // Set default state.
         this.state = {
             selectedRow: null,
         };
     }
 
+    /**
+     * Sets selected row into the class's state
+     * @function handleEvent
+     * @param {number} i Index of selected row
+     */
     handleEvent = (i) => {
         
-
+        // If row has already been selected, then unselect it. Then return
         if (i === this.state.selectedRow) {
             this.setState({selectedRow: null});
             return;
         }
         
+        // If row has not been already selected, then set the state of the class
         this.setState({selectedRow: i});
     }
     
     render() {
+        
+        // Destructure props
         const { schedule, activeCallBack, colors, activeBus } = this.props;
 
+        // Columns that MUIDataTable uses to render the table. Options are provided to set functionality of certain columns 
         const columns = [
             {
                 name: "UID",
@@ -79,8 +100,10 @@ class MUITable extends React.Component {
             },
         ];
 
+        // Container for our data.
         const data = [];
 
+        // Format the schedule in order to be rendered
         schedule.forEach((bus, index) => {
             bus.uid = index;
             data.push([
@@ -94,6 +117,7 @@ class MUITable extends React.Component {
             ]);
         });
 
+        // Set our options for the table and extra functionality
         const options = {
             filter: true,
             filterType: "dropdown",
@@ -121,6 +145,8 @@ class MUITable extends React.Component {
                 };
             },
             isRowExpandable: (dataIndex, expandedRows) => {
+                
+                // Limit how many rows can be expanded at one time to 4
                 if (
                     expandedRows.data.length > 4 &&
                     expandedRows.data.filter((d) => d.dataIndex === dataIndex)
@@ -133,18 +159,17 @@ class MUITable extends React.Component {
             renderExpandableRow: (rowData, rowMeta) => {
                 const colSpan = rowData.length + 1;
                 return (
+                    // Return an info Card if a row is expanded
                     <TableRow className={this.state.selectedRow === rowMeta.rowIndex ? "selected" : ""}>
                         <TableCell  colSpan={colSpan} >
-                            {/* {console.log(schedule[rowData[0]])} */}
                             <InfoCard info={schedule[rowData[0]]} colors={colors} />
                         </TableCell>
                     </TableRow>
                 );
             },
-            // onRowExpansionChange: (curExpanded, allExpanded, rowsExpanded) =>
-            //     console.log(curExpanded, allExpanded, rowsExpanded),
         };
 
+        // Testing purposes
         const theme = createTheme({
             overrides: {
                 MUIDataTable: {
@@ -155,9 +180,9 @@ class MUITable extends React.Component {
             },
         });
 
+        // Expand arrow attached to each row
         const components = {
             ExpandButton: function (props) {
-                // if (props.dataIndex === 3 || props.dataIndex === 4) return <div style={{width:'24px'}} />;
                 return <ExpandButton {...props} />;
             },
         };

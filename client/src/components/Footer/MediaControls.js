@@ -6,12 +6,35 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import { useTheme } from '@mui/material/styles';
-//function for displaying mnedia controls
-//practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
-function MediaControls({ handleCallback, setDirection }) {
-    const theme = useTheme();
-    const [paused, setPaused] = useState(true);
 
+/** @module MediaControls */
+
+/**
+ * function for displaying mnedia controls practically deprecated at the moment as media buttons are actually called in "HistoryToggle.js"
+ * 
+ * @function MediaControls
+ * @param {callback} handleCallback Callback function to track state of play 
+ * @returns {Component} Renderable component
+ *         
+ * <img src="media-controls.png">
+ * 
+ */
+function MediaControls({ handleCallback, setDirection }) {
+    
+    /**
+     * Handle state of play and paused
+     * @function setPaused
+     * @param {boolean} paused
+     */
+    const [paused, setPaused] = useState(true);
+    
+    const theme = useTheme();
+
+    /**
+     * Extends the onCLick for the play pause buttons
+     * @function handleChange
+     * 
+     */
     const handleChange = () => {
         setPaused(!paused);
         handleCallback(paused);

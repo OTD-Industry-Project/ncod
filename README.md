@@ -1,6 +1,21 @@
 # NCOD
 
-Single-Page fleet management app using PERN stack
+Single-Page fleet management app using PERN stack by:
+
+-   Jamie Garner
+-   James Hawes
+-   Joesph Ising
+-   Mark Dodson
+
+## Generate Docs File
+
+### As a website
+
+To generate docs, use  `npm run docs` from within the root directory.
+
+### Generate as Markdown (github flavoured)
+
+From within the root directory, run `jsdoc2md --files './client/src/**/*.{js,jsx}' './server/**/*.js' > docs.md`
 
 ## Get Started
 

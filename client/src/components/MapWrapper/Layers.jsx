@@ -13,6 +13,20 @@ import {
 import { divIcon } from "leaflet";
 import BusIcons from "./BusIcons";
 
+/**@module Layers */
+
+/**
+ * @function Layers
+ * @param {Object} schedule Raw schedule data - JSON object
+ * @param {Object} activeBus A single entry from schedule data w/ a status attached
+ * @param {Object} colors Global color scheme that is used for layers
+ * @param {array} waypoints Array of lat, long coords
+ * @param {array} routesArray Array of routes
+ * @param {array} oldRoutesArray Array of old routes
+ * @param {date} time Current time selected by Scrub bar
+ * @param {array} tracking Array of tracking objects.
+ *
+ */
 const Layers = ({
     schedule,
     activeBus,
@@ -25,13 +39,19 @@ const Layers = ({
 }) => {
     // Create custom Marker Icons
     var icon = divIcon();
+
     // Variable for icon colors
     var busColor;
 
-    // waypoints.length !== 0 && console.log(waypoints[0]);
-
     // Clicking an item on the sidebar, will change focused position and provide info
     function LocationMarker() {
+        /**
+         * Track position state
+         * @function setPosition
+         * @param {array} position Array of lat long coords
+         * @example
+         * const position = [144.040383, -37.405732]
+         */
         const [position, setPosition] = useState(null);
 
         // When clicked on sidebar, will update position of active selection, flyTo location
@@ -83,7 +103,12 @@ const Layers = ({
             });
         }
 
-        // Access active bus Marker to force open Popup on selection
+        /**
+         * Access active bus Marker to force open Popup on selection
+         * @function MyMarker
+         * @param {props} props Props required to build the marker
+         * @returns {Component} A leaflet Marker component
+         */
         const MyMarker = (props) => {
             const leafletRef = useRef();
             useEffect(() => {
