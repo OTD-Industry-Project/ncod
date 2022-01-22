@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import { Toolbar, Box } from "@mui/material";
 import React, { Component } from "react";
 import FooterScrubBar from "./FooterScrubBar";

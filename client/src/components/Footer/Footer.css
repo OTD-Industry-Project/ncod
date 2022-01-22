@@ -1,4 +1,12 @@
-@import url('http://fonts.cdnfonts.com/css/led-digital-7');
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+ @import url('http://fonts.cdnfonts.com/css/led-digital-7');
 
 .MuiSlider-valueLabelLabel {
     color: white !important;

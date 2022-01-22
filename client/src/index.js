@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Wed Nov 03 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery';
 import '@popperjs/core';

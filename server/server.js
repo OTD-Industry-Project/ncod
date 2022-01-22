@@ -1,6 +1,11 @@
-// Express Server
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Wed Nov 03 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
 
-// REQUIRES //
 // Express
 const express = require("express");
 
@@ -18,7 +23,7 @@ const PORT = process.env.PORT || 3002;
 
 // Instantiate express app
 const app = express();
- 
+
 // parses incoming requests with JSON payloads
 app.use(express.json());
 

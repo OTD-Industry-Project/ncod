@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Fri Dec 24 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import { createGlobalStyle } from "styled-components";
 
 /** @module Theme */

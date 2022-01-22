@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Fri Dec 24 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import React, { useState } from "react";
 import { FiHome, FiChevronLeft, FiSettings, FiList } from "react-icons/fi";
 import { Sidebar, Tab } from "./react-leaflet-sidetabs";

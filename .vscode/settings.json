@@ -1,0 +1,14 @@
+{
+    "psi-header.templates": [
+        {
+            "language": "*",
+            "template": [
+                "Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson",
+                "-----",
+                "Created Date: <<filecreated('ddd MMM DD YYYY')>>",
+                "-----",
+                "Last Modified: <<date>>",
+            ],
+        },
+    ]
+}
