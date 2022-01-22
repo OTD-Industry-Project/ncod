@@ -21,6 +21,8 @@ import "./MapWrapper.css";
  *
  * <img src="bus-icon.png" >
  */
+
+//Mapping each marker to matching waypoints, allowing to re-render when pickup lat/long is changed simulating movement
 const BusIcons = (props) => {
     // eslint-disable-next-line no-lone-blocks
     {

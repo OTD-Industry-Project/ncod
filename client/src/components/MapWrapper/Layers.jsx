@@ -76,13 +76,11 @@ const Layers = ({
         }
         if (position === null && activeBus !== null) {
             //display a route
-            // console.log(activeBus.vehicle_id)
             for (let route of routesArray) {
                 maps.removeControl(route[0].route);
                 if (route[1] === activeBus.vehicle_id) {
                     route[0].route.addTo(maps);
                 }
-                // console.log
             }
             setPosition(
                 activeBus.pickup_longitude + ", " + activeBus.pickup_latitude
@@ -168,6 +166,7 @@ const Layers = ({
                 {/* flyTo function call to focus on active bus*/}
                 <LocationMarker />
                 <LayersControl.Overlay name="All Routes">
+                    {/* assigning polyline routes maped to each buses waypoint data */}
                     <FeatureGroup>
                         {waypoints &&
                             waypoints.map((bus, index) => {
