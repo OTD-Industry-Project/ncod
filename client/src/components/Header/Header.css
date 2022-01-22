@@ -1,4 +1,12 @@
-.Header {
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+ .Header {
     max-height: var(--header-height);
     min-height: var(--header-height);
 }

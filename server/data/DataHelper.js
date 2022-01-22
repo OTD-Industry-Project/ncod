@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Thu Jan 13 2022
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 /** @module DataHelper */
 
 const fs = require("fs");
@@ -65,8 +73,8 @@ const getScheduledActivity = async () => {
             scheduledActivity.push(row);
         })
         let dailySchedule = {};
-        let pickup_id = [];
-        let dest_id = [];
+        let pickup_id = []; //to store matched id in the Address table
+        let dest_id = []; //to store matched id in the Address table
 
 
         //looping over schedule, inserting new pickup address in database if not exist, returning matching ID
@@ -80,7 +88,6 @@ const getScheduledActivity = async () => {
 
             var { rows: [{ addr_id }] } = pickupId[1];
             pickup_id[i] = addr_id;
-            //await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
         }
 
 
@@ -96,14 +103,15 @@ const getScheduledActivity = async () => {
             var { rows: [{ addr_id }] } = destId[1];
             dest_id[i] = addr_id;
         }
-
+        //maps the order of the jobs insert statement, to results of the GetSheduledActivity return
         for (i = 0; i < scheduledActivity.length; i++) {
 
             dailySchedule[i] = (scheduledActivity[i].vehicleid + ", '" + scheduledActivity[i].driverid + "', '" +
                 (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + pickup_id[i] + ", '" +
                 (scheduledActivity[i].endtime.toISOString().substring(0, 10) + " " + scheduledActivity[i].endtime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + dest_id[i]);
 
-            var dateCheck = (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false }));
+                //converting time stamp to date format used in the database
+                var dateCheck = (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false }));
 
             //inserting values into jobs table
             const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) SELECT ${dailySchedule[i]}

@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import React from "react";
 import "./MapWrapper.css";
 import { MapContainer, useMap } from "react-leaflet";
@@ -34,16 +42,6 @@ function MapWrapper({
     time,
     tracking,
 }) {
-    // function Event() {
-    //     var map = useMap();
-    //     if (routesArray != null) {
-    //         for (let route of routesArray) {
-    //             // route[0].route.addTo(map);
-    //         }
-    //     }
-
-    //     return null;
-    // }
 
     return (
         <MapContainer
@@ -59,7 +57,6 @@ function MapWrapper({
                 [-48.102563, 164.401997],
             ]}
         >
-            {/* <Event /> */}
             {schedule !== null ? (
                 <Layers
                     schedule={schedule}

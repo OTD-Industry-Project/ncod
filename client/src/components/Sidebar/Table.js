@@ -1,3 +1,11 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Tue Nov 30 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import React, { useMemo, useState } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import "./Sidebar.css";

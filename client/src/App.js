@@ -1,3 +1,10 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
 
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -26,7 +33,7 @@ import { useMap } from 'leaflet';
  * @param {Object} data Scheduled data that is fetched from database
  * @param {callback} setRoutesArray Call back function to update state of App
  */
-function CreateRoutes(data, setRoutesArray){
+function CreateRoutes(data, setRoutesArray) {
     //GENERATE ROUTES ON LOAD
     var controlsArray = [];
     if (data != null) {
@@ -122,14 +129,14 @@ function App() {
         setPlay(e);
 
     };
-    
-    
+
+
     const timeCallback = (newTime) => {
-       
+
         const datetime = date;
         const hourMinSec = newTime.split(":");
         datetime.setHours(hourMinSec[0], hourMinSec[1], 0);
-        
+
         setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
         setTime(newTime);
     }
@@ -159,7 +166,7 @@ function App() {
         if (activeBus !== null && activeBus.job_id === job_id) {
             setActiveBus(null);
         } else {
-            setActiveBus(schedule[index])            
+            setActiveBus(schedule[index])
         }
 
     };
@@ -181,7 +188,7 @@ function App() {
      * @param {string} color Hex code of new color to be set 
      */
     const changeColors = (key, color) => {
-        
+
         // Try and get local color scheme from browser
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
@@ -264,7 +271,7 @@ function App() {
             },
             body: JSON.stringify({ date: date })
         };
-        
+
         // fetch with predefined routes
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
@@ -286,7 +293,7 @@ function App() {
                     historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
-                    
+
                     tmp.forEach(bus => temp2.push(bus));
                     historyTracking.push({
                         [uniqueBus]: temp2,
@@ -350,7 +357,6 @@ function App() {
     return (
         <ThemeProvider theme={theme ? darkTheme : lightTheme}>
             <>
-                {/* { tracking && console.log(tracking) } */}
                 <GlobalStyle />
                 {/* Entire app container */}
                 <div className="container-fluid vh-100 d-flex flex-column">
@@ -368,7 +374,6 @@ function App() {
 
                         </div>
                     </div>
-                    {/* Footer row with one col */}
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     <div className="Map">
@@ -413,7 +418,7 @@ function App() {
                             time={time}
                         />
 
-
+                        {/* Footer row with one col */}
                         <div className="Footer">
                             <Footer
                                 handleCallback={playCallback}
