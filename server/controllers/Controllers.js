@@ -8,7 +8,14 @@
 
 const db = require("../db");
 const dataHelper = require("../data/DataHelper");
-
+/**
+ * @function getHistory
+ * @async
+ * @description queries database for schedule data along with an array of waypoints, where the date matches the provided date of the request.
+ * @param {Object} req Http POST request containing a body with a date field
+ * @param {Object} res Http response
+ * @returns {Object} Http response with data and a status code attached
+ */
 const getHistory = async (req, res) => {
     
     const date = new Date(req.body.date);

@@ -65,6 +65,9 @@
 ## Functions
 
 <dl>
+<dt><a href="#getHistory">getHistory(req, res)</a> ⇒ <code>Object</code></dt>
+<dd><p>queries database for schedule data along with an array of waypoints, where the date matches the provided date of the request.</p>
+</dd>
 <dt><a href="#getSchedule">getSchedule(req, res)</a> ⇒ <code>Object</code></dt>
 <dd><p>queries database for schedule data and returns to client</p>
 </dd>
@@ -1301,6 +1304,19 @@ Reads the cached schedule from file
 ***Deprecated***
 
 **Kind**: global constant  
+<a name="getHistory"></a>
+
+## getHistory(req, res) ⇒ <code>Object</code>
+queries database for schedule data along with an array of waypoints, where the date matches the provided date of the request.
+
+**Kind**: global function  
+**Returns**: <code>Object</code> - Http response with data and a status code attached  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| req | <code>Object</code> | Http POST request containing a body with a date field |
+| res | <code>Object</code> | Http response |
+
 <a name="getSchedule"></a>
 
 ## getSchedule(req, res) ⇒ <code>Object</code>

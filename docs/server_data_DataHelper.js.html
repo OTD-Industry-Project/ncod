@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getHistory">getHistory</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -102,7 +102,15 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** @module DataHelper */
+            <pre class="prettyprint source linenums"><code>/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Thu Jan 13 2022
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+/** @module DataHelper */
 
 const fs = require("fs");
 
@@ -169,8 +177,8 @@ const getScheduledActivity = async () => {
             scheduledActivity.push(row);
         })
         let dailySchedule = {};
-        let pickup_id = [];
-        let dest_id = [];
+        let pickup_id = []; //to store matched id in the Address table
+        let dest_id = []; //to store matched id in the Address table
 
 
         //looping over schedule, inserting new pickup address in database if not exist, returning matching ID
@@ -184,7 +192,6 @@ const getScheduledActivity = async () => {
 
             var { rows: [{ addr_id }] } = pickupId[1];
             pickup_id[i] = addr_id;
-            //await db.query(`INSERT INTO test (test) VALUES ('${addr_id}');`); //inserting values into test table
         }
 
 
@@ -200,18 +207,18 @@ const getScheduledActivity = async () => {
             var { rows: [{ addr_id }] } = destId[1];
             dest_id[i] = addr_id;
         }
-
+        //maps the order of the jobs insert statement, to results of the GetSheduledActivity return
         for (i = 0; i &lt; scheduledActivity.length; i++) {
 
             dailySchedule[i] = (scheduledActivity[i].vehicleid + ", '" + scheduledActivity[i].driverid + "', '" +
                 (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + pickup_id[i] + ", '" +
-                (scheduledActivity[i].endtime.toISOString().substring(0, 10) + " " + scheduledActivity[i].endtime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + dest_id[i]
-                + ", " + scheduledActivity[i].routing_info);
+                (scheduledActivity[i].endtime.toISOString().substring(0, 10) + " " + scheduledActivity[i].endtime.toLocaleTimeString(['en-AU'], { hour12: false })) + "', " + dest_id[i]);
 
-            var dateCheck = (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false }));
+                //converting time stamp to date format used in the database
+                var dateCheck = (scheduledActivity[i].starttime.toISOString().substring(0, 10) + " " + scheduledActivity[i].starttime.toLocaleTimeString(['en-AU'], { hour12: false }));
 
             //inserting values into jobs table
-            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id,routing_info) SELECT ${dailySchedule[i]}
+            const jobInsert = await db.query(`INSERT INTO job (vehicle_id,driver_id,pickup_time,pickup_id,destination_time,destination_id) SELECT ${dailySchedule[i]}
             FROM job
             WHERE NOT EXISTS (SELECT vehicle_id FROM job WHERE pickup_time = '"${dateCheck}"')
             LIMIT 1;

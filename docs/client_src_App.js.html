@@ -85,7 +85,7 @@
             
             <nav>
                 
-                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-access.html">api-access</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getHistory">getHistory</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
                 
             </nav>
         </div>
@@ -102,7 +102,14 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>
+            <pre class="prettyprint source linenums"><code>/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
 import "./App.css";
 import Header from "./components/Header/Header";
 import { isSameDay } from "./components/Header/Datetime";
@@ -130,7 +137,7 @@ import { useMap } from 'leaflet';
  * @param {Object} data Scheduled data that is fetched from database
  * @param {callback} setRoutesArray Call back function to update state of App
  */
-function CreateRoutes(data, setRoutesArray){
+function CreateRoutes(data, setRoutesArray) {
     //GENERATE ROUTES ON LOAD
     var controlsArray = [];
     if (data != null) {
@@ -226,14 +233,14 @@ function App() {
         setPlay(e);
 
     };
-    
-    
+
+
     const timeCallback = (newTime) => {
-       
+
         const datetime = date;
         const hourMinSec = newTime.split(":");
         datetime.setHours(hourMinSec[0], hourMinSec[1], 0);
-        
+
         setSchedule((oldSchedule) => calculatedSchedule(oldSchedule, datetime, tracking));
         setTime(newTime);
     }
@@ -263,7 +270,7 @@ function App() {
         if (activeBus !== null &amp;&amp; activeBus.job_id === job_id) {
             setActiveBus(null);
         } else {
-            setActiveBus(schedule[index])            
+            setActiveBus(schedule[index])
         }
 
     };
@@ -285,7 +292,7 @@ function App() {
      * @param {string} color Hex code of new color to be set 
      */
     const changeColors = (key, color) => {
-        
+
         // Try and get local color scheme from browser
         let existingColorScheme = JSON.parse(
             localStorage.getItem("color-scheme")
@@ -368,7 +375,7 @@ function App() {
             },
             body: JSON.stringify({ date: date })
         };
-        
+
         // fetch with predefined routes
         fetch(ROUTES.getHistory(), options)
             .then((res) => res.json())
@@ -390,7 +397,7 @@ function App() {
                     historyWaypoints.push({
                         [uniqueBus]: temp,
                     });
-                    
+
                     tmp.forEach(bus => temp2.push(bus));
                     historyTracking.push({
                         [uniqueBus]: temp2,
@@ -454,7 +461,6 @@ function App() {
     return (
         &lt;ThemeProvider theme={theme ? darkTheme : lightTheme}>
             &lt;>
-                {/* { tracking &amp;&amp; console.log(tracking) } */}
                 &lt;GlobalStyle />
                 {/* Entire app container */}
                 &lt;div className="container-fluid vh-100 d-flex flex-column">
@@ -472,7 +478,6 @@ function App() {
 
                         &lt;/div>
                     &lt;/div>
-                    {/* Footer row with one col */}
 
                     {/* 2nd row. Two cols - Sidebar and Map Section */}
                     &lt;div className="Map">
@@ -517,7 +522,7 @@ function App() {
                             time={time}
                         />
 
-
+                        {/* Footer row with one col */}
                         &lt;div className="Footer">
                             &lt;Footer
                                 handleCallback={playCallback}
