@@ -1,9 +1,7 @@
 {
-  "short_name": "NCOD",
-  "name": "Nuline Charter On The Day",
-  "icons": [
-    
-  ],
+  "short_name": "OTD",
+  "name": "Industry Project",
+  "icons": [],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
