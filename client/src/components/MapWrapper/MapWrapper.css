@@ -1,0 +1,13 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+ .MapWrapper {
+    min-height: calc(100vh - var(--header-height));
+    margin: 0 -12px;
+    padding: 0;
+}

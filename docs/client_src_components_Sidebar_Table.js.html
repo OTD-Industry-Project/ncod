@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On The Day client/src/components/Sidebar/Table.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="./style.css">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">On The Day</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/OTD-Industry-Project/"
+                        >
+                            Github
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getHistory">getHistory</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>client/src/components/Sidebar/Table.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Tue Nov 30 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+import React, { useMemo, useState } from "react";
+import { useTable, useSortBy, useGlobalFilter } from "react-table";
+import "./Sidebar.css";
+import { Filter } from "./Filter";
+import { FiRefreshCw } from "react-icons/fi";
+
+/** @module Table */
+
+/**
+ * @function getTime
+ * @param {date} value Datetime object 
+ * @returns {Component} Stringified local time in 24 hour format
+ */
+export const getTime = (value) => {
+    const time = new Date(value);
+    return &lt;>{time.toLocaleTimeString([], { hour12: false })}&lt;/>;
+};
+
+
+/**
+ * @function Table
+ * @param {Object} schedule Raw schedule data
+ * @param {callback} activeCallBack Update state of activeBus in parent component
+ * @param {Object} activeBus An entry from the schedule that represents on vehicle 
+ * @returns {Component} A functional table with styling and sort/search features
+ */
+export const Table = ({ schedule, activeCallBack, activeBus }) => {
+    
+    // Used to map schedule data to Headers in order to build table
+    const COLUMNS = [
+        {
+            Header: "Status",
+            accessor: "status",
+        },
+        {
+            Header: "ID",
+            accessor: "vehicle_id",
+        },
+        {
+            Header: "Dest.",
+            accessor: "destination",
+        },
+        {
+            Header: "From",
+            accessor: "pickup_time",
+            // Format time into human readable format
+            Cell: ({ cell: { value } }) => getTime(value),
+        },
+        {
+            Header: "To",
+            accessor: "destination_time",
+            // Format time into human readable format
+            Cell: ({ cell: { value } }) => getTime(value),
+        },
+    ];
+
+    // Load all vehicles to sidebar
+    const NUM_OF_VEHICLES = schedule.length;
+
+    // Keep track of last updated. Will be more useful when we are pulling live GPS data
+    // eslint-disable-next-line no-unused-vars
+    const [lastUpdated, setLastUpdated] = useState(new Date());
+    const [selectedRow, setSelectedRow] = useState(null);
+
+    /**
+     * Essentially an event handler that sets the activeBus of the row that is selected.
+     * @function handleEvent
+     * @param {Object} row Object containing schedule data from a particular entry 
+     * @param {number} i Index of row in Schedule 
+     *  
+     */
+    const handleEvent = (row, i) => {
+        activeCallBack(row.job_id);
+
+        if (row.job_id === selectedRow) {
+            setSelectedRow(null);
+            return;
+        }
+
+        
+        setSelectedRow(row.job_id);
+        
+    };
+
+    // Memoize the columns and data for the table.
+    // This is essentially caching all the data, so react doesn't need to rebuild the data and columns on every refresh.
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const columns = useMemo(() => COLUMNS, []);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const data = useMemo(() => schedule.slice(0, NUM_OF_VEHICLES), [schedule]);
+
+    // Create a table instance with useTable hook provided by the React-Table package
+    // We are passing in colums and data, as well as Filter and Sorting functions
+    const tableInstance = useTable(
+        {
+            columns,
+            data,
+        },
+        useGlobalFilter,
+        useSortBy
+    );
+
+    // Destructure all the properties and methods we need that the useTable hook gives us to work with
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+        state,
+        setGlobalFilter,
+    } = tableInstance;
+
+    // Destructure the globalFilter state
+    const { globalFilter } = state;
+
+    return (
+        &lt;>
+            {/* Input field and Last Updated */}
+            &lt;div className="Top mt-3 container-fluid d-flex justify-content-between">
+                &lt;Filter
+                    className="Search"
+                    filter={globalFilter}
+                    setFilter={setGlobalFilter}
+                />
+                &lt;div className="text-secondary align-self-center small">
+                    {`Last Updated: ${lastUpdated.toLocaleTimeString([], {
+                        hour12: false,
+                    })}`}{" "}
+                    &lt;FiRefreshCw
+                        className="refresh"
+                        aria-label="refresh"
+                        onClick={() => window.location.reload(false)}
+                    />{" "}
+                &lt;/div>
+            &lt;/div>
+
+            {/* Table starts here. the ...getSomethingProps() methods are essentially returning an array of props that
+                React-table uses to build the table */}
+            &lt;table className="table" {...getTableProps()}>
+                {/* Table Header */}
+                &lt;thead>
+                    {/* Here we are mapping a new table Row for each HeaderGroup. In our case, there is
+                        only one Header group, but this allows to add more and it won't affect functionality */}
+                    {headerGroups.map((headerGroup) => (
+                        // Apply props to each header row
+                        &lt;tr {...headerGroup.getHeaderGroupProps()}>
+                            {/* Map each column of the header to a th Cell. This is where the render() method is finally called.
+                            This is also where we enable React-table's sort functionality and apply to each column*/}
+                            {headerGroup.headers.map((column) => (
+                                &lt;th
+                                    {...column.getHeaderProps(
+                                        column.getSortByToggleProps()
+                                    )}
+                                >
+                                    {column.render("Header")}
+
+                                    {/* Conditionally insert the little sort arrows */}
+                                    &lt;span>
+                                        {/* A nested ternary statement. Essentially this is a one-liner of this:
+                                            if isSorted:
+                                                if isSortedDesc:
+                                                    print up arrow
+                                                else:
+                                                    print down arrow
+                                            else:
+                                                print nothing
+                                        */}
+                                        {column.isSorted
+                                            ? column.isSortedDesc
+                                                ? " ▼"
+                                                : " ▲"
+                                            : "  "}
+                                    &lt;/span>
+                                &lt;/th>
+                            ))}
+                        &lt;/tr>
+                    ))}
+                &lt;/thead>
+
+                {/* Get and apply table body props */}
+                &lt;tbody {...getTableBodyProps()}>
+                    {/* Iterate over every row */}
+                    {rows.map((row, i) => {
+                        // React-table function that prepares the row to be iterated over and displayed
+                        prepareRow(row);
+
+                        return (
+                            // Get and apply row props
+                            &lt;tr
+                                key={i}
+                                onClick={() => handleEvent(row.original, i)}
+                                className={selectedRow &amp;&amp; selectedRow === row.original.job_id &amp;&amp; activeBus !== null ? "selected" : ""}
+                                {...row.getRowProps()}
+                            >
+                                {/* Iterate over each cell in the row and return the rendered cell */}
+                                {row.cells.map((cell) => {
+                                    return (
+                                        &lt;td {...cell.getCellProps()}>
+                                            {cell.render("Cell")}
+                                        &lt;/td>
+                                    );
+                                })}
+                            &lt;/tr>
+                        );
+                    })}
+                &lt;/tbody>
+
+                {/* Custom footer. Ract-table is not involved with this bit */}
+                &lt;tfoot>
+                    &lt;tr>
+                        &lt;td
+                            className="text-center h6 p-1"
+                            colSpan="6"
+                        >{`Total Vehicles: ${NUM_OF_VEHICLES}`}&lt;/td>
+                    &lt;/tr>
+                &lt;/tfoot>
+            &lt;/table>
+        &lt;/>
+    );
+};
+
+export default Table;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

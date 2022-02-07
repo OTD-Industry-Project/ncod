@@ -1,0 +1,381 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On The Day client/src/components/Footer/FooterScrubBar.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="./style.css">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">On The Day</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/OTD-Industry-Project/"
+                        >
+                            Github
+                        </a>
+                    
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Modules</h3><ul><li><a href="module-AlertBtn.html">AlertBtn</a></li><li><a href="module-api-calls.html">api-calls</a></li><li><a href="module-App.html">App</a></li><li><a href="module-BusIcon.html">BusIcon</a></li><li><a href="module-ColorPicker.html">ColorPicker</a></li><li><a href="module-DarkModeToggle.html">DarkModeToggle</a></li><li><a href="module-DataHelper.html">DataHelper</a></li><li><a href="module-Datetime.html">Datetime</a></li><li><a href="module-Filter.html">Filter</a></li><li><a href="module-Footer.html">Footer</a></li><li><a href="module-FooterScrubBar.html">FooterScrubBar</a></li><li><a href="module-Header.html">Header</a></li><li><a href="module-HistoryToggle.html">HistoryToggle</a></li><li><a href="module-InfoCard.html">InfoCard</a></li><li><a href="module-Layers.html">Layers</a></li><li><a href="module-Loading.html">Loading</a></li><li><a href="module-Logo.html">Logo</a></li><li><a href="module-MapWrapper.html">MapWrapper</a></li><li><a href="module-MediaControls.html">MediaControls</a></li><li><a href="module-MenuBtn.html">MenuBtn</a></li><li><a href="module-MUITable.html">MUITable</a></li><li><a href="module-ScheduleHelper.html">ScheduleHelper</a></li><li><a href="module-Sidetabs.html">Sidetabs</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Theme.html">Theme</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getHistory">getHistory</a></li><li><a href="global.html#getSchedule">getSchedule</a></li><li><a href="global.html#processedData">processedData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>client/src/components/Footer/FooterScrubBar.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+import React, { useEffect } from 'react';
+import './Footer.css';
+import Slider from '@mui/material/Slider';
+import Box from '@mui/material/Box';
+
+/** @module FooterScrubBar */
+
+
+/*Adjusted this to display correct 00:00 time, and value is
+set as per the correct number of minutes for each displayed hour*/
+
+/**
+ * @name marks
+ * @description Provides markers for the scrub bar, where total minutes (value) is mapped to a time in hours:minutes format (label)
+ * @example 
+ * const marks = [
+  {
+    value: 120,
+    label: '02:00',
+  },
+  {
+    value: 300,
+    label: '05:00',
+  },
+  {
+    value: 480,
+    label: '08:00',
+  },
+  {
+    value: 660,
+    label: '11:00',
+  },
+  ...
+ */
+const marks = [
+  {
+    value: 120,
+    label: '02:00',
+  },
+  {
+    value: 300,
+    label: '05:00',
+  },
+  {
+    value: 480,
+    label: '08:00',
+  },
+  {
+    value: 660,
+    label: '11:00',
+  },
+  {
+    value: 840,
+    label: '14:00',
+  },
+  {
+    value: 1020,
+    label: '17:00',
+  },
+  {
+    value: 1200,
+    label: '20:00',
+  },
+  {
+    value: 1380,
+    label: '23:00',
+  },
+];
+
+/**
+ * Prepends a time string with a leading zero
+ * @param {string} string The time string that needs to be prepended with a 00
+ * @returns {string}
+ */
+function padZero(string) {
+  return ("00" + string).slice(-2)
+}
+//get value at each step and converting to time
+
+/**
+ * Converts a value (time in minutes 0 - 1440) to a time.
+ * @param {number} value number between 0 - 1440 ie. Time in minutes
+ * @returns {string}
+ */
+function valuetext(value) {
+  if (value &lt; 0)
+    value = 0;
+  var hrs = ~~((value / 60) % 24),
+    mins = ~~(value % 60),
+    timeType = (hrs > 11 ? "PM" : "AM");
+  if (hrs > 12)
+    hrs = hrs - 12;
+  if (hrs === 0)
+    hrs = 12;
+  return (
+    hrs + ":" + padZero(mins) + timeType);
+}
+
+/**
+ * @function scrubTimer
+ * @description scrub bar function to display actual scrub bar
+min and max set time for day
+step is how often to set points
+marks are the labeling of regular intervals
+ * @param {number} value A time in minutes converted to hh:mm
+ * @returns {string} formatted time string in 24hour time
+ * @example
+ * 
+ * scrubTimer(420) // returns 07:00
+ * scrubTimer(930) // returns 15:30
+ */
+function scrubTimer(value) {
+  if (value &lt; 0)
+    value = 0;
+  var hrs = ~~((value / 60) % 24),
+    mins = ~~(value % 60);
+  if (hrs === 24)
+    hrs = "00";
+  if (hrs &lt; 10)
+    hrs = "0" + hrs;
+  return (
+    hrs + ":" + padZero(mins));
+}
+
+
+/*  */
+
+/**
+ * Tracks state of the Scrub bar and interval and renders it
+ * @function FooterScrubBar
+ * @param {boolean} play Boolean to set inner state
+ * @param {boolean} historyMode If true then history mode is active
+ * @param {number} action current Direction of scrub bar
+ * @param {callback} setDirection Callback to set the direction in parent compoenent (Header)
+ * @returns {Component} renderable Component
+ * 
+ * 
+ */
+export default function FooterScrubBar({ play, historyMode, action, setDirection, timeCallback }) {
+
+  /**
+   * Convers a time of the day to minutes
+   * @function getTimeAsMinutes
+   * @param {date} date Date object
+   * @example
+   * return (date.getHours() * 60) + date.getMinutes();
+   * Thus, 2:30 am:
+   * = (2 * 60) + 30
+   * = 120 + 30
+   * = 150 minutes
+   */
+  function getTimeAsMinutes(date) {
+    return (date.getHours() * 60) + date.getMinutes();
+  }
+  
+  /**
+   * @name value
+   * @description Track the state of the value
+   */
+  const [value, setValue] = React.useState(getTimeAsMinutes(new Date())); 
+  
+  /**
+   * Updates the value state
+   * @param {e} event  
+   * @param {number} newValue Value to be set  
+   */
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    timeCallback(scrubTimer(newValue));
+  };
+
+  /**
+   * React Life cycle method. Runs on Component creation
+   * @function useffect
+   * @description Checks props passed to component and calculates whether the scrub bar should be moving and tells it how to move.
+   * 
+   */
+  useEffect(() => {
+
+    // History mode and paused
+    if (historyMode &amp;&amp; (action === -1 || action === 1)) {
+
+      if (action === -1) {
+        setValue((oldValue) => oldValue - 60);
+      } else {
+        setValue((oldValue) => oldValue + 60);
+      }
+      setDirection(0);
+
+    }
+
+    // Playing and History mode
+    if (play &amp;&amp; historyMode) {
+
+      const interval = setInterval(() => {
+
+        setValue((oldValue) => {
+
+          timeCallback(scrubTimer(oldValue + 5));
+          if (oldValue >= 1440) {
+            return oldValue = 0 + (oldValue-1440+5);
+          }
+          return oldValue + 5;
+
+        });
+
+
+      }, 500);
+      timeCallback(scrubTimer(value + 5));
+      return () => clearInterval(interval);
+    }
+
+    // Play and NOT history mode (ie. live mode playing)
+    if (play &amp;&amp; !historyMode) {
+      const checkTimer = getTimeAsMinutes(new Date());
+      setValue(getTimeAsMinutes(new Date()));
+      const interval = setInterval(() => {
+        if (checkTimer &lt; getTimeAsMinutes(new Date())) {
+          setValue(getTimeAsMinutes(new Date()));
+          timeCallback(scrubTimer(getTimeAsMinutes(new Date())));
+        }
+        else {
+          setValue(getTimeAsMinutes(new Date()));
+        }
+
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+
+  }, [historyMode, action, play, setDirection, timeCallback, value]);
+
+
+  return (
+    &lt;Box>
+      &lt;Slider
+        key={`${value}`}
+        min={0}
+        step={5} //5 minutes
+        max={1440} //total minutes per 24 hours
+        defaultValue={value}
+        valueLabelFormat={valuetext}
+        marks={marks}
+        valueLabelDisplay={historyMode ? 'on' : 'auto'}
+        onChangeCommitted={handleChange}
+      />
+
+    &lt;/Box>
+  )
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
+
+</body>
+</html>

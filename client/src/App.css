@@ -1,0 +1,61 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+
+/* Basic colors for testing */
+/* * {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+} */
+
+.row {
+    min-height: var(--header-height);
+}
+
+.Sidebar {
+    /* background-color: aqua; */
+    position: absolute;
+    max-height: calc(99% - var(--footer-height));
+    min-height: calc(99% - var(--footer-height));
+    z-index: 10000;
+}
+
+.Map {
+    min-height: 100%;
+    max-height: 100%;
+    position: relative;
+}
+
+.Footer {
+    position: absolute;
+    bottom: 1%;
+    left: 0;
+    max-height: var(--footer-height);
+    min-height: var(--footer-height);
+    width: 100%;
+    z-index: 1000;
+}
+
+.marker > div {
+    border-radius: 15px;
+    margin-top: -12px !important;
+    margin-left: -12px !important;
+    border: 1px solid #fff;
+    display: inline-block;
+    width: 30px !important;
+    text-align: center;
+    height: 30px !important;
+    line-height: 30px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.leaflet-routing-container{
+    display:none;
+}

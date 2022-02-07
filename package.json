@@ -1,0 +1,37 @@
+{
+  "name": "ncod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "cd client && npm install",
+    "server-install": "cd server && npm install",
+    "i": "npm run client-install && npm run server-install",
+    "client": "cd client && npm start",
+    "server": "nodemon server/server.js",
+    "start": "nodemon server/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "docs": "jsdoc -c jsdoc.conf.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "concurrently": "^6.3.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "moment-timezone": "^0.5.33",
+    "nodemon": "^2.0.14",
+    "pg": "^8.7.1",
+    "react-datepicker": "^4.3.0",
+    "react-live-clock": "^5.3.1",
+    "react-moment": "^1.1.1",
+    "react-switch": "^6.0.0"
+  },
+  "devDependencies": {
+    "better-docs": "^2.3.2",
+    "jsdoc": "^3.6.7",
+    "jsdoc-to-markdown": "^7.1.0"
+  }
+}

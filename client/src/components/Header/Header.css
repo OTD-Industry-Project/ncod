@@ -1,0 +1,50 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+ .Header {
+    max-height: var(--header-height);
+    min-height: var(--header-height);
+}
+.react-date-picker__calendar--open {
+    top: 100% !important;
+    bottom: unset !important;
+}
+.react-datepicker-wrapper {
+    display: inline-block;
+    padding-left: 10px !important;
+    border: 0px;
+    width: 200px !important;
+}
+.history-date {
+    font-weight: bold;
+    color: rgb(250, 91, 91);
+    animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.Logo {
+    cursor: pointer;
+}
+
+.css-jcn4dz-MuiBadge-badge {
+    background-color: OrangeRed !important;
+}
+
+.MuiAlert-message,
+.MuiAlert-icon {
+    background-color: inherit !important; 
+}
+.MuiAlert-message,
+.MuiAlert-message > div,
+.MuiAlert-message > button {
+    color: rgba(0, 0, 0, 0.87) !important;
+}

@@ -1,0 +1,22 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+ @import url('http://fonts.cdnfonts.com/css/led-digital-7');
+
+.MuiSlider-valueLabelLabel {
+    color: white !important;
+}
+
+.MuiSlider-markLabel {
+    font-family: 'LED Digital 7', sans-serif !important;
+    font-size: 1.125rem !important;
+}
+
+.align-self-start {
+    padding-bottom: 10px;
+}

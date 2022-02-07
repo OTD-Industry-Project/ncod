@@ -1,0 +1,69 @@
+/*
+ * Authors: James Hawes, Jamie Garner, Joseph Ising, Mark Dodson
+ * -----
+ * Created Date: Sat Nov 27 2021
+ * -----
+ * Last Modified: Sat Jan 22 2022
+ */
+
+.mui-table {
+    margin: 0 0px;
+    padding: 1rem;
+}
+
+.MuiTableRow-root > td {
+    padding: 0 0 0 0px !important;
+    overflow: hidden !important;
+}
+
+.Search {
+    width: 40%;
+}
+
+table {
+    font-size: smaller;
+}
+
+tbody > tr:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+}
+
+.MuiPopover-paper {
+    top: 86px !important;
+    left: 525px !important;
+}
+
+.selected {
+    font-weight: 800;
+}
+
+.circle-picker > span > div > span > div {
+    background-image: url("../../assets/images/pngegg.png") !important;
+    background-color: black !important;
+}
+
+.m-3 {
+    margin-left: 0px !important;
+}
+
+.info-card {
+    padding: 0.6rem 0.3rem;
+    width: 100;
+    color: white;
+}
+.info-card > table,
+.info-card > table > thead {
+    background-color: white !important;
+}
+
+.refresh {
+    color: #0074d9;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.refresh:hover {
+    font-size: 1.8rem;
+}
